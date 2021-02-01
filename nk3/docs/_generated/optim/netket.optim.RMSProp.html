@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>netket.optim.RMSProp &#8212; netket v3.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jumbo-style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_theme.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/rtd_theme.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Requirements" href="../../requirements.html" />
+    <link rel="prev" title="netket.optim.Momentum" href="netket.optim.Momentum.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html"><span><img src="../../../_static/logonav.png"></span>
+          NetKet</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../../website/get_started.html">Get Started</a></li>
+                <li><a href="../../getting_started.html">Documentation</a></li>
+                <li><a href="../../../tutorials/tutorials.html">Tutorials</a></li>
+                <li><a href="../../../website/citing.html">Citing NetKet</a></li>
+                <li><a href="../../../about.html">About</a></li>
+                <li><a href="https://github.com/netket/netket"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+                <li><a href="https://twitter.com/NetKetOrg"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"></ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><div class="sidenav-header">
+  <div class="h4"> 
+    Netket 3.0 Documentation
+  </div>
+
+  <!---
+  	<div role="search">
+  <form id="rtd-search-form" class="wy-form"  action="../search.html" method="get">
+    <input type="text" name="q" class="form-control" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+  ---->
+</div>
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#installation-and-requirements">Installation and requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#jax-flax-extensions">Jax/Flax extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#legacy-api-support-api-before-2021">Legacy API support (API before 2021)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#commented-example">Commented Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../graphs.html">Graph submodule</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../graphs.html#stuff">Stuff</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Square.html">netket.graph.Square</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Grid.html">netket.graph.Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../graphs.html#abstract-interface">Abstract Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graphs.html#lattice-constructors">Lattice Constructors</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../api.html">Public API: netket package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#graph">Graph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Chain.html">netket.graph.Chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Grid.html">netket.graph.Grid</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#hilbert">Hilbert</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.AbstractHilbert.html">netket.hilbert.AbstractHilbert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Spin.html">netket.hilbert.Spin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Boson.html">netket.hilbert.Boson</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.CustomHilbert.html">netket.hilbert.CustomHilbert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.DoubledHilbert.html">netket.hilbert.DoubledHilbert</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#operators">Operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.BoseHubbard.html">netket.operator.BoseHubbard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.GraphOperator.html">netket.operator.GraphOperator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.LocalOperator.html">netket.operator.LocalOperator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.Ising.html">netket.operator.Ising</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.Heisenberg.html">netket.operator.Heisenberg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pre-defined-operators">Pre-defined operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.create.html">netket.operator.boson.create</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.destroy.html">netket.operator.boson.destroy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.number.html">netket.operator.boson.number</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.spin.sigmax.html">netket.operator.spin.sigmax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.spin.sigmay.html">netket.operator.spin.sigmay</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.spin.sigmaz.html">netket.operator.spin.sigmaz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.spin.sigmap.html">netket.operator.spin.sigmap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.spin.sigmam.html">netket.operator.spin.sigmam</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#exact-solvers">Exact solvers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../exact/netket.exact.full_ed.html">netket.exact.full_ed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exact/netket.exact.lanczos_ed.html">netket.exact.lanczos_ed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exact/netket.exact.steady_state.html">netket.exact.steady_state</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#samplers">Samplers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.ExactSampler.html">netket.sampler.ExactSampler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.Metropolis.html">netket.sampler.Metropolis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.MetropolisNumpy.html">netket.sampler.MetropolisNumpy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.MetropolisPt.html">netket.sampler.MetropolisPt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.MetropolisLocal.html">netket.sampler.MetropolisLocal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.MetropolisExchange.html">netket.sampler.MetropolisExchange</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.MetropolisHamiltonian.html">netket.sampler.MetropolisHamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.MetropolisLocalPt.html">netket.sampler.MetropolisLocalPt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.MetropolisExchangePt.html">netket.sampler.MetropolisExchangePt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#pre-built-models">Pre-built models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../models/netket.models.RBM.html">netket.models.RBM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../models/netket.models.RBMModPhase.html">netket.models.RBMModPhase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../models/netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#model-tools">Model tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../nn/netket.nn.Module.html">netket.nn.Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#linear-modules">Linear Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.Dense.html">netket.nn.Dense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.DenseGeneral.html">netket.nn.DenseGeneral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.Conv.html">netket.nn.Conv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.Embed.html">netket.nn.Embed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#activation-functions">Activation functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.celu.html">netket.nn.celu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.elu.html">netket.nn.elu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.gelu.html">netket.nn.gelu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.glu.html">netket.nn.glu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.log_sigmoid.html">netket.nn.log_sigmoid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.log_softmax.html">netket.nn.log_softmax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.relu.html">netket.nn.relu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.sigmoid.html">netket.nn.sigmoid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.soft_sign.html">netket.nn.soft_sign</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.softmax.html">netket.nn.softmax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.softplus.html">netket.nn.softplus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.swish.html">netket.nn.swish</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.logcosh.html">netket.nn.logcosh</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../api.html#optim">Optim</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="netket.optim.SR.html">netket.optim.SR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.optim.Adam.html">netket.optim.Adam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.optim.Adagrad.html">netket.optim.Adagrad</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.optim.GradientDescent.html">netket.optim.GradientDescent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.optim.LAMB.html">netket.optim.LAMB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.optim.LARS.html">netket.optim.LARS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.optim.Momentum.html">netket.optim.Momentum</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">netket.optim.RMSProp</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../requirements.html#mpi-and-cmake">MPI and CMake</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../requirements.html#mac">Mac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../requirements.html#ubuntu">Ubuntu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../requirements.html#other-platforms">Other platforms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../requirements.html#optional-python-libraries">Optional Python Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../website/citing.html">Citing NetKet</a></li>
+</ul>
+
+
+<!--- |replace("", "<span class=\"toctree-expand\Z"></span>")  --->
+        </div>
+      </div>
+    <div class="body col-md-9 content" role="main">
+      
+  <div class="section" id="netket-optim-rmsprop">
+<h1>netket.optim.RMSProp<a class="headerlink" href="#netket-optim-rmsprop" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="netket.optim.RMSProp">
+<em class="property">class </em><code class="sig-prename descclassname">netket.optim.</code><code class="sig-name descname">RMSProp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">learning_rate</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">beta2</span><span class="o">=</span><span class="default_value">0.9</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">centered</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/flax/optim/rmsprop.html#RMSProp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netket.optim.RMSProp" title="Permalink to this definition">¶</a></dt>
+<dd><p>RMSProp optimizer</p>
+<dl class="py method">
+<dt id="netket.optim.RMSProp.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">learning_rate</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">beta2</span><span class="o">=</span><span class="default_value">0.9</span></em>, <em class="sig-param"><span class="n">eps</span><span class="o">=</span><span class="default_value">1e-08</span></em>, <em class="sig-param"><span class="n">centered</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/flax/optim/rmsprop.html#RMSProp.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netket.optim.RMSProp.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor for the RMSProp optimizer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>learning_rate</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]) – the step size used to update the parameters.</p></li>
+<li><p><strong>beta2</strong> – the coefficient used for the moving average of the
+gradient magnitude (default: 0.9).</p></li>
+<li><p><strong>eps</strong> – the term added to the gradient magnitude estimate for
+numerical stability.</p></li>
+<li><p><strong>centered</strong> – If <cite>True</cite>, gradients are normalized by the estimated
+variance of the gradient; if False, by the uncentered second moment.
+Setting this to <cite>True</cite> may help with training, but is slightly more
+expensive in terms of computation and memory. Defaults to <cite>False</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#netket.optim.RMSProp.__init__" title="netket.optim.RMSProp.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([learning_rate, beta2, eps, centered])</p></td>
+<td><p>Constructor for the RMSProp optimizer</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#netket.optim.RMSProp.apply_gradient" title="netket.optim.RMSProp.apply_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_gradient</span></code></a>(hyper_params, params, state, …)</p></td>
+<td><p>Applies a gradient for a set of parameters.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#netket.optim.RMSProp.apply_param_gradient" title="netket.optim.RMSProp.apply_param_gradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_param_gradient</span></code></a>(step, hyper_params, …)</p></td>
+<td><p>Apply per-parameter gradients</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#netket.optim.RMSProp.create" title="netket.optim.RMSProp.create"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create</span></code></a>(target[, focus])</p></td>
+<td><p>Creates a new optimizer for the given target.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#netket.optim.RMSProp.init_param_state" title="netket.optim.RMSProp.init_param_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_param_state</span></code></a>(param)</p></td>
+<td><p>Initialize parameter state</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_state</span></code>(params)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#netket.optim.RMSProp.restore_state" title="netket.optim.RMSProp.restore_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restore_state</span></code></a>(opt_target, opt_state, state_dict)</p></td>
+<td><p>Restore the optimizer target and state from the state dict.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">state_dict</span></code>(target, state)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#netket.optim.RMSProp.update_hyper_params" title="netket.optim.RMSProp.update_hyper_params"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_hyper_params</span></code></a>(**hyper_param_overrides)</p></td>
+<td><p>Updates the hyper parameters with a set of overrides.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="netket.optim.RMSProp.apply_gradient">
+<code class="sig-name descname">apply_gradient</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hyper_params</span></em>, <em class="sig-param"><span class="n">params</span></em>, <em class="sig-param"><span class="n">state</span></em>, <em class="sig-param"><span class="n">grads</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.optim.RMSProp.apply_gradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies a gradient for a set of parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hyper_params</strong> – a named tuple of hyper parameters.</p></li>
+<li><p><strong>params</strong> – the parameters that should be updated.</p></li>
+<li><p><strong>state</strong> – a named tuple containing the state of the optimizer</p></li>
+<li><p><strong>grads</strong> – the gradient tensors for the parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A tuple containing the new parameters and the new optimizer state.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.optim.RMSProp.apply_param_gradient">
+<code class="sig-name descname">apply_param_gradient</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">step</span></em>, <em class="sig-param"><span class="n">hyper_params</span></em>, <em class="sig-param"><span class="n">param</span></em>, <em class="sig-param"><span class="n">state</span></em>, <em class="sig-param"><span class="n">grad</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/flax/optim/rmsprop.html#RMSProp.apply_param_gradient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netket.optim.RMSProp.apply_param_gradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply per-parameter gradients</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.optim.RMSProp.create">
+<code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target</span></em>, <em class="sig-param"><span class="n">focus</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.optim.RMSProp.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new optimizer for the given target.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> – the object to be optimized. This will typically be
+an instance of <cite>flax.nn.Model</cite>.</p></li>
+<li><p><strong>focus</strong> – a <cite>flax.traverse_util.Traversal</cite> that selects which subset of
+the target is optimized.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An instance of <cite>Optimizer</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.optim.RMSProp.init_param_state">
+<code class="sig-name descname">init_param_state</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">param</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/flax/optim/rmsprop.html#RMSProp.init_param_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netket.optim.RMSProp.init_param_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize parameter state</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.optim.RMSProp.restore_state">
+<code class="sig-name descname">restore_state</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">opt_target</span></em>, <em class="sig-param"><span class="n">opt_state</span></em>, <em class="sig-param"><span class="n">state_dict</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.optim.RMSProp.restore_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restore the optimizer target and state from the state dict.</p>
+<p>This function accepts the current optimizer target and state. This
+lets us know the exact structure of the optimizer target and state,
+as well as lets us add assertions that shapes and dtypes don’t change.</p>
+<p>In practice, no values in <cite>opt_target</cite> and <cite>opt_state</cite> are actually
+used. Only the tree structure, shapes and types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>opt_target</strong> – the optimizer target.</p></li>
+<li><p><strong>opt_state</strong> – the optimizer state.</p></li>
+<li><p><strong>state_dict</strong> – the state dict containing the desired new state of the
+optimizer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a tuple of the optimizer target and state with the restored values from
+the state dict.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.optim.RMSProp.update_hyper_params">
+<code class="sig-name descname">update_hyper_params</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">hyper_param_overrides</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.optim.RMSProp.update_hyper_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the hyper parameters with a set of overrides.</p>
+<p>This method is called from Optimizer apply_gradient to create the
+hyper parameters for a specific optimization step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**hyper_param_overrides</strong> – the hyper parameters updates
+will override the defaults specified in the <cite>OptimizerDef</cite>.
+Pass <cite>hyper_params=…</cite> to replace all hyper parameters.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The new hyper parameters.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2019, The Simons Foundation, Inc. - All rights reserved.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+
+<script type="text/javascript">
+    jQuery(function () {
+        SphinxRtdTheme.Navigation.enable(true);
+      })
+</script>
+
+<!-- Temporary footer-->
+<div class="footer-wip">
+  <div class="footer-wip-content">
+    This documentation refers to an unreleased version of Netket.
+  </div>
+</div>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118013987-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-118013987-1');
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "url": "https://www.netket.org",
+  "name": "NetKet",
+  "founder": "Giuseppe Carleo",
+  "foundingDate": "2018-04-24",
+  "foundingLocation" : "New York",
+  "logo": "https://www.netket.org/img/logo_small.jpg",
+  "sameAs": [
+    "https://twitter.com/NetKetOrg",
+    "https://github.com/NetKet/netket"
+  ],
+  "description" : "Netket is an open-source project delivering cutting-edge
+  methods for the study of many-body quantum systems with artificial neural
+  networks and machine learning techniques.
+  NetKet provides state-of-the-art Neural-Network Quantum states,
+  and advanced learning algorithms to find the ground-state of many-body Hamiltonians.
+ NetKet is supported by the Simons Foundation and the Flatiron Institute."
+}
+</script>
+
+  </body>
+</html>

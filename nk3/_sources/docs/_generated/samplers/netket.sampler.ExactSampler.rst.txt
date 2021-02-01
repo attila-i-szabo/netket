@@ -1,0 +1,35 @@
+﻿netket.sampler.ExactSampler
+===========================
+
+.. currentmodule:: netket.sampler
+
+.. autoclass:: ExactSampler
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ExactSampler.__init__
+      ~ExactSampler.init_state
+      ~ExactSampler.replace
+      ~ExactSampler.reset
+      ~ExactSampler.sample
+      ~ExactSampler.sample_next
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ExactSampler.machine_pow
+      ~ExactSampler.n_batches
+      ~ExactSampler.n_chains
+   
+   

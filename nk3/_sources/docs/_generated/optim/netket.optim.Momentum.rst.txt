@@ -1,0 +1,30 @@
+﻿netket.optim.Momentum
+=====================
+
+.. currentmodule:: netket.optim
+
+.. autoclass:: Momentum
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Momentum.__init__
+      ~Momentum.apply_gradient
+      ~Momentum.apply_param_gradient
+      ~Momentum.create
+      ~Momentum.init_param_state
+      ~Momentum.init_state
+      ~Momentum.restore_state
+      ~Momentum.state_dict
+      ~Momentum.update_hyper_params
+   
+   
+
+   
+   
+   

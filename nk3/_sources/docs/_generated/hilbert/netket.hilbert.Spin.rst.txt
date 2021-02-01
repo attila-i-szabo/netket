@@ -1,0 +1,41 @@
+﻿netket.hilbert.Spin
+===================
+
+.. currentmodule:: netket.hilbert
+
+.. autoclass:: Spin
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Spin.__init__
+      ~Spin.all_states
+      ~Spin.number_to_state
+      ~Spin.numbers_to_states
+      ~Spin.random_state
+      ~Spin.state_to_number
+      ~Spin.states
+      ~Spin.states_to_numbers
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Spin.is_discrete
+      ~Spin.is_finite
+      ~Spin.is_indexable
+      ~Spin.local_size
+      ~Spin.local_states
+      ~Spin.n_states
+      ~Spin.size
+   
+   

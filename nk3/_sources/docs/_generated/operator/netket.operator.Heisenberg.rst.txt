@@ -1,0 +1,50 @@
+﻿netket.operator.Heisenberg
+==========================
+
+.. currentmodule:: netket.operator
+
+.. autoclass:: Heisenberg
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Heisenberg.__init__
+      ~Heisenberg.apply
+      ~Heisenberg.conjugate
+      ~Heisenberg.copy
+      ~Heisenberg.get_conn
+      ~Heisenberg.get_conn_filtered
+      ~Heisenberg.get_conn_flattened
+      ~Heisenberg.get_conn_padded
+      ~Heisenberg.n_conn
+      ~Heisenberg.to_dense
+      ~Heisenberg.to_linear_operator
+      ~Heisenberg.to_sparse
+      ~Heisenberg.transpose
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Heisenberg.H
+      ~Heisenberg.J
+      ~Heisenberg.T
+      ~Heisenberg.constant
+      ~Heisenberg.hilbert
+      ~Heisenberg.is_hermitian
+      ~Heisenberg.mel_cutoff
+      ~Heisenberg.n_operators
+      ~Heisenberg.operators
+      ~Heisenberg.size
+      ~Heisenberg.uses_sign_rule
+   
+   

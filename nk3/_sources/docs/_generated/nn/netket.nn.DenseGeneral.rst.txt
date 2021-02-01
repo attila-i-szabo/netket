@@ -1,0 +1,47 @@
+﻿netket.nn.DenseGeneral
+======================
+
+.. currentmodule:: netket.nn
+
+.. autoclass:: DenseGeneral
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DenseGeneral.__init__
+      ~DenseGeneral.apply
+      ~DenseGeneral.bias_init
+      ~DenseGeneral.clone
+      ~DenseGeneral.has_variable
+      ~DenseGeneral.init
+      ~DenseGeneral.init_with_output
+      ~DenseGeneral.kernel_init
+      ~DenseGeneral.make_rng
+      ~DenseGeneral.param
+      ~DenseGeneral.setup
+      ~DenseGeneral.variable
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DenseGeneral.axis
+      ~DenseGeneral.batch_dims
+      ~DenseGeneral.bias_dtype
+      ~DenseGeneral.name
+      ~DenseGeneral.parent
+      ~DenseGeneral.precision
+      ~DenseGeneral.scope
+      ~DenseGeneral.use_bias
+      ~DenseGeneral.variables
+   
+   

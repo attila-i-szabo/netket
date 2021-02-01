@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>flax.optim.base &#8212; netket v3.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jumbo-style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_theme.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/rtd_theme.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html"><span><img src="../../../_static/logonav.png"></span>
+          NetKet</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../../website/get_started.html">Get Started</a></li>
+                <li><a href="../../../docs/getting_started.html">Documentation</a></li>
+                <li><a href="../../../tutorials/tutorials.html">Tutorials</a></li>
+                <li><a href="../../../website/citing.html">Citing NetKet</a></li>
+                <li><a href="../../../about.html">About</a></li>
+                <li><a href="https://github.com/netket/netket"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+                <li><a href="https://twitter.com/NetKetOrg"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"></ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <h1>Source code for flax.optim.base</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 The Flax Authors.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;Flax Optimizer api.</span>
+
+<span class="sd">Flax optimizers are defined using the OptimizerDef class which specifies the</span>
+<span class="sd">initialization and gradient application logic.</span>
+<span class="sd">Creating an optimizer using the `create` method will result in an instance of</span>
+<span class="sd">the `Optimizer` class which encapsulates the optimization target and state.</span>
+
+<span class="sd">Example of constructing an optimizer for a model::</span>
+
+<span class="sd">  from flax import optim</span>
+<span class="sd">  optimizer_def = optim.GradientDescent(learning_rate=0.1)</span>
+<span class="sd">  optimizer = optimizer_def.create(model)</span>
+
+<span class="sd">The optimizer is then used in a training step as follows::</span>
+
+<span class="sd">  def train_step(optimizer, data):</span>
+<span class="sd">    def loss_fn(model):</span>
+<span class="sd">      y = model(data)</span>
+<span class="sd">      loss = ... # compute the loss</span>
+<span class="sd">      aux = ... # compute auxiliary outputs (eg. training metrics)</span>
+<span class="sd">      return loss, aux</span>
+<span class="sd">    grad_fn = jax.value_and_grad(loss_fn, has_aux=True)</span>
+<span class="sd">    (loss, aux), grad = grad_fn(optimizer.target)</span>
+<span class="sd">    new_optimizer = optimizer.apply_gradient(grad)</span>
+<span class="sd">    return new_optimizer, loss, aux</span>
+
+
+<span class="sd">Distributed training only requires a few extra additions::</span>
+
+<span class="sd">  from flax import optim</span>
+<span class="sd">  optimizer_def = optim.GradientDescent(learning_rate=0.1)</span>
+<span class="sd">  optimizer = optimizer_def.create(model)</span>
+<span class="sd">  optimizer = jax_utils.replicate(optimizer)</span>
+
+<span class="sd">  def train_step(optimizer, data):</span>
+<span class="sd">    def loss_fn(model):</span>
+<span class="sd">      y = model(data)</span>
+<span class="sd">      loss = ... # compute the loss</span>
+<span class="sd">      aux = ... # compute auxiliary outputs (eg. training metrics)</span>
+<span class="sd">      return loss, aux</span>
+<span class="sd">    grad_fn = jax.value_and_grad(loss_fn, has_aux=True)</span>
+<span class="sd">    (loss, aux), grad = grad_fn(optimizer.target)</span>
+<span class="sd">    grad = jax.lax.pmean(grad, &#39;batch&#39;)</span>
+<span class="sd">    new_optimizer = optimizer.apply_gradient(grad)</span>
+<span class="sd">    return new_optimizer, loss, aux</span>
+
+<span class="sd">  distributed_train_step = jax.pmap(train_step, axis_name=&#39;batch&#39;)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">jax_utils</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">serialization</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">struct</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">traverse_util</span>
+
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+
+<span class="kn">from</span> <span class="nn">..nn</span> <span class="kn">import</span> <span class="n">base</span>
+
+
+<span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">OptimizerState</span><span class="p">:</span>
+  <span class="n">step</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+  <span class="n">param_states</span><span class="p">:</span> <span class="n">Any</span>
+
+
+<span class="k">class</span> <span class="nc">OptimizerDef</span><span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;Base class for optimizers.&quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hyper_params</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">hyper_params</span> <span class="o">=</span> <span class="n">hyper_params</span>
+
+  <span class="k">def</span> <span class="nf">apply_param_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">hyper_params</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">grad</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply a gradient for a single parameter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      step: the current step of the optimizer.</span>
+<span class="sd">      hyper_params: a named tuple of hyper parameters.</span>
+<span class="sd">      param: the parameter that should be updated.</span>
+<span class="sd">      state: a named tuple containing the state for this parameter</span>
+<span class="sd">      grad: the gradient tensor for the parameter.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      A tuple containing the new parameter and the new state.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+  <span class="k">def</span> <span class="nf">init_param_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Initializes the state for a parameter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      param: the parameter for which to initialize the state.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      A named tuple containing the initial optimization state for the parameter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+  <span class="k">def</span> <span class="nf">apply_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hyper_params</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">grads</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Applies a gradient for a set of parameters.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      hyper_params: a named tuple of hyper parameters.</span>
+<span class="sd">      params: the parameters that should be updated.</span>
+<span class="sd">      state: a named tuple containing the state of the optimizer</span>
+<span class="sd">      grads: the gradient tensors for the parameters.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      A tuple containing the new parameters and the new optimizer state.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">step</span>
+    <span class="n">params_flat</span><span class="p">,</span> <span class="n">treedef</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_flatten</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">states_flat</span> <span class="o">=</span> <span class="n">treedef</span><span class="o">.</span><span class="n">flatten_up_to</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">param_states</span><span class="p">)</span>
+    <span class="n">grads_flat</span> <span class="o">=</span> <span class="n">treedef</span><span class="o">.</span><span class="n">flatten_up_to</span><span class="p">(</span><span class="n">grads</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">apply_param_gradient</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">hyper_params</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">grad</span><span class="p">)</span>
+           <span class="k">for</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">grad</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">params_flat</span><span class="p">,</span> <span class="n">states_flat</span><span class="p">,</span> <span class="n">grads_flat</span><span class="p">)]</span>
+
+    <span class="n">new_params_flat</span><span class="p">,</span> <span class="n">new_states_flat</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">out</span><span class="p">))</span> <span class="k">if</span> <span class="n">out</span> <span class="k">else</span> <span class="p">((),</span> <span class="p">())</span>
+    <span class="n">new_params</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_unflatten</span><span class="p">(</span><span class="n">treedef</span><span class="p">,</span> <span class="n">new_params_flat</span><span class="p">)</span>
+    <span class="n">new_param_states</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_unflatten</span><span class="p">(</span><span class="n">treedef</span><span class="p">,</span> <span class="n">new_states_flat</span><span class="p">)</span>
+    <span class="n">new_state</span> <span class="o">=</span> <span class="n">OptimizerState</span><span class="p">(</span><span class="n">step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">new_param_states</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_params</span><span class="p">,</span> <span class="n">new_state</span>
+
+  <span class="k">def</span> <span class="nf">init_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="n">param_states</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">init_param_state</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">OptimizerState</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="n">param_states</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">state</span>
+
+  <span class="k">def</span> <span class="nf">update_hyper_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hyper_param_overrides</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Updates the hyper parameters with a set of overrides.</span>
+
+<span class="sd">    This method is called from Optimizer apply_gradient to create the</span>
+<span class="sd">    hyper parameters for a specific optimization step.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      **hyper_param_overrides: the hyper parameters updates</span>
+<span class="sd">        will override the defaults specified in the `OptimizerDef`.</span>
+<span class="sd">        Pass `hyper_params=...` to replace all hyper parameters.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      The new hyper parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hp</span> <span class="o">=</span> <span class="n">hyper_param_overrides</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;hyper_params&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyper_params</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">hyper_param_overrides</span><span class="p">:</span>
+      <span class="n">hp</span> <span class="o">=</span> <span class="n">hp</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="o">**</span><span class="n">hyper_param_overrides</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">hp</span>
+
+  <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">focus</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a new optimizer for the given target.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      target: the object to be optimized. This will typically be</span>
+<span class="sd">        an instance of `flax.nn.Model`.</span>
+<span class="sd">      focus: a `flax.traverse_util.Traversal` that selects which subset of</span>
+<span class="sd">        the target is optimized.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      An instance of `Optimizer`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">opt_def</span> <span class="o">=</span> <span class="bp">self</span>
+    <span class="k">if</span> <span class="n">focus</span><span class="p">:</span>
+      <span class="n">opt_def</span> <span class="o">=</span> <span class="n">MultiOptimizer</span><span class="p">((</span><span class="n">focus</span><span class="p">,</span> <span class="n">opt_def</span><span class="p">))</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">opt_def</span><span class="o">.</span><span class="n">init_state</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Optimizer</span><span class="p">(</span><span class="n">opt_def</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">serialization</span><span class="o">.</span><span class="n">to_state_dict</span><span class="p">({</span>
+        <span class="s1">&#39;target&#39;</span><span class="p">:</span> <span class="n">serialization</span><span class="o">.</span><span class="n">to_state_dict</span><span class="p">(</span><span class="n">target</span><span class="p">),</span>
+        <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="n">serialization</span><span class="o">.</span><span class="n">to_state_dict</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="p">})</span>
+
+  <span class="k">def</span> <span class="nf">restore_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt_target</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Restore the optimizer target and state from the state dict.</span>
+
+<span class="sd">    This function accepts the current optimizer target and state. This</span>
+<span class="sd">    lets us know the exact structure of the optimizer target and state,</span>
+<span class="sd">    as well as lets us add assertions that shapes and dtypes don&#39;t change.</span>
+
+<span class="sd">    In practice, no values in `opt_target` and `opt_state` are actually</span>
+<span class="sd">    used. Only the tree structure, shapes and types.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      opt_target: the optimizer target.</span>
+<span class="sd">      opt_state: the optimizer state.</span>
+<span class="sd">      state_dict: the state dict containing the desired new state of the</span>
+<span class="sd">                  optimizer.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      a tuple of the optimizer target and state with the restored values from</span>
+<span class="sd">      the state dict.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">opt_target</span> <span class="o">=</span> <span class="n">serialization</span><span class="o">.</span><span class="n">from_state_dict</span><span class="p">(</span><span class="n">opt_target</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">])</span>
+    <span class="n">opt_state</span> <span class="o">=</span> <span class="n">serialization</span><span class="o">.</span><span class="n">from_state_dict</span><span class="p">(</span><span class="n">opt_state</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">opt_target</span><span class="p">,</span> <span class="n">opt_state</span>
+
+
+<span class="k">class</span> <span class="nc">_NoAux</span><span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;Placeholder used to indicate a lack of auxilairy outputs.&quot;&quot;&quot;</span>
+  <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">Optimizer</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">PyTreeNode</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Wraps an optimizer with its hyper_params, state, and model parameters.&quot;&quot;&quot;</span>
+
+  <span class="n">optimizer_def</span><span class="p">:</span> <span class="n">OptimizerDef</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">pytree_node</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="n">state</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">pytree_node</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="n">target</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">pytree_node</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">apply_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grads</span><span class="p">,</span> <span class="o">**</span><span class="n">hyper_param_overrides</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Applies a pytree of gradients to the target.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      grads: A pytree of gradients.</span>
+<span class="sd">      **hyper_param_overrides: the hyper parameters passed to apply_gradient</span>
+<span class="sd">        will override the defaults specified in the `OptimizerDef`.</span>
+<span class="sd">        Pass `hyper_params=...` to replace all hyper parameters.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      A new optimizer with the updated target and state.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hyper_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer_def</span><span class="o">.</span><span class="n">update_hyper_params</span><span class="p">(</span>
+        <span class="o">**</span><span class="n">hyper_param_overrides</span><span class="p">)</span>
+    <span class="n">new_target</span><span class="p">,</span> <span class="n">new_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer_def</span><span class="o">.</span><span class="n">apply_gradient</span><span class="p">(</span>
+        <span class="n">hyper_params</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">grads</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">new_target</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">new_state</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">compute_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes gradient of loss_fn.</span>
+
+<span class="sd">    DEPRECATION WARNING:</span>
+<span class="sd">    compute_gradient() is deprecated.</span>
+<span class="sd">    Use jax.grad() or jax.value_and_grad() instead.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      loss_fn: a function that receives the target and returns a loss or a</span>
+<span class="sd">        tuple of the loss and auxiliary outputs.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      A tuple consisting of the loss, auxiliary outputs if any,</span>
+<span class="sd">        and a list of gradient.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;compute_gradient() will be removed soon.&#39;</span>
+                  <span class="s1">&#39; Use jax.grad() or jax.value_and_grad()&#39;</span>
+                  <span class="s1">&#39;instead.&#39;</span><span class="p">,</span>
+                  <span class="ne">DeprecationWarning</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">loss_wrapper</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
+      <span class="n">loss_and_aux</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+      <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">loss_and_aux</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">loss_and_aux</span><span class="p">,</span> <span class="n">_NoAux</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">loss_and_aux</span>
+    <span class="n">grad_fn</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">value_and_grad</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">,</span> <span class="n">has_aux</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">aux</span><span class="p">),</span> <span class="n">grad</span> <span class="o">=</span> <span class="n">grad_fn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">aux</span> <span class="ow">is</span> <span class="n">_NoAux</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">grad</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">aux</span><span class="p">,</span> <span class="n">grad</span>
+  <span class="n">compute_gradients</span> <span class="o">=</span> <span class="n">compute_gradient</span>
+
+  <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">,</span> <span class="o">**</span><span class="n">hyper_param_overrides</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Optimizes the target with respect to a loss function.</span>
+
+<span class="sd">    DEPRECATION WARNING:</span>
+<span class="sd">    optimize() is deprecated.</span>
+<span class="sd">    Use jax.grad() or jax.value_and_grad() and apply_gradient() instead.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      loss_fn:  function that receives the target and returns a loss or a</span>
+<span class="sd">        tuple of the loss and auxiliary outputs.</span>
+<span class="sd">      **hyper_param_overrides: the hyper parameters passed to apply_gradient</span>
+<span class="sd">        will override the defaults specified in the `OptimizerDef`.</span>
+<span class="sd">        Pass `hyper_params=...` to replace all hyper parameters.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      A tuple consisting of the new optimizer, the loss,</span>
+<span class="sd">        and the auxiliary outputs if any.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;optimize() will be removed soon.&#39;</span>
+                  <span class="s1">&#39; Use jax.grad() or jax.value_and_grad()&#39;</span>
+                  <span class="s1">&#39;and apply_gradient() instead.&#39;</span><span class="p">,</span>
+                  <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+    <span class="n">output_and_grad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_gradient</span><span class="p">(</span><span class="n">loss_fn</span><span class="p">)</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">output_and_grad</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_gradient</span><span class="p">(</span><span class="n">grad</span><span class="p">,</span> <span class="o">**</span><span class="n">hyper_param_overrides</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">optimizer</span><span class="p">,)</span> <span class="o">+</span> <span class="n">output_and_grad</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+  <span class="k">def</span> <span class="nf">replicate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">devices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis_name</span><span class="o">=</span><span class="s1">&#39;batch&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Replicates an optimizer for data parallel training.</span>
+
+<span class="sd">    A replicated optimizer will automatically average the gradients across</span>
+<span class="sd">      devices. For this to work correctly the optimize method should be called</span>
+<span class="sd">      within the context of a `jax.pmap` call with the correct axis_name.</span>
+<span class="sd">    Args:</span>
+<span class="sd">      devices: an optional list of devices defining which devices this optimizer</span>
+<span class="sd">        is replicated to (default: all local devices).</span>
+<span class="sd">      axis_name: the axis_name used for gradient averaging across devices.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      The replicated optimizer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">devices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">devices</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">local_devices</span><span class="p">()</span>
+    <span class="n">optimizer_def</span> <span class="o">=</span> <span class="n">ReplicatedOptimizer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">optimizer_def</span><span class="p">,</span> <span class="n">devices</span><span class="p">,</span> <span class="n">axis_name</span><span class="p">)</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">jax_utils</span><span class="o">.</span><span class="n">replicate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">devices</span><span class="o">=</span><span class="n">devices</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">optimizer_def</span><span class="o">=</span><span class="n">optimizer_def</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">unreplicate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Un-replicates an optimizer.</span>
+
+<span class="sd">    This will create a new optimizer with the target and state of the first</span>
+<span class="sd">      device this optimizer was replicated to. After this call the optimizer</span>
+<span class="sd">      and the target can be used outside of a `jax.pmap` call.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      The optimizer that is no longer replicated.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">optimizer_def</span><span class="p">,</span> <span class="n">ReplicatedOptimizer</span><span class="p">):</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Cannot unreplicate an optimizer &#39;</span>
+                       <span class="s1">&#39;that is not replicated.&#39;</span><span class="p">)</span>
+    <span class="n">optimizer_def</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer_def</span><span class="o">.</span><span class="n">optimizer_def</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">jax_utils</span><span class="o">.</span><span class="n">unreplicate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">optimizer_def</span><span class="o">=</span><span class="n">optimizer_def</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer_def</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">restore_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+    <span class="n">target</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer_def</span><span class="o">.</span><span class="n">restore_state</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">)</span>
+
+
+<span class="c1"># Optimizer serialization is handled by the state_dict and restore_dict methods</span>
+<span class="c1"># of the OptimizerDef. Currently, this is used to store only a single copy of</span>
+<span class="c1"># a replicated optimizer.</span>
+<span class="n">serialization</span><span class="o">.</span><span class="n">register_serialization_state</span><span class="p">(</span>
+    <span class="n">Optimizer</span><span class="p">,</span> <span class="n">Optimizer</span><span class="o">.</span><span class="n">state_dict</span><span class="p">,</span> <span class="n">Optimizer</span><span class="o">.</span><span class="n">restore_state</span><span class="p">,</span>
+    <span class="n">override</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">ReplicatedOptimizer</span><span class="p">(</span><span class="n">OptimizerDef</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Data parallel optimizer.</span>
+
+<span class="sd">  DEPRECATION WARNING:</span>
+<span class="sd">  ReplicatedOptimizer will be removed soon.</span>
+<span class="sd">  Use `jax_utils.replicate(optimizer)` and `lax.pmean(grad)` to explicitly</span>
+<span class="sd">  control the replication of the the optimizer and the cross replica averaging</span>
+<span class="sd">  over gradients, respectively.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimizer_def</span><span class="p">,</span> <span class="n">devices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis_name</span><span class="o">=</span><span class="s1">&#39;batch&#39;</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">optimizer_def</span><span class="o">.</span><span class="n">hyper_params</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">devices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">devices</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">local_devices</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">optimizer_def</span> <span class="o">=</span> <span class="n">optimizer_def</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">devices</span> <span class="o">=</span> <span class="n">devices</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">axis_name</span> <span class="o">=</span> <span class="n">axis_name</span>
+
+  <span class="k">def</span> <span class="nf">init_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer_def</span><span class="o">.</span><span class="n">init_state</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">_cross_replica_mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grad</span><span class="p">):</span>
+    <span class="n">axis_size</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">psum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">axis_name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">psum</span><span class="p">(</span><span class="n">grad</span><span class="p">,</span> <span class="n">axis_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">axis_name</span><span class="p">)</span> <span class="o">/</span> <span class="n">axis_size</span>
+
+  <span class="k">def</span> <span class="nf">apply_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hyper_params</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">grads</span><span class="p">):</span>
+    <span class="n">grads</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cross_replica_mean</span><span class="p">,</span> <span class="n">grads</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer_def</span><span class="o">.</span><span class="n">apply_gradient</span><span class="p">(</span><span class="n">hyper_params</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">grads</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">update_hyper_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hyper_param_overrides</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer_def</span><span class="o">.</span><span class="n">update_hyper_params</span><span class="p">(</span><span class="o">**</span><span class="n">hyper_param_overrides</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+    <span class="n">state_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer_def</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+    <span class="c1"># only the first copy of the parameters and optimizer state are stored.</span>
+    <span class="n">state_dict</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">state_dict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">state_dict</span>
+
+  <span class="k">def</span> <span class="nf">restore_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">):</span>
+    <span class="c1"># replicate the parameters and state to all devices.</span>
+    <span class="n">state_dict</span> <span class="o">=</span> <span class="n">jax_utils</span><span class="o">.</span><span class="n">replicate</span><span class="p">(</span><span class="n">state_dict</span><span class="p">,</span> <span class="n">devices</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">devices</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">optimizer_def</span><span class="o">.</span><span class="n">restore_state</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">MultiOptimizer</span><span class="p">(</span><span class="n">OptimizerDef</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Combine a set of optimizers by applying each to a subset of the parameters.&quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">traversals_and_optimizers</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a new MultiOptimizer.</span>
+
+<span class="sd">    A MultiOptimizer is useful when separate optimizer algorithms should be</span>
+<span class="sd">    applied to various subsets of the model parameters.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">      kernels = optim.ModelParamTraversal(lambda path, _: &#39;kernel&#39; in path)</span>
+<span class="sd">      biases = optim.ModelParamTraversal(lambda path, _: &#39;bias&#39; in path)</span>
+<span class="sd">      kernel_opt = optim.Momentum(learning_rate=0.01)</span>
+<span class="sd">      bias_opt = optim.Momentum(learning_rate=0.1)</span>
+<span class="sd">      opt_def = MultiOptimizer((kernels, kernel_opt), (biases, bias_opt))</span>
+<span class="sd">      optimizer = opt_def.create(model)</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">      *traversals_and_optimizers: pairs of flax.traverse_util.Traversal and</span>
+<span class="sd">      `flax.optim.OptimizerDef` instances.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">traversals</span><span class="p">,</span> <span class="n">sub_optimizers</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">traversals_and_optimizers</span><span class="p">)</span>
+    <span class="n">hyper_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">opt</span><span class="o">.</span><span class="n">hyper_params</span> <span class="k">for</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">sub_optimizers</span><span class="p">]</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hyper_params</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">traversals</span> <span class="o">=</span> <span class="n">traversals</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">sub_optimizers</span> <span class="o">=</span> <span class="n">sub_optimizers</span>
+
+  <span class="k">def</span> <span class="nf">init_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="n">sub_states</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">traversal</span><span class="p">,</span> <span class="n">opt</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">traversals</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_optimizers</span><span class="p">):</span>
+      <span class="n">params_t</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">traversal</span><span class="o">.</span><span class="n">iterate</span><span class="p">(</span><span class="n">params</span><span class="p">))</span>
+      <span class="n">state</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">init_state</span><span class="p">(</span><span class="n">params_t</span><span class="p">)</span>
+      <span class="n">sub_states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sub_states</span>
+
+  <span class="k">def</span> <span class="nf">apply_gradient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hyper_params</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">grads</span><span class="p">):</span>
+    <span class="n">new_params</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="n">new_states</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">it</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">traversals</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub_optimizers</span><span class="p">,</span> <span class="n">hyper_params</span><span class="p">,</span> <span class="n">states</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">focus</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">hp</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">it</span><span class="p">:</span>
+      <span class="n">p</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">focus</span><span class="o">.</span><span class="n">iterate</span><span class="p">(</span><span class="n">params</span><span class="p">))</span>
+      <span class="n">g</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">focus</span><span class="o">.</span><span class="n">iterate</span><span class="p">(</span><span class="n">grads</span><span class="p">))</span>
+      <span class="n">new_p</span><span class="p">,</span> <span class="n">new_s</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">apply_gradient</span><span class="p">(</span><span class="n">hp</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+      <span class="n">new_params</span> <span class="o">=</span> <span class="n">focus</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">new_p</span><span class="p">,</span> <span class="n">new_params</span><span class="p">)</span>
+      <span class="n">new_states</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_params</span><span class="p">,</span> <span class="n">new_states</span>
+
+  <span class="k">def</span> <span class="nf">update_hyper_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hyper_param_overrides</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Updates the hyper parameters with a set of overrides.</span>
+
+<span class="sd">    This method is called from Optimizer apply_gradient to create the</span>
+<span class="sd">    hyper parameters for a specific optimization step.</span>
+<span class="sd">    MultiOptimizer will apply the overrides for each sub optimizer.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      **hyper_param_overrides: the hyper parameters updates</span>
+<span class="sd">        will override the defaults specified in the `OptimizerDef`.</span>
+<span class="sd">        Pass `hyper_params=...` to replace all hyper parameters.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">      The new hyper parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hps</span> <span class="o">=</span> <span class="n">hyper_param_overrides</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;hyper_params&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hyper_params</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">hyper_param_overrides</span><span class="p">:</span>
+      <span class="n">hps</span> <span class="o">=</span> <span class="p">[</span><span class="n">hp</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="o">**</span><span class="n">hyper_param_overrides</span><span class="p">)</span> <span class="k">for</span> <span class="n">hp</span> <span class="ow">in</span> <span class="n">hps</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">hps</span>
+
+
+<span class="k">def</span> <span class="nf">_sorted_items</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Returns items of a dict ordered by keys.&quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+
+<span class="k">class</span> <span class="nc">ModelParamTraversal</span><span class="p">(</span><span class="n">traverse_util</span><span class="o">.</span><span class="n">Traversal</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Select model parameters using a name filter.&quot;&quot;&quot;</span>
+
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_fn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Constructor a new ModelParamTraversal.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      filter_fn: a function that takes a parameters full name and its value and</span>
+<span class="sd">        returns whether this parameter should be selected or not. The name of a</span>
+<span class="sd">        parameter is determined by the module hierarchy and the parameter name</span>
+<span class="sd">        (for example: &#39;/module/sub_module/parameter_name&#39;).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_filter_fn</span> <span class="o">=</span> <span class="n">filter_fn</span>
+
+  <span class="nd">@staticmethod</span>
+  <span class="k">def</span> <span class="nf">_check_inputs</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">base</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+          <span class="s1">&#39;ModelParamTraversal can only traverse a flax Model instance.&#39;</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">iterate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_check_inputs</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="n">flat_dict</span> <span class="o">=</span> <span class="n">traverse_util</span><span class="o">.</span><span class="n">flatten_dict</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">_sorted_items</span><span class="p">(</span><span class="n">flat_dict</span><span class="p">):</span>
+      <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+      <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_fn</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">value</span>
+
+  <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_check_inputs</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="n">flat_dict</span> <span class="o">=</span> <span class="n">traverse_util</span><span class="o">.</span><span class="n">flatten_dict</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">keep_empty_nodes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">new_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">_sorted_items</span><span class="p">(</span><span class="n">flat_dict</span><span class="p">):</span>
+      <span class="c1"># empty_node is not an actual leave. It&#39;s just a stub for empty nodes</span>
+      <span class="c1"># in the nested dict.</span>
+      <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">traverse_util</span><span class="o">.</span><span class="n">empty_node</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_fn</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+          <span class="n">value</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+      <span class="n">new_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="n">new_params</span> <span class="o">=</span> <span class="n">traverse_util</span><span class="o">.</span><span class="n">unflatten_dict</span><span class="p">(</span><span class="n">new_dict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">inputs</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">new_params</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2019, The Simons Foundation, Inc. - All rights reserved.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+
+<script type="text/javascript">
+    jQuery(function () {
+        SphinxRtdTheme.Navigation.enable(true);
+      })
+</script>
+
+<!-- Temporary footer-->
+<div class="footer-wip">
+  <div class="footer-wip-content">
+    This documentation refers to an unreleased version of Netket.
+  </div>
+</div>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118013987-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-118013987-1');
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "url": "https://www.netket.org",
+  "name": "NetKet",
+  "founder": "Giuseppe Carleo",
+  "foundingDate": "2018-04-24",
+  "foundingLocation" : "New York",
+  "logo": "https://www.netket.org/img/logo_small.jpg",
+  "sameAs": [
+    "https://twitter.com/NetKetOrg",
+    "https://github.com/NetKet/netket"
+  ],
+  "description" : "Netket is an open-source project delivering cutting-edge
+  methods for the study of many-body quantum systems with artificial neural
+  networks and machine learning techniques.
+  NetKet provides state-of-the-art Neural-Network Quantum states,
+  and advanced learning algorithms to find the ground-state of many-body Hamiltonians.
+ NetKet is supported by the Simons Foundation and the Flatiron Institute."
+}
+</script>
+
+  </body>
+</html>

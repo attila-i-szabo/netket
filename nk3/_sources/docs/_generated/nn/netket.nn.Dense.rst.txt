@@ -1,0 +1,45 @@
+﻿netket.nn.Dense
+===============
+
+.. currentmodule:: netket.nn
+
+.. autoclass:: Dense
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Dense.__init__
+      ~Dense.apply
+      ~Dense.bias_init
+      ~Dense.clone
+      ~Dense.has_variable
+      ~Dense.init
+      ~Dense.init_with_output
+      ~Dense.kernel_init
+      ~Dense.make_rng
+      ~Dense.param
+      ~Dense.setup
+      ~Dense.variable
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Dense.bias_dtype
+      ~Dense.name
+      ~Dense.parent
+      ~Dense.precision
+      ~Dense.scope
+      ~Dense.use_bias
+      ~Dense.variables
+   
+   

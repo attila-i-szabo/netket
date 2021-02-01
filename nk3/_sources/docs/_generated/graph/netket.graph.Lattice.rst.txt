@@ -1,0 +1,42 @@
+﻿netket.graph.Lattice
+====================
+
+.. currentmodule:: netket.graph
+
+.. autoclass:: Lattice
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Lattice.__init__
+      ~Lattice.adjacency_list
+      ~Lattice.atom_label
+      ~Lattice.automorphisms
+      ~Lattice.coord_to_site
+      ~Lattice.distances
+      ~Lattice.edges
+      ~Lattice.is_bipartite
+      ~Lattice.is_connected
+      ~Lattice.nodes
+      ~Lattice.site_to_coord
+      ~Lattice.site_to_vector
+      ~Lattice.vector_to_coord
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Lattice.basis_vectors
+      ~Lattice.n_edges
+      ~Lattice.n_nodes
+   
+   

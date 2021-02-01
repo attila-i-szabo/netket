@@ -1,0 +1,6 @@
+﻿netket.sampler.MetropolisExchangePt
+===================================
+
+.. currentmodule:: netket.sampler
+
+.. autofunction:: MetropolisExchangePt

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>netket.nn.Embed &#8212; netket v3.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jumbo-style.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_theme.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/rtd_theme.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="netket.nn.celu" href="netket.nn.celu.html" />
+    <link rel="prev" title="netket.nn.Conv" href="netket.nn.Conv.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../../index.html"><span><img src="../../../_static/logonav.png"></span>
+          NetKet</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../../../website/get_started.html">Get Started</a></li>
+                <li><a href="../../getting_started.html">Documentation</a></li>
+                <li><a href="../../../tutorials/tutorials.html">Tutorials</a></li>
+                <li><a href="../../../website/citing.html">Citing NetKet</a></li>
+                <li><a href="../../../about.html">About</a></li>
+                <li><a href="https://github.com/netket/netket"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+                <li><a href="https://twitter.com/NetKetOrg"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"></ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><div class="sidenav-header">
+  <div class="h4"> 
+    Netket 3.0 Documentation
+  </div>
+
+  <!---
+  	<div role="search">
+  <form id="rtd-search-form" class="wy-form"  action="../search.html" method="get">
+    <input type="text" name="q" class="form-control" placeholder="Search" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+  ---->
+</div>
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#installation-and-requirements">Installation and requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#jax-flax-extensions">Jax/Flax extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#legacy-api-support-api-before-2021">Legacy API support (API before 2021)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#commented-example">Commented Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../graphs.html">Graph submodule</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../graphs.html#stuff">Stuff</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Square.html">netket.graph.Square</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Grid.html">netket.graph.Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../graphs.html#abstract-interface">Abstract Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../graphs.html#lattice-constructors">Lattice Constructors</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../api.html">Public API: netket package</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#graph">Graph</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Chain.html">netket.graph.Chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Grid.html">netket.graph.Grid</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#hilbert">Hilbert</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.AbstractHilbert.html">netket.hilbert.AbstractHilbert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Spin.html">netket.hilbert.Spin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Boson.html">netket.hilbert.Boson</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.CustomHilbert.html">netket.hilbert.CustomHilbert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.DoubledHilbert.html">netket.hilbert.DoubledHilbert</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#operators">Operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.BoseHubbard.html">netket.operator.BoseHubbard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.GraphOperator.html">netket.operator.GraphOperator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.LocalOperator.html">netket.operator.LocalOperator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.Ising.html">netket.operator.Ising</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.Heisenberg.html">netket.operator.Heisenberg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#pre-defined-operators">Pre-defined operators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.create.html">netket.operator.boson.create</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.destroy.html">netket.operator.boson.destroy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.number.html">netket.operator.boson.number</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.spin.sigmax.html">netket.operator.spin.sigmax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.spin.sigmay.html">netket.operator.spin.sigmay</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.spin.sigmaz.html">netket.operator.spin.sigmaz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.spin.sigmap.html">netket.operator.spin.sigmap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.spin.sigmam.html">netket.operator.spin.sigmam</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#exact-solvers">Exact solvers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../exact/netket.exact.full_ed.html">netket.exact.full_ed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exact/netket.exact.lanczos_ed.html">netket.exact.lanczos_ed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../exact/netket.exact.steady_state.html">netket.exact.steady_state</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#samplers">Samplers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.ExactSampler.html">netket.sampler.ExactSampler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.Metropolis.html">netket.sampler.Metropolis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.MetropolisNumpy.html">netket.sampler.MetropolisNumpy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.MetropolisPt.html">netket.sampler.MetropolisPt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.MetropolisLocal.html">netket.sampler.MetropolisLocal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.MetropolisExchange.html">netket.sampler.MetropolisExchange</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.MetropolisHamiltonian.html">netket.sampler.MetropolisHamiltonian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.MetropolisLocalPt.html">netket.sampler.MetropolisLocalPt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../samplers/netket.sampler.MetropolisExchangePt.html">netket.sampler.MetropolisExchangePt</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#pre-built-models">Pre-built models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../models/netket.models.RBM.html">netket.models.RBM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../models/netket.models.RBMModPhase.html">netket.models.RBMModPhase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../models/netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../api.html#model-tools">Model tools</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="netket.nn.Module.html">netket.nn.Module</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../api.html#linear-modules">Linear Modules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.Dense.html">netket.nn.Dense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.DenseGeneral.html">netket.nn.DenseGeneral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.Conv.html">netket.nn.Conv</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">netket.nn.Embed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#activation-functions">Activation functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.celu.html">netket.nn.celu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.elu.html">netket.nn.elu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.gelu.html">netket.nn.gelu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.glu.html">netket.nn.glu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.log_sigmoid.html">netket.nn.log_sigmoid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.log_softmax.html">netket.nn.log_softmax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.relu.html">netket.nn.relu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.sigmoid.html">netket.nn.sigmoid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.soft_sign.html">netket.nn.soft_sign</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.softmax.html">netket.nn.softmax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.softplus.html">netket.nn.softplus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.swish.html">netket.nn.swish</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.nn.logcosh.html">netket.nn.logcosh</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#optim">Optim</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optim.SR.html">netket.optim.SR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optim.Adam.html">netket.optim.Adam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optim.Adagrad.html">netket.optim.Adagrad</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optim.GradientDescent.html">netket.optim.GradientDescent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optim.LAMB.html">netket.optim.LAMB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optim.LARS.html">netket.optim.LARS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optim.Momentum.html">netket.optim.Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optim.RMSProp.html">netket.optim.RMSProp</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../requirements.html#mpi-and-cmake">MPI and CMake</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../requirements.html#mac">Mac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../requirements.html#ubuntu">Ubuntu</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../requirements.html#other-platforms">Other platforms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../requirements.html#optional-python-libraries">Optional Python Libraries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../website/citing.html">Citing NetKet</a></li>
+</ul>
+
+
+<!--- |replace("", "<span class=\"toctree-expand\Z"></span>")  --->
+        </div>
+      </div>
+    <div class="body col-md-9 content" role="main">
+      
+  <div class="section" id="netket-nn-embed">
+<h1>netket.nn.Embed<a class="headerlink" href="#netket-nn-embed" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="netket.nn.Embed">
+<em class="property">class </em><code class="sig-prename descclassname">netket.nn.</code><code class="sig-name descname">Embed</code><span class="sig-paren">(</span><em class="sig-param">num_embeddings</em>, <em class="sig-param">features</em>, <em class="sig-param">dtype=&lt;class 'jax._src.numpy.lax_numpy.float32'&gt;</em>, <em class="sig-param">embedding_init=&lt;function variance_scaling.&lt;locals&gt;.init&gt;</em>, <em class="sig-param">parent=&lt;flax.linen.module._Sentinel object&gt;</em>, <em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/flax/linen/linear.html#Embed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netket.nn.Embed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Embedding Module.
+A parameterized function from integers [0, n) to d-dimensional vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_embeddings</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of embeddings.</p></li>
+<li><p><strong>features</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of feature dimensions for each embedding.</p></li>
+<li><p><strong>dtype</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>) – the dtype of the embedding vectors (default: float32).</p></li>
+<li><p><strong>embedding_init</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>[[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>], <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>], <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]) – embedding initializer.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="netket.nn.Embed.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">num_embeddings</em>, <em class="sig-param">features</em>, <em class="sig-param">dtype=&lt;class 'jax._src.numpy.lax_numpy.float32'&gt;</em>, <em class="sig-param">embedding_init=&lt;function variance_scaling.&lt;locals&gt;.init&gt;</em>, <em class="sig-param">parent=&lt;flax.linen.module._Sentinel object&gt;</em>, <em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#netket.nn.Embed.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#netket.nn.Embed.__init__" title="netket.nn.Embed.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(num_embeddings, features[, dtype, …])</p></td>
+<td><p>Initialize self.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#netket.nn.Embed.apply" title="netket.nn.Embed.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a>(variables, *args[, rngs, method, mutable])</p></td>
+<td><p>Applies a module method to variables and returns output and modified variables.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#netket.nn.Embed.attend" title="netket.nn.Embed.attend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">attend</span></code></a>(query)</p></td>
+<td><p>Attend over the embedding using a query array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#netket.nn.Embed.clone" title="netket.nn.Embed.clone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clone</span></code></a>(*[, parent])</p></td>
+<td><p>Creates a clone of this Module, with optionally updated arguments.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">embedding_init</span></code>(shape[, dtype])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#netket.nn.Embed.has_variable" title="netket.nn.Embed.has_variable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_variable</span></code></a>(col, name)</p></td>
+<td><p>Checks if a variable of given collection and name exists in this Module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#netket.nn.Embed.init" title="netket.nn.Embed.init"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init</span></code></a>(rngs, *args[, method])</p></td>
+<td><p>Initializes a module method with variables and returns modified variables.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#netket.nn.Embed.init_with_output" title="netket.nn.Embed.init_with_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">init_with_output</span></code></a>(rngs, *args[, method])</p></td>
+<td><p>Initializes a module method with variables and returns output and modified variables.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#netket.nn.Embed.make_rng" title="netket.nn.Embed.make_rng"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_rng</span></code></a>(col)</p></td>
+<td><p>Returns a new RNG key for a given collection for this Module.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#netket.nn.Embed.param" title="netket.nn.Embed.param"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param</span></code></a>(name, init_fn, *init_args)</p></td>
+<td><p>Declares and returns a parameter in this Module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#netket.nn.Embed.setup" title="netket.nn.Embed.setup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setup</span></code></a>()</p></td>
+<td><p>Initializes a Module (similar to <code class="docutils literal notranslate"><span class="pre">__init__</span></code> for non-dataclass Python classes).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#netket.nn.Embed.variable" title="netket.nn.Embed.variable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable</span></code></a>(col, name, init_fn, *init_args)</p></td>
+<td><p>Declares and returns a variable in this Module.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">parent</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">scope</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#netket.nn.Embed.variables" title="netket.nn.Embed.variables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variables</span></code></a></p></td>
+<td><p>Returns the variables in this module.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="netket.nn.Embed.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">variables</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">rngs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mutable</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.nn.Embed.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies a module method to variables and returns output and modified variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variables</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]) – A dictionary containing variables keyed by variable
+collections. See <code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code> for more details
+about variables.</p></li>
+<li><p><strong>rngs</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]) – The rngs for the variable collections.</p></li>
+<li><p><strong>method</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>[…, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]) – The literal name of a method in this class. If provided, applies
+this method. If not provided, applies the <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method.</p></li>
+<li><p><strong>mutable</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – Can be bool, str, or list. Specifies which collections should be
+treated as mutable: <code class="docutils literal notranslate"><span class="pre">bool</span></code>: all/no collections are mutable.
+<code class="docutils literal notranslate"><span class="pre">str</span></code>: The name of a single mutable collection. <code class="docutils literal notranslate"><span class="pre">list</span></code>: A
+list of names of mutable collections.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]]]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If <code class="docutils literal notranslate"><span class="pre">mutable</span></code> is False, returns output. If any collections are
+mutable, returns <code class="docutils literal notranslate"><span class="pre">(output,</span> <span class="pre">vars)</span></code>, where <code class="docutils literal notranslate"><span class="pre">vars</span></code> are is a dict
+of the modified collections.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.nn.Embed.attend">
+<code class="sig-name descname">attend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">query</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/flax/linen/linear.html#Embed.attend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netket.nn.Embed.attend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attend over the embedding using a query array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>query</strong> – array with last dimension equal the feature depth <cite>features</cite> of the
+embedding.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array with final dim <cite>num_embeddings</cite> corresponding to the batched
+inner-product of the array of query vectors against each embedding.
+Commonly used for weight-sharing between embeddings and logit transform
+in NLP models.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.nn.Embed.clone">
+<code class="sig-name descname">clone</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">parent</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">updates</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.nn.Embed.clone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a clone of this Module, with optionally updated arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Scope</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>]) – The parent of the clone. The clone will have no parent if no
+explicit parent is specified.</p></li>
+<li><p><strong>**updates</strong> – Attribute updates.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A clone of the this Module with the updated attributes and parent.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.nn.Embed.has_variable">
+<code class="sig-name descname">has_variable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">col</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.nn.Embed.has_variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if a variable of given collection and name exists in this Module.</p>
+<p>See <code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code> for more explanation on variables and
+collections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>col</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The variable collection name.</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The name of the variable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if the variable exists.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.nn.Embed.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rngs</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.nn.Embed.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes a module method with variables and returns modified variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rngs</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]) – The rngs for the variable collections.</p></li>
+<li><p><strong>method</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>[…, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]) – An optional method. If provided, applies this method. If not
+provided, applies the <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The initialized variable dict.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.nn.Embed.init_with_output">
+<code class="sig-name descname">init_with_output</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rngs</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.nn.Embed.init_with_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes a module method with variables and returns output and modified variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rngs</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]) – The rngs for the variable collections.</p></li>
+<li><p><strong>method</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>[…, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]) – An optional method. If provided, applies this method. If not
+provided, applies the <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><cite>(output, vars)`</cite>, where <code class="docutils literal notranslate"><span class="pre">vars</span></code> are is a dict of the modified
+collections.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.nn.Embed.make_rng">
+<code class="sig-name descname">make_rng</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">col</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.nn.Embed.make_rng" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new RNG key for a given collection for this Module.</p>
+<p>The new RNG key is split from the previous one. Thus, every call to
+<cite>make_rng</cite> returns a new RNG key, while still guaranteeing full
+reproducibility.</p>
+<p>TODO: Link to both Flax RNG design note.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>col</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The variable collection name.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The newly generated RNG key.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.nn.Embed.param">
+<code class="sig-name descname">param</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">init_fn</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">init_args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.nn.Embed.param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Declares and returns a parameter in this Module.</p>
+<p>Parameters are read-only variables in the collection named “params”. See
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code> for more details on variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The parameter name.</p></li>
+<li><p><strong>init_fn</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>[…, ~T]) – The function that will be called to compute the initial value
+of this variable. This function will only be called the first time
+this parameter is used in this module.</p></li>
+<li><p><strong>*init_args</strong> – The arguments to pass to init_fn.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>~T</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The value of the initialized parameter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.nn.Embed.setup">
+<code class="sig-name descname">setup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/flax/linen/linear.html#Embed.setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#netket.nn.Embed.setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes a Module (similar to <code class="docutils literal notranslate"><span class="pre">__init__</span></code> for non-dataclass Python classes).</p>
+<p><code class="docutils literal notranslate"><span class="pre">setup</span></code> is called on a module instance at the moment it is safe to define
+or access variables or submodules (once the module is “bound”).</p>
+<div class="line-block">
+<div class="line">This happens in three cases:</div>
+</div>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Immediately when invoking <a class="reference internal" href="#netket.nn.Embed.apply" title="netket.nn.Embed.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a>, <a class="reference internal" href="#netket.nn.Embed.init" title="netket.nn.Embed.init"><code class="xref py py-meth docutils literal notranslate"><span class="pre">init()</span></code></a> or
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">init_and_output()</span></code>.</p></li>
+<li><p>When the module is given a name by being assigned to an attribute of
+another module inside the other module’s <code class="docutils literal notranslate"><span class="pre">setup</span></code> method
+(see <code class="xref py py-meth docutils literal notranslate"><span class="pre">__setattr__()</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyModule</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">submodule</span> <span class="o">=</span> <span class="n">Conv</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+    <span class="c1"># Accessing `submodule.variables` does not yet work here.</span>
+
+    <span class="c1"># The following line invokes `self.__setattr__`, which gives</span>
+    <span class="c1"># `submodule` the name &quot;conv1&quot;, which calls `submodule.setup`.</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">submodule</span>
+
+    <span class="c1"># Accessing `submodule.variables` is now safe.</span>
+</pre></div>
+</div>
+</li>
+<li><p>Immediately when a module is constructed inside a method wrapped with
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">compact()</span></code>.</p></li>
+</ol>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.nn.Embed.variable">
+<code class="sig-name descname">variable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">col</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">init_fn</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">init_args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.nn.Embed.variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Declares and returns a variable in this Module.</p>
+<p>See <code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code> for more information. See also <a class="reference internal" href="#netket.nn.Embed.param" title="netket.nn.Embed.param"><code class="xref py py-meth docutils literal notranslate"><span class="pre">param()</span></code></a>
+for a shorthand way to define read-only variables in the “params”
+collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>col</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The variable collection name.</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The variable name.</p></li>
+<li><p><strong>init_fn</strong> – The function that will be called to compute the initial value
+of this variable. This function will only be called the first time
+this variable is used in this module.</p></li>
+<li><p><strong>*init_args</strong> – The arguments to pass to init_fn.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">flax.core.variables.Variable</span></code> that can be read or set via
+“.value” attribute. Throws an error if the variable exists already.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.nn.Embed.variables">
+<em class="property">property </em><code class="sig-name descname">variables</code><a class="headerlink" href="#netket.nn.Embed.variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the variables in this module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2019, The Simons Foundation, Inc. - All rights reserved.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+
+<script type="text/javascript">
+    jQuery(function () {
+        SphinxRtdTheme.Navigation.enable(true);
+      })
+</script>
+
+<!-- Temporary footer-->
+<div class="footer-wip">
+  <div class="footer-wip-content">
+    This documentation refers to an unreleased version of Netket.
+  </div>
+</div>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118013987-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-118013987-1');
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "url": "https://www.netket.org",
+  "name": "NetKet",
+  "founder": "Giuseppe Carleo",
+  "foundingDate": "2018-04-24",
+  "foundingLocation" : "New York",
+  "logo": "https://www.netket.org/img/logo_small.jpg",
+  "sameAs": [
+    "https://twitter.com/NetKetOrg",
+    "https://github.com/NetKet/netket"
+  ],
+  "description" : "Netket is an open-source project delivering cutting-edge
+  methods for the study of many-body quantum systems with artificial neural
+  networks and machine learning techniques.
+  NetKet provides state-of-the-art Neural-Network Quantum states,
+  and advanced learning algorithms to find the ground-state of many-body Hamiltonians.
+ NetKet is supported by the Simons Foundation and the Flatiron Institute."
+}
+</script>
+
+  </body>
+</html>

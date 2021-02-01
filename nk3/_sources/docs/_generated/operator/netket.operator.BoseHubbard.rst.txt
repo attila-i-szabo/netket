@@ -1,0 +1,38 @@
+﻿netket.operator.BoseHubbard
+===========================
+
+.. currentmodule:: netket.operator
+
+.. autoclass:: BoseHubbard
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BoseHubbard.__init__
+      ~BoseHubbard.apply
+      ~BoseHubbard.get_conn
+      ~BoseHubbard.get_conn_flattened
+      ~BoseHubbard.get_conn_padded
+      ~BoseHubbard.n_conn
+      ~BoseHubbard.to_dense
+      ~BoseHubbard.to_linear_operator
+      ~BoseHubbard.to_sparse
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BoseHubbard.hilbert
+      ~BoseHubbard.is_hermitian
+      ~BoseHubbard.size
+   
+   

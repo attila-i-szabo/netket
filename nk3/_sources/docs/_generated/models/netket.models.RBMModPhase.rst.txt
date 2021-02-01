@@ -1,0 +1,43 @@
+﻿netket.models.RBMModPhase
+=========================
+
+.. currentmodule:: netket.models
+
+.. autoclass:: RBMModPhase
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~RBMModPhase.__init__
+      ~RBMModPhase.activation
+      ~RBMModPhase.apply
+      ~RBMModPhase.clone
+      ~RBMModPhase.has_variable
+      ~RBMModPhase.init
+      ~RBMModPhase.init_with_output
+      ~RBMModPhase.make_rng
+      ~RBMModPhase.param
+      ~RBMModPhase.setup
+      ~RBMModPhase.variable
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~RBMModPhase.alpha
+      ~RBMModPhase.name
+      ~RBMModPhase.parent
+      ~RBMModPhase.scope
+      ~RBMModPhase.use_bias
+      ~RBMModPhase.variables
+   
+   

@@ -1,0 +1,45 @@
+﻿netket.models.RBM
+=================
+
+.. currentmodule:: netket.models
+
+.. autoclass:: RBM
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~RBM.__init__
+      ~RBM.activation
+      ~RBM.apply
+      ~RBM.clone
+      ~RBM.has_variable
+      ~RBM.init
+      ~RBM.init_with_output
+      ~RBM.make_rng
+      ~RBM.param
+      ~RBM.setup
+      ~RBM.variable
+      ~RBM.visible_bias_init
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~RBM.alpha
+      ~RBM.name
+      ~RBM.parent
+      ~RBM.scope
+      ~RBM.use_bias
+      ~RBM.use_visible
+      ~RBM.variables
+   
+   

@@ -1,0 +1,41 @@
+﻿netket.hilbert.Qubit
+====================
+
+.. currentmodule:: netket.hilbert
+
+.. autoclass:: Qubit
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Qubit.__init__
+      ~Qubit.all_states
+      ~Qubit.number_to_state
+      ~Qubit.numbers_to_states
+      ~Qubit.random_state
+      ~Qubit.state_to_number
+      ~Qubit.states
+      ~Qubit.states_to_numbers
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Qubit.is_discrete
+      ~Qubit.is_finite
+      ~Qubit.is_indexable
+      ~Qubit.local_size
+      ~Qubit.local_states
+      ~Qubit.n_states
+      ~Qubit.size
+   
+   

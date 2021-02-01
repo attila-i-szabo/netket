@@ -1,0 +1,38 @@
+﻿netket.operator.Ising
+=====================
+
+.. currentmodule:: netket.operator
+
+.. autoclass:: Ising
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Ising.__init__
+      ~Ising.apply
+      ~Ising.get_conn
+      ~Ising.get_conn_flattened
+      ~Ising.get_conn_padded
+      ~Ising.n_conn
+      ~Ising.to_dense
+      ~Ising.to_linear_operator
+      ~Ising.to_sparse
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Ising.hilbert
+      ~Ising.is_hermitian
+      ~Ising.size
+   
+   

@@ -1,0 +1,6 @@
+﻿netket.graph.Square
+===================
+
+.. currentmodule:: netket.graph
+
+.. autofunction:: Square

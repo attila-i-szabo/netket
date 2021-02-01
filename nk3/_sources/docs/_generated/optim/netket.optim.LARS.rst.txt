@@ -1,0 +1,30 @@
+﻿netket.optim.LARS
+=================
+
+.. currentmodule:: netket.optim
+
+.. autoclass:: LARS
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LARS.__init__
+      ~LARS.apply_gradient
+      ~LARS.apply_param_gradient
+      ~LARS.create
+      ~LARS.init_param_state
+      ~LARS.init_state
+      ~LARS.restore_state
+      ~LARS.state_dict
+      ~LARS.update_hyper_params
+   
+   
+
+   
+   
+   

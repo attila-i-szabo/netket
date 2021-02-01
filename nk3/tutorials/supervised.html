@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supervised Learning with Neural Networks &#8212; netket v3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jumbo-style.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/rtd_theme.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/rtd_theme.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logonav.png"></span>
+          NetKet</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="../website/get_started.html">Get Started</a></li>
+                <li><a href="../docs/getting_started.html">Documentation</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="../website/citing.html">Citing NetKet</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="https://github.com/netket/netket"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+                <li><a href="https://twitter.com/NetKetOrg"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"></ul>
+</li>
+              
+            
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="Supervised-Learning-with-Neural-Networks">
+<h1>Supervised Learning with Neural Networks<a class="headerlink" href="#Supervised-Learning-with-Neural-Networks" title="Permalink to this headline">¶</a></h1>
+<p>In this tutorial we show how to optimize a neural networks to approximate the state given. In this example, we consider the ground state of the J1-J2 model in one-dimension obtained from ED using NetKet.</p>
+<p>The Hamiltonian of the model is given by:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}H = \sum_{i=1}^{L} J_{1}\hat{S}_{i} \cdot \hat{S}_{i+1} + J_{2} \hat{S}_{i} \cdot \hat{S}_{i+2}\\where the sum is over sites of the 1-D chain.\end{aligned}\end{align} \]</div>
+<div class="section" id="Outline:">
+<h2>Outline:<a class="headerlink" href="#Outline:" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">Obtain</span> <span class="n">data</span> <span class="kn">from</span> <span class="nn">ED</span>
+<span class="mf">2.</span> <span class="n">Choosing</span> <span class="n">the</span> <span class="n">machine</span> <span class="p">(</span><span class="n">variational</span> <span class="n">ansatz</span><span class="p">)</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">optimizer</span>
+<span class="mf">3.</span> <span class="n">Defining</span> <span class="n">the</span> <span class="n">Supervised</span> <span class="n">Learning</span> <span class="nb">object</span>
+<span class="mf">4.</span> <span class="n">Running</span> <span class="n">the</span> <span class="n">Supervised</span> <span class="n">Learning</span>
+<span class="mf">5.</span> <span class="n">Data</span> <span class="n">Visualisation</span>
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># Import netket library
+import netket as nk
+
+# Helper libraries
+import numpy as np
+import matplotlib.pyplot as plt
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="1)-Obtain-data-from-ED">
+<h2>1) Obtain data from ED<a class="headerlink" href="#1)-Obtain-data-from-ED" title="Permalink to this headline">¶</a></h2>
+<p>For a supervised learning problem, we would need to provide the data including input <span class="math notranslate nohighlight">\(X\)</span> and output label <span class="math notranslate nohighlight">\(Y\)</span>. The neural network is asked to learn the mapping <span class="math notranslate nohighlight">\(Y=f(X)\)</span>. In our case, the input is the spin basis and the output is the coefficient of the corresponding spin basis.</p>
+<p>First, we write a simple function to obtain data, i.e. ground state, from exact diagonalization. For detailed explanation see the tutorial for J1-J2 model for example.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>def load_ed_data(L, J2=0.4):
+    # Sigma^z*Sigma^z interactions
+    sigmaz = np.array([[1, 0], [0, -1]])
+    mszsz = (np.kron(sigmaz, sigmaz))
+
+    # Exchange interactions
+    exchange = np.asarray(
+        [[0, 0, 0, 0], [0, 0, 2, 0], [0, 2, 0, 0], [0, 0, 0, 0]])
+
+    # Couplings J1 and J2
+    J = [1., J2]
+
+    mats = []
+    sites = []
+
+    for i in range(L):
+        for d in [0, 1]:
+            # \sum_i J*sigma^z(i)*sigma^z(i+d)
+            mats.append((J[d] * mszsz).tolist())
+            sites.append([i, (i + d + 1) % L])
+
+            # \sum_i J*(sigma^x(i)*sigma^x(i+d) + sigma^y(i)*sigma^y(i+d))
+            mats.append(((-1.)**(d + 1) * J[d] * exchange).tolist())
+            sites.append([i, (i + d + 1) % L])
+
+    # 1D Lattice
+    g = nk.graph.Hypercube(length=L, n_dim=1, pbc=True)
+
+    # Spin based Hilbert Space
+    hi = nk.hilbert.Spin(s=0.5, graph=g)
+
+    # Custom Hamiltonian operator
+    ha = nk.operator.LocalOperator(hi)
+    for mat, site in zip(mats, sites):
+        ha += nk.operator.LocalOperator(hi, mat, site)
+
+    # Perform Lanczos Exact Diagonalization to get lowest three eigenvalues
+    res = nk.exact.lanczos_ed(ha, first_n=3, compute_eigenvectors=True)
+
+    # Eigenvector
+    ttargets = []
+
+    tsamples = []
+
+    for i, visible in enumerate(hi.states()):
+        # only pick zero-magnetization states
+        mag = np.sum(visible)
+        if(np.abs(mag) &lt; 1.0e-4):
+            tsamples.append(visible.tolist())
+            ttargets.append([np.log(res.eigenvectors[0][i])])
+
+    return hi, tsamples, ttargets
+
+</pre></div>
+</div>
+</div>
+<p>After we obtain the result as <code class="docutils literal notranslate"><span class="pre">res</span></code>, we return the hilbert space <code class="docutils literal notranslate"><span class="pre">hi</span></code>, the spin basis <code class="docutils literal notranslate"><span class="pre">tsamples</span></code>, and the coefficients <code class="docutils literal notranslate"><span class="pre">ttargets</span></code>.</p>
+<p>Notice that we restrict ourselves to <span class="math notranslate nohighlight">\(\sum S_z = 0\)</span> symmetry sector to simplify the learning.</p>
+<p>We now consider a small system <span class="math notranslate nohighlight">\(L=10\)</span> and with <span class="math notranslate nohighlight">\(J_2 = 0.4\)</span>, and obtain the data by calling the function <code class="docutils literal notranslate"><span class="pre">load_ed_data</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>L = 10
+J2 = 0.4
+
+# Load the Hilbert space info and data
+hi, training_samples, training_targets = load_ed_data(L, J2)
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="2)-Choosing-the-Machine-and-the-Optimizer">
+<h2>2) Choosing the Machine and the Optimizer<a class="headerlink" href="#2)-Choosing-the-Machine-and-the-Optimizer" title="Permalink to this headline">¶</a></h2>
+<p>For this tutorial, we consider the Restricted Bolzmann Machine <code class="docutils literal notranslate"><span class="pre">nk.machine.RbmSpin</span></code> and the AdaDelta optimizer <code class="docutils literal notranslate"><span class="pre">nk.optimizer.AdaDelta</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># Machine
+ma = nk.machine.RbmSpin(hilbert=hi, alpha=1)
+ma.init_random_parameters(seed=1234, sigma=0.01)
+# Optimizer
+op = nk.optimizer.AdaDelta()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="3)-Defining-the-Supervised-Learning-object">
+<h2>3) Defining the Supervised Learning object<a class="headerlink" href="#3)-Defining-the-Supervised-Learning-object" title="Permalink to this headline">¶</a></h2>
+<p>We have now have almost everything (machine, optimizer, data) for setting up a supervised learning object. We also need to provide the batch size, <code class="docutils literal notranslate"><span class="pre">batch_size</span></code>, for stochatic gradient descent. For detail, see <a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">https://en.wikipedia.org/wiki/Stochastic_gradient_descent</a></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># Supervised learning object
+spvsd = nk.supervised.Supervised(
+    machine=ma,
+    optimizer=op,
+    batch_size=400,
+    samples=training_samples,
+    targets=training_targets)
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="4)-Running-the-Supervised-Learning">
+<h2>4) Running the Supervised Learning<a class="headerlink" href="#4)-Running-the-Supervised-Learning" title="Permalink to this headline">¶</a></h2>
+<p>The very last piece we need for supervised learning is the loss function.</p>
+<div class="section" id="Loss-function">
+<h3>Loss function<a class="headerlink" href="#Loss-function" title="Permalink to this headline">¶</a></h3>
+<p>There are different loss functions one could define for the optimization problem, for example:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+        \mathcal{L}_\text{MSE log} &amp;= \frac{1}{N} \sum_{i}^N |\log\Psi(X_i) - \log\Phi(X_i) |^2\\
+        \mathcal{L}_\text{Overlap} &amp;=-\log\Big[ \frac{\langle{\Psi|\Phi}\rangle\langle{\Phi|\Psi}\rangle}{\langle{\Psi|\Psi}\rangle\langle{\Phi|\Phi}\rangle} \Big] \\
+        &amp;=- \log\Big( \sum_{i}^N \Psi^*(X_i)\Phi(X_i) \Big) - \log\Big( \sum_{i}^N \Phi^*(X_i)\Psi(X_i) \Big) \\
+        &amp;\qquad +
+        \log\Big( \sum_{i}^N \Psi^*(X_i)\Psi(X_i) \Big) +
+        \log\Big( \sum_{i}^N \Phi^*(X_i)\Phi(X_i) \Big)
+\end{align*}\end{split}\]</div>
+<p>Here, we consider the latter one, which is the negative log of the overlap, as the loss function.</p>
+</div>
+<div class="section" id="Gradient-estimate">
+<h3>Gradient estimate<a class="headerlink" href="#Gradient-estimate" title="Permalink to this headline">¶</a></h3>
+<p>Taking the derivative from overlap errror function above, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation*}
+    \partial_k \mathcal{L}_\text{Overlap} = -\frac{\sum_i O_k^*\Psi^*(X_i)\Phi(X_i) }{\sum_i\Psi^*(X_i)\Phi(X_i)} + \frac{\sum_i O_k^*\Psi^*(X_i)\Psi(X_i)}{\sum_i \Psi^*(X_i)\Psi(X_i)}
+\end{equation*}\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(N\)</span> is the size of the Hilbert space. In general, this could not be computed exactly.</p>
+<p>We could estimate this gradient by sampling different distributions,</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation*}
+    \hat{\partial_k \mathcal{L}}_\text{Overlap uni} = \frac{\Big\langle O_k^*\Psi^*(X_i)\Psi(X_i)\Big \rangle_{i\sim\text{uni}[1,N]} }{\Big \langle \Psi^*(X_i)\Psi(X_i) \Big \rangle_{i\sim\text{uni}[1,N]}} - \frac{\Big \langle O_k^*\Psi^*(X_i)\Phi(X_i)\Big \rangle_{i\sim\text{uni}[1,N]} }{\Big \langle \Psi^*(X_i)\Phi(X_i) \Big \rangle_{i\sim\text{uni}[1,N]}}
+\end{equation*}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{equation*}
+    \hat{\partial_k \mathcal{L}}_\text{Overlap phi} = \frac{\Big \langle O_k^*(X_i)\frac{\lVert \Psi(X_i)\rVert^2}{\lVert \Phi(X_i)\rVert^2} \Big \rangle_{X_i\sim \lVert \Phi(X_i)\rVert^2 }}   {\Big \langle \frac{\lVert \Psi(X_i)\rVert^2}{\lVert \Phi(X_i)\rVert^2} \Big \rangle_{X_i\sim \lVert \Phi(X_i)\rVert^2 }} - \frac{\Big \langle O_k^*(X_i)\frac{ \Psi^*(X_i)}{ \Phi^*(X_i)} \Big \rangle_{X_i\sim \lVert \Phi(X_i)\rVert^2 }}{\Big \langle \frac{ \Psi^*(X_i)}{ \Phi^*(X_i)} \Big \rangle_{X_i\sim \lVert \Phi(X_i)\rVert^2 }}
+\end{equation*}\]</div>
+<p>So for the overlap loss function, we have two gradient estimate, one is <span class="math notranslate nohighlight">\(\hat{\partial_k \mathcal{L}}_\text{Overlap uni}\)</span>, <code class="docutils literal notranslate"><span class="pre">Overlap_uni</span></code>, and <span class="math notranslate nohighlight">\(\hat{\partial_k \mathcal{L}}_\text{Overlap phi}\)</span>, <code class="docutils literal notranslate"><span class="pre">Overlap_phi</span></code>.</p>
+<p>We save the loss function every iteration, and save the optimized parameters only every <code class="docutils literal notranslate"><span class="pre">save_params_every</span></code> iterations.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># Number of iteration
+n_iter = 4000
+
+# Run with &quot;Overlap_phi&quot; loss. Also available currently is &quot;MSE, Overlap_uni&quot;
+spvsd.run(n_iter=n_iter, loss_function=&quot;Overlap_phi&quot;,
+          output_prefix=&#39;output&#39;, save_params_every=50)
+
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="5)-Data-Visualisation">
+<h2>5) Data Visualisation<a class="headerlink" href="#5)-Data-Visualisation" title="Permalink to this headline">¶</a></h2>
+<p>We have optimized our machine to approximate the ground state of the J1-J2 model. The results for the loss function are stored in the “.log” file and the optimized parameters in the “.wf” file. The files are all in json format.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># Load the data from the .log file
+import json
+
+data=json.load(open(&quot;output.log&quot;))
+
+# Extract the relevant information
+iters=[]
+log_overlap=[]
+mse=[]
+mse_log=[]
+
+data=json.load(open(&#39;output.log&#39;))
+for iteration in data[&quot;Output&quot;]:
+    iters.append(iteration[&quot;Iteration&quot;])
+    log_overlap.append(iteration[&quot;log_overlap&quot;])
+    mse.append(iteration[&quot;mse&quot;])
+    mse_log.append(iteration[&quot;mse_log&quot;])
+
+overlap = np.exp(-np.array(log_overlap))
+
+</pre></div>
+</div>
+</div>
+<p>Now, we plot the overlap, i.e. fidelity, with respect to the number of iteration.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+
+<span></span>J2 = 0.4
+
+plt.subplot(2, 1, 1)
+plt.title(r&#39;$J_1 J_2$ model, $J_2=&#39; + str(J2) + &#39;$&#39;)
+plt.ylabel(&#39;Overlap = F&#39;)
+plt.xlabel(&#39;Iteration #&#39;)
+
+plt.plot(iters, overlap)
+plt.axhline(y=1, xmin=0, xmax=iters[-1], linewidth=2, color=&#39;k&#39;,label=&#39;max accuracy = 1&#39;)
+
+plt.legend(frameon=False)
+
+plt.subplot(2, 1, 2)
+plt.ylabel(&#39;Overlap Error = 1-F&#39;)
+plt.xlabel(&#39;Iteration #&#39;)
+plt.semilogy(iters, 1.-overlap)
+plt.show()
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_supervised_18_0.png" src="../_images/tutorials_supervised_18_0.png" />
+</div>
+</div>
+<p>The result suggests that indeed we could have a good approximate to the state given by supervised learning.</p>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2019, The Simons Foundation, Inc. - All rights reserved.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+    </p>
+  </div>
+</footer>
+
+<script type="text/javascript">
+    jQuery(function () {
+        SphinxRtdTheme.Navigation.enable(true);
+      })
+</script>
+
+<!-- Temporary footer-->
+<div class="footer-wip">
+  <div class="footer-wip-content">
+    This documentation refers to an unreleased version of Netket.
+  </div>
+</div>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-118013987-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-118013987-1');
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "url": "https://www.netket.org",
+  "name": "NetKet",
+  "founder": "Giuseppe Carleo",
+  "foundingDate": "2018-04-24",
+  "foundingLocation" : "New York",
+  "logo": "https://www.netket.org/img/logo_small.jpg",
+  "sameAs": [
+    "https://twitter.com/NetKetOrg",
+    "https://github.com/NetKet/netket"
+  ],
+  "description" : "Netket is an open-source project delivering cutting-edge
+  methods for the study of many-body quantum systems with artificial neural
+  networks and machine learning techniques.
+  NetKet provides state-of-the-art Neural-Network Quantum states,
+  and advanced learning algorithms to find the ground-state of many-body Hamiltonians.
+ NetKet is supported by the Simons Foundation and the Flatiron Institute."
+}
+</script>
+
+  </body>
+</html>

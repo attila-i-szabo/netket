@@ -1,0 +1,48 @@
+﻿netket.operator.GraphOperator
+=============================
+
+.. currentmodule:: netket.operator
+
+.. autoclass:: GraphOperator
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GraphOperator.__init__
+      ~GraphOperator.apply
+      ~GraphOperator.conjugate
+      ~GraphOperator.copy
+      ~GraphOperator.get_conn
+      ~GraphOperator.get_conn_filtered
+      ~GraphOperator.get_conn_flattened
+      ~GraphOperator.get_conn_padded
+      ~GraphOperator.n_conn
+      ~GraphOperator.to_dense
+      ~GraphOperator.to_linear_operator
+      ~GraphOperator.to_sparse
+      ~GraphOperator.transpose
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GraphOperator.H
+      ~GraphOperator.T
+      ~GraphOperator.constant
+      ~GraphOperator.hilbert
+      ~GraphOperator.is_hermitian
+      ~GraphOperator.mel_cutoff
+      ~GraphOperator.n_operators
+      ~GraphOperator.operators
+      ~GraphOperator.size
+   
+   

@@ -1,0 +1,30 @@
+﻿netket.optim.LAMB
+=================
+
+.. currentmodule:: netket.optim
+
+.. autoclass:: LAMB
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LAMB.__init__
+      ~LAMB.apply_gradient
+      ~LAMB.apply_param_gradient
+      ~LAMB.create
+      ~LAMB.init_param_state
+      ~LAMB.init_state
+      ~LAMB.restore_state
+      ~LAMB.state_dict
+      ~LAMB.update_hyper_params
+   
+   
+
+   
+   
+   

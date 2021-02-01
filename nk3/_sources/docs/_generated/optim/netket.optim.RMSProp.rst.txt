@@ -1,0 +1,30 @@
+﻿netket.optim.RMSProp
+====================
+
+.. currentmodule:: netket.optim
+
+.. autoclass:: RMSProp
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~RMSProp.__init__
+      ~RMSProp.apply_gradient
+      ~RMSProp.apply_param_gradient
+      ~RMSProp.create
+      ~RMSProp.init_param_state
+      ~RMSProp.init_state
+      ~RMSProp.restore_state
+      ~RMSProp.state_dict
+      ~RMSProp.update_hyper_params
+   
+   
+
+   
+   
+   

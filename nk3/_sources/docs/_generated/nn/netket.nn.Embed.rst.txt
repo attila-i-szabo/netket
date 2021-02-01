@@ -1,0 +1,42 @@
+﻿netket.nn.Embed
+===============
+
+.. currentmodule:: netket.nn
+
+.. autoclass:: Embed
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Embed.__init__
+      ~Embed.apply
+      ~Embed.attend
+      ~Embed.clone
+      ~Embed.embedding_init
+      ~Embed.has_variable
+      ~Embed.init
+      ~Embed.init_with_output
+      ~Embed.make_rng
+      ~Embed.param
+      ~Embed.setup
+      ~Embed.variable
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Embed.name
+      ~Embed.parent
+      ~Embed.scope
+      ~Embed.variables
+   
+   

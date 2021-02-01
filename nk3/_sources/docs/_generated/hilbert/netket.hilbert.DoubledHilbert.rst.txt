@@ -1,0 +1,42 @@
+﻿netket.hilbert.DoubledHilbert
+=============================
+
+.. currentmodule:: netket.hilbert
+
+.. autoclass:: DoubledHilbert
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DoubledHilbert.__init__
+      ~DoubledHilbert.all_states
+      ~DoubledHilbert.number_to_state
+      ~DoubledHilbert.numbers_to_states
+      ~DoubledHilbert.random_state
+      ~DoubledHilbert.state_to_number
+      ~DoubledHilbert.states
+      ~DoubledHilbert.states_to_numbers
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DoubledHilbert.is_discrete
+      ~DoubledHilbert.is_finite
+      ~DoubledHilbert.is_indexable
+      ~DoubledHilbert.local_size
+      ~DoubledHilbert.local_states
+      ~DoubledHilbert.n_states
+      ~DoubledHilbert.size
+      ~DoubledHilbert.size_physical
+   
+   

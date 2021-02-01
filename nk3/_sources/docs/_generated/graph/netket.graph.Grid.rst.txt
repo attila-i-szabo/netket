@@ -1,0 +1,36 @@
+﻿netket.graph.Grid
+=================
+
+.. currentmodule:: netket.graph
+
+.. autoclass:: Grid
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Grid.__init__
+      ~Grid.adjacency_list
+      ~Grid.automorphisms
+      ~Grid.distances
+      ~Grid.edges
+      ~Grid.is_bipartite
+      ~Grid.is_connected
+      ~Grid.nodes
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Grid.n_edges
+      ~Grid.n_nodes
+   
+   

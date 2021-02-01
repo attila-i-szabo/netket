@@ -1,0 +1,41 @@
+﻿netket.hilbert.AbstractHilbert
+==============================
+
+.. currentmodule:: netket.hilbert
+
+.. autoclass:: AbstractHilbert
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~AbstractHilbert.__init__
+      ~AbstractHilbert.all_states
+      ~AbstractHilbert.number_to_state
+      ~AbstractHilbert.numbers_to_states
+      ~AbstractHilbert.random_state
+      ~AbstractHilbert.state_to_number
+      ~AbstractHilbert.states
+      ~AbstractHilbert.states_to_numbers
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~AbstractHilbert.is_discrete
+      ~AbstractHilbert.is_finite
+      ~AbstractHilbert.is_indexable
+      ~AbstractHilbert.local_size
+      ~AbstractHilbert.local_states
+      ~AbstractHilbert.n_states
+      ~AbstractHilbert.size
+   
+   

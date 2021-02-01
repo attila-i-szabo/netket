@@ -1,0 +1,30 @@
+﻿netket.optim.GradientDescent
+============================
+
+.. currentmodule:: netket.optim
+
+.. autoclass:: GradientDescent
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GradientDescent.__init__
+      ~GradientDescent.apply_gradient
+      ~GradientDescent.apply_param_gradient
+      ~GradientDescent.create
+      ~GradientDescent.init_param_state
+      ~GradientDescent.init_state
+      ~GradientDescent.restore_state
+      ~GradientDescent.state_dict
+      ~GradientDescent.update_hyper_params
+   
+   
+
+   
+   
+   

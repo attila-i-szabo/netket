@@ -1,0 +1,50 @@
+﻿netket.nn.Conv
+==============
+
+.. currentmodule:: netket.nn
+
+.. autoclass:: Conv
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Conv.__init__
+      ~Conv.apply
+      ~Conv.bias_init
+      ~Conv.clone
+      ~Conv.has_variable
+      ~Conv.init
+      ~Conv.init_with_output
+      ~Conv.kernel_init
+      ~Conv.make_rng
+      ~Conv.param
+      ~Conv.setup
+      ~Conv.variable
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Conv.bias_dtype
+      ~Conv.feature_group_count
+      ~Conv.input_dilation
+      ~Conv.kernel_dilation
+      ~Conv.name
+      ~Conv.padding
+      ~Conv.parent
+      ~Conv.precision
+      ~Conv.scope
+      ~Conv.strides
+      ~Conv.use_bias
+      ~Conv.variables
+   
+   

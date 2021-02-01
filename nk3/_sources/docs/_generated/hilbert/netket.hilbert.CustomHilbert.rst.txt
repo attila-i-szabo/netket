@@ -1,0 +1,41 @@
+﻿netket.hilbert.CustomHilbert
+============================
+
+.. currentmodule:: netket.hilbert
+
+.. autoclass:: CustomHilbert
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~CustomHilbert.__init__
+      ~CustomHilbert.all_states
+      ~CustomHilbert.number_to_state
+      ~CustomHilbert.numbers_to_states
+      ~CustomHilbert.random_state
+      ~CustomHilbert.state_to_number
+      ~CustomHilbert.states
+      ~CustomHilbert.states_to_numbers
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CustomHilbert.is_discrete
+      ~CustomHilbert.is_finite
+      ~CustomHilbert.is_indexable
+      ~CustomHilbert.local_size
+      ~CustomHilbert.local_states
+      ~CustomHilbert.n_states
+      ~CustomHilbert.size
+   
+   

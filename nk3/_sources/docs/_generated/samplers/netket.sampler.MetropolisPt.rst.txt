@@ -1,0 +1,38 @@
+﻿netket.sampler.MetropolisPt
+===========================
+
+.. currentmodule:: netket.sampler
+
+.. autoclass:: MetropolisPt
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MetropolisPt.__init__
+      ~MetropolisPt.init_state
+      ~MetropolisPt.replace
+      ~MetropolisPt.reset
+      ~MetropolisPt.sample
+      ~MetropolisPt.sample_next
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MetropolisPt.machine_pow
+      ~MetropolisPt.n_batches
+      ~MetropolisPt.n_chains
+      ~MetropolisPt.n_replicas
+      ~MetropolisPt.n_sweeps
+      ~MetropolisPt.rule
+   
+   

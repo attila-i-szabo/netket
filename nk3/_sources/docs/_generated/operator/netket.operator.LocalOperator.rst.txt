@@ -1,0 +1,48 @@
+﻿netket.operator.LocalOperator
+=============================
+
+.. currentmodule:: netket.operator
+
+.. autoclass:: LocalOperator
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LocalOperator.__init__
+      ~LocalOperator.apply
+      ~LocalOperator.conjugate
+      ~LocalOperator.copy
+      ~LocalOperator.get_conn
+      ~LocalOperator.get_conn_filtered
+      ~LocalOperator.get_conn_flattened
+      ~LocalOperator.get_conn_padded
+      ~LocalOperator.n_conn
+      ~LocalOperator.to_dense
+      ~LocalOperator.to_linear_operator
+      ~LocalOperator.to_sparse
+      ~LocalOperator.transpose
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LocalOperator.H
+      ~LocalOperator.T
+      ~LocalOperator.constant
+      ~LocalOperator.hilbert
+      ~LocalOperator.is_hermitian
+      ~LocalOperator.mel_cutoff
+      ~LocalOperator.n_operators
+      ~LocalOperator.operators
+      ~LocalOperator.size
+   
+   

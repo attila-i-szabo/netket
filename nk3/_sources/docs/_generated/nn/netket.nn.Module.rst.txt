@@ -1,0 +1,41 @@
+﻿netket.nn.Module
+================
+
+.. currentmodule:: netket.nn
+
+.. autoclass:: Module
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Module.__init__
+      ~Module.apply
+      ~Module.clone
+      ~Module.has_variable
+      ~Module.init
+      ~Module.init_with_output
+      ~Module.make_rng
+      ~Module.param
+      ~Module.random_weights
+      ~Module.setup
+      ~Module.variable
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Module.name
+      ~Module.parent
+      ~Module.scope
+      ~Module.variables
+   
+   

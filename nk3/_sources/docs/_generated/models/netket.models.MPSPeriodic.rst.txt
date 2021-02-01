@@ -1,0 +1,43 @@
+﻿netket.models.MPSPeriodic
+=========================
+
+.. currentmodule:: netket.models
+
+.. autoclass:: MPSPeriodic
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MPSPeriodic.__init__
+      ~MPSPeriodic.apply
+      ~MPSPeriodic.clone
+      ~MPSPeriodic.has_variable
+      ~MPSPeriodic.init
+      ~MPSPeriodic.init_with_output
+      ~MPSPeriodic.kernel_init
+      ~MPSPeriodic.make_rng
+      ~MPSPeriodic.param
+      ~MPSPeriodic.setup
+      ~MPSPeriodic.variable
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MPSPeriodic.diag
+      ~MPSPeriodic.name
+      ~MPSPeriodic.parent
+      ~MPSPeriodic.scope
+      ~MPSPeriodic.symperiod
+      ~MPSPeriodic.variables
+   
+   
