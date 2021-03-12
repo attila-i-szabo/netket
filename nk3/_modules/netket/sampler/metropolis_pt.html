@@ -15,10 +15,8 @@
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/js/rtd_theme.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script src="../../../_static/js/rtd_theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
 <meta charset='utf-8'>
@@ -53,7 +51,7 @@
                 <li><a href="../../../docs/getting_started.html">Documentation</a></li>
                 <li><a href="../../../tutorials/tutorials.html">Tutorials</a></li>
                 <li><a href="../../../website/citing.html">Citing NetKet</a></li>
-                <li><a href="../../../about.html">About</a></li>
+                <li><a href="../../../website/about.html">About</a></li>
                 <li><a href="https://github.com/netket/netket"><i class="fab fa-github" aria-hidden="true"></i></a></li>
                 <li><a href="https://twitter.com/NetKetOrg"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
             
@@ -123,6 +121,7 @@
 <span class="kn">from</span> <span class="nn">flax</span> <span class="kn">import</span> <span class="n">struct</span>
 
 <span class="kn">from</span> <span class="nn">netket.hilbert</span> <span class="kn">import</span> <span class="n">AbstractHilbert</span>
+<span class="kn">from</span> <span class="nn">netket</span> <span class="kn">import</span> <span class="n">config</span>
 
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Sampler</span><span class="p">,</span> <span class="n">SamplerState</span>
 <span class="kn">from</span> <span class="nn">.metropolis</span> <span class="kn">import</span> <span class="n">MetropolisSamplerState</span><span class="p">,</span> <span class="n">MetropolisSampler</span><span class="p">,</span> <span class="n">MetropolisRule</span>
@@ -164,10 +163,11 @@
         <span class="k">return</span> <span class="n">text</span>
 
 
-<span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
+<div class="viewcode-block" id="MetropolisPtSampler"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.MetropolisPtSampler.html#netket.sampler.MetropolisPtSampler">[docs]</a><span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">MetropolisPtSampler</span><span class="p">(</span><span class="n">MetropolisSampler</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Metropolis-Hastings sampler.</span>
+<span class="sd">    Metropolis-Hastings with Parallel Tempering sampler.</span>
+
 <span class="sd">    This sampler samples an Hilbert space, producing samples off a specific dtype.</span>
 <span class="sd">    The samples are generated according to a transition rule that must be</span>
 <span class="sd">    specified.</span>
@@ -211,6 +211,18 @@
 <span class="sd">            machine_pow: The power to which the machine should be exponentiated to generate the pdf (default = 2).</span>
 <span class="sd">            dtype: The dtype of the statees sampled (default = np.float32).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">config</span><span class="o">.</span><span class="n">FLAGS</span><span class="p">[</span><span class="s2">&quot;NETKET_EXPERIMENTAL&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">                               Parallel Tempering samplers are under development and</span>
+<span class="sd">                               are known not to work.</span>
+<span class="sd">                               </span>
+<span class="sd">                               If you want to debug it, set the environment variable</span>
+<span class="sd">                               NETKET_EXPERIMENTAL=1</span>
+<span class="sd">                               &quot;&quot;&quot;</span>
+            <span class="p">)</span>
+
         <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;n_replicas&quot;</span><span class="p">,</span> <span class="n">n_replicas</span><span class="p">)</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -248,9 +260,9 @@
             <span class="n">n_samples</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
             <span class="n">n_accepted</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
             <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span>
-            <span class="n">beta_0_index</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+            <span class="n">beta_0_index</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
             <span class="n">n_accepted_per_beta</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
-                <span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">,</span> <span class="n">sampler</span><span class="o">.</span><span class="n">n_replicas</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span>
+                <span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">,</span> <span class="n">sampler</span><span class="o">.</span><span class="n">n_replicas</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span>
             <span class="p">),</span>
             <span class="n">beta_position</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">,)),</span>
             <span class="n">beta_diffusion</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">,)),</span>
@@ -435,20 +447,20 @@
                     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;prob_rescaled;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">prob</span><span class="p">)</span>
                     <span class="k">return</span> <span class="n">new_beta</span>
 
-                <span class="n">new_beta</span> <span class="o">=</span> <span class="n">hcb</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
-                    <span class="n">cb</span><span class="p">,</span>
-                    <span class="p">(</span>
-                        <span class="n">beta</span><span class="p">,</span>
-                        <span class="n">proposed_beta</span><span class="p">,</span>
-                        <span class="n">new_beta</span><span class="p">,</span>
-                        <span class="n">swap_order</span><span class="p">,</span>
-                        <span class="n">do_swap</span><span class="p">,</span>
-                        <span class="n">log_prob</span><span class="p">,</span>
-                        <span class="n">prob_rescaled</span><span class="p">,</span>
-                    <span class="p">),</span>
-                    <span class="n">result_shape</span><span class="o">=</span><span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">(</span><span class="n">new_beta</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">new_beta</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
-                <span class="p">)</span>
-                <span class="n">s</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="n">new_beta</span>
+                <span class="c1"># new_beta = hcb.call(</span>
+                <span class="c1">#    cb,</span>
+                <span class="c1">#    (</span>
+                <span class="c1">#        beta,</span>
+                <span class="c1">#        proposed_beta,</span>
+                <span class="c1">#        new_beta,</span>
+                <span class="c1">#        swap_order,</span>
+                <span class="c1">#        do_swap,</span>
+                <span class="c1">#        log_prob,</span>
+                <span class="c1">#        prob_rescaled,</span>
+                <span class="c1">#    ),</span>
+                <span class="c1">#    result_shape=jax.ShapeDtypeStruct(new_beta.shape, new_beta.dtype),</span>
+                <span class="c1"># )</span>
+                <span class="c1"># s.beta = new_beta</span>
 
                 <span class="n">swap_order</span> <span class="o">=</span> <span class="n">swap_order</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
@@ -500,8 +512,18 @@
 
         <span class="k">return</span> <span class="n">new_state</span><span class="p">,</span> <span class="n">new_state</span><span class="o">.</span><span class="n">σ</span><span class="p">[</span><span class="n">new_state</span><span class="o">.</span><span class="n">beta_0_index</span> <span class="o">+</span> <span class="n">offsets</span><span class="p">,</span> <span class="p">:]</span>
 
-    <span class="c1"># def __repr__(sampler):</span>
-    <span class="c1">#    return &quot;MetropolisSampler(...)&quot;</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="n">sampler</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="s2">&quot;MetropolisPTSampler(&quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  hilbert = </span><span class="si">{}</span><span class="s2">,&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">hilbert</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  rule = </span><span class="si">{}</span><span class="s2">,&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">rule</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  n_chains = </span><span class="si">{}</span><span class="s2">,&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  machine_power = </span><span class="si">{}</span><span class="s2">,&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">machine_pow</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  reset_chain = </span><span class="si">{}</span><span class="s2">,&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">reset_chain</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  n_sweeps = </span><span class="si">{}</span><span class="s2">,&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_sweeps</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  dtype = </span><span class="si">{}</span><span class="s2">,&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
+        <span class="p">)</span></div>
 
 
 <span class="kn">from</span> <span class="nn">netket.utils</span> <span class="kn">import</span> <span class="n">wraps_legacy</span>
@@ -679,7 +701,7 @@
     </p>
     <p>
         &copy; Copyright 2019, The Simons Foundation, Inc. - All rights reserved.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.4.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.2.<br/>
     </p>
   </div>
 </footer>

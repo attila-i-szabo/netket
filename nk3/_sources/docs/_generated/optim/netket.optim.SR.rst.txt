@@ -1,6 +1,0 @@
-﻿netket.optim.SR
-===============
-
-.. currentmodule:: netket.optim
-
-.. autofunction:: SR
