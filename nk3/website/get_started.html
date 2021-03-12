@@ -7,6 +7,8 @@
     <title>Get Started &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/jumbo-style.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
@@ -92,44 +94,55 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <br>
-<div class="container">
-
-<div class="row" >
-  <div class="col-sm-8 col-sm-offset-2">
-    <div class="jumbotron">
-    <h2 class="text-center">Quick Start</h2>
-
-    <div class="text-center">
-    <p class="text-muted"> in four steps</p>
-    </div>
-    </div>
-    </div>
-  </div>
-
-
-<div class="row" >
-<div class="col-sm-8 col-sm-offset-2">
-  <ol class="list-group">
-     <libullet class="list-group-item" markdown="span">Make sure you satisfy all <a href="requirements.html">requirements</a>: a working <code>MPI</code> compiler, and a <code>Python</code> interpreter.</libullet>
-     <libullet class="list-group-item" markdown="span"><code>pip install netket</code></libullet>
-     <libullet class="list-group-item" markdown="span">Explore our <a href="tutorials.html">Tutorials</a>.</libullet>
-     <libullet class="list-group-item" markdown="span">Check out our <a href="https://github.com/netket/netket/tree/master/Examples">example codes</a> on GitHub</libullet>
-  </ol>
+  <div class="jumbotron jumbotron-fluid landing-page-box landing-page-box-logo docutils container">
+<p class="h1"><strong>Get Started!</strong></p>
+<p class="h2">In few easy steps</p>
 </div>
+<div class="inner-content docutils container">
+<details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+Make sure you have Python 3.7 or higher installed on Mac or Linux<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<p class="card-text">If Python 3.7 is not available on your computer, don’t despair!
+You can use <a class="reference external" href="https://github.com/pyenv/pyenv">pyenv</a> (the easiest way to install it is with the <a class="reference external" href="https://github.com/pyenv/pyenv-installer">pyenv installer</a>) to install any Python version, or you can use Anaconda, even though the latter is not recomended if you plan on using MPI.</p>
+<p class="card-text">Windows is not natively supported because Jax does not yet support it. However, if you use WSL (Windows Subsystem for Linux) NetKet will run smoothly.</p>
 </div>
+</details><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+If you plan to use MPI, make sure you have an up to date version of the <cite>mpicc</cite> compilers available on your path.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<p class="card-text">When using MPI, we recommend not to use Anaconda unless it’s for small experimentation on a laptop. This is due to a dependency of netket, mpi4jax. You can read more about the limitations on the <a class="reference external" href="https://mpi4jax.readthedocs.io/en/latest/installation.html">mpi4jax documentation</a>.</p>
+</div>
+</details><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+<code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--pre</span> <span class="pre">netket</span></code>, or <code class="code docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">netket</span></code>.
+Choose between pip or conda. We recommend pip.<div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<p class="card-text">Be mindfull that this will install the latest 3.0 beta version. If you prefer to keep using the old stable versions, remove the <code class="code docutils literal notranslate"><span class="pre">--pre</span></code> directive.  Eventually we will release the stable 3.0, but we need your help in order to test it!</p>
+<p class="card-text">If you want to use MPI, use <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--pre</span> <span class="pre">netket[mpi]</span></code>.</p>
+<p class="card-text">If you want to develop netket, extra development dependencies are installed by running <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--pre</span> <span class="pre">netket[all,dev]</span></code></p>
+</div>
+</details><details class="sphinx-bs dropdown card mb-3">
+<summary class="summary-title card-header">
+Explore our <a class="reference external" href="../tutorials/tutorials.html">Tutorials</a> and check out our <a class="reference external" href="https://github.com/netket/netket/tree/master/Examples">Examples</a><div class="summary-down docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="summary-up docutils">
+<svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="summary-content card-body docutils">
+<p class="card-text">Tutorials are commented python notebooks. Examples are sample python files that can be run.
+If you want to experiment with mpi, try running some examples with <code class="code docutils literal notranslate"><span class="pre">mpirun</span> <span class="pre">-np2</span> <span class="pre">python</span> <span class="pre">path/to/example.py</span></code></p>
+</div>
+</details></div>
 
-<div class="row" >
-<div class="col-sm-8 col-sm-offset-2">
-<div class="alert alert-info">
-  <h3 class="text-center">Remarks</h3>
-  <h5 class="text-center" markdown="span"> We are not yet supporting Conda installs</h5>
-  <h5 class="text-center" markdown="span">Windows Os is not supported</h5>
-</div>
-</div>
-</div>
-
-</div>
 
     </div>
       
@@ -155,13 +168,13 @@
       })
 </script>
 
-<!-- Temporary footer-->
+<!-- Temporary footer
 <div class="footer-wip">
   <div class="footer-wip-content">
     This documentation refers to an unreleased version of Netket.
   </div>
 </div>
-
+-->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118013987-1"></script>

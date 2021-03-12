@@ -4,9 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quantum State Tomography (Unsupervised Learning) &#8212; netket v3.0 documentation</title>
+    <title>Using JAX as a backend in NetKet - Feature Preview for v3.0 &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/jumbo-style.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
@@ -342,240 +344,170 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="section" id="Quantum-State-Tomography-(Unsupervised-Learning)">
-<h1>Quantum State Tomography (Unsupervised Learning)<a class="headerlink" href="#Quantum-State-Tomography-(Unsupervised-Learning)" title="Permalink to this headline">¶</a></h1>
-<p>Quantum state tomography (QST) is a machine learning task which aims to reconstruct the full quantum state from measurement results.</p>
-<p><strong>Aim</strong>: Given a variational ansatz <span class="math notranslate nohighlight">\(\Psi(\lbrace \boldsymbol{\beta} \rbrace)\)</span> and a set of measurement results, we want to find the parameters <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> which best reproduce the probability distribution of the measurements.</p>
-<p><strong>Training Data</strong>: A set of single shot measurements in some basis, e.g. <span class="math notranslate nohighlight">\(\lbrace(100010, \textrm{XZZZYZ}), (011001, \textrm{ZXXYZZ}), \dots \rbrace\)</span></p>
+<div class="section" id="Using-JAX-as-a-backend-in-NetKet---Feature-Preview-for-v3.0">
+<h1>Using JAX as a backend in NetKet - Feature Preview for v3.0<a class="headerlink" href="#Using-JAX-as-a-backend-in-NetKet---Feature-Preview-for-v3.0" title="Permalink to this headline">¶</a></h1>
+<p>In this tutorial we will show how differentiable functions (for example deep networks) written in <a class="reference external" href="https://github.com/google/jax">JAX</a> can be used as variational quantum states in NetKet.</p>
+<p>This feature will be available in the upcoming major release (version 3.0). While version 3.0 is still in beta development, users can already try this feature.</p>
+<div class="section" id="Prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#Prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>To try out integration with JAX, you first need to fetch the development version of NetKet (v3.0) We recommend using a virtual environment (either a python environment or a conda environment), for example</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3 -m venv nk_env
+<span class="nb">source</span> nk_env/bin/activate
+pip install git+https://github.com/netket/netket@v3.0
+</pre></div>
+</div>
+<p>Frameworks such as JAX and Pytorch are add-ons for NetKet 3.0, thus they require separate installation. In this case, we can easily get JAX doing</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install --upgrade jax jaxlib
+</pre></div>
+</div>
+<p>More information can also be found <a class="reference external" href="https://github.com/google/jax#installation">here</a>.</p>
+</div>
+<div class="section" id="Defining-the-quantum-system">
+<h2>Defining the quantum system<a class="headerlink" href="#Defining-the-quantum-system" title="Permalink to this headline">¶</a></h2>
+<p>NetKet allows for full flexibility in defining quantum systems, for example when tackling a ground-state search problem. While there are a few pre-defined hamiltonians, it is relatively straightforward to implement new quantum operators/ Hamiltonians.</p>
+<p>In the following, we consider the case of a transverse-field Ising model defined on a graph with random edges.</p>
+<div class="math notranslate nohighlight">
+\[H = -\sum_{i\in\textrm{nodes}}^{L} \sigma^x_{i} + J \sum_{(i,j)\in\textrm{edges}}\sigma_{i}^{z}\sigma_{i}^{z}\]</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span>import netket as nk
-import numpy as np
-import matplotlib.pyplot as plt
-import math
-import sys
+
+#Define a random graph
+n_nodes=10
+n_edges=20
+from numpy.random import choice
+rand_edges=[choice(n_nodes, size=2,replace=False).tolist() for i in range(n_edges)]
+
+graph=nk.graph.Graph(nodes=[i for i in range(n_nodes)], edges=rand_edges)
+
+#Define the local hilbert space
+hi=nk.hilbert.Spin(s=0.5)**graph.n_nodes
+
+#Define the Hamiltonian as a sum of local operators
+from netket.operator import LocalOperator as Op
+
+# Pauli Matrices
+sx = [[0, 1], [1, 0]]
+sz = [[1, 0], [0, -1]]
+
+# Defining the Hamiltonian as a LocalOperator acting on the given Hilbert space
+ha = Op(hi)
+
+#Adding a transverse field term on each node of the graph
+for i in range(graph.n_nodes):
+    ha += Op(hi, sx, [i])
+
+#Adding nearest-neighbors interactions on the edges of the given graph
+from numpy import kron
+J=0.5
+for edge in graph.edges():
+    ha += J*Op(hi, kron(sz, sz), edge)
 </pre></div>
 </div>
 </div>
-<p>While in practice, the measurement results can be experimental data e.g. from a quantum computer/simulator, for our purpose, we shall construct our data set by making single shot measurement on a wavefunction that we have obtained via exact diagonalisation. For this tutorial, we shall focus on the one-dimensional anti-ferromagnetic transverse-field Ising model defined by</p>
-<div class="math notranslate nohighlight">
-\[H = \sum_{i} Z_{i}Z_{i+1} + h \sum_{i} X_{i}\]</div>
+</div>
+<div class="section" id="Defining-a-JAX-module-to-be-used-as-a-wave-function">
+<h2>Defining a JAX module to be used as a wave function<a class="headerlink" href="#Defining-a-JAX-module-to-be-used-as-a-wave-function" title="Permalink to this headline">¶</a></h2>
+<p>We now want to define a suitable JAX wave function to be used as a wave function ansatz. To simplify the discusssion, we consider here a simple single-layer fully connected network with complex weights and a <span class="math notranslate nohighlight">\(tanh\)</span> activation function. These are easy to define in JAX, using for example a model built with <a class="reference external" href="https://github.com/google/jax/tree/master/jax/experimental">STAX</a>. The only requirement is that these networks take as inputs JAX arrays of shape <code class="docutils literal notranslate"><span class="pre">(batch_size,n)</span></code>, where batch_size
+is an arbitrary <code class="docutils literal notranslate"><span class="pre">batch</span> <span class="pre">size</span></code> and <code class="docutils literal notranslate"><span class="pre">n</span></code> is the number of quantum degrees of freedom (for example, the number of spins, in the previous example). Notice that regardless of the dimensionality of the problem, the last dimension is always flattened into a single index.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># Define the Hamiltonian
-N = 8
-g = nk.graph.Hypercube(length=N, n_dim=1, pbc=False)
-hi = nk.hilbert.Spin(g, s=0.5)
-ha = nk.operator.Ising(hi, h=1.0)
+<span></span>import jax
+from jax.experimental import stax
+
+#We define a custom layer that performs the sum of its inputs
+def SumLayer():
+    def init_fun(rng, input_shape):
+        output_shape = (-1, 1)
+        return output_shape, ()
+
+    def apply_fun(params, inputs, **kwargs):
+        return inputs.sum(axis=-1)
+
+    return init_fun, apply_fun
+
+#We construct a fully connected network with tanh activation
+model=stax.serial(stax.Dense(2 * graph.n_nodes, W_init=nk.nn.initializers.normal(stddev=0.1, dtype=complex),
+                             b_init=nk.nn.initializers.normal(stddev=0.1, dtype=complex)),
+                  stax.Tanh,SumLayer())
+
+# Alternatively, we could have used flax, which would have been easier:
+#class Model(nk.nn.Module):
+#    @nk.nn.compact
+#    def __call__(self, x):
+#        x = nk.nn.Dense(features=2*x.shape[-1], dtype=complex, kernel_init=nk.nn.initializers.normal(stddev=0.1), bias_init=nk.nn.initializers.normal(stddev=0.1))(x)
+#        x = jax.numpy.tanh(x)
+#        return jax.numpy.sum(x, axis=-1)
+#model = Model()
+
+# Alternatively #2 we could have used the built in RBM model:
+#model = nk.models.RBM(alpha=2, use_visible_bias=False, dtype=complex)
 </pre></div>
 </div>
 </div>
-<p>Next, perform exact diagonalisation to obtain the ground state wavefunction.</p>
-<div class="nbinput docutils container">
+</div>
+<div class="section" id="Train-the-neural-network-to-find-an-approximate-ground-state">
+<h2>Train the neural network to find an approximate ground state<a class="headerlink" href="#Train-the-neural-network-to-find-an-approximate-ground-state" title="Permalink to this headline">¶</a></h2>
+<p>In order to perform Variational Monte Carlo, we further need to specify a suitable sampler (to compute expectation values over the variational state) as well as an optimizer. In the following we will adopt the Stochatic Gradient Descent coupled with quantum natural gradients (this scheme is known in the VMC literature as Stochastic Reconfiguration)</p>
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># Obtain the ED wavefunction
-res = nk.exact.lanczos_ed(ha, first_n=1, compute_eigenvectors=True)
-psi = res.eigenvectors[0]
-print(&quot;Ground state energy =&quot;, res.eigenvalues[0])
+<span></span># Defining a sampler that performs local moves
+# NetKet automatically dispatches here to MCMC sampler written using JAX types
+sa = nk.sampler.MetropolisLocal(hilbert=hi, n_chains=2)
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Ground state energy = -9.837951447459439
-</pre></div></div>
-</div>
-<p>Finally, to construct the dataset, we will make single shot measurements in various bases. To obtain a single shot measurement, we need to sample from the wavefunction in the relevant basis.</p>
-<p>Since the wavefunction we obtained is in the computational basis (i.e. <span class="math notranslate nohighlight">\(Z\)</span> basis), to obtain a single shot measurement in another basis, one would need to transform the wavefunction as follows (this is similar to how one would do a measurement in a different basis on a quantum computer):</p>
-<p>X Basis:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}|{\Psi}\rangle \rightarrow I_n \otimes \frac{1}{\sqrt{2}}\pmatrix{1 &amp; 1 \\ 1&amp; -1} \otimes I_m \ |\Psi\rangle\end{split}\]</div>
-<p>Y Basis:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}|{\Psi}\rangle \rightarrow I_n \otimes \frac{1}{\sqrt{2}}\pmatrix{1 &amp; -i \\ 1&amp; i} \otimes I_m \ |\Psi\rangle\end{split}\]</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>def build_rotation(hi, basis):
-    localop = nk.operator.LocalOperator(hi, 1.0)
-    U_X = 1.0 / (math.sqrt(2)) * np.asarray([[1.0, 1.0], [1.0, -1.0]])
-    U_Y = 1.0 / (math.sqrt(2)) * np.asarray([[1.0, -1j], [1.0, 1j]])
-
-    N = hi.size
-
-    assert len(basis) == hi.size
-
-    for j in range(hi.size):
-        if basis[j] == &quot;X&quot;:
-            localop *= nk.operator.LocalOperator(hi, U_X, [j])
-        if basis[j] == &quot;Y&quot;:
-            localop *= nk.operator.LocalOperator(hi, U_Y, [j])
-    return localop
+<span></span># Construct the variational state
+vs = nk.variational.MCState(sa, model, n_samples=1000)
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>n_basis = 2*N
-n_shots = 1000
+<span></span># Using Sgd
+# Also dispatching to JAX optimizer
+op = nk.optimizer.Sgd(learning_rate=0.02)
 
+# Using Stochastic Reconfiguration a.k.a. quantum natural gradient
+# Also dispatching to a pure JAX version
+sr = nk.optimizer.SR(diag_shift=0.1)
 
-rotations = []
-training_samples = []
-training_bases = []
-
-np.random.seed(1234)
-
-for m in range(n_basis):
-    basis = np.random.choice(
-        list(&quot;XYZ&quot;), size=N, p=[1.0 / N, 1.0 / N, (N - 2.0) / N]
-    )
-
-    psi_rotated = np.copy(psi)
-    if &#39;X&#39; in basis or &#39;Y&#39; in basis:
-        rotation = build_rotation(hi, basis)
-        psi_rotated = rotation.to_sparse().dot(psi_rotated)
-    psi_square = np.square(np.absolute(psi_rotated))
-
-    rand_n = np.random.choice(hi.n_states, p=psi_square, size=n_shots)
-
-    for rn in rand_n:
-        training_samples.append(hi.number_to_state(rn))
-    training_bases += [m] * n_shots
-
-    rotations.append(rotation)
-
-print(&#39;Number of bases:&#39;, n_basis)
-print(&#39;Number of shots:&#39;, n_shots)
-print(&#39;Total size of the dataset:&#39;, n_basis*n_shots)
-print(&#39;Some single shot results: (sample, basis)\n&#39;, list(zip(training_samples[:3], training_bases[:3])))
+# Create the Variational Monte Carlo instance to learn the ground state
+vmc = nk.Vmc(
+    hamiltonian=ha, optimizer=op, variational_state=vs, sr=sr
+)
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Number of bases: 16
-Number of shots: 1000
-Total size of the dataset: 16000
-Some single shot results: (sample, basis)
- [(array([ 1.,  1.,  1., -1.,  1., -1.,  1., -1.]), 0), (array([ 1.,  1., -1.,  1., -1.,  1., -1.,  1.]), 0), (array([-1.,  1., -1.,  1., -1.,  1., -1.,  1.]), 0)]
-</pre></div></div>
-</div>
-<p>The basis rotations are contained in <code class="docutils literal notranslate"><span class="pre">rotations</span></code> and the single shot measurements are stored in <code class="docutils literal notranslate"><span class="pre">training_samples</span></code>. <code class="docutils literal notranslate"><span class="pre">training_bases</span></code> is a list of integers which labels each samples in <code class="docutils literal notranslate"><span class="pre">training_samples</span></code> according to their basis.</p>
-<p>Having obtained the dataset, we can proceed to define the variational ansatz one wishes to train. We shall simply use the Restricted Boltzmann Machine (RBM) with real parameters defined as:</p>
-<div class="math notranslate nohighlight">
-\[\tilde\psi (\boldsymbol{\sigma})  =  p_{\boldsymbol{\lambda}}(\boldsymbol{\sigma}) e^{i \phi_{\boldsymbol{\mu}}(\boldsymbol{\sigma})}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\phi_{\boldsymbol{\mu}}(\boldsymbol{\sigma}) = \log p_{\boldsymbol{\mu}}(\boldsymbol{\sigma})\)</span> and <span class="math notranslate nohighlight">\(p_{\boldsymbol{\lambda/\mu}}\)</span> are standard RBM real probability distributions. Notice that the amplitude part <span class="math notranslate nohighlight">\(p_{\boldsymbol{\lambda}}\)</span> completely defines the measurements in the Z basis and vice versa.</p>
-<div class="nbinput nblast docutils container">
+<div class="section" id="Running-the-training-loop">
+<h3>Running the training loop<a class="headerlink" href="#Running-the-training-loop" title="Permalink to this headline">¶</a></h3>
+<p>The last version of NetKet also allows for a finer control of the vmc loop. In the simplest case, one can just iterate through the vmc object and print the current value of the energy. More sophisticated output schemes based on tensorboard have been also implemented, but are not discussed in this Tutorial.</p>
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># Define the variational wavefunction ansatz
-ma = nk.machine.RbmSpinPhase(hilbert=hi, alpha=1)
-</pre></div>
-</div>
-</div>
-<p>With the variational ansatz as well as the dataset, the quantum state tomography can now be performed. Recall that the aim is to reconstruct a wavefunction <span class="math notranslate nohighlight">\(|\Psi_{U}\rangle\)</span> (for our case, the ground state of the 1D TFIM) given single shot measurements of the wavefunction in various bases. The single shot measurements are governed by a probability distribution</p>
-<div class="math notranslate nohighlight">
-\[P_{b}(\boldsymbol{\sigma}) = | \langle \boldsymbol{\sigma}| \hat{U}_{b} |\Psi_{U}\rangle|^{2}\]</div>
-<p>which depends on <span class="math notranslate nohighlight">\(|\Psi_{U}\rangle\)</span> and the basis <span class="math notranslate nohighlight">\(b\)</span> in which the measurement is performed. <span class="math notranslate nohighlight">\(\hat{U}_{b}\)</span> is simply the unitary which rotates the wavefunction into the corresponding basis.</p>
-<p>Similarly, the variational wavefunction <span class="math notranslate nohighlight">\(|\tilde\psi\rangle\)</span> also defines a set of basis dependent probability distributions <span class="math notranslate nohighlight">\(\tilde P_{b}(\boldsymbol{\sigma})\)</span>. The optimisation procedure is then basically a minimisation task to find the set of parameters <span class="math notranslate nohighlight">\(\boldsymbol{\kappa}\)</span> which minimises the total Kullback–Leibler divergence between <span class="math notranslate nohighlight">\(\tilde P_{b}\)</span> and <span class="math notranslate nohighlight">\(P_{b}\)</span>, i.e.</p>
-<div class="math notranslate nohighlight">
-\[\Xi(\boldsymbol{\kappa}) = \sum_{b} \mathbb{KL}_{b}({\kappa})\]</div>
-<p>where</p>
-<div class="math notranslate nohighlight">
-\[\mathbb{KL}_{b}({\boldsymbol{\kappa}}) = \sum_{\boldsymbol{\sigma}} P_{b}(\boldsymbol{\sigma}) \log \frac{ P_{b}(\boldsymbol{\sigma})}{\tilde P_{b}(\boldsymbol{\sigma})}\]</div>
-<p>.</p>
-<p>This minimisation can be achieved by gradient descent. Although one does not have access to the underlying probability distributions <span class="math notranslate nohighlight">\(P_{b}(\boldsymbol{\sigma})\)</span>, the total KL divergence can be estimated by summing over the dataset <span class="math notranslate nohighlight">\(\lbrace D_{b} \rbrace\)</span></p>
-<div class="math notranslate nohighlight">
-\[\Xi(\boldsymbol{\kappa}) = -\sum_{b} \sum_{\boldsymbol{\sigma} \in D_{b}} \log \tilde P_{b}(\boldsymbol{\sigma}) + S\]</div>
-<p>where <span class="math notranslate nohighlight">\(S\)</span> is the constant entropy of <span class="math notranslate nohighlight">\(P_{b}(\boldsymbol{\sigma})\)</span> which can be ignored. The details regarding the computation of the gradients can be found in arXiv:1703.05334.</p>
-<p>In addition to reconstructing the quantum state, we would also like to investigate how the size of the dataset affects the quality of the reconstruction. To that end, we shall run the optimisation with different dataset sizes.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># Shuffle our datasets
-import random
-temp = list(zip(training_bases, training_samples))
-random.shuffle(temp)
-training_bases, training_samples = zip(*temp)
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># Sampler
-sa = nk.sampler.MetropolisLocal(machine=ma)
-
-# Optimizer
-op = nk.optimizer.AdaDelta()
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>dataset_sizes = [2000, 4000, 8000, 16000]
-# During the optimisation, we would like to keep track
-# of the fidelities and energies
-fidelities = {}
-energies = {}
-
-for size in dataset_sizes:
-    # First remember to reinitialise the machine
-    ma.init_random_parameters(seed=1234, sigma=0.01)
-    # Quantum State Tomography object
-    qst = nk.unsupervised.Qsr(
-        sampler=sa,
-        optimizer=op,
-        batch_size=300,
-        n_samples=300,
-        rotations=tuple(rotations[:size]),
-        samples=training_samples[:size],
-        bases=training_bases,
-        method=&quot;Gd&quot;
-    )
-    qst.add_observable(ha, &quot;Energy&quot;)
-
-    # Run the optimisation using the iterator
-    print(&quot;Starting optimisation for dataset size&quot;, size)
-    fidelities_temp = []
-    energies_temp = []
-    for step in qst.iter(2000, 100):
-        # Compute fidelity with exact state
-        psima = ma.to_array()
-        fidelity = np.abs(np.vdot(psima, psi))
-        fidelities_temp.append(fidelity)
-    fidelities[size] = fidelities_temp
-    energies[size] = energies_temp
+<span></span># Running the learning loop and printing the energy every 50 steps
+# [notice that the very first iteration is slow because of JIT compilation]
+for it in vmc.iter(500,50):
+    print(it,vmc.energy)
 </pre></div>
 </div>
 </div>
@@ -584,26 +516,32 @@ for size in dataset_sizes:
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Starting optimisation for dataset size 2000
-Starting optimisation for dataset size 4000
-Starting optimisation for dataset size 8000
-Starting optimisation for dataset size 16000
+0 8.62-0.02j ± 0.10 [σ²=8.47, R̂=0.9991]
+50 -6.81+0.09j ± 0.10 [σ²=5.67, R̂=0.9991]
+100 -10.281+0.008j ± 0.051 [σ²=1.575, R̂=0.9992]
+150 -11.034+0.004j ± 0.028 [σ²=0.565, R̂=0.9993]
+200 -11.203-0.025j ± 0.016 [σ²=0.306, R̂=0.9993]
+250 -11.260-0.002j ± 0.013 [σ²=0.188, R̂=0.9990]
+300 -11.271-0.008j ± 0.011 [σ²=0.126, R̂=0.9991]
+350 -11.2832-0.0032j ± 0.0100 [σ²=0.1114, R̂=0.9995]
+400 -11.282-0.019j ± 0.010 [σ²=0.103, R̂=0.9992]
+450 -11.2934+0.0047j ± 0.0086 [σ²=0.0811, R̂=0.9993]
 </pre></div></div>
 </div>
+</div>
+</div>
+<div class="section" id="Comparing-to-exact-diagonalization">
+<h2>Comparing to exact diagonalization<a class="headerlink" href="#Comparing-to-exact-diagonalization" title="Permalink to this headline">¶</a></h2>
+<p>Since this is a relatively small quantum system, we can still diagonalize the Hamiltonian using exact diagonalization. For this purpose, NetKet conveniently exposes a <code class="docutils literal notranslate"><span class="pre">.to_sparse</span></code> method that just converts the Hamiltonian into a <code class="docutils literal notranslate"><span class="pre">scipy</span></code> sparse matrix. Here we first obtain this sparse matrix, and then diagonalize it with scipy builtins.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>for size in fidelities:
-    plt.plot(np.arange(1,21,1),fidelities[size], label=&#39;dataset size = &#39;+str(size))
-plt.axhline(y=1, xmin=0,
-            xmax=20, linewidth=3, color=&#39;k&#39;, label=&#39;Perfect Fidelity&#39;)
-plt.ylabel(&#39;Fidelity&#39;)
-plt.xlabel(&#39;Iteration&#39;)
-plt.xticks(range(0,21,4))
-plt.legend()
-plt.show()
+<span></span>import scipy
+exact_ens=scipy.sparse.linalg.eigsh(ha.to_sparse(),k=1,which=&#39;SA&#39;,return_eigenvectors=False)
+print(&quot;Exact energy is : &quot;,exact_ens[0])
+print(&quot;Relative error is : &quot;, (abs((vmc.energy.mean-exact_ens[0])/exact_ens[0])))
 </pre></div>
 </div>
 </div>
@@ -611,10 +549,12 @@ plt.show()
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutorials_qst_18_0.png" src="../_images/tutorials_qst_18_0.png" />
+<div class="highlight"><pre>
+Exact energy is :  -11.302079317764267
+Relative error is :  0.0017295387652704216
+</pre></div></div>
 </div>
 </div>
-<p>As expected, it is relatively clear that with increasing dataset size, the final fidelity does increase.</p>
 </div>
 
 
@@ -642,13 +582,13 @@ plt.show()
       })
 </script>
 
-<!-- Temporary footer-->
+<!-- Temporary footer
 <div class="footer-wip">
   <div class="footer-wip-content">
     This documentation refers to an unreleased version of Netket.
   </div>
 </div>
-
+-->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118013987-1"></script>

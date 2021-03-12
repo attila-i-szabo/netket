@@ -7,6 +7,8 @@
     <title>Variational Monte Carlo with Neural Networks &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/jumbo-style.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
@@ -360,8 +362,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <p>Let’s start.</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[340]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -374,12 +376,20 @@ import matplotlib.pyplot as plt
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING:absl:No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+</pre></div></div>
+</div>
 </div>
 <div class="section" id="1)-Defining-a-Custom-Hamiltonian">
 <h2>1) Defining a Custom Hamiltonian<a class="headerlink" href="#1)-Defining-a-Custom-Hamiltonian" title="Permalink to this headline">¶</a></h2>
 <p>The first thing to do is to define the graph (lattice) on which to specify the Hamiltonian. Here we would like to build a one-dimensional graph with both nearest and next nearest neighbour bonds. The graph is created in the <code class="docutils literal notranslate"><span class="pre">nk.graph.CustomGraph</span></code> class. To initialise the class we simply provide a list of edges in the <code class="docutils literal notranslate"><span class="pre">[[site_i,</span> <span class="pre">site_j,</span> <span class="pre">edge_color],</span> <span class="pre">...]</span></code></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[341]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -390,7 +400,7 @@ L = 14
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[342]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -401,13 +411,13 @@ for i in range(L):
     edge_colors.append([i, (i+2)%L, 2])
 
 # Define the netket graph object
-g = nk.graph.CustomGraph(edge_colors)
+g = nk.graph.Graph(edges=edge_colors)
 </pre></div>
 </div>
 </div>
 <p>We specify a different <code class="docutils literal notranslate"><span class="pre">color</span></code> for each type of bond so as to define a different operator for each of them. Next, we define the relevant bond operators.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[343]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -433,24 +443,24 @@ bond_color = [1, 2, 1, 2]
 identical in both bases. Note further that this sign change is useful at low frustration (such as here <span class="math notranslate nohighlight">\(J_2=0.2\)</span>), but may actually be not optimal at stronger frustration. As a bonus exercise, repeat the calculation with <span class="math notranslate nohighlight">\(J_2=0.8\)</span>, and see which basis (<em>i.e.</em> which sign in front of the exchange) leads to faster convergence.</p>
 <p>Before defining the Hamiltonian, we also need to specify the Hilbert space. For our case, this would be the chain spin-half degrees of freedom.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[344]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span># Spin based Hilbert Space
-hi = nk.hilbert.Spin(s=0.5, total_sz=0.0, graph=g)
+hi = nk.hilbert.Spin(s=0.5, total_sz=0.0, N=g.n_nodes)
 </pre></div>
 </div>
 </div>
 <p>Note that we impose here the total magnetization to be zero (it turns out to be the correct magnetization for the ground-state). As an exercise, check that the energy of the lowest state in other magnetization sectors is larger.</p>
 <p>Next, we define the custom graph Hamiltonian using the <code class="docutils literal notranslate"><span class="pre">nk.operator.GraphOperator</span></code> class, by providing the hilbert space <code class="docutils literal notranslate"><span class="pre">hi</span></code>, the bond operators <code class="docutils literal notranslate"><span class="pre">bondops=bond_operator</span></code> and the corresponding bond color <code class="docutils literal notranslate"><span class="pre">bondops_colors=bond_color</span></code>. The information about the graph (bonds and bond colors) are contained within the <code class="docutils literal notranslate"><span class="pre">nk.hilbert.Spin</span></code> object <code class="docutils literal notranslate"><span class="pre">hi</span></code>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[345]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span># Custom Hamiltonian operator
-op = nk.operator.GraphOperator(hi, bondops=bond_operator, bondops_colors=bond_color)
+op = nk.operator.GraphOperator(hi, graph=g, bond_ops=bond_operator, bond_ops_colors=bond_color)
 </pre></div>
 </div>
 </div>
@@ -459,18 +469,22 @@ op = nk.operator.GraphOperator(hi, bondops=bond_operator, bondops_colors=bond_co
 <h2>2) Defining the Machine<a class="headerlink" href="#2)-Defining-the-Machine" title="Permalink to this headline">¶</a></h2>
 <p>For this tutorial, we shall use the most common type of neural network: fully connected feedforward neural network <code class="docutils literal notranslate"><span class="pre">nk.machine.FFNN</span></code>. Other types of neural networks available will be discussed in other tutorials.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[346]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span># Define the fully-connected FFNN
-layers = (nk.layer.FullyConnected(input_size=L,output_size=2*L,use_bias=True),
-          nk.layer.Lncosh(input_size=2*L),
-          nk.layer.SumOutput(input_size=2*L))
-for layer in layers:
-    layer.init_random_parameters(seed=1234, sigma=0.01)
+<span></span>import netket.nn as nknn
+import jax.numpy as jnp
 
-ffnn = nk.machine.FFNN(hi, layers)
+class FFNN(nknn.Module):
+    @nknn.compact
+    def __call__(self, x):
+        x = nknn.Dense(features=2*x.shape[-1], use_bias=True, dtype=complex, kernel_init=nknn.initializers.normal(stddev=0.01), bias_init=nknn.initializers.normal(stddev=0.01))(x)
+        x = nknn.logcosh(x)
+        x = jnp.sum(x, axis=-1)
+        return x
+
+model = FFNN()
 </pre></div>
 </div>
 </div>
@@ -480,25 +494,26 @@ ffnn = nk.machine.FFNN(hi, layers)
 <p>We have now set up our model (Hamiltonian, Graph, Hilbert Space) and can proceed to optimise the variational ansatz we chose, namely the <code class="docutils literal notranslate"><span class="pre">ffnn</span></code> machine.</p>
 <p>To setup the variational Monte Carlo optimisation tool, we have to provide a sampler <code class="docutils literal notranslate"><span class="pre">nk.sampler</span></code> and an optimizer <code class="docutils literal notranslate"><span class="pre">nk.optimizer</span></code>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[347]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span># We shall use an exchange Sampler which preserves the global magnetization (as this is a conserved quantity in the model)
-sa = nk.sampler.MetropolisExchange(graph=g, machine=ffnn, d_max = 2)
+sa = nk.sampler.MetropolisExchange(hilbert=hi, graph=g, d_max = 2)
+
+# Construct the variational state
+vs = nk.variational.MCState(sa, model, n_samples=1000)
 
 # We choose a basic, albeit important, Optimizer: the Stochastic Gradient Descent
 opt = nk.optimizer.Sgd(learning_rate=0.01)
 
+# Stochastic Reconfiguration
+sr = nk.optimizer.SR(diag_shift=0.01)
+
 # We can then specify a Variational Monte Carlo object, using the Hamiltonian, sampler and optimizers chosen.
 # Note that we also specify the method to learn the parameters of the wave-function: here we choose the efficient
 # Stochastic reconfiguration (Sr), here in an iterative setup
-gs = nk.variational.Vmc(hamiltonian=op,
-                        sampler=sa,
-                        optimizer=opt,
-                        n_samples=1000,
-                        use_iterative=True,
-                        method=&#39;Sr&#39;)
+gs = nk.Vmc(hamiltonian=op, optimizer=opt, variational_state=vs, sr=sr)
 </pre></div>
 </div>
 </div>
@@ -510,21 +525,18 @@ gs = nk.variational.Vmc(hamiltonian=op,
 \[\frac{1}{L} \sum_{ij} \langle \hat{\sigma}_{i}^z \cdot \hat{\sigma}_{j}^z\rangle e^{i\pi(i-j)}\]</div>
 <p>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[348]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span># We need to specify the local operators as a matrix acting on a local Hilbert space
 sf = []
 sites = []
+structure_factor = nk.operator.LocalOperator(hi, dtype=complex)
 for i in range(0, L):
     for j in range(0, L):
-        sf.append(((-1)**(i-j)*mszsz/L).tolist())
-        sites.append([i,j])
-structure_factor = nk.operator.LocalOperator(hi, sf, sites)
+        structure_factor += (nk.operator.spin.sigmaz(hi, i)*nk.operator.spin.sigmaz(hi, j))*((-1)**(i-j))/L
 
-# Add the observable to the VMC object
-gs.add_observable(structure_factor, &quot;Structure Factor&quot;)
 </pre></div>
 </div>
 </div>
@@ -532,15 +544,23 @@ gs.add_observable(structure_factor, &quot;Structure Factor&quot;)
 <p>We can now optimize our variational ansatz. The optimization data for each iteration will be stored in a log file, which contains the following information: 1. Mean, variance and uncertainty in the Energy $ <span class="math">\langle `:nbsphinx-math:</span>hat{H}` <span class="math">\rangle `$ 2. Mean, variance and uncertainty in the Energy Variance, $
 :nbsphinx-math:</span>langle`:nbsphinx-math:<cite>hat{H}</cite><sup>{2}:nbsphinx-math:</sup>rangle`-<span class="math">\langle `:nbsphinx-math:</span>hat{H}`:nbsphinx-math:<cite>rangle`</cite>{2}$. 3. Acceptance rates of the sampler 4. Mean, variance and uncertainty of observables (if specified)</p>
 <p>Now let’s learn the ground-state!</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[349]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span># Run the optimization protocol
-gs.run(output_prefix=&#39;test&#39;, n_iter=600)
+gs.run(out=&#39;test&#39;, n_iter=600, obs={&#39;Structure Factor&#39;: structure_factor})
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+100%|██████████| 600/600 [01:16&lt;00:00,  7.82it/s, Energy=-23.0614-0.0001j ± 0.0037 [σ²=0.0136, R̂=1.0024]]
+</pre></div></div>
 </div>
 </div>
 <div class="section" id="5)-Data-Visualisation">
@@ -548,7 +568,7 @@ gs.run(output_prefix=&#39;test&#39;, n_iter=600)
 <p>Now that we have optimized our machine to find the ground state of the <span class="math notranslate nohighlight">\(J_1-J_2\)</span> model, let’s look at what we have. The relevant data are stored in the “.log” file while the optimized parameters are in the “.wf” file. The files are all in json format.</p>
 <p>We shall extract the energy as well as specified observables (antiferromagnetic structure factor in our case) from the “.log” file.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[350]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -571,7 +591,7 @@ for iteration in data[&quot;Output&quot;]:
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[351]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -597,7 +617,7 @@ plt.show()
 </div>
 <p>Let’s also compute the average of those quantities (energy and neel order) over the last 50 iterations where the optimization seems to have converged.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[357]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -612,7 +632,7 @@ print(r&quot;Energy = {0:.3f}({1:.3f})&quot;.format(np.mean(energy[-50:]), np.st
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Structure factor = 3.794(0.035)
+Structure factor = 3.875(0.035)
 Energy = -23.062(0.001)
 </pre></div></div>
 </div>
@@ -621,22 +641,23 @@ Energy = -23.062(0.001)
 <h2>6) Sanity Check: Exact Diagonalisation<a class="headerlink" href="#6)-Sanity-Check:-Exact-Diagonalisation" title="Permalink to this headline">¶</a></h2>
 <p>Now that we have obtained some results using VMC, it is a good time to check the quality of our results (at least for small system sizes). For this purpose, Netket provides exact diagonalisation tools.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[353]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>res = nk.exact.lanczos_ed(op, first_n=1, compute_eigenvectors=True)
+<span></span>E_gs, ket_gs = nk.exact.lanczos_ed(op, compute_eigenvectors=True)
+structure_factor_gs = (ket_gs.T.conj()@structure_factor.to_linear_operator()@ket_gs).real[0,0]
 </pre></div>
 </div>
 </div>
-<p>Here we specify that we only want the ground-state <code class="docutils literal notranslate"><span class="pre">first_n=1</span></code>, and also that we want the corresponding eigenvector (in order to compute observables).</p>
+<p>Here we have specified that we want the corresponding eigenvector (in order to compute observables).</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[354]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span>print(&quot;Exact Ground-state Structure Factor: {0:.3f}&quot;.format(np.real(res.mean(structure_factor, 0))))
-print(&quot;Exact ground state energy = {0:.3f}&quot;.format(res.eigenvalues[0]))
+<span></span>print(&quot;Exact Ground-state Structure Factor: {0:.3f}&quot;.format(structure_factor_gs))
+print(&quot;Exact ground state energy = {0:.3f}&quot;.format(E_gs[0]))
 </pre></div>
 </div>
 </div>
@@ -678,13 +699,13 @@ Exact ground state energy = -23.064
       })
 </script>
 
-<!-- Temporary footer-->
+<!-- Temporary footer
 <div class="footer-wip">
   <div class="footer-wip-content">
     This documentation refers to an unreleased version of Netket.
   </div>
 </div>
-
+-->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118013987-1"></script>
