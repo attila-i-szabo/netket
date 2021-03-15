@@ -244,6 +244,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#optimizer">Optimizer</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SR.html">netket.optimizer.SR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyCG.html">netket.optimizer.SRLazyCG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyGMRES.html">netket.optimizer.SRLazyGMRES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.sr.LazySMatrix.html">netket.optimizer.sr.LazySMatrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Adam.html">netket.optimizer.Adam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.AdaGrad.html">netket.optimizer.AdaGrad</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Sgd.html">netket.optimizer.Sgd</a></li>
@@ -279,6 +282,41 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.graph.graph.NetworkX</span></code></p>
 <p>A Grid lattice of d dimensions, and possibly different sizes of each dimension.
 Periodic boundary conditions can also be imposed</p>
+<dl class="class-dl-groups">
+<dt>Methods</dt><dd><dl class="py method">
+<dt id="netket.graph.Grid.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_edges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/graph/grid.html#Grid.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.graph.Grid.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new <cite>Grid</cite> given its length vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>) – Side length of the Grid. It must be a list with integer components &gt;= 1.</p></li>
+<li><p><strong>pbc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If <cite>True</cite>, the grid will have periodic boundary conditions (PBC);
+if <cite>False</cite>, the grid will have open boundary conditions (OBC).
+This parameter can also be a list of booleans with same length as
+the parameter <cite>length</cite>, in which case each dimension will have
+PBC/OBC depending on the corresponding entry of <cite>pbc</cite>.</p></li>
+<li><p><strong>color_edges</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If <cite>True</cite>, the edges will be colored by their grid direction.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>A 5x10 lattice with periodic boundary conditions can be
+constructed as follows:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">netket</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">=</span><span class="n">netket</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">Grid</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">pbc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">n_nodes</span><span class="p">)</span>
+<span class="go">50</span>
+</pre></div>
+</div>
+<p>Also, a 2x2x3 lattice with open boundary conditions can be constructed as follows:
+&gt;&gt;&gt; g=netket.graph.Grid(length=[2,2,3], pbc=False)
+&gt;&gt;&gt; print(g.n_nodes)
+12</p>
+</dd></dl>
+
+</dd>
+</dl>
 <dl class="class-dl-groups">
 <dt>Attributes</dt><dd><dl class="py attribute">
 <dt id="netket.graph.Grid.n_edges">

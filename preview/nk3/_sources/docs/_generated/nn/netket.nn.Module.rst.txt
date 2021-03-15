@@ -6,8 +6,15 @@
 .. autoclass:: Module
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: Module.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: Module.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -29,5 +36,4 @@
       .. automethod:: Module.sow
       .. automethod:: Module.variable
 
-   
    

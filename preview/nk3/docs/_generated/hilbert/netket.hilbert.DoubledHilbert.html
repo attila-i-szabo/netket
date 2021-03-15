@@ -244,6 +244,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#optimizer">Optimizer</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SR.html">netket.optimizer.SR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyCG.html">netket.optimizer.SRLazyCG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyGMRES.html">netket.optimizer.SRLazyGMRES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.sr.LazySMatrix.html">netket.optimizer.sr.LazySMatrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Adam.html">netket.optimizer.Adam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.AdaGrad.html">netket.optimizer.AdaGrad</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Sgd.html">netket.optimizer.Sgd</a></li>
@@ -279,6 +282,33 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.hilbert.abstract_hilbert.AbstractHilbert</span></code></p>
 <p>Superoperatorial hilbert space for states living in the
 tensorised state Hotimes H, encoded according to Choi’s isomorphism.</p>
+<dl class="class-dl-groups">
+<dt>Methods</dt><dd><dl class="py method">
+<dt id="netket.hilbert.DoubledHilbert.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/hilbert/doubled_hilbert.html#DoubledHilbert.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.hilbert.DoubledHilbert.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Superoperatorial hilbert space for states living in the</dt><dd><p>tensorised state Hotimes H, encoded according to Choi’s isomorphism.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hilb</strong> – the hilbrt space H.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Simple superoperatorial hilbert space for few spins.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">netket.hilbert</span> <span class="kn">import</span> <span class="n">Spin</span><span class="p">,</span> <span class="n">DoubledHilbert</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Hypercube</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">n_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">pbc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hi</span> <span class="o">=</span> <span class="n">Spin</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hi2</span> <span class="o">=</span> <span class="n">DoubledHilbert</span><span class="p">(</span><span class="n">hi</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">hi2</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="go">50</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd>
+</dl>
 <dl class="class-dl-groups">
 <dt>Attributes</dt><dd><dl class="py attribute">
 <dt id="netket.hilbert.DoubledHilbert.is_discrete">

@@ -244,6 +244,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#optimizer">Optimizer</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SR.html">netket.optimizer.SR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyCG.html">netket.optimizer.SRLazyCG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyGMRES.html">netket.optimizer.SRLazyGMRES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.sr.LazySMatrix.html">netket.optimizer.sr.LazySMatrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Adam.html">netket.optimizer.Adam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.AdaGrad.html">netket.optimizer.AdaGrad</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Sgd.html">netket.optimizer.Sgd</a></li>
@@ -281,6 +284,15 @@
 <p>This class definese the common interface that can be used to
 interact with hilbert spaces.</p>
 <p>Hilbert Spaces are immutable.</p>
+<dl class="class-dl-groups">
+<dt>Methods</dt><dd><dl class="py method">
+<dt id="netket.hilbert.AbstractHilbert.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/hilbert/abstract_hilbert.html#AbstractHilbert.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.hilbert.AbstractHilbert.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+</dd>
+</dl>
 <dl class="class-dl-groups">
 <dt>Attributes</dt><dd><dl class="py attribute">
 <dt id="netket.hilbert.AbstractHilbert.is_discrete">
@@ -333,7 +345,7 @@ Throws an exception iff the space is not indexable.</p>
 <dd><p>The size of the hilbert space on every site.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, …]</p>
 </dd>
 </dl>
 </dd></dl>

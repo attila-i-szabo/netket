@@ -6,8 +6,15 @@
 .. autoclass:: LocalRule
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: LocalRule.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: LocalRule.__init__
+
       
    
       
@@ -19,5 +26,4 @@
       .. automethod:: LocalRule.reset
       .. automethod:: LocalRule.transition
 
-   
    

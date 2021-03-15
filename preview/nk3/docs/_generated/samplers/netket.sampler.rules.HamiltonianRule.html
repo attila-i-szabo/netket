@@ -18,6 +18,8 @@
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script src="../../../_static/js/rtd_theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -244,6 +246,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#optimizer">Optimizer</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SR.html">netket.optimizer.SR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyCG.html">netket.optimizer.SRLazyCG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyGMRES.html">netket.optimizer.SRLazyGMRES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.sr.LazySMatrix.html">netket.optimizer.sr.LazySMatrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Adam.html">netket.optimizer.Adam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.AdaGrad.html">netket.optimizer.AdaGrad</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Sgd.html">netket.optimizer.Sgd</a></li>
@@ -277,6 +282,31 @@
 <dt id="netket.sampler.rules.HamiltonianRule">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.sampler.rules.</span></code><code class="sig-name descname"><span class="pre">HamiltonianRule</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ô</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/rules/hamiltonian.html#HamiltonianRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.rules.HamiltonianRule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.sampler.metropolis.MetropolisRule</span></code></p>
+<blockquote>
+<div><p>Rule proposing moves according to the terms in an operator.</p>
+<p>In this case, the transition matrix is taken to be:</p>
+<div class="math notranslate nohighlight">
+\[T( \mathbf{s}\]</div>
+</div></blockquote>
+<p>ightarrow mathbf{s}^prime) =
+rac{1}{mathcal{N}(mathbf{s})} heta(<a href="#id1"><span class="problematic" id="id2">|H_{\mathbf{s},\mathbf{s}^\prime}|</span></a>),</p>
+<dl class="class-dl-groups">
+<dt>Methods</dt><dd><dl class="py method">
+<dt id="netket.sampler.rules.HamiltonianRule.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ô</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.rules.HamiltonianRule.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>Ô</strong> (<em>Any</em>) – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
 <dl class="class-dl-groups">
 <dt>Methods</dt><dd><dl class="py method">
 <dt id="netket.sampler.rules.HamiltonianRule.init_state">

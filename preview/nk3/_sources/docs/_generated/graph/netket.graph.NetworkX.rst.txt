@@ -6,8 +6,15 @@
 .. autoclass:: NetworkX
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: NetworkX.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: NetworkX.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -25,5 +32,4 @@
       .. automethod:: NetworkX.is_connected
       .. automethod:: NetworkX.nodes
 
-   
    

@@ -18,6 +18,8 @@
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script src="../../../_static/js/rtd_theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -244,6 +246,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#optimizer">Optimizer</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SR.html">netket.optimizer.SR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyCG.html">netket.optimizer.SRLazyCG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyGMRES.html">netket.optimizer.SRLazyGMRES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.sr.LazySMatrix.html">netket.optimizer.sr.LazySMatrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Adam.html">netket.optimizer.Adam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.AdaGrad.html">netket.optimizer.AdaGrad</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Sgd.html">netket.optimizer.Sgd</a></li>
@@ -281,6 +286,60 @@
 This sampler samples an Hilbert space, producing samples off a specific dtype.
 The samples are generated according to a transition rule that must be
 specified.</p>
+<dl class="class-dl-groups">
+<dt>Methods</dt><dd><dl class="py method">
+<dt id="netket.sampler.MetropolisSampler.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilbert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_sweeps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset_chain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/metropolis.html#MetropolisSampler.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.MetropolisSampler.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">MetropolisSampler</span></code> is a generic Metropolis-Hastings sampler using
+a transition rule to perform moves in the Markov Chain.
+The transition kernel is used to generate
+a proposed state <span class="math notranslate nohighlight">\(s^\prime\)</span>, starting from the current state <span class="math notranslate nohighlight">\(s\)</span>.
+The move is accepted with probability</p>
+<div class="math notranslate nohighlight">
+\[\]</div>
+<p>A(s</p>
+</div></blockquote>
+<p>ightarrow s^prime) = mathrm{min}left (1,
+rac{P(s^prime)}{P(s)} F(e^{L(s,s^prime)})
+ight),</p>
+<blockquote>
+<div><p>where the probability being sampled from is <span class="math notranslate nohighlight">\(P(s)=|M(s)|^p. Here ::math::\)</span> is a
+user-provided function (the machine), <span class="math notranslate nohighlight">\(p\)</span> is also user-provided with default value <span class="math notranslate nohighlight">\(p=2\)</span>,
+and <span class="math notranslate nohighlight">\(L(s,s^\prime)\)</span> is a suitable correcting factor computed by the transition kernel.</p>
+<dl>
+<dt>Args:</dt><dd><p>hilbert: The hilbert space to sample
+rule: A <cite>MetropolisRule</cite> to generate random transitions from a given state as</p>
+<blockquote>
+<div><p>well as uniform random states.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>n_sweeps: The number of exchanges that compose a single sweep.</dt><dd><p>If None, sweep_size is equal to the number of degrees of freedom being sampled
+(the size of the input vector s to the machine).</p>
+</dd>
+</dl>
+<p>reset_chain: If False the state configuration is not resetted when reset() is called.
+n_chains: The number of Markov Chain to be run in parallel on a single process.
+n_chains: The number of batches of the states to sample (default = 8)
+machine_pow: The power to which the machine should be exponentiated to generate the pdf (default = 2).
+dtype: The dtype of the statees sampled (default = np.float32).</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hilbert</strong> (<em>netket.hilbert.abstract_hilbert.AbstractHilbert</em>) – </p></li>
+<li><p><strong>rule</strong> (<em>netket.sampler.metropolis.MetropolisRule</em>) – </p></li>
+<li><p><strong>n_sweeps</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – </p></li>
+<li><p><strong>reset_chain</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
 <dl class="class-dl-groups">
 <dt>Attributes</dt><dd><dl class="py attribute">
 <dt id="netket.sampler.MetropolisSampler.machine_pow">

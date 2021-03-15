@@ -6,8 +6,15 @@
 .. autoclass:: DoubledHilbert
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: DoubledHilbert.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: DoubledHilbert.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -33,5 +40,4 @@
       .. automethod:: DoubledHilbert.states_at_index
       .. automethod:: DoubledHilbert.states_to_numbers
 
-   
    

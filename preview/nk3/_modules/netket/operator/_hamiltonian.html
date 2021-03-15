@@ -189,7 +189,13 @@
 
 
 <div class="viewcode-block" id="Ising"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.Ising.html#netket.operator.Ising">[docs]</a><span class="k">class</span> <span class="nc">Ising</span><span class="p">(</span><span class="n">SpecialHamiltonian</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Transverse-Field Ising Hamiltonian :math:`-h\sum_i \sigma_i^{(x)} +J\sum_{\langle i,j\rangle} \sigma_i^{(z)}\sigma_j^{(z)}`.</span>
+
+<span class="sd">    This implementation is considerably faster than the Ising hamiltonian constructed by summing :class:`~LocalOperator`s.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Ising.__init__"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.Ising.html#netket.operator.Ising.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">hilbert</span><span class="p">:</span> <span class="n">AbstractHilbert</span><span class="p">,</span>
         <span class="n">graph</span><span class="p">:</span> <span class="n">AbstractGraph</span><span class="p">,</span>
@@ -227,7 +233,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_J</span> <span class="o">=</span> <span class="n">dtype</span><span class="p">(</span><span class="n">J</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edges</span><span class="p">()))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span> <span class="o">=</span> <span class="n">dtype</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span> <span class="o">=</span> <span class="n">dtype</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -419,7 +425,11 @@
 
 
 <div class="viewcode-block" id="Heisenberg"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.Heisenberg.html#netket.operator.Heisenberg">[docs]</a><span class="k">class</span> <span class="nc">Heisenberg</span><span class="p">(</span><span class="n">GraphOperator</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Heisemberg hamiltonian on a lattice.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Heisenberg.__init__"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.Heisenberg.html#netket.operator.Heisenberg.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">hilbert</span><span class="p">,</span>
         <span class="n">graph</span><span class="p">,</span>
@@ -482,7 +492,7 @@
             <span class="n">hilbert</span><span class="p">,</span>
             <span class="n">graph</span><span class="p">,</span>
             <span class="n">bond_ops</span><span class="o">=</span><span class="p">[</span><span class="n">J</span> <span class="o">*</span> <span class="n">heis_term</span><span class="p">],</span>
-        <span class="p">)</span>
+        <span class="p">)</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">J</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -502,7 +512,7 @@
 <span class="sd">    on-site interactions and nearest-neighboring density-density interactions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<div class="viewcode-block" id="BoseHubbard.__init__"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.BoseHubbard.html#netket.operator.BoseHubbard.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">hilbert</span><span class="p">:</span> <span class="n">AbstractHilbert</span><span class="p">,</span>
         <span class="n">graph</span><span class="p">:</span> <span class="n">AbstractGraph</span><span class="p">,</span>
@@ -554,7 +564,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edges</span><span class="p">()))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_max_conn</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_max_mels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_conn</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_max_xprime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_conn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_sites</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_max_xprime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_conn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_sites</span><span class="p">))</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_hermitian</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

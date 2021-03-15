@@ -246,6 +246,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#optimizer">Optimizer</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SR.html">netket.optimizer.SR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyCG.html">netket.optimizer.SRLazyCG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyGMRES.html">netket.optimizer.SRLazyGMRES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.sr.LazySMatrix.html">netket.optimizer.sr.LazySMatrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Adam.html">netket.optimizer.Adam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.AdaGrad.html">netket.optimizer.AdaGrad</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Sgd.html">netket.optimizer.Sgd</a></li>
@@ -279,6 +282,40 @@
 <dt id="netket.operator.Heisenberg">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.operator.</span></code><code class="sig-name descname"><span class="pre">Heisenberg</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilbert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sign_rule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_hamiltonian.html#Heisenberg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.Heisenberg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.operator._graph_operator.GraphOperator</span></code></p>
+<p>The Heisemberg hamiltonian on a lattice.</p>
+<dl class="class-dl-groups">
+<dt>Methods</dt><dd><dl class="py method">
+<dt id="netket.operator.Heisenberg.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilbert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sign_rule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_hamiltonian.html#Heisenberg.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.Heisenberg.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new <code class="docutils literal notranslate"><span class="pre">Heisenberg</span></code> given a hilbert space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hilbert</strong> – Hilbert space the operator acts on.</p></li>
+<li><p><strong>grah</strong> – The graph upon which this hamiltonian is defined.</p></li>
+<li><p><strong>J</strong> – The strength of the coupling. Default is 1.</p></li>
+<li><p><strong>sign_rule</strong> – If enabled, Marshal’s sign rule will be used. On a bipartite
+lattice, this corresponds to a basis change flipping the Sz direction
+at every odd site of the lattice. For non-bipartite lattices, the
+sign rule cannot be applied. Defaults to True if the lattice is
+bipartite, False otherwise.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Constructs a <code class="docutils literal notranslate"><span class="pre">Heisenberg</span></code> operator for a 1D system.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">netket</span> <span class="k">as</span> <span class="nn">nk</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">Hypercube</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pbc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hi</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">Spin</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">total_sz</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">op</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">Heisenberg</span><span class="p">(</span><span class="n">hilbert</span><span class="o">=</span><span class="n">hi</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="go">20</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd>
+</dl>
 <dl class="class-dl-groups">
 <dt>Attributes</dt><dd><dl class="py attribute">
 <dt id="netket.operator.Heisenberg.H">

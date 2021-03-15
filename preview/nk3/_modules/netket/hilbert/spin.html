@@ -133,7 +133,7 @@
 <div class="viewcode-block" id="Spin"><a class="viewcode-back" href="../../../docs/_generated/hilbert/netket.hilbert.Spin.html#netket.hilbert.Spin">[docs]</a><span class="k">class</span> <span class="nc">Spin</span><span class="p">(</span><span class="n">CustomHilbert</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Hilbert space obtained as tensor product of local spin states.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<div class="viewcode-block" id="Spin.__init__"><a class="viewcode-back" href="../../../docs/_generated/hilbert/netket.hilbert.Spin.html#netket.hilbert.Spin.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">N</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -181,7 +181,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_s</span> <span class="o">=</span> <span class="n">s</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_local_size</span> <span class="o">=</span> <span class="n">local_size</span>
 
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">local_states</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">constraints</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">local_states</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">constraints</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="fm">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_sz</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>

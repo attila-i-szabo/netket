@@ -244,6 +244,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#optimizer">Optimizer</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SR.html">netket.optimizer.SR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyCG.html">netket.optimizer.SRLazyCG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyGMRES.html">netket.optimizer.SRLazyGMRES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.sr.LazySMatrix.html">netket.optimizer.sr.LazySMatrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Adam.html">netket.optimizer.Adam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.AdaGrad.html">netket.optimizer.AdaGrad</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Sgd.html">netket.optimizer.Sgd</a></li>
@@ -277,6 +280,33 @@
 <dt id="netket.models.MPSPeriodic">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.models.</span></code><code class="sig-name descname"><span class="pre">MPSPeriodic</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">hilbert</span></em>, <em class="sig-param"><span class="pre">graph</span></em>, <em class="sig-param"><span class="pre">bond_dim</span></em>, <em class="sig-param"><span class="pre">diag=False</span></em>, <em class="sig-param"><span class="pre">symperiod=None</span></em>, <em class="sig-param"><span class="pre">kernel_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.complex64'&gt;</span></em>, <em class="sig-param"><span class="pre">parent=&lt;flax.linen.module._Sentinel</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">name=None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/models/mps.html#MPSPeriodic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.models.MPSPeriodic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">flax.linen.module.Module</span></code></p>
+<dl class="class-dl-groups">
+<dt>Methods</dt><dd><dl class="py method">
+<dt id="netket.models.MPSPeriodic.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">hilbert</span></em>, <em class="sig-param"><span class="pre">graph</span></em>, <em class="sig-param"><span class="pre">bond_dim</span></em>, <em class="sig-param"><span class="pre">diag=False</span></em>, <em class="sig-param"><span class="pre">symperiod=None</span></em>, <em class="sig-param"><span class="pre">kernel_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.complex64'&gt;</span></em>, <em class="sig-param"><span class="pre">parent=&lt;flax.linen.module._Sentinel</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">name=None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.models.MPSPeriodic.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hilbert</strong> (<em>netket.hilbert.abstract_hilbert.AbstractHilbert</em>) – </p></li>
+<li><p><strong>graph</strong> (<em>netket.graph.abstract_graph.AbstractGraph</em>) – </p></li>
+<li><p><strong>bond_dim</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
+<li><p><strong>diag</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – </p></li>
+<li><p><strong>symperiod</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – </p></li>
+<li><p><strong>kernel_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+<li><p><strong>dtype</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>parent</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>Type</em><em>[</em><a class="reference internal" href="../nn/netket.nn.Module.html#netket.nn.Module" title="netket.nn.Module"><em>Module</em></a><em>]</em><em>, </em><em>Type</em><em>[</em><em>Scope</em><em>]</em><em>, </em><em>Type</em><em>[</em><em>_Sentinel</em><em>]</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
 <dl class="class-dl-groups">
 <dt>Attributes</dt><dd><dl class="py attribute">
 <dt id="netket.models.MPSPeriodic.diag">

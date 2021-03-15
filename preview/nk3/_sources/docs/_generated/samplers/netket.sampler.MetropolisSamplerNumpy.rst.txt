@@ -6,8 +6,15 @@
 .. autoclass:: MetropolisSamplerNumpy
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: MetropolisSamplerNumpy.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: MetropolisSamplerNumpy.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -28,5 +35,4 @@
       .. automethod:: MetropolisSamplerNumpy.sample
       .. automethod:: MetropolisSamplerNumpy.sample_next
 
-   
    

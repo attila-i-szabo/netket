@@ -1,5 +1,5 @@
 .bs-sidenav {
-  position: fixed;
+  /*position: fixed;*/
   max-height: 80%;
   border-radius: 15px;
   overflow-x: auto;
@@ -13,6 +13,10 @@
 .bs-sidenav li ul {
   margin-bottom: 0;
   display: none;
+}
+
+.bs-sidenav.affix {
+  display: inline-block;
 }
 
 /* Show and affix the side nav when space allows it */

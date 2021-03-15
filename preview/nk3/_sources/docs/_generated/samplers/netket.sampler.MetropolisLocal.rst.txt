@@ -6,11 +6,14 @@
 .. autoclass:: MetropolisLocal
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: MetropolisLocal.__init__
 
    
+      
+
       
    
       
 
-   
    

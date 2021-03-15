@@ -6,11 +6,14 @@
 .. autoclass:: MetropolisHamiltonian
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: MetropolisHamiltonian.__init__
 
    
+      
+
       
    
       
 
-   
    

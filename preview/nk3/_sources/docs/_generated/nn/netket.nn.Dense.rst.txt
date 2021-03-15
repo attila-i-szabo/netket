@@ -6,8 +6,15 @@
 .. autoclass:: Dense
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: Dense.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: Dense.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -37,5 +44,4 @@
       .. automethod:: Dense.sow
       .. automethod:: Dense.variable
 
-   
    

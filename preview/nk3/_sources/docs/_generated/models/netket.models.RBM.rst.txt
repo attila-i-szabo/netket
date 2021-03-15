@@ -6,8 +6,15 @@
 .. autoclass:: RBM
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: RBM.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: RBM.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -40,5 +47,4 @@
       .. automethod:: RBM.variable
       .. automethod:: RBM.visible_bias_init
 
-   
    

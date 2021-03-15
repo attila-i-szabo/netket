@@ -6,8 +6,15 @@
 .. autoclass:: MetropolisSampler
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: MetropolisSampler.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: MetropolisSampler.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -28,5 +35,4 @@
       .. automethod:: MetropolisSampler.sample
       .. automethod:: MetropolisSampler.sample_next
 
-   
    

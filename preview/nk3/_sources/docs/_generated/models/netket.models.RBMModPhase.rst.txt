@@ -6,8 +6,15 @@
 .. autoclass:: RBMModPhase
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: RBMModPhase.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: RBMModPhase.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -38,5 +45,4 @@
       .. automethod:: RBMModPhase.sow
       .. automethod:: RBMModPhase.variable
 
-   
    

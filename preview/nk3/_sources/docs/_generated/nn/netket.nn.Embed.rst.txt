@@ -6,8 +6,15 @@
 .. autoclass:: Embed
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: Embed.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: Embed.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -35,5 +42,4 @@
       .. automethod:: Embed.sow
       .. automethod:: Embed.variable
 
-   
    

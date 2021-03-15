@@ -6,8 +6,15 @@
 .. autoclass:: Heisenberg
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: Heisenberg.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: Heisenberg.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -45,5 +52,4 @@
       .. automethod:: Heisenberg.to_sparse
       .. automethod:: Heisenberg.transpose
 
-   
    

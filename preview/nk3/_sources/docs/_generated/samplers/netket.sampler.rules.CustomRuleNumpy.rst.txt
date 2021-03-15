@@ -6,8 +6,15 @@
 .. autoclass:: CustomRuleNumpy
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: CustomRuleNumpy.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: CustomRuleNumpy.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -22,5 +29,4 @@
       .. automethod:: CustomRuleNumpy.reset
       .. automethod:: CustomRuleNumpy.transition
 
-   
    

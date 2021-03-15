@@ -6,8 +6,15 @@
 .. autoclass:: Spin
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: Spin.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: Spin.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -32,5 +39,4 @@
       .. automethod:: Spin.states_at_index
       .. automethod:: Spin.states_to_numbers
 
-   
    

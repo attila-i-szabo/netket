@@ -18,6 +18,8 @@
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script src="../../../_static/js/rtd_theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -244,6 +246,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#optimizer">Optimizer</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SR.html">netket.optimizer.SR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyCG.html">netket.optimizer.SRLazyCG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyGMRES.html">netket.optimizer.SRLazyGMRES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.sr.LazySMatrix.html">netket.optimizer.sr.LazySMatrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Adam.html">netket.optimizer.Adam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.AdaGrad.html">netket.optimizer.AdaGrad</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Sgd.html">netket.optimizer.Sgd</a></li>
@@ -276,7 +281,49 @@
 <dl class="py function">
 <dt id="netket.sampler.rules.ExchangeRule">
 <code class="sig-prename descclassname"><span class="pre">netket.sampler.rules.</span></code><code class="sig-name descname"><span class="pre">ExchangeRule</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/rules/exchange.html#ExchangeRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.rules.ExchangeRule" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><blockquote>
+<div><p>A Rule exchanging the state on a random couple of sites, chosen from a list of
+possible couples (clusters).</p>
+<p>This rule acts on two local degree of freedom <span class="math notranslate nohighlight">\(s_i\)</span> and <span class="math notranslate nohighlight">\(s_j\)</span>,
+and proposes a new state: <span class="math notranslate nohighlight">\(s_1 \dots s^\prime_i \dots s^\prime_j \dots s_N\)</span>,
+where in general :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>s^prime_i</p>
+</div></blockquote>
+<p>eq s_i` and <span class="math notranslate nohighlight">\(s^\prime_j
+eq s_j\)</span>.</p>
+<blockquote>
+<div><p>The sites <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> are also chosen to be within a maximum graph
+distance of <span class="math notranslate nohighlight">\(d_{\mathrm{max}}\)</span>.</p>
+<p>The transition probability associated to this sampler can
+be decomposed into two steps:</p>
+<ol class="arabic simple">
+<li><p>A pair of indices <span class="math notranslate nohighlight">\(i,j = 1\dots N\)</span>, and such
+that <span class="math notranslate nohighlight">\(\mathrm{dist}(i,j) \leq d_{\mathrm{max}}\)</span>,
+is chosen with uniform probability.</p></li>
+<li><p>The sites are exchanged, i.e. <span class="math notranslate nohighlight">\(s^\prime_i = s_j\)</span> and <span class="math notranslate nohighlight">\(s^\prime_j = s_i\)</span>.</p></li>
+</ol>
+<p>Notice that this sampling method generates random permutations of the quantum
+numbers, thus global quantities such as the sum of the local quantum numbers
+are conserved during the sampling.
+This scheme should be used then only when sampling in a
+region where <span class="math notranslate nohighlight">\(\sum_i s_i = \mathrm{constant}\)</span> is needed,
+otherwise the sampling would be strongly not ergodic.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>clusters: The list of clusters that can be exchanged.
+graph: A graph, from which the edges determine the clusters that can be exchanged.
+d_max: Only valid if a graph is passed in. The maximum distance between two sites</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clusters</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>graph</strong> (<em>Optional</em><em>[</em><em>netket.graph.abstract_graph.AbstractGraph</em><em>]</em>) – </p></li>
+<li><p><strong>d_max</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 

@@ -6,8 +6,15 @@
 .. autoclass:: AbstractHilbert
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: AbstractHilbert.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: AbstractHilbert.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -30,5 +37,4 @@
       .. automethod:: AbstractHilbert.states_at_index
       .. automethod:: AbstractHilbert.states_to_numbers
 
-   
    

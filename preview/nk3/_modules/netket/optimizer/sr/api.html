@@ -109,18 +109,45 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
 <span class="kn">from</span> <span class="nn">netket.utils</span> <span class="kn">import</span> <span class="n">wraps_legacy</span>
 <span class="kn">from</span> <span class="nn">netket.legacy.optimizer</span> <span class="kn">import</span> <span class="n">SR</span> <span class="k">as</span> <span class="n">SR_legacy</span>
 <span class="kn">from</span> <span class="nn">netket.legacy.machine</span> <span class="kn">import</span> <span class="n">AbstractMachine</span>
 
-<span class="kn">from</span> <span class="nn">.sr_onthefly</span> <span class="kn">import</span> <span class="n">SR_otf_cg</span><span class="p">,</span> <span class="n">SR_otf_gmres</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">SR</span>
+<span class="kn">from</span> <span class="nn">.sr_onthefly</span> <span class="kn">import</span> <span class="n">SRLazyCG</span><span class="p">,</span> <span class="n">SRLazyGMRES</span>
 
 <span class="n">default_iterative</span> <span class="o">=</span> <span class="s2">&quot;cg&quot;</span>
 <span class="c1"># default_direct = &quot;eigen&quot;</span>
 
 
 <div class="viewcode-block" id="SR"><a class="viewcode-back" href="../../../../docs/_generated/optim/netket.optimizer.SR.html#netket.optimizer.SR">[docs]</a><span class="nd">@wraps_legacy</span><span class="p">(</span><span class="n">SR_legacy</span><span class="p">,</span> <span class="s2">&quot;machine&quot;</span><span class="p">,</span> <span class="n">AbstractMachine</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">SR</span><span class="p">(</span><span class="n">diag_shift</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">iterative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">SR</span><span class="p">(</span>
+    <span class="n">diag_shift</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">iterative</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SR</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Construct the structure holding the parameters for using the</span>
+<span class="sd">    Stochastic Reconfiguration/Natural gradient method.</span>
+
+<span class="sd">    Depending on the arguments, an implementation is chosen. For</span>
+<span class="sd">    details on all possible kwargs check the specific SR implementations</span>
+<span class="sd">    in the documentation.</span>
+
+<span class="sd">    You can also construct one of those structures directly.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        diag_shift: Diagonal shift added to the S matrix</span>
+<span class="sd">        method: (cg, gmres) The specific method.</span>
+<span class="sd">        iterative: Whever to use an iterative method or not.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The SR parameter structure.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">method</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">iterative</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">method</span> <span class="o">=</span> <span class="n">default_iterative</span>
     <span class="k">elif</span> <span class="n">method</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">iterative</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
@@ -129,9 +156,9 @@
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;cg&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">SR_otf_cg</span><span class="p">(</span><span class="n">diag_shift</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">SRLazyCG</span><span class="p">(</span><span class="n">diag_shift</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;gmres&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">SR_otf_gmres</span><span class="p">(</span><span class="n">diag_shift</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">SRLazyGMRES</span><span class="p">(</span><span class="n">diag_shift</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Only cg and gmres are implemented&quot;</span><span class="p">)</span></div>
 </pre></div>

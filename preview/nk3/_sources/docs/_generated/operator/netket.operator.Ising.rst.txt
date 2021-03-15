@@ -6,8 +6,15 @@
 .. autoclass:: Ising
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: Ising.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: Ising.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -40,5 +47,4 @@
       .. automethod:: Ising.to_sparse
       .. automethod:: Ising.transpose
 
-   
    

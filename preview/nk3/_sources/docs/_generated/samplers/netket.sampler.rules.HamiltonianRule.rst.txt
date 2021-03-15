@@ -6,8 +6,15 @@
 .. autoclass:: HamiltonianRule
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: HamiltonianRule.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: HamiltonianRule.__init__
+
       
    
       
@@ -19,5 +26,4 @@
       .. automethod:: HamiltonianRule.reset
       .. automethod:: HamiltonianRule.transition
 
-   
    

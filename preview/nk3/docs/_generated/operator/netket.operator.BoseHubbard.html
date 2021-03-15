@@ -246,6 +246,9 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#optimizer">Optimizer</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SR.html">netket.optimizer.SR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyCG.html">netket.optimizer.SRLazyCG</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.SRLazyGMRES.html">netket.optimizer.SRLazyGMRES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.sr.LazySMatrix.html">netket.optimizer.sr.LazySMatrix</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Adam.html">netket.optimizer.Adam</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.AdaGrad.html">netket.optimizer.AdaGrad</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.Sgd.html">netket.optimizer.Sgd</a></li>
@@ -281,6 +284,40 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.operator._hamiltonian.SpecialHamiltonian</span></code></p>
 <p>An extended Bose Hubbard model Hamiltonian operator, containing both
 on-site interactions and nearest-neighboring density-density interactions.</p>
+<dl class="class-dl-groups">
+<dt>Methods</dt><dd><dl class="py method">
+<dt id="netket.operator.BoseHubbard.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">hilbert</span></em>, <em class="sig-param"><span class="pre">graph</span></em>, <em class="sig-param"><span class="pre">U</span></em>, <em class="sig-param"><span class="pre">V=0.0</span></em>, <em class="sig-param"><span class="pre">J=1.0</span></em>, <em class="sig-param"><span class="pre">mu=0.0</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'float'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_hamiltonian.html#BoseHubbard.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.BoseHubbard.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new <code class="docutils literal notranslate"><span class="pre">BoseHubbard</span></code> given a hilbert space and a Hubbard
+interaction strength. The chemical potential and the density-density interaction strenght
+can be specified as well.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hilbert</strong> (<em>netket.hilbert.Boson</em>) – Hilbert space the operator acts on.</p></li>
+<li><p><strong>U</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – The Hubbard interaction term.</p></li>
+<li><p><strong>V</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – The strenght of density-density interaction term.</p></li>
+<li><p><strong>J</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – The hopping amplitude.</p></li>
+<li><p><strong>mu</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – The chemical potential.</p></li>
+<li><p><strong>graph</strong> (<em>netket.graph.abstract_graph.AbstractGraph</em>) – </p></li>
+<li><p><strong>dtype</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v1.20)"><em>numpy.dtype</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><em>None</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)"><em>type</em></a><em>, </em><em>numpy.typing._dtype_like._SupportsDType</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>Tuple</em><em>[</em><em>Any</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>]</em><em>]</em><em>, </em><em>List</em><em>[</em><em>Any</em><em>]</em><em>, </em><em>numpy.typing._dtype_like._DTypeDict</em><em>, </em><em>Tuple</em><em>[</em><em>Any</em><em>, </em><em>Any</em><em>]</em><em>]</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Constructs a <code class="docutils literal notranslate"><span class="pre">BoseHubbard</span></code> operator for a 2D system.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">netket</span> <span class="k">as</span> <span class="nn">nk</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">Hypercube</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pbc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hi</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">Boson</span><span class="p">(</span><span class="n">n_max</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_bosons</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">op</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">BoseHubbard</span><span class="p">(</span><span class="n">U</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">hilbert</span><span class="o">=</span><span class="n">hi</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="go">9</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd>
+</dl>
 <dl class="class-dl-groups">
 <dt>Attributes</dt><dd><dl class="py attribute">
 <dt id="netket.operator.BoseHubbard.H">

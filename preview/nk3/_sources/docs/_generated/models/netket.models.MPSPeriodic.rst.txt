@@ -6,8 +6,15 @@
 .. autoclass:: MPSPeriodic
    :show-inheritance:
 
+   .. rst-class:: class-dl-groups
+      .. automethod:: MPSPeriodic.__init__
 
    
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: MPSPeriodic.__init__
+
       
    .. rst-class:: class-dl-groups
    Attributes
@@ -36,5 +43,4 @@
       .. automethod:: MPSPeriodic.sow
       .. automethod:: MPSPeriodic.variable
 
-   
    
