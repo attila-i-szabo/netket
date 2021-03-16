@@ -397,7 +397,7 @@ you must provide the constructor the hilbert space to be sampled and some option
 <span class="n">op</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">Sgd</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>You can then chose an optimizer from the <span class="xref std std-ref">optim</span> submodule. You can also
+<p>You can then chose an optimizer from the <a class="reference internal" href="api.html#optimizer"><span class="std std-ref">Optimizer</span></a> submodule. You can also
 use an arbitrary flax optimiser, or define your own.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Variational monte carlo driver</span>
 <span class="n">gs</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">Vmc</span><span class="p">(</span><span class="n">ha</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">sa</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_discard</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
