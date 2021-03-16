@@ -152,6 +152,7 @@
 <li class="toctree-l4"><a class="reference internal" href="netket.operator.boson.create.html">netket.operator.boson.create</a></li>
 <li class="toctree-l4"><a class="reference internal" href="netket.operator.boson.destroy.html">netket.operator.boson.destroy</a></li>
 <li class="toctree-l4"><a class="reference internal" href="netket.operator.boson.number.html">netket.operator.boson.number</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.operator.boson.proj.html">netket.operator.boson.proj</a></li>
 <li class="toctree-l4"><a class="reference internal" href="netket.operator.spin.sigmax.html">netket.operator.spin.sigmax</a></li>
 <li class="toctree-l4"><a class="reference internal" href="netket.operator.spin.sigmay.html">netket.operator.spin.sigmay</a></li>
 <li class="toctree-l4"><a class="reference internal" href="netket.operator.spin.sigmaz.html">netket.operator.spin.sigmaz</a></li>
@@ -207,6 +208,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.RBM.html">netket.models.RBM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.RBMModPhase.html">netket.models.RBMModPhase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../models/netket.models.NDM.html">netket.models.NDM</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#model-tools">Model tools</a><ul>
@@ -281,8 +283,7 @@
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.hilbert.</span></code><code class="sig-name descname"><span class="pre">Spin</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_sz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/hilbert/spin.html#Spin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.hilbert.Spin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.hilbert.custom_hilbert.CustomHilbert</span></code></p>
 <p>Hilbert space obtained as tensor product of local spin states.</p>
-<dl class="class-dl-groups">
-<dt>Methods</dt><dd><dl class="py method">
+<dl class="py method">
 <dt id="netket.hilbert.Spin.__init__">
 <code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_sz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/hilbert/spin.html#Spin.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.hilbert.Spin.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Hilbert space obtained as tensor product of local spin states.</p>
@@ -307,8 +308,6 @@
 </div>
 </dd></dl>
 
-</dd>
-</dl>
 <dl class="class-dl-groups">
 <dt>Attributes</dt><dd><dl class="py attribute">
 <dt id="netket.hilbert.Spin.is_discrete">

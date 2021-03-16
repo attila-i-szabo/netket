@@ -6,15 +6,9 @@
 .. autoclass:: SRLazyCG
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: SRLazyCG.__init__
+   .. automethod:: SRLazyCG.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: SRLazyCG.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

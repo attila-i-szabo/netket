@@ -152,6 +152,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.create.html">netket.operator.boson.create</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.destroy.html">netket.operator.boson.destroy</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.number.html">netket.operator.boson.number</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.proj.html">netket.operator.boson.proj</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.spin.sigmax.html">netket.operator.spin.sigmax</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.spin.sigmay.html">netket.operator.spin.sigmay</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.spin.sigmaz.html">netket.operator.spin.sigmaz</a></li>
@@ -207,6 +208,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.RBM.html">netket.models.RBM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.RBMModPhase.html">netket.models.RBMModPhase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../models/netket.models.NDM.html">netket.models.NDM</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#model-tools">Model tools</a><ul>
@@ -285,8 +287,7 @@
 <code class="code docutils literal notranslate"><span class="pre">to_dense</span></code>.
 The details on how the ⟨S⟩⁻¹⟨F⟩ system is solved are contaianed in
 the field <cite>sr</cite>.</p>
-<dl class="class-dl-groups">
-<dt>Methods</dt><dd><dl class="py method">
+<dl class="py method">
 <dt id="netket.optimizer.sr.LazySMatrix.__init__">
 <code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">apply_fun</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.optimizer.sr.LazySMatrix.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
@@ -307,8 +308,6 @@ the field <cite>sr</cite>.</p>
 </dl>
 </dd></dl>
 
-</dd>
-</dl>
 <dl class="class-dl-groups">
 <dt>Attributes</dt><dd><dl class="py attribute">
 <dt id="netket.optimizer.sr.LazySMatrix.model_state">

@@ -6,15 +6,9 @@
 .. autoclass:: Grid
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: Grid.__init__
+   .. automethod:: Grid.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: Grid.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

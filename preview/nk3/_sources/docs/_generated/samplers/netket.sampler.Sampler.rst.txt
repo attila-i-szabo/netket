@@ -6,15 +6,9 @@
 .. autoclass:: Sampler
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: Sampler.__init__
+   .. automethod:: Sampler.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: Sampler.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

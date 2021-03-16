@@ -6,15 +6,9 @@
 .. autoclass:: MCMixedState
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: MCMixedState.__init__
+   .. automethod:: MCMixedState.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: MCMixedState.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

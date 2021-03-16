@@ -6,15 +6,9 @@
 .. autoclass:: BoseHubbard
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: BoseHubbard.__init__
+   .. automethod:: BoseHubbard.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: BoseHubbard.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

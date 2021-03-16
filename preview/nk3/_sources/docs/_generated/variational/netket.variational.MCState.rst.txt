@@ -6,15 +6,9 @@
 .. autoclass:: MCState
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: MCState.__init__
+   .. automethod:: MCState.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: MCState.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

@@ -6,15 +6,9 @@
 .. autoclass:: SamplerState
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: SamplerState.__init__
+   .. automethod:: SamplerState.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: SamplerState.__init__
-
       
    
       

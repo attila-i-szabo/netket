@@ -246,10 +246,20 @@
 <div class="viewcode-block" id="MetropolisSampler"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.MetropolisSampler.html#netket.sampler.MetropolisSampler">[docs]</a><span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">MetropolisSampler</span><span class="p">(</span><span class="n">Sampler</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Metropolis-Hastings sampler.</span>
-<span class="sd">    This sampler samples an Hilbert space, producing samples off a specific dtype.</span>
-<span class="sd">    The samples are generated according to a transition rule that must be</span>
-<span class="sd">    specified.</span>
+<span class="sd">    Metropolis-Hastings sampler for an Hilbert space according to a specific transition rule.</span>
+
+<span class="sd">    The transition rule is used to generate a proposed state :math:`s^\prime`, starting from the</span>
+<span class="sd">    current state :math:`s`. The move is accepted with probability</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        A(s \\rightarrow s^\\prime) = \\mathrm{min} \\left( 1,\\frac{P(s^\\prime)}{P(s)} F(e^{L(s,s^\\prime)}) \\right) ,</span>
+
+<span class="sd">    where the probability being sampled from is :math:`P(s)=|M(s)|^p. Here ::math::`M(s)` is a</span>
+<span class="sd">    user-provided function (the machine), :math:`p` is also user-provided with default value :math:`p=2`,</span>
+<span class="sd">    and :math:`L(s,s^\prime)` is a suitable correcting factor computed by the transition kernel.</span>
+
+<span class="sd">    The dtype of the sampled states can be chosen.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">rule</span><span class="p">:</span> <span class="n">MetropolisRule</span> <span class="o">=</span> <span class="kc">None</span>
@@ -269,19 +279,7 @@
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        ``MetropolisSampler`` is a generic Metropolis-Hastings sampler using</span>
-<span class="sd">        a transition rule to perform moves in the Markov Chain.</span>
-<span class="sd">        The transition kernel is used to generate</span>
-<span class="sd">        a proposed state :math:`s^\prime`, starting from the current state :math:`s`.</span>
-<span class="sd">        The move is accepted with probability</span>
-
-<span class="sd">        .. math::</span>
-<span class="sd">        A(s\rightarrow s^\prime) = \mathrm{min}\left (1,\frac{P(s^\prime)}{P(s)} F(e^{L(s,s^\prime)})\right),</span>
-
-<span class="sd">        where the probability being sampled from is :math:`P(s)=|M(s)|^p. Here ::math::`M(s)` is a</span>
-<span class="sd">        user-provided function (the machine), :math:`p` is also user-provided with default value :math:`p=2`,</span>
-<span class="sd">        and :math:`L(s,s^\prime)` is a suitable correcting factor computed by the transition kernel.</span>
-
+<span class="sd">        Constructs a Metropolis Sampler.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            hilbert: The hilbert space to sample</span>
@@ -295,7 +293,6 @@
 <span class="sd">            n_chains: The number of batches of the states to sample (default = 8)</span>
 <span class="sd">            machine_pow: The power to which the machine should be exponentiated to generate the pdf (default = 2).</span>
 <span class="sd">            dtype: The dtype of the statees sampled (default = np.float32).</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">n_sweeps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">n_sweeps</span> <span class="o">=</span> <span class="n">hilbert</span><span class="o">.</span><span class="n">size</span>

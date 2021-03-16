@@ -6,15 +6,9 @@
 .. autoclass:: LazySMatrix
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: LazySMatrix.__init__
+   .. automethod:: LazySMatrix.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: LazySMatrix.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

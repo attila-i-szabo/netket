@@ -6,15 +6,9 @@
 .. autoclass:: ExactSampler
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: ExactSampler.__init__
+   .. automethod:: ExactSampler.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: ExactSampler.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

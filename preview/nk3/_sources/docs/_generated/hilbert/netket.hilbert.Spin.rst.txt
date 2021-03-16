@@ -6,15 +6,9 @@
 .. autoclass:: Spin
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: Spin.__init__
+   .. automethod:: Spin.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: Spin.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

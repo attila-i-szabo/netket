@@ -6,15 +6,9 @@
 .. autoclass:: DenseGeneral
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: DenseGeneral.__init__
+   .. automethod:: DenseGeneral.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: DenseGeneral.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

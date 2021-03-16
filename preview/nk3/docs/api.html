@@ -154,6 +154,7 @@
 <li class="toctree-l4"><a class="reference internal" href="_generated/hilbert/netket.operator.boson.create.html">netket.operator.boson.create</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/hilbert/netket.operator.boson.destroy.html">netket.operator.boson.destroy</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/hilbert/netket.operator.boson.number.html">netket.operator.boson.number</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/hilbert/netket.operator.boson.proj.html">netket.operator.boson.proj</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/hilbert/netket.operator.spin.sigmax.html">netket.operator.spin.sigmax</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/hilbert/netket.operator.spin.sigmay.html">netket.operator.spin.sigmay</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/hilbert/netket.operator.spin.sigmaz.html">netket.operator.spin.sigmaz</a></li>
@@ -209,6 +210,7 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.RBM.html">netket.models.RBM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.RBMModPhase.html">netket.models.RBMModPhase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.NDM.html">netket.models.NDM</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#model-tools">Model tools</a><ul>
@@ -370,28 +372,31 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/hilbert/netket.operator.boson.create.html#netket.operator.boson.create" title="netket.operator.boson.create"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.boson.create</span></code></a></p></td>
-<td><p>Builds the boson creation operator acting on the <cite>site</cite>-th of the</p></td>
+<td><p>Builds the boson creation operator <span class="math notranslate nohighlight">\(\hat{a}^\dagger\)</span> acting on the <cite>site</cite>-th of the</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/hilbert/netket.operator.boson.destroy.html#netket.operator.boson.destroy" title="netket.operator.boson.destroy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.boson.destroy</span></code></a></p></td>
-<td><p>Builds the boson destruction operator acting on the <cite>site</cite>-th of the</p></td>
+<td><p>Builds the boson destruction operator <span class="math notranslate nohighlight">\(\hat{a}\)</span> acting on the <cite>site</cite>-th of the</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/hilbert/netket.operator.boson.number.html#netket.operator.boson.number" title="netket.operator.boson.number"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.boson.number</span></code></a></p></td>
-<td><p>Builds the number operator acting on the <cite>site</cite>-th of the Hilbert space <cite>hilbert</cite>.</p></td>
+<td><p>Builds the number operator <span class="math notranslate nohighlight">\(\hat{a}^\dagger\hat{a}\)</span>  acting on the <cite>site</cite>-th of the Hilbert space <cite>hilbert</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/hilbert/netket.operator.spin.sigmax.html#netket.operator.spin.sigmax" title="netket.operator.spin.sigmax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.spin.sigmax</span></code></a></p></td>
-<td><p>Builds the sigma_x operator acting on the <cite>site</cite>-th of the Hilbert space <cite>hilbert</cite>.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/hilbert/netket.operator.boson.proj.html#netket.operator.boson.proj" title="netket.operator.boson.proj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.boson.proj</span></code></a></p></td>
+<td><p>Builds the projector operator <span class="math notranslate nohighlight">\(|n\rangle\langle n |\)</span> acting on the <cite>site</cite>-th of the Hilbert space <cite>hilbert</cite> and collapsing on the state with <cite>n</cite> bosons.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/hilbert/netket.operator.spin.sigmay.html#netket.operator.spin.sigmay" title="netket.operator.spin.sigmay"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.spin.sigmay</span></code></a></p></td>
-<td><p>Builds the sigma_y operator acting on the <cite>site</cite>-th of the Hilbert space <cite>hilbert</cite>.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/hilbert/netket.operator.spin.sigmax.html#netket.operator.spin.sigmax" title="netket.operator.spin.sigmax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.spin.sigmax</span></code></a></p></td>
+<td><p>Builds the <span class="math notranslate nohighlight">\(\sigma^x\)</span> operator acting on the <cite>site</cite>-th of the Hilbert space <cite>hilbert</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/hilbert/netket.operator.spin.sigmaz.html#netket.operator.spin.sigmaz" title="netket.operator.spin.sigmaz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.spin.sigmaz</span></code></a></p></td>
-<td><p>Builds the sigma_z operator acting on the <cite>site</cite>-th of the Hilbert space <cite>hilbert</cite>.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/hilbert/netket.operator.spin.sigmay.html#netket.operator.spin.sigmay" title="netket.operator.spin.sigmay"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.spin.sigmay</span></code></a></p></td>
+<td><p>Builds the <span class="math notranslate nohighlight">\(\sigma^y\)</span> operator acting on the <cite>site</cite>-th of the Hilbert space <cite>hilbert</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/hilbert/netket.operator.spin.sigmap.html#netket.operator.spin.sigmap" title="netket.operator.spin.sigmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.spin.sigmap</span></code></a></p></td>
-<td><p>Builds the $sigma_- = sigma_x + im * sigma_y$ operator acting on the <cite>site</cite>-th of the Hilbert space <cite>hilbert</cite>.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/hilbert/netket.operator.spin.sigmaz.html#netket.operator.spin.sigmaz" title="netket.operator.spin.sigmaz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.spin.sigmaz</span></code></a></p></td>
+<td><p>Builds the <span class="math notranslate nohighlight">\(\sigma^z\)</span> operator acting on the <cite>site</cite>-th of the Hilbert space <cite>hilbert</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/hilbert/netket.operator.spin.sigmam.html#netket.operator.spin.sigmam" title="netket.operator.spin.sigmam"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.spin.sigmam</span></code></a></p></td>
-<td><p>Builds the $sigma_- = sigma_x - im * sigma_y$ operator acting on the <cite>site</cite>-th of the Hilbert space <cite>hilbert</cite>.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/hilbert/netket.operator.spin.sigmap.html#netket.operator.spin.sigmap" title="netket.operator.spin.sigmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.spin.sigmap</span></code></a></p></td>
+<td><p>Builds the <span class="math notranslate nohighlight">\(\sigma^{+} = \sigma^x + i \sigma^y\)</span> operator acting on the <cite>site</cite>-th of the Hilbert space <cite>hilbert</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/hilbert/netket.operator.spin.sigmam.html#netket.operator.spin.sigmam" title="netket.operator.spin.sigmam"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.spin.sigmam</span></code></a></p></td>
+<td><p>Builds the <span class="math notranslate nohighlight">\(\sigma^{-} = \sigma^x - i \sigma^y\)</span> operator acting on the <cite>site</cite>-th of the Hilbert space <cite>hilbert</cite>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -470,10 +475,10 @@ have a much higher overhead for small to moderate (for GPUs) system sizes.</p>
 <td><p>This sampler generates i.i.d.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/samplers/netket.sampler.MetropolisSampler.html#netket.sampler.MetropolisSampler" title="netket.sampler.MetropolisSampler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.sampler.MetropolisSampler</span></code></a></p></td>
-<td><p>Metropolis-Hastings sampler.</p></td>
+<td><p>Metropolis-Hastings sampler for an Hilbert space according to a specific transition rule.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/samplers/netket.sampler.MetropolisSamplerNumpy.html#netket.sampler.MetropolisSamplerNumpy" title="netket.sampler.MetropolisSamplerNumpy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.sampler.MetropolisSamplerNumpy</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Metropolis-Hastings sampler for an Hilbert space according to a specific transition rule executed on CPU through Numpy.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/samplers/netket.sampler.MetropolisPtSampler.html#netket.sampler.MetropolisPtSampler" title="netket.sampler.MetropolisPtSampler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.sampler.MetropolisPtSampler</span></code></a></p></td>
 <td><p>Metropolis-Hastings with Parallel Tempering sampler.</p></td>
@@ -517,7 +522,7 @@ Sampler. Rules with <cite>Numpy</cite> in their name can only be used with
 <td><p>Rule proposing moves according to the terms in an operator.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/samplers/netket.sampler.rules.HamiltonianRuleNumpy.html#netket.sampler.rules.HamiltonianRuleNumpy" title="netket.sampler.rules.HamiltonianRuleNumpy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.sampler.rules.HamiltonianRuleNumpy</span></code></a>(Ô)</p></td>
-<td><p></p></td>
+<td><p>Rule for Numpy sampler backend proposing moves according to the terms in an operator.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/samplers/netket.sampler.rules.CustomRuleNumpy.html#netket.sampler.rules.CustomRuleNumpy" title="netket.sampler.rules.CustomRuleNumpy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.sampler.rules.CustomRuleNumpy</span></code></a>(Ô[, …])</p></td>
 <td><p></p></td>
@@ -558,7 +563,10 @@ neural quantum states.</p>
 <td><p>Two restricted boltzman machines, one encoding the real part and one encoding the imaginary part of the output</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/models/netket.models.MPSPeriodic.html#netket.models.MPSPeriodic" title="netket.models.MPSPeriodic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.models.MPSPeriodic</span></code></a></p></td>
-<td><p></p></td>
+<td><p>A periodic Matrix Product State (MPS) for a quantum state of discrete degrees of freedom, wrapped as Jax machine.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/models/netket.models.NDM.html#netket.models.NDM" title="netket.models.NDM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.models.NDM</span></code></a></p></td>
+<td><p>Encodes a Positive-Definite Neural Density Matrix using the ansatz from Torlai and Melko, PRL 120, 240503 (2018).</p></td>
 </tr>
 </tbody>
 </table>

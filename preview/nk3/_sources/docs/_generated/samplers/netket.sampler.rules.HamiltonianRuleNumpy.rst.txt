@@ -6,15 +6,9 @@
 .. autoclass:: HamiltonianRuleNumpy
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: HamiltonianRuleNumpy.__init__
+   .. automethod:: HamiltonianRuleNumpy.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: HamiltonianRuleNumpy.__init__
-
       
    
       

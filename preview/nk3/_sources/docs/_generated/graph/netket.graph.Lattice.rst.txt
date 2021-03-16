@@ -6,15 +6,9 @@
 .. autoclass:: Lattice
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: Lattice.__init__
+   .. automethod:: Lattice.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: Lattice.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

@@ -6,15 +6,9 @@
 .. autoclass:: SRLazyGMRES
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: SRLazyGMRES.__init__
+   .. automethod:: SRLazyGMRES.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: SRLazyGMRES.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

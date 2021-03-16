@@ -6,15 +6,9 @@
 .. autoclass:: Conv
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: Conv.__init__
+   .. automethod:: Conv.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: Conv.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

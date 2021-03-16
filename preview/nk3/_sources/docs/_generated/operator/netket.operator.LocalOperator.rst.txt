@@ -6,15 +6,9 @@
 .. autoclass:: LocalOperator
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: LocalOperator.__init__
+   .. automethod:: LocalOperator.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: LocalOperator.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

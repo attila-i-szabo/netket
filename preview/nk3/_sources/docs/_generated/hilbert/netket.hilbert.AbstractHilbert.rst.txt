@@ -6,15 +6,9 @@
 .. autoclass:: AbstractHilbert
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: AbstractHilbert.__init__
+   .. automethod:: AbstractHilbert.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: AbstractHilbert.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

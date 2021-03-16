@@ -160,6 +160,24 @@
 
 
 <div class="viewcode-block" id="MetropolisSamplerNumpy"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.MetropolisSamplerNumpy.html#netket.sampler.MetropolisSamplerNumpy">[docs]</a><span class="k">class</span> <span class="nc">MetropolisSamplerNumpy</span><span class="p">(</span><span class="n">MetropolisSampler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Metropolis-Hastings sampler for an Hilbert space according to a specific transition</span>
+<span class="sd">    rule executed on CPU through Numpy.</span>
+
+<span class="sd">    This sampler is equivalent to :ref:`netket.sampler.MetropolisSampler` but instead of</span>
+<span class="sd">    executing the whole sampling inside a jax-jitted function, only evaluates the forward</span>
+<span class="sd">    pass inside a jax-jitted function, while proposing new steps and accepting/rejecting</span>
+<span class="sd">    them is performed in numpy.</span>
+
+<span class="sd">    Because of Jax dispatch cost, and especially for small system, this sampler performs</span>
+<span class="sd">    poorly, while asyntotically it should have the same performance of standard Jax samplers.</span>
+
+<span class="sd">    However, some transition rules don&#39;t work on GPU, and some samplers (Hamiltonian) work</span>
+<span class="sd">    very poorly on jax so this is a good workaround.</span>
+
+<span class="sd">    See :ref:`netket.sampler.MetropolisSampler` for more informations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">_init_state</span><span class="p">(</span><span class="n">sampler</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="n">rgen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
 

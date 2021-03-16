@@ -6,15 +6,9 @@
 .. autoclass:: VariationalState
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: VariationalState.__init__
+   .. automethod:: VariationalState.__init__
 
    
-      
-   .. rst-class:: class-dl-groups
-   Methods
-      .. automethod:: VariationalState.__init__
-
       
    .. rst-class:: class-dl-groups
    Attributes

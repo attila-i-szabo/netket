@@ -6,12 +6,9 @@
 .. autoclass:: MetropolisExchangePt
    :show-inheritance:
 
-   .. rst-class:: class-dl-groups
-      .. automethod:: MetropolisExchangePt.__init__
+   .. automethod:: MetropolisExchangePt.__init__
 
    
-      
-
       
    
       

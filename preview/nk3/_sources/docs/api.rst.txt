@@ -66,6 +66,7 @@ Pre-defined operators
    netket.operator.boson.create
    netket.operator.boson.destroy
    netket.operator.boson.number
+   netket.operator.boson.proj
    netket.operator.spin.sigmax
    netket.operator.spin.sigmay
    netket.operator.spin.sigmaz
@@ -181,6 +182,7 @@ neural quantum states.
    netket.models.RBM
    netket.models.RBMModPhase
    netket.models.MPSPeriodic
+   netket.models.NDM
 
 
 Model tools
