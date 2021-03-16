@@ -169,7 +169,10 @@
 
         <span class="n">_choose</span><span class="p">(</span><span class="n">σp</span><span class="p">,</span> <span class="n">sections</span><span class="p">,</span> <span class="n">σ1</span><span class="p">,</span> <span class="n">log_prob_corr</span><span class="p">,</span> <span class="n">rand_vec</span><span class="p">)</span>
         <span class="n">rule</span><span class="o">.</span><span class="n">Ô</span><span class="o">.</span><span class="n">n_conn</span><span class="p">(</span><span class="n">σ1</span><span class="p">,</span> <span class="n">sections</span><span class="p">)</span>
-        <span class="n">log_prob_corr</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sections</span><span class="p">)</span></div></div>
+        <span class="n">log_prob_corr</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sections</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;HamiltonianRuleNumpy(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">Ô</span><span class="si">}</span><span class="s2">)&quot;</span></div>
 
 
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

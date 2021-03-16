@@ -148,7 +148,10 @@
         <span class="n">indxs</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">key1</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">n_chains</span><span class="p">,),</span> <span class="n">minval</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxval</span><span class="o">=</span><span class="n">hilb</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
         <span class="n">σp</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">flip_state</span><span class="p">(</span><span class="n">hilb</span><span class="p">,</span> <span class="n">key2</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">indxs</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">σp</span><span class="p">,</span> <span class="kc">None</span></div></div>
+        <span class="k">return</span> <span class="n">σp</span><span class="p">,</span> <span class="kc">None</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;LocalRule()&quot;</span></div>
 </pre></div>
 
     </div>

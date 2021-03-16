@@ -178,7 +178,10 @@
             <span class="p">),</span>
         <span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">σp</span><span class="p">,</span> <span class="n">log_prob_correction</span></div></div>
+        <span class="k">return</span> <span class="n">σp</span><span class="p">,</span> <span class="n">log_prob_correction</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;HamiltonianRule(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">Ô</span><span class="si">}</span><span class="s2">)&quot;</span></div>
 
 
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
