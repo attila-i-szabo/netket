@@ -27,6 +27,7 @@
       **Machine Learning for Many-Body Quantum Systems**
 
     .. raw:: html
+
       <div class="btn-group">
         <a class="btn btn-primary btn-lg" href="https://www.sciencedirect.com/science/article/pii/S2352711019300974" role="button">Paper</a>
         <div class="btn-group">
@@ -112,8 +113,7 @@
    docs/getting_started
    docs/whats_new
    docs/api
-   docs/requirements
-
+   docs/sharp-bits
 ..
   hidden from toctree
    tutorials/tutorials

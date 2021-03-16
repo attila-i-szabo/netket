@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Requirements &#8212; netket v3.0 documentation</title>
+    <title>🔪 The Sharp Bits 🔪 &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
@@ -111,7 +111,10 @@
 
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation-and-requirements">Installation and requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation-and-requirements">Installation and requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting_started.html#mpi">MPI</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#jax-flax-extensions">Jax/Flax extensions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#legacy-api-support-api-before-2021">Legacy API support (API before 2021)</a></li>
@@ -257,14 +260,10 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Requirements</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#mpi-and-cmake">MPI and CMake</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#mac">Mac</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ubuntu">Ubuntu</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#other-platforms">Other platforms</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#optional-python-libraries">Optional Python Libraries</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">🔪 The Sharp Bits 🔪</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#parallelization">Parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-on-cpu-when-gpus-are-present">Running on CPU when GPUs are present</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-gpus">Using GPUs</a></li>
 </ul>
 </li>
 </ul>
@@ -275,50 +274,45 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <div class="section" id="requirements">
-<h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
-<p>NetKet is a light-weight framework with minimal dependencies on external libraries.
-Dependencies are discussed below, together with common strategies to install them on your machine.
-In a nutshell, the only strict requirements are a working <cite>MPI</cite> C++ compiler, <cite>CMake</cite>, and a modern
-Python interpreter.</p>
-<div class="section" id="mpi-and-cmake">
-<h2>MPI and CMake<a class="headerlink" href="#mpi-and-cmake" title="Permalink to this headline">¶</a></h2>
-<p>In order to install NetKet you need to have a working C++11 compiler installed on your computer.
-NetKet relies on <a class="reference external" href="https://en.wikipedia.org/wiki/Message_Passing_Interface">MPI</a> to provide seamless parallelism on multiples computing cores.</p>
-<p>Below you can find more detailed, platform-dependent steps to install those requirements.</p>
-<div class="section" id="mac">
-<h3>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">¶</a></h3>
-<p>On Mac Os, one of the simplest strategy to get <cite>MPI</cite> and <cite>CMake</cite> is to first get <a class="reference external" href="https://brew.sh">https://brew.sh</a> and then either do:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">cmake</span> <span class="nb">open</span><span class="o">-</span><span class="n">mpi</span>
+  <div class="section" id="the-sharp-bits">
+<h1>🔪 The Sharp Bits 🔪<a class="headerlink" href="#the-sharp-bits" title="Permalink to this headline">¶</a></h1>
+<p>Read ahead for some pitfalls, counter-intuitive behavior, and sharp edges that we had to introduce in order to make this work.</p>
+<div class="section" id="parallelization">
+<span id="id1"></span><h2>Parallelization<a class="headerlink" href="#parallelization" title="Permalink to this headline">¶</a></h2>
+<p>Netket computations run mostly via Jax’s XLA.
+Compared to NetKet 2, this means that we can automatically benefit from multiple CPUs without having to use MPI.
+This is because mathematical operations such as matrix multiplications and overs will be split into sub-chunks and distributed across different cpus.
+This behaviour is trigered only for matrices/vectors above a certain size, and will not perform particularly good for small matrices or if you have many cpu cores.
+To disable this behaviour, refer to <a class="reference external" href="https://github.com/google/jax/issues/743">Jax#743</a>, which mainly suggest defining the two env variables:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">XLA_FLAGS</span><span class="o">=</span><span class="s2">&quot;--xla_cpu_multi_thread_eigen=false intra_op_parallelism_threads=1&quot;</span>
 </pre></div>
 </div>
-<p>to get <a class="reference external" href="https://www.open-mpi.org">Open MPI</a>, or if you prefer <a class="reference external" href="https://www.mpich.org">MPICH</a> :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">cmake</span> <span class="n">mpich</span>
+<p>Usually we have noticed that the best performance is achieved by combining both BLAS parallelism and MPI, for example by guaranteeing between 2-4 (depending on your problem size) cpus to every MPI thread.</p>
+</div>
+<div class="section" id="running-on-cpu-when-gpus-are-present">
+<span id="running-on-cpu"></span><h2>Running on CPU when GPUs are present<a class="headerlink" href="#running-on-cpu-when-gpus-are-present" title="Permalink to this headline">¶</a></h2>
+<p>If you have the CUDA version of jaxlib installed, then computations will, by default, run on the GPU.
+For small systems this will be very inefficient. To check if this is the case, run the following code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">devices</span><span class="p">())</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="ubuntu">
-<h3>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this headline">¶</a></h3>
-<p>On Ubuntu you can get <a class="reference external" href="https://www.open-mpi.org">Open MPI</a> and the needed development headers doing:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">cmake</span> <span class="n">libopenmpi</span><span class="o">-</span><span class="n">dev</span> <span class="n">openmpi</span><span class="o">-</span><span class="nb">bin</span> <span class="n">openmpi</span><span class="o">-</span><span class="n">doc</span>
-</pre></div>
-</div>
-<p>Alternatively, you can have <a class="reference external" href="https://www.mpich.org">MPICH</a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">cmake</span> <span class="n">libmpich</span><span class="o">-</span><span class="n">dev</span> <span class="n">mpich</span>
+<p>If the output is <code class="code docutils literal notranslate"><span class="pre">[CpuDevice(id=0)]</span></code>, then computations will run by default on the CPU, if instead you see
+something like <code class="code docutils literal notranslate"><span class="pre">[GpuDevice(id=0)]</span></code> computations will run on the GPU.</p>
+<p>To force Jax/XLA to run comutations on the CPU, set the environment variable</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">JAX_PLATFORM_NAME</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="other-platforms">
-<h3>Other platforms<a class="headerlink" href="#other-platforms" title="Permalink to this headline">¶</a></h3>
-<p>On other platforms/Linux distributions, it is fairly easy to find pre-compiled packages, for example you can have a look at these installation guidelines: <a class="reference external" href="https://cmake.org/download/">CMake</a>, <a class="reference external" href="http://www.mpich.org/downloads/">MPICH</a>.</p>
-</div>
-</div>
-<div class="section" id="optional-python-libraries">
-<h2>Optional Python Libraries<a class="headerlink" href="#optional-python-libraries" title="Permalink to this headline">¶</a></h2>
-<p>It is also suggested to have <a class="reference external" href="https://ipython.readthedocs.io/en/stable/">IPython</a>, and <a class="reference external" href="https://matplotlib.org/">matplotlib</a> installed, to fully enjoy our Tutorials and Examples.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span> <span class="n">jupyter</span>
-</pre></div>
-</div>
+<div class="section" id="using-gpus">
+<span id="gpus"></span><h2>Using GPUs<a class="headerlink" href="#using-gpus" title="Permalink to this headline">¶</a></h2>
+<p>Jax supports GPUs, so your calculations should run fine on GPU, however there are a few gotchas:</p>
+<ul class="simple">
+<li><p>GPUs have a much higher overhead, therefore you will see very bad performance at small system size (typically below 40 spins)</p></li>
+<li><p>Not all Metropolis Transition Rules work on GPUs. To go around that, those rules have been rewritten in numpy in order to run on the cpu, therefore you might need to use <a class="reference internal" href="_generated/samplers/netket.sampler.MetropolisSamplerNumpy.html#netket-sampler-metropolissamplernumpy"><span class="std std-ref">netket.sampler.MetropolisSamplerNumpy</span></a> instead of <a class="reference internal" href="_generated/samplers/netket.sampler.MetropolisSampler.html#netket-sampler-metropolissampler"><span class="std std-ref">netket.sampler.MetropolisSampler</span></a>.</p></li>
+</ul>
+<p>Eventually we would like the selection to be automatic, but this has not yet been implemented.</p>
+<p>Please open tickets if you find issues!</p>
 </div>
 </div>
 

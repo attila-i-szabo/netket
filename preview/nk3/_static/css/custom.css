@@ -1482,12 +1482,10 @@ html .tabbed-set > label:hover {
   }
 }
 
-
-.btn-group > .btn:first-child {
-  margin-left: -10px;
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
+.btn-group > .btn {
+  border-radius: 15px;
 }
+
 
 .quick-start {
   margin-top: 50px;
@@ -1551,4 +1549,8 @@ html .tabbed-set > label:hover {
 .img-bottom-flat {
   border-bottom-left-radius: 0px !important;
   border-bottom-right-radius: 0px !important;
+}
+
+ul {
+   list-style-position: inside;
 }

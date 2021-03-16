@@ -1,6 +1,6 @@
-########################
+***************
 Getting Started
-########################
+***************
 
 .. currentmodule:: netket
 
@@ -41,6 +41,12 @@ To query the installed `netket` version you can run the following command in you
 .. code-block:: 
 
    python -e "import netket; print(netket.version)"
+
+
+MPI
+***
+
+If you want to use MPI, you will need to have a working MPI compiler
 
 
 Introduction 
