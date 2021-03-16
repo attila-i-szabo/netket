@@ -281,22 +281,23 @@
 
 <span class="sd">        If running under MPI, the total samples will be n_nodes * chain_length * n_batches.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="o">.</span><span class="n">chain_length_diag</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="o">.</span><span class="n">chain_length</span>
 
     <span class="nd">@chain_length_diag</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">chain_length_diag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="o">.</span><span class="n">chain_length_diag</span> <span class="o">=</span> <span class="n">length</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="o">.</span><span class="n">chain_length</span> <span class="o">=</span> <span class="n">length</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">n_discard_diag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Number of discarded samples at the beginning of the markov chain used to</span>
 <span class="sd">        sample the diagonal of this mixed state.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="o">.</span><span class="n">n_discard_diag</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="o">.</span><span class="n">n_discard</span>
 
     <span class="nd">@n_discard_diag</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">n_discard_diag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_discard</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="o">.</span><span class="n">n_discard_diag</span> <span class="o">=</span> <span class="n">n_discard</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span><span class="o">.</span><span class="n">n_discard</span> <span class="o">=</span> <span class="n">n_discard</span>
 
     <span class="nd">@MCState</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pars</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">):</span>
@@ -360,7 +361,7 @@
       
     </p>
     <p>
-        &copy; Copyright 2019, The Simons Foundation, Inc. - All rights reserved.<br/>
+        &copy; Copyright 2019-2021, The Netket authors - All rights reserved.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.2.<br/>
     </p>
   </div>
@@ -405,10 +406,7 @@
   ],
   "description" : "Netket is an open-source project delivering cutting-edge
   methods for the study of many-body quantum systems with artificial neural
-  networks and machine learning techniques.
-  NetKet provides state-of-the-art Neural-Network Quantum states,
-  and advanced learning algorithms to find the ground-state of many-body Hamiltonians.
- NetKet is supported by the Simons Foundation and the Flatiron Institute."
+  networks and machine learning techniques."
 }
 </script>
 

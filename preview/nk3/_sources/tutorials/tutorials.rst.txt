@@ -21,8 +21,6 @@
 
     Learn how to define a simple model in bare jax.
 
-    :badge:`simple,badge-primary`
-
     ---
 
     :doc:`Variational Monte Carlo with Neural Networks <j1j2>`

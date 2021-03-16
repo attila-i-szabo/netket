@@ -45,6 +45,7 @@
       .. automethod:: MCMixedState.grad
       .. automethod:: MCMixedState.grad_operator
       .. automethod:: MCMixedState.init
+      .. automethod:: MCMixedState.init_parameters
       .. automethod:: MCMixedState.quantum_geometric_tensor
       .. automethod:: MCMixedState.reset
       .. automethod:: MCMixedState.sample

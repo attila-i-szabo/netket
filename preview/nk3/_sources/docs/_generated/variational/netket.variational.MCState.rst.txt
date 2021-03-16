@@ -37,6 +37,7 @@
       .. automethod:: MCState.expect_and_grad
       .. automethod:: MCState.grad
       .. automethod:: MCState.init
+      .. automethod:: MCState.init_parameters
       .. automethod:: MCState.quantum_geometric_tensor
       .. automethod:: MCState.reset
       .. automethod:: MCState.sample

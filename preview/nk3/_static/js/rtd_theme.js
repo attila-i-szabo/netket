@@ -69,7 +69,7 @@
         docHeight: null,
         isRunning: !1,
         enable: function (n) {
-          console.log("enable")
+          console.log("enable");
           var t = this;
           void 0 === n && (n = !0),
             t.isRunning ||
@@ -98,11 +98,15 @@
               }));
         },
         enableSticky: function () {
-            console.log("sticky")
+            console.log("sticky");
           this.enable(!0);
         },
         init: function (n) {
-          console.log("init")
+          console.log("init");
+
+          console.log("Fix bugin scroll");
+          window.scrollTo(0,0);
+
           n(document);
           var e = this;
           (this.navBar = n("div.bs-sidenav:first")),
@@ -144,7 +148,7 @@
               });
         },
         reset: function () {
-          console.log("reset")
+          console.log("reset");
           var n = encodeURI(window.location.hash) || "#";
           try {
             var e = $(".bs-sidenav"),
@@ -170,8 +174,16 @@
           } catch (n) {
             console.log("Error expanding nav for anchor", n);
           }
+          console.log("Fix bugin scroll");
+          whash = window.location.hash;
+          console.log(whash);
+          if (whash) {
+          } else {
+            window.scrollTo(0,0);
+          }
         },
         onScroll: function () {
+          console.log("onscroll");
           this.winScroll = !1;
           var n = this.win.scrollTop(),
             e = n + this.winHeight,

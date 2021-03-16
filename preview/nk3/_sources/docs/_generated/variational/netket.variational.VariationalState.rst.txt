@@ -30,6 +30,7 @@
       .. automethod:: VariationalState.expect
       .. automethod:: VariationalState.expect_and_grad
       .. automethod:: VariationalState.grad
+      .. automethod:: VariationalState.init_parameters
       .. automethod:: VariationalState.quantum_geometric_tensor
       .. automethod:: VariationalState.reset
       .. automethod:: VariationalState.to_array

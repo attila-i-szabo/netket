@@ -172,13 +172,10 @@
     <span class="k">def</span> <span class="fm">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_local_operator</span><span class="p">()</span><span class="o">.</span><span class="fm">__rmul__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__matmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hermitian</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Squared</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
+    <span class="k">def</span> <span class="nf">_op__matmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_local_operator</span><span class="p">()</span><span class="o">.</span><span class="fm">__matmul__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__rmatmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_op__rmatmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_hermitian</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Squared</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
@@ -818,7 +815,7 @@
       
     </p>
     <p>
-        &copy; Copyright 2019, The Simons Foundation, Inc. - All rights reserved.<br/>
+        &copy; Copyright 2019-2021, The Netket authors - All rights reserved.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.2.<br/>
     </p>
   </div>
@@ -863,10 +860,7 @@
   ],
   "description" : "Netket is an open-source project delivering cutting-edge
   methods for the study of many-body quantum systems with artificial neural
-  networks and machine learning techniques.
-  NetKet provides state-of-the-art Neural-Network Quantum states,
-  and advanced learning algorithms to find the ground-state of many-body Hamiltonians.
- NetKet is supported by the Simons Foundation and the Flatiron Institute."
+  networks and machine learning techniques."
 }
 </script>
 

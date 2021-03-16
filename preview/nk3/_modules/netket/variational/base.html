@@ -96,21 +96,26 @@
       
   <h1>Source code for netket.variational.base</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">abc</span>
-
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Callable</span>
 
+<span class="kn">import</span> <span class="nn">jax</span>
 <span class="kn">import</span> <span class="nn">flax</span>
 <span class="kn">from</span> <span class="nn">flax.core.frozen_dict</span> <span class="kn">import</span> <span class="n">FrozenDict</span>
 
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
 <span class="kn">import</span> <span class="nn">netket.jax</span> <span class="k">as</span> <span class="nn">nkjax</span>
+<span class="kn">import</span> <span class="nn">netket.nn</span> <span class="k">as</span> <span class="nn">nknn</span>
 <span class="kn">from</span> <span class="nn">netket.operator</span> <span class="kn">import</span> <span class="n">AbstractOperator</span><span class="p">,</span> <span class="n">LocalLiouvillian</span>
 <span class="kn">from</span> <span class="nn">netket.hilbert</span> <span class="kn">import</span> <span class="n">AbstractHilbert</span><span class="p">,</span> <span class="n">DoubledHilbert</span>
 <span class="kn">from</span> <span class="nn">netket.stats</span> <span class="kn">import</span> <span class="n">Stats</span>
 
 <span class="n">PyTree</span> <span class="o">=</span> <span class="n">Any</span>
+<span class="n">ShapeT</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<span class="n">DTypeT</span> <span class="o">=</span> <span class="n">Any</span>
+<span class="n">PRNGKey</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="n">InitFunType</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">PRNGKey</span><span class="p">,</span> <span class="n">ShapeT</span><span class="p">,</span> <span class="n">DTypeT</span><span class="p">],</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="VariationalState"><a class="viewcode-back" href="../../../docs/_generated/variational/netket.variational.VariationalState.html#netket.variational.VariationalState">[docs]</a><span class="k">class</span> <span class="nc">VariationalState</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
@@ -183,6 +188,33 @@
             <span class="nb">vars</span> <span class="o">=</span> <span class="n">flax</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">freeze</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">model_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="nb">vars</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;params&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="VariationalState.init_parameters"><a class="viewcode-back" href="../../../docs/_generated/variational/netket.variational.VariationalState.html#netket.variational.VariationalState.init_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">init_parameters</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">init_fun</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">InitFunType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PRNGKey</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Re-initializes all the parameters with the provided initialization function, defaulting to</span>
+<span class="sd">        the normal distribution of standard deviation 0.01.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            init_fun: a jax initializer such as :ref:`netket.nn.initializers.normal`. Must be a Callable</span>
+<span class="sd">                taking 3 inputs, the jax PRNG key, the shape and the dtype, and outputting an array with</span>
+<span class="sd">                the valid dtype and shape. If left unspecified, defaults to :code:`netket.nn.initializers.normal(stddev=0.01)`</span>
+<span class="sd">            seed: Optional seed to be used. The seed is synced across all MPI processes. If unspecified, uses</span>
+<span class="sd">                a random seed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">init_fun</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">init_fun</span> <span class="o">=</span> <span class="n">nknn</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">stddev</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+        <span class="n">rng</span> <span class="o">=</span> <span class="n">nkjax</span><span class="o">.</span><span class="n">PRNGSeq</span><span class="p">(</span><span class="n">nkjax</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="n">seed</span><span class="p">))</span>
+
+        <span class="k">def</span> <span class="nf">new_pars</span><span class="p">(</span><span class="n">par</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span>
+                <span class="n">init_fun</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">shape</span><span class="o">=</span><span class="n">par</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">par</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+                <span class="n">dtype</span><span class="o">=</span><span class="n">par</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="n">new_pars</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="VariationalState.reset"><a class="viewcode-back" href="../../../docs/_generated/variational/netket.variational.VariationalState.html#netket.variational.VariationalState.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Resets the internal cache of th variational state.</span>
@@ -337,7 +369,7 @@
       
     </p>
     <p>
-        &copy; Copyright 2019, The Simons Foundation, Inc. - All rights reserved.<br/>
+        &copy; Copyright 2019-2021, The Netket authors - All rights reserved.<br/>
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.2.<br/>
     </p>
   </div>
@@ -382,10 +414,7 @@
   ],
   "description" : "Netket is an open-source project delivering cutting-edge
   methods for the study of many-body quantum systems with artificial neural
-  networks and machine learning techniques.
-  NetKet provides state-of-the-art Neural-Network Quantum states,
-  and advanced learning algorithms to find the ground-state of many-body Hamiltonians.
- NetKet is supported by the Simons Foundation and the Flatiron Institute."
+  networks and machine learning techniques."
 }
 </script>
 
