@@ -1,6 +1,0 @@
-﻿netket.hilbert.Boson
-====================
-
-.. currentmodule:: netket.hilbert
-
-.. autofunction:: Boson
