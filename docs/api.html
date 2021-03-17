@@ -263,6 +263,17 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/optim/netket.optimizer.RmsProp.html">netket.optimizer.RmsProp</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#optimization-drivers">Optimization drivers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.drivers.VMC.html">netket.drivers.VMC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.drivers.SteadyState.html">netket.drivers.SteadyState</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#logging-output">Logging output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.JsonLog.html">netket.logging.JsonLog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.RuntimeLog.html">netket.logging.RuntimeLog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.TBLog.html">netket.logging.TBLog</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
@@ -506,7 +517,7 @@ have a much higher overhead for small to moderate (for GPUs) system sizes.</p>
 <h3>Transition Rules<a class="headerlink" href="#transition-rules" title="Permalink to this headline">¶</a></h3>
 <p>Those are the transition rules that can be used with the Metropolis
 Sampler. Rules with <cite>Numpy</cite> in their name can only be used with
-<span class="xref std std-ref">MetropolisSamplerNumpy</span>.</p>
+<a class="reference internal" href="_generated/samplers/netket.sampler.MetropolisSamplerNumpy.html#netket.sampler.MetropolisSamplerNumpy" title="netket.sampler.MetropolisSamplerNumpy"><code class="xref py py-class docutils literal notranslate"><span class="pre">netket.sampler.MetropolisSamplerNumpy</span></code></a>.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -740,6 +751,45 @@ optimisers, and it’s extremely easy to use step-dependent schedulers.</p>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/optim/netket.optimizer.RmsProp.html#netket.optimizer.RmsProp" title="netket.optimizer.RmsProp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.optimizer.RmsProp</span></code></a></p></td>
 <td><p>RMSProp optimizer.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="optimization-drivers">
+<span id="drivers-api"></span><h2>Optimization drivers<a class="headerlink" href="#optimization-drivers" title="Permalink to this headline">¶</a></h2>
+<p>Those are the optimization drivers already implmented in Netket:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/driver/netket.drivers.VMC.html#netket.drivers.VMC" title="netket.drivers.VMC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.drivers.VMC</span></code></a></p></td>
+<td><p>Energy minimization using Variational Monte Carlo (VMC).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/driver/netket.drivers.SteadyState.html#netket.drivers.SteadyState" title="netket.drivers.SteadyState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.drivers.SteadyState</span></code></a></p></td>
+<td><p>Steady-state driver minimizing L^†L.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="logging-output">
+<span id="logging-api"></span><h2>Logging output<a class="headerlink" href="#logging-output" title="Permalink to this headline">¶</a></h2>
+<p>Those are the loggers that can be used with the optimization drivers.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/driver/netket.logging.JsonLog.html#netket.logging.JsonLog" title="netket.logging.JsonLog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.logging.JsonLog</span></code></a></p></td>
+<td><p>Json Logger, that can be passed with keyword argument <cite>logger</cite> to Monte Carlo drivers in order to serialize the outpit data of the simulation.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/driver/netket.logging.RuntimeLog.html#netket.logging.RuntimeLog" title="netket.logging.RuntimeLog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.logging.RuntimeLog</span></code></a></p></td>
+<td><p>Runtim Logger, that can be passed with keyword argument <cite>logger</cite> to Monte Carlo drivers in order to serialize the outpit data of the simulation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/driver/netket.logging.TBLog.html#netket.logging.TBLog" title="netket.logging.TBLog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.logging.TBLog</span></code></a></p></td>
+<td><p>Creates a tensorboard logger using tensorboardX’s summarywriter.</p></td>
 </tr>
 </tbody>
 </table>
