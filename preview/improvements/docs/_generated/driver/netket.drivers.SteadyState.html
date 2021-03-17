@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>netket.sampler.MetropolisLocal &#8212; netket v3.0 documentation</title>
+    <title>netket.drivers.SteadyState &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
@@ -18,13 +18,11 @@
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script src="../../../_static/js/rtd_theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="netket.sampler.MetropolisExchange" href="netket.sampler.MetropolisExchange.html" />
-    <link rel="prev" title="netket.sampler.MetropolisPtSampler" href="netket.sampler.MetropolisPtSampler.html" />
+    <link rel="next" title="🔪 The Sharp Bits 🔪" href="../../sharp-bits.html" />
+    <link rel="prev" title="netket.drivers.VMC" href="netket.drivers.VMC.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -173,38 +171,38 @@
 <li class="toctree-l3"><a class="reference internal" href="../exact/netket.exact.steady_state.html">netket.exact.steady_state</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../api.html#sampler">Sampler</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#sampler">Sampler</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#generic-api">Generic API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.sampler_state.html">netket.sampler.sampler_state</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.reset.html">netket.sampler.reset</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.sample_next.html">netket.sampler.sample_next</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.sample.html">netket.sampler.sample</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.samples.html">netket.sampler.samples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.sampler_state.html">netket.sampler.sampler_state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.reset.html">netket.sampler.reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.sample_next.html">netket.sampler.sample_next</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.sample.html">netket.sampler.sample</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.samples.html">netket.sampler.samples</a></li>
 </ul>
 </li>
-<li class="toctree-l3 current"><a class="reference internal" href="../../api.html#list-of-samplers">List of Samplers</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.Sampler.html">netket.sampler.Sampler</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.ExactSampler.html">netket.sampler.ExactSampler</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisSampler.html">netket.sampler.MetropolisSampler</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisSamplerNumpy.html">netket.sampler.MetropolisSamplerNumpy</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisPtSampler.html">netket.sampler.MetropolisPtSampler</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">netket.sampler.MetropolisLocal</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisExchange.html">netket.sampler.MetropolisExchange</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisHamiltonian.html">netket.sampler.MetropolisHamiltonian</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisLocalPt.html">netket.sampler.MetropolisLocalPt</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisExchangePt.html">netket.sampler.MetropolisExchangePt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#list-of-samplers">List of Samplers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.Sampler.html">netket.sampler.Sampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.ExactSampler.html">netket.sampler.ExactSampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisSampler.html">netket.sampler.MetropolisSampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisSamplerNumpy.html">netket.sampler.MetropolisSamplerNumpy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisPtSampler.html">netket.sampler.MetropolisPtSampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisLocal.html">netket.sampler.MetropolisLocal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisExchange.html">netket.sampler.MetropolisExchange</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisHamiltonian.html">netket.sampler.MetropolisHamiltonian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisLocalPt.html">netket.sampler.MetropolisLocalPt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisExchangePt.html">netket.sampler.MetropolisExchangePt</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#transition-rules">Transition Rules</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.LocalRule.html">netket.sampler.rules.LocalRule</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.ExchangeRule.html">netket.sampler.rules.ExchangeRule</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.HamiltonianRule.html">netket.sampler.rules.HamiltonianRule</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.HamiltonianRuleNumpy.html">netket.sampler.rules.HamiltonianRuleNumpy</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.CustomRuleNumpy.html">netket.sampler.rules.CustomRuleNumpy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.rules.LocalRule.html">netket.sampler.rules.LocalRule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.rules.ExchangeRule.html">netket.sampler.rules.ExchangeRule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.rules.HamiltonianRule.html">netket.sampler.rules.HamiltonianRule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.rules.HamiltonianRuleNumpy.html">netket.sampler.rules.HamiltonianRuleNumpy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.rules.CustomRuleNumpy.html">netket.sampler.rules.CustomRuleNumpy</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#internal-state">Internal State</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="netket.sampler.SamplerState.html">netket.sampler.SamplerState</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.SamplerState.html">netket.sampler.SamplerState</a></li>
 </ul>
 </li>
 </ul>
@@ -261,9 +259,9 @@
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.RmsProp.html">netket.optimizer.RmsProp</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../api.html#optimization-drivers">Optimization drivers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../driver/netket.drivers.VMC.html">netket.drivers.VMC</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../driver/netket.drivers.SteadyState.html">netket.drivers.SteadyState</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../api.html#optimization-drivers">Optimization drivers</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="netket.drivers.VMC.html">netket.drivers.VMC</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">netket.drivers.SteadyState</a></li>
 </ul>
 </li>
 </ul>
@@ -282,51 +280,164 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <div class="section" id="netket-sampler-metropolislocal">
-<h1>netket.sampler.MetropolisLocal<a class="headerlink" href="#netket-sampler-metropolislocal" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="netket-drivers-steadystate">
+<h1>netket.drivers.SteadyState<a class="headerlink" href="#netket-drivers-steadystate" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="netket.sampler.MetropolisLocal">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.sampler.</span></code><code class="sig-name descname"><span class="pre">MetropolisLocal</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilbert</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/metropolis.html#MetropolisLocal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.MetropolisLocal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sampler acting on one local degree of freedom.</p>
-<p>This sampler acts locally only on one local degree of freedom <span class="math notranslate nohighlight">\(s_i\)</span>,
-and proposes a new state: <span class="math notranslate nohighlight">\(s_1 \dots s^\prime_i \dots s_N\)</span>,
-where <span class="math notranslate nohighlight">\(s^\prime_i \neq s_i\)</span>.</p>
-<p>The transition probability associated to this
-sampler can be decomposed into two steps:</p>
-<p>1. One of the site indices <span class="math notranslate nohighlight">\(i = 1\dots N\)</span> is chosen
-with uniform probability.
-2. Among all the possible (<span class="math notranslate nohighlight">\(m\)</span>) values that <span class="math notranslate nohighlight">\(s_i\)</span> can take,
-one of them is chosen with uniform probability.</p>
-<p>For example, in the case of spin <span class="math notranslate nohighlight">\(1/2\)</span> particles, <span class="math notranslate nohighlight">\(m=2\)</span>
-and the possible local values are <span class="math notranslate nohighlight">\(s_i = -1,+1\)</span>.
-In this case then <a class="reference internal" href="#netket.sampler.MetropolisLocal" title="netket.sampler.MetropolisLocal"><code class="xref py py-class docutils literal notranslate"><span class="pre">MetropolisLocal</span></code></a> is equivalent to flipping a random spin.</p>
-<p>In the case of bosons, with occupation numbers
-<span class="math notranslate nohighlight">\(s_i = 0, 1, \dots n_{\mathrm{max}}\)</span>, <a class="reference internal" href="#netket.sampler.MetropolisLocal" title="netket.sampler.MetropolisLocal"><code class="xref py py-class docutils literal notranslate"><span class="pre">MetropolisLocal</span></code></a>
-would pick a random local occupation number uniformly between <span class="math notranslate nohighlight">\(0\)</span>
-and <span class="math notranslate nohighlight">\(n_{\mathrm{max}}\)</span>.</p>
+<dt id="netket.drivers.SteadyState">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.drivers.</span></code><code class="sig-name descname"><span class="pre">SteadyState</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lindbladian</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variational_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sr_restart</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/drivers/steady_state.html#SteadyState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.drivers.SteadyState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.drivers.abstract_variational_driver.AbstractVariationalDriver</span></code></p>
+<p>Steady-state driver minimizing L^†L.</p>
+<dl class="py method">
+<dt id="netket.drivers.SteadyState.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lindbladian</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variational_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sr_restart</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/drivers/steady_state.html#SteadyState.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.drivers.SteadyState.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes the driver class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>hilbert</strong> – The hilbert space to sample</p></li>
-<li><p><strong>n_chains</strong> – The number of Markov Chain to be run in parallel on a single process.</p></li>
-<li><p><strong>n_sweeps</strong> – The number of exchanges that compose a single sweep.
-If None, sweep_size is equal to the number of degrees of freedom being sampled
-(the size of the input vector s to the machine).</p></li>
-<li><p><strong>n_chains</strong> – The number of batches of the states to sample (default = 8)</p></li>
-<li><p><strong>machine_pow</strong> – The power to which the machine should be exponentiated to generate the pdf (default = 2).</p></li>
-<li><p><strong>dtype</strong> – The dtype of the statees sampled (default = np.float32).</p></li>
+<li><p><strong>lindbladian</strong> – The Lindbladian of the system.</p></li>
+<li><p><strong>optimizer</strong> – Determines how optimization steps are performed given the
+bare energy gradient.</p></li>
+<li><p><strong>sr</strong> – Determines whether and how stochastic reconfiguration
+is applied to the bare energy gradient before performing applying
+the optimizer. If this parameter is not passed or None, SR is not used.</p></li>
+<li><p><strong>sr_restart</strong> – whever to restart the SR solver at every iteration, or use the
+previous result to speed it up</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">MetropolisSampler</span></code></p>
-</dd>
 </dl>
-<dl class="py method">
-<dt id="netket.sampler.MetropolisLocal.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.MetropolisLocal.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
+<dl class="class-dl-groups">
+<dt>Attributes</dt><dd><dl class="py attribute">
+<dt id="netket.drivers.SteadyState.ldagl">
+<code class="sig-name descname"><span class="pre">ldagl</span></code><a class="headerlink" href="#netket.drivers.SteadyState.ldagl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return MCMC statistics for the expectation value of observables in the
+current state of the driver.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="netket.drivers.SteadyState.optimizer">
+<code class="sig-name descname"><span class="pre">optimizer</span></code><a class="headerlink" href="#netket.drivers.SteadyState.optimizer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="netket.drivers.SteadyState.state">
+<code class="sig-name descname"><span class="pre">state</span></code><a class="headerlink" href="#netket.drivers.SteadyState.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the machine that is optimized by this driver.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="netket.drivers.SteadyState.step_count">
+<code class="sig-name descname"><span class="pre">step_count</span></code><a class="headerlink" href="#netket.drivers.SteadyState.step_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a monotonic integer labelling all the steps performed by this driver.
+This can be used, for example, to identify the line in a log file.</p>
+</dd></dl>
+
+</dd>
+</dl>
+<dl class="class-dl-groups">
+<dt>Methods</dt><dd><dl class="py method">
+<dt id="netket.drivers.SteadyState.advance">
+<code class="sig-name descname"><span class="pre">advance</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.drivers.SteadyState.advance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs <cite>steps</cite> optimization steps.</p>
+<p>steps: (Default=1) number of steps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.drivers.SteadyState.estimate">
+<code class="sig-name descname"><span class="pre">estimate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observables</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.drivers.SteadyState.estimate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return MCMC statistics for the expectation value of observables in the
+current state of the driver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>observables</strong> – A pytree of operators for which statistics should be computed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A pytree of the same structure as the input, containing MCMC statistics
+for the corresponding operators as leaves.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.drivers.SteadyState.info">
+<code class="sig-name descname"><span class="pre">info</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/drivers/steady_state.html#SteadyState.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.drivers.SteadyState.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an info string used to print information to screen about this driver.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.drivers.SteadyState.iter">
+<code class="sig-name descname"><span class="pre">iter</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.drivers.SteadyState.iter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a generator which advances the VMC optimization, yielding
+after every <cite>step_size</cite> steps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_iter</strong> – The total number of steps to perform.</p></li>
+<li><p><strong>step_size</strong> – The number of internal steps the simulation
+is advanced every turn.</p></li>
+<li><p><strong>n_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
+<li><p><strong>step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>int</em> – The current step.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.drivers.SteadyState.reset">
+<code class="sig-name descname"><span class="pre">reset</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#netket.drivers.SteadyState.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the driver.
+Concrete drivers should also call super().reset() to ensure that the step
+count is set to 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.drivers.SteadyState.run">
+<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">n_iter</span></em>, <em class="sig-param"><span class="pre">out=None</span></em>, <em class="sig-param"><span class="pre">obs=None</span></em>, <em class="sig-param"><span class="pre">show_progress=True</span></em>, <em class="sig-param"><span class="pre">save_params_every=50</span></em>, <em class="sig-param"><span class="pre">write_every=50</span></em>, <em class="sig-param"><span class="pre">step_size=1</span></em>, <em class="sig-param"><span class="pre">callback=&lt;function</span> <span class="pre">AbstractVariationalDriver.&lt;lambda&gt;&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.drivers.SteadyState.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the Monte Carlo Variational optimization, updating the weights of the network
+stored in this driver for <cite>n_iter</cite> steps and dumping values of the observables <cite>obs</cite>
+in the output <cite>logger</cite>. If no logger is specified, creates a json file at <cite>out</cite>,
+overwriting files with the same prefix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_iter</strong> – the total number of iterations</p></li>
+<li><p><strong>out</strong> – A logger object, or an iterable of loggers, to be used to store simulation log and data.
+If this argument is a string, it will be used as output prefix for the standard JSON logger.</p></li>
+<li><p><strong>obs</strong> – An iterable containing all observables that should be computed</p></li>
+<li><p><strong>save_params_every</strong> – Every how many steps the parameters of the network should be
+serialized to disk (ignored if logger is provided)</p></li>
+<li><p><strong>write_every</strong> – Every how many steps the json data should be flushed to disk (ignored if
+logger is provided)</p></li>
+<li><p><strong>step_size</strong> – Every how many steps should observables be logged to disk (default=1)</p></li>
+<li><p><strong>show_progress</strong> – If true displays a progress bar (default=True)</p></li>
+<li><p><strong>callback</strong> – Callable or list of callable callback functions to stop training given a condition</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.drivers.SteadyState.update_parameters">
+<code class="sig-name descname"><span class="pre">update_parameters</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.drivers.SteadyState.update_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the parameters of the machine using the optimizer in this driver</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dp</strong> – the pytree containing the updates to the parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
 </dd></dl>
 
 </div>

@@ -259,6 +259,11 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/optim/netket.optimizer.RmsProp.html">netket.optimizer.RmsProp</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#optimization-drivers">Optimization drivers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.drivers.VMC.html">netket.drivers.VMC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.drivers.SteadyState.html">netket.drivers.SteadyState</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
@@ -400,7 +405,7 @@ you must provide the constructor the hilbert space to be sampled and some option
 <p>You can then chose an optimizer from the <a class="reference internal" href="api.html#optimizer"><span class="std std-ref">Optimizer</span></a> submodule. You can also
 use an arbitrary flax optimiser, or define your own.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Variational monte carlo driver</span>
-<span class="n">gs</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">Vmc</span><span class="p">(</span><span class="n">ha</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">sa</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_discard</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">VMC</span><span class="p">(</span><span class="n">ha</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">sa</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_discard</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
 <span class="n">gs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>

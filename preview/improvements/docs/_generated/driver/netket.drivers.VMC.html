@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>netket.graph.Square &#8212; netket v3.0 documentation</title>
+    <title>netket.drivers.VMC &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
@@ -21,6 +21,8 @@
     <script src="../../../_static/js/rtd_theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="netket.drivers.SteadyState" href="netket.drivers.SteadyState.html" />
+    <link rel="prev" title="netket.optimizer.RmsProp" href="../optim/netket.optimizer.RmsProp.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -108,7 +110,7 @@
   ---->
 </div>
 
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#installation-and-requirements">Installation and requirements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../getting_started.html#mpi">MPI</a></li>
@@ -124,15 +126,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../whats_new.html#api-changes">API Changes</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../api.html">Public API: netket package</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="../../api.html">Public API: netket package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#graph">Graph</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="netket.graph.NetworkX.html">netket.graph.NetworkX</a></li>
-<li class="toctree-l3"><a class="reference internal" href="netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
-<li class="toctree-l3"><a class="reference internal" href="netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
-<li class="toctree-l3"><a class="reference internal" href="netket.graph.Lattice.html">netket.graph.Lattice</a></li>
-<li class="toctree-l3"><a class="reference internal" href="netket.graph.Chain.html">netket.graph.Chain</a></li>
-<li class="toctree-l3"><a class="reference internal" href="netket.graph.Grid.html">netket.graph.Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.NetworkX.html">netket.graph.NetworkX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Chain.html">netket.graph.Chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Grid.html">netket.graph.Grid</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#hilbert">Hilbert</a><ul>
@@ -257,9 +259,9 @@
 <li class="toctree-l3"><a class="reference internal" href="../optim/netket.optimizer.RmsProp.html">netket.optimizer.RmsProp</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../api.html#optimization-drivers">Optimization drivers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../driver/netket.drivers.VMC.html">netket.drivers.VMC</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../driver/netket.drivers.SteadyState.html">netket.drivers.SteadyState</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../api.html#optimization-drivers">Optimization drivers</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">netket.drivers.VMC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.drivers.SteadyState.html">netket.drivers.SteadyState</a></li>
 </ul>
 </li>
 </ul>
@@ -278,45 +280,179 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <div class="section" id="netket-graph-square">
-<h1>netket.graph.Square<a class="headerlink" href="#netket-graph-square" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt id="netket.graph.Square">
-<code class="sig-prename descclassname"><span class="pre">netket.graph.</span></code><code class="sig-name descname"><span class="pre">Square</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/graph/grid.html#Square"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.graph.Square" title="Permalink to this definition">¶</a></dt>
-<dd><p>A square lattice of side L.
-Periodic boundary conditions can also be imposed</p>
-<p>Constructs a new <code class="docutils literal notranslate"><span class="pre">Square</span></code> given its side length.</p>
+  <div class="section" id="netket-drivers-vmc">
+<h1>netket.drivers.VMC<a class="headerlink" href="#netket-drivers-vmc" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="netket.drivers.VMC">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.drivers.</span></code><code class="sig-name descname"><span class="pre">VMC</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hamiltonian</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variational_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sr_restart</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/drivers/vmc.html#VMC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.drivers.VMC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.drivers.abstract_variational_driver.AbstractVariationalDriver</span></code></p>
+<p>Energy minimization using Variational Monte Carlo (VMC).</p>
+<dl class="py method">
+<dt id="netket.drivers.VMC.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hamiltonian</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variational_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sr_restart</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/drivers/vmc.html#VMC.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.drivers.VMC.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes the driver class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Side length of the square; must always be &gt;=1</p></li>
-<li><p><strong>pbc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code> then the constructed hypercube
-will have periodic boundary conditions, otherwise
-open boundary conditions are imposed.</p></li>
+<li><p><strong>hamiltonian</strong> – The Hamiltonian of the system.</p></li>
+<li><p><strong>optimizer</strong> – Determines how optimization steps are performed given the
+bare energy gradient.</p></li>
+<li><p><strong>sr</strong> – Determines whether and how stochastic reconfiguration
+is applied to the bare energy gradient before performing applying
+the optimizer. If this parameter is not passed or None, SR is not used.</p></li>
+<li><p><strong>sr_restart</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – whever to restart the SR solver at every iteration, or use the
+previous result to speed it up</p></li>
 </ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>netket.graph.grid.Grid</p>
 </dd>
 </dl>
-<p class="rubric">Examples</p>
-<p>A 10x10 square lattice with periodic boundary conditions can be
-constructed as follows:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">netket</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">=</span><span class="n">netket</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">Square</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">pbc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">n_nodes</span><span class="p">)</span>
-<span class="go">100</span>
+<p class="rubric">Example</p>
+<p>Optimizing a 1D wavefunction with Variational Monte Carlo.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">netket</span> <span class="k">as</span> <span class="nn">nk</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hi</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">Spin</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">n_nodes</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ha</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">Ising</span><span class="p">(</span><span class="n">hilbert</span><span class="o">=</span><span class="n">hi</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">RBM</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">use_visible_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sa</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">MetropolisLocal</span><span class="p">(</span><span class="n">hi</span><span class="p">,</span> <span class="n">n_chains</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">op</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">Sgd</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gs</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">drivers</span><span class="o">.</span><span class="n">VMC</span><span class="p">(</span><span class="n">ha</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">sa</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_discard</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gs</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">n_iter</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="class-dl-groups">
+<dt>Attributes</dt><dd><dl class="py attribute">
+<dt id="netket.drivers.VMC.energy">
+<code class="sig-name descname"><span class="pre">energy</span></code><a class="headerlink" href="#netket.drivers.VMC.energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return MCMC statistics for the expectation value of observables in the
+current state of the driver.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Grid</span></code></p>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Stats</span></code></p>
 </dd>
-<dt class="field-even">Parameters</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
-<li><p><strong>pbc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – </p></li>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="netket.drivers.VMC.optimizer">
+<code class="sig-name descname"><span class="pre">optimizer</span></code><a class="headerlink" href="#netket.drivers.VMC.optimizer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="netket.drivers.VMC.state">
+<code class="sig-name descname"><span class="pre">state</span></code><a class="headerlink" href="#netket.drivers.VMC.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the machine that is optimized by this driver.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="netket.drivers.VMC.step_count">
+<code class="sig-name descname"><span class="pre">step_count</span></code><a class="headerlink" href="#netket.drivers.VMC.step_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a monotonic integer labelling all the steps performed by this driver.
+This can be used, for example, to identify the line in a log file.</p>
+</dd></dl>
+
+</dd>
+</dl>
+<dl class="class-dl-groups">
+<dt>Methods</dt><dd><dl class="py method">
+<dt id="netket.drivers.VMC.advance">
+<code class="sig-name descname"><span class="pre">advance</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.drivers.VMC.advance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs <cite>steps</cite> optimization steps.</p>
+<p>steps: (Default=1) number of steps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.drivers.VMC.estimate">
+<code class="sig-name descname"><span class="pre">estimate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observables</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.drivers.VMC.estimate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return MCMC statistics for the expectation value of observables in the
+current state of the driver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>observables</strong> – A pytree of operators for which statistics should be computed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A pytree of the same structure as the input, containing MCMC statistics
+for the corresponding operators as leaves.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.drivers.VMC.info">
+<code class="sig-name descname"><span class="pre">info</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/drivers/vmc.html#VMC.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.drivers.VMC.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an info string used to print information to screen about this driver.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.drivers.VMC.iter">
+<code class="sig-name descname"><span class="pre">iter</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.drivers.VMC.iter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a generator which advances the VMC optimization, yielding
+after every <cite>step_size</cite> steps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_iter</strong> – The total number of steps to perform.</p></li>
+<li><p><strong>step_size</strong> – The number of internal steps the simulation
+is advanced every turn.</p></li>
+<li><p><strong>n_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
+<li><p><strong>step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
 </ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>int</em> – The current step.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.drivers.VMC.reset">
+<code class="sig-name descname"><span class="pre">reset</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#netket.drivers.VMC.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the driver.
+Concrete drivers should also call super().reset() to ensure that the step
+count is set to 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.drivers.VMC.run">
+<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">n_iter</span></em>, <em class="sig-param"><span class="pre">out=None</span></em>, <em class="sig-param"><span class="pre">obs=None</span></em>, <em class="sig-param"><span class="pre">show_progress=True</span></em>, <em class="sig-param"><span class="pre">save_params_every=50</span></em>, <em class="sig-param"><span class="pre">write_every=50</span></em>, <em class="sig-param"><span class="pre">step_size=1</span></em>, <em class="sig-param"><span class="pre">callback=&lt;function</span> <span class="pre">AbstractVariationalDriver.&lt;lambda&gt;&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.drivers.VMC.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the Monte Carlo Variational optimization, updating the weights of the network
+stored in this driver for <cite>n_iter</cite> steps and dumping values of the observables <cite>obs</cite>
+in the output <cite>logger</cite>. If no logger is specified, creates a json file at <cite>out</cite>,
+overwriting files with the same prefix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_iter</strong> – the total number of iterations</p></li>
+<li><p><strong>out</strong> – A logger object, or an iterable of loggers, to be used to store simulation log and data.
+If this argument is a string, it will be used as output prefix for the standard JSON logger.</p></li>
+<li><p><strong>obs</strong> – An iterable containing all observables that should be computed</p></li>
+<li><p><strong>save_params_every</strong> – Every how many steps the parameters of the network should be
+serialized to disk (ignored if logger is provided)</p></li>
+<li><p><strong>write_every</strong> – Every how many steps the json data should be flushed to disk (ignored if
+logger is provided)</p></li>
+<li><p><strong>step_size</strong> – Every how many steps should observables be logged to disk (default=1)</p></li>
+<li><p><strong>show_progress</strong> – If true displays a progress bar (default=True)</p></li>
+<li><p><strong>callback</strong> – Callable or list of callable callback functions to stop training given a condition</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.drivers.VMC.update_parameters">
+<code class="sig-name descname"><span class="pre">update_parameters</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.drivers.VMC.update_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the parameters of the machine using the optimizer in this driver</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dp</strong> – the pytree containing the updates to the parameters</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd>
 </dl>
 </dd></dl>
