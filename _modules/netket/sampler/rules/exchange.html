@@ -206,24 +206,24 @@
 <span class="sd">    possible couples (clusters).</span>
 
 <span class="sd">    This rule acts on two local degree of freedom :math:`s_i` and :math:`s_j`,</span>
-<span class="sd">    and proposes a new state: :math:`s_1 \dots s^\prime_i \dots s^\prime_j \dots s_N`,</span>
-<span class="sd">    where in general :math:`s^\prime_i \neq s_i` and :math:`s^\prime_j \neq s_j`.</span>
+<span class="sd">    and proposes a new state: :math:`s_1 \\dots s^\\prime_i \\dots s^\\prime_j \\dots s_N`,</span>
+<span class="sd">    where in general :math:`s^\\prime_i \\neq s_i` and :math:`s^\\prime_j \\neq s_j`.</span>
 <span class="sd">    The sites :math:`i` and :math:`j` are also chosen to be within a maximum graph</span>
-<span class="sd">    distance of :math:`d_{\mathrm{max}}`.</span>
+<span class="sd">    distance of :math:`d_{\\mathrm{max}}`.</span>
 
 <span class="sd">    The transition probability associated to this sampler can</span>
 <span class="sd">    be decomposed into two steps:</span>
 
-<span class="sd">    1. A pair of indices :math:`i,j = 1\dots N`, and such</span>
-<span class="sd">       that :math:`\mathrm{dist}(i,j) \leq d_{\mathrm{max}}`,</span>
+<span class="sd">    1. A pair of indices :math:`i,j = 1\\dots N`, and such</span>
+<span class="sd">       that :math:`\\mathrm{dist}(i,j) \\leq d_{\\mathrm{max}}`,</span>
 <span class="sd">       is chosen with uniform probability.</span>
-<span class="sd">    2. The sites are exchanged, i.e. :math:`s^\prime_i = s_j` and :math:`s^\prime_j = s_i`.</span>
+<span class="sd">    2. The sites are exchanged, i.e. :math:`s^\\prime_i = s_j` and :math:`s^\\prime_j = s_i`.</span>
 
 <span class="sd">    Notice that this sampling method generates random permutations of the quantum</span>
 <span class="sd">    numbers, thus global quantities such as the sum of the local quantum numbers</span>
 <span class="sd">    are conserved during the sampling.</span>
 <span class="sd">    This scheme should be used then only when sampling in a</span>
-<span class="sd">    region where :math:`\sum_i s_i = \mathrm{constant}` is needed,</span>
+<span class="sd">    region where :math:`\\sum_i s_i = \\mathrm{constant}` is needed,</span>
 <span class="sd">    otherwise the sampling would be strongly not ergodic.</span>
 
 <span class="sd">    Args:</span>

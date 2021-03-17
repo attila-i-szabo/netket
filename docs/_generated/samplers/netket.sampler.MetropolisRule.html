@@ -297,46 +297,6 @@
 <p>Base class for Transition rules of Metropolis, such as Local, Exchange, Hamiltonian
 and several others.</p>
 <dl class="py method">
-<dt>
-<code class="sig-name descname"><span class="pre">-</span> <span class="pre">init_state(rule,</span> <span class="pre">sampler,</span> <span class="pre">machine,</span> <span class="pre">params),</span> <span class="pre">constructing</span> <span class="pre">the</span> <span class="pre">state</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">rule.</span></code></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt>
-<code class="sig-name descname"><span class="pre">By</span> <span class="pre">default</span> <span class="pre">the</span> <span class="pre">state</span> <span class="pre">is</span> <span class="pre">None.</span></code></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt>
-<code class="sig-name descname"><span class="pre">-</span> <span class="pre">reset(rule,</span> <span class="pre">sampler,</span> <span class="pre">machine,</span> <span class="pre">parameters,</span> <span class="pre">state),</span> <span class="pre">resets</span> <span class="pre">the</span> <span class="pre">state</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">rule,</span></code></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt>
-<code class="sig-name descname"><span class="pre">by</span> <span class="pre">default</span> <span class="pre">returns</span> <span class="pre">None.</span></code></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt>
-<code class="sig-name descname"><span class="pre">-</span> <span class="pre">transition(rule,</span> <span class="pre">sampler,</span> <span class="pre">machine,</span> <span class="pre">parameters,</span> <span class="pre">state,</span> <span class="pre">key,</span> <span class="pre">σ),</span> <span class="pre">which</span> <span class="pre">returns</span> <span class="pre">a</span></code></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt>
-<code class="sig-name descname"><span class="pre">new</span> <span class="pre">configuration</span> <span class="pre">given</span> <span class="pre">the</span> <span class="pre">configuration</span> <span class="pre">σ</span> <span class="pre">and</span> <span class="pre">rng</span> <span class="pre">key</span> <span class="pre">key.</span></code></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt>
-<code class="sig-name descname"><span class="pre">-</span> <span class="pre">random_state(rule,</span> <span class="pre">sampler,</span> <span class="pre">machine,</span> <span class="pre">parameters,</span> <span class="pre">state,</span> <span class="pre">key),</span> <span class="pre">which</span> <span class="pre">returns</span> <span class="pre">a</span></code></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt>
-<code class="sig-name descname"><span class="pre">new</span> <span class="pre">random</span> <span class="pre">configuration.</span> <span class="pre">By</span> <span class="pre">default</span> <span class="pre">this</span> <span class="pre">uses</span> <span class="pre">standard</span> <span class="pre">hilbert</span> <span class="pre">random_state.</span></code></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt id="netket.sampler.MetropolisRule.__init__">
 <code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.MetropolisRule.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
@@ -352,15 +312,16 @@ and several others.</p>
 <dt id="netket.sampler.MetropolisRule.init_state">
 <code class="sig-name descname"><span class="pre">init_state</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">machine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/metropolis.html#MetropolisRule.init_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.MetropolisRule.init_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialises the optional internal state of the Metropolis Sampler Transition
-Rule. The provided key is unique and does not need to be splitted
+Rule.</p>
+<p>The provided key is unique and does not need to be splitted.
 It should return an immutable datastructure.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sampler</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code>) – The Metropolis sampler</p></li>
 <li><p><strong>machine</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>) – The forward evaluation function of the model, accepting PyTrees of parameters and inputs.</p></li>
+<li><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – The dict of variables needed to evaluate the model.</p></li>
 <li><p><strong>key</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – A Jax PRNGKey rng state.</p></li>
-<li><p><strong>params</strong> (<em>Any</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -375,14 +336,16 @@ It should return an immutable datastructure.</p>
 <dl class="py method">
 <dt id="netket.sampler.MetropolisRule.random_state">
 <code class="sig-name descname"><span class="pre">random_state</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sampler</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">machine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/metropolis.html#MetropolisRule.random_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.MetropolisRule.random_state" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Generates a random state compatible with this rule.</p>
+<p>By default this calls <code class="xref py py-func docutils literal notranslate"><span class="pre">netket.hilbert.random.random_state()</span></code>.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sampler</strong> (<em>netket.sampler.base.Sampler</em>) – </p></li>
-<li><p><strong>machine</strong> (<em>Callable</em>) – </p></li>
-<li><p><strong>parameters</strong> (<em>Any</em>) – </p></li>
-<li><p><strong>state</strong> (<em>netket.sampler.base.SamplerState</em>) – </p></li>
-<li><p><strong>key</strong> (<em>jax._src.numpy.lax_numpy.ndarray</em>) – </p></li>
+<li><p><strong>sampler</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code>) – the sampler</p></li>
+<li><p><strong>machine</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>) – the function to evaluate the model</p></li>
+<li><p><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – the parameters of the model</p></li>
+<li><p><strong>state</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">SamplerState</span></code>) – the current sampler state</p></li>
+<li><p><strong>key</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – the PRNGKey to use to generate the random state</p></li>
 </ul>
 </dd>
 </dl>
@@ -403,9 +366,8 @@ It should return an immutable datastructure.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sampler</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code>) – The Metropolis sampler</p></li>
 <li><p><strong>machine</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>) – The forward evaluation function of the model, accepting PyTrees of parameters and inputs.</p></li>
-<li><p><strong>key</strong> – A Jax PRNGKey rng state.</p></li>
+<li><p><strong>params</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – The dict of variables needed to evaluate the model.</p></li>
 <li><p><strong>sampler_state</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">SamplerState</span></code>) – The current state of the sampler. Should not modify it.</p></li>
-<li><p><strong>params</strong> (<em>Any</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>

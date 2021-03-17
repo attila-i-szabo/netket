@@ -130,17 +130,6 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for Transition rules of Metropolis, such as Local, Exchange, Hamiltonian</span>
 <span class="sd">    and several others.</span>
-
-<span class="sd">    Methods:</span>
-<span class="sd">        - init_state(rule, sampler, machine, params), constructing the state of the rule.</span>
-<span class="sd">        By default the state is None.</span>
-
-<span class="sd">        - reset(rule, sampler, machine, parameters, state), resets the state of the rule,</span>
-<span class="sd">        by default returns None.</span>
-<span class="sd">        - transition(rule, sampler, machine, parameters, state, key, σ), which returns a</span>
-<span class="sd">        new configuration given the configuration σ and rng key key.</span>
-<span class="sd">        - random_state(rule, sampler, machine, parameters, state, key), which returns a</span>
-<span class="sd">        new random configuration. By default this uses standard hilbert random_state.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="MetropolisRule.init_state"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.MetropolisRule.html#netket.sampler.MetropolisRule.init_state">[docs]</a>    <span class="k">def</span> <span class="nf">init_state</span><span class="p">(</span>
@@ -152,12 +141,15 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialises the optional internal state of the Metropolis Sampler Transition</span>
-<span class="sd">        Rule. The provided key is unique and does not need to be splitted</span>
+<span class="sd">        Rule.</span>
+
+<span class="sd">        The provided key is unique and does not need to be splitted.</span>
 <span class="sd">        It should return an immutable datastructure.</span>
 
 <span class="sd">        Arguments:</span>
 <span class="sd">            sampler: The Metropolis sampler</span>
 <span class="sd">            machine: The forward evaluation function of the model, accepting PyTrees of parameters and inputs.</span>
+<span class="sd">            params: The dict of variables needed to evaluate the model.</span>
 <span class="sd">            key: A Jax PRNGKey rng state.</span>
 
 <span class="sd">        Returns:</span>
@@ -178,7 +170,7 @@
 <span class="sd">        Arguments:</span>
 <span class="sd">            sampler: The Metropolis sampler</span>
 <span class="sd">            machine: The forward evaluation function of the model, accepting PyTrees of parameters and inputs.</span>
-<span class="sd">            key: A Jax PRNGKey rng state.</span>
+<span class="sd">            params: The dict of variables needed to evaluate the model.</span>
 <span class="sd">            sampler_state: The current state of the sampler. Should not modify it.</span>
 
 <span class="sd">        Returns:</span>
@@ -206,6 +198,18 @@
         <span class="n">state</span><span class="p">:</span> <span class="n">SamplerState</span><span class="p">,</span>
         <span class="n">key</span><span class="p">:</span> <span class="n">PRNGKey</span><span class="p">,</span>
     <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a random state compatible with this rule.</span>
+
+<span class="sd">        By default this calls :func:`netket.hilbert.random.random_state`.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            sampler: the sampler</span>
+<span class="sd">            machine: the function to evaluate the model</span>
+<span class="sd">            parameters: the parameters of the model</span>
+<span class="sd">            state: the current sampler state</span>
+<span class="sd">            key: the PRNGKey to use to generate the random state</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">sampler</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">random_state</span><span class="p">(</span>
             <span class="n">key</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_batches</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">sampler</span><span class="o">.</span><span class="n">dtype</span>
         <span class="p">)</span></div></div>
