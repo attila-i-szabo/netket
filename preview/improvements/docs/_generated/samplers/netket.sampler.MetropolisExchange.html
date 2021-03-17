@@ -290,8 +290,8 @@ distance of <span class="math notranslate nohighlight">\(d_{\mathrm{max}}\)</spa
 <p>The transition probability associated to this sampler can
 be decomposed into two steps:</p>
 <ol class="arabic simple">
-<li><p>A pair of indices <span class="math notranslate nohighlight">\(i,j = 1\dots N\)</span>, and such
-that <span class="math notranslate nohighlight">\(\mathrm{dist}(i,j) \leq d_{\mathrm{max}}\)</span>,
+<li><p>A pair of indices <span class="math notranslate nohighlight">\(i,j = 1\dots N\)</span>, and such that
+<span class="math notranslate nohighlight">\(\mathrm{dist}(i,j) \leq d_{\mathrm{max}}\)</span>,
 is chosen with uniform probability.</p></li>
 <li><p>The sites are exchanged, i.e. <span class="math notranslate nohighlight">\(s^\prime_i = s_j\)</span> and <span class="math notranslate nohighlight">\(s^\prime_j = s_i\)</span>.</p></li>
 </ol>
@@ -299,7 +299,7 @@ is chosen with uniform probability.</p></li>
 numbers, thus global quantities such as the sum of the local quantum numbers
 are conserved during the sampling.
 This scheme should be used then only when sampling in a
-region where <span class="math notranslate nohighlight">\(\sum_i s_i = \mathrm{constant}\)</span> is needed,
+region where :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>sum_i s_i = mathrm{constant} ` is needed,
 otherwise the sampling would be strongly not ergodic.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

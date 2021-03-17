@@ -290,46 +290,29 @@ specified.</p>
 <dl class="py method">
 <dt id="netket.sampler.MetropolisPtSampler.__init__">
 <code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilbert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_replicas</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/metropolis_pt.html#MetropolisPtSampler.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.MetropolisPtSampler.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">MetropolisSampler</span></code> is a generic Metropolis-Hastings sampler using
+<dd><p><code class="docutils literal notranslate"><span class="pre">MetropolisSampler</span></code> is a generic Metropolis-Hastings sampler using
 a transition rule to perform moves in the Markov Chain.
 The transition kernel is used to generate
 a proposed state <span class="math notranslate nohighlight">\(s^\prime\)</span>, starting from the current state <span class="math notranslate nohighlight">\(s\)</span>.
 The move is accepted with probability</p>
 <div class="math notranslate nohighlight">
-\[\]</div>
-<p>A(s</p>
-</div></blockquote>
-<p>ightarrow s^prime) = mathrm{min}left (1,
-rac{P(s^prime)}{P(s)} F(e^{L(s,s^prime)})
-ight),</p>
-<blockquote>
-<div><p>where the probability being sampled from is <span class="math notranslate nohighlight">\(P(s)=|M(s)|^p. Here ::math::\)</span> is a
+\[A(s\rightarrow s^\prime) = \mathrm{min}\left (1,\frac{P(s^\prime)}{P(s)} F(e^{L(s,s^\prime)})\right),\]</div>
+<p>where the probability being sampled from is <span class="math notranslate nohighlight">\(P(s)=|M(s)|^p. Here ::math::\)</span> is a
 user-provided function (the machine), <span class="math notranslate nohighlight">\(p\)</span> is also user-provided with default value <span class="math notranslate nohighlight">\(p=2\)</span>,
 and <span class="math notranslate nohighlight">\(L(s,s^\prime)\)</span> is a suitable correcting factor computed by the transition kernel.</p>
-<dl>
-<dt>Args:</dt><dd><p>hilbert: The hilbert space to sample
-rule: A <cite>MetropolisRule</cite> to generate random transitions from a given state as</p>
-<blockquote>
-<div><p>well as uniform random states.</p>
-</div></blockquote>
-<p>n_chains: The number of Markov Chain to be run in parallel on a single process.
-n_sweeps: The number of exchanges that compose a single sweep.</p>
-<blockquote>
-<div><p>If None, sweep_size is equal to the number of degrees of freedom being sampled
-(the size of the input vector s to the machine).</p>
-</div></blockquote>
-<p>n_chains: The number of batches of the states to sample (default = 8)
-machine_pow: The power to which the machine should be exponentiated to generate the pdf (default = 2).
-dtype: The dtype of the statees sampled (default = np.float32).</p>
-</dd>
-</dl>
-</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>hilbert</strong> (<em>netket.hilbert.abstract_hilbert.AbstractHilbert</em>) – </p></li>
-<li><p><strong>rule</strong> (<em>netket.sampler.metropolis.MetropolisRule</em>) – </p></li>
+<li><p><strong>hilbert</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractHilbert</span></code>) – The hilbert space to sample</p></li>
+<li><p><strong>rule</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">MetropolisRule</span></code>) – A <cite>MetropolisRule</cite> to generate random transitions from a given state as
+well as uniform random states.</p></li>
+<li><p><strong>n_chains</strong> – The number of Markov Chain to be run in parallel on a single process.</p></li>
+<li><p><strong>n_sweeps</strong> – The number of exchanges that compose a single sweep.
+If None, sweep_size is equal to the number of degrees of freedom being sampled
+(the size of the input vector s to the machine).</p></li>
+<li><p><strong>n_chains</strong> – The number of batches of the states to sample (default = 8)</p></li>
+<li><p><strong>machine_pow</strong> – The power to which the machine should be exponentiated to generate the pdf (default = 2).</p></li>
+<li><p><strong>dtype</strong> – The dtype of the statees sampled (default = np.float32).</p></li>
 <li><p><strong>n_replicas</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
 </ul>
 </dd>
