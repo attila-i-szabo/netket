@@ -147,6 +147,13 @@
 <span class="sd">    If the model state is serialized, then it is serialized using the msgpack protocol of flax.</span>
 <span class="sd">    For more information on how to de-serialize the output, see</span>
 <span class="sd">    `here &lt;https://flax.readthedocs.io/en/latest/flax.serialization.html&gt;`_.</span>
+
+<span class="sd">    Data is serialized to json as several nested dictionaries. You can deserialize by simply calling</span>
+<span class="sd">    :code:`json.load(open(filename))`.</span>
+<span class="sd">    Logged expectation values will be captured inside histories objects, so they will have a</span>
+<span class="sd">    subfield `iter` with the iterations at which that quantity has been computed, then `Mean` and</span>
+<span class="sd">    others.</span>
+<span class="sd">    Complex numbers are logged as dictionaries :code:`{&#39;real&#39;:list, &#39;imag&#39;:list}`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="JsonLog.__init__"><a class="viewcode-back" href="../../../docs/_generated/driver/netket.logging.JsonLog.html#netket.logging.JsonLog.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>

@@ -414,6 +414,9 @@ count is set to 0.</p>
 stored in this driver for <cite>n_iter</cite> steps and dumping values of the observables <cite>obs</cite>
 in the output <cite>logger</cite>. If no logger is specified, creates a json file at <cite>out</cite>,
 overwriting files with the same prefix.</p>
+<p>By default uses <span class="xref std std-ref">netket.logging.JsonLogger</span>. To know about the output format
+check it’s documentation. The logger object is also returned at the end of this function
+so that you can inspect the results without reading the json output.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
