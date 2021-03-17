@@ -18,6 +18,8 @@
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script src="../../../_static/js/rtd_theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -194,6 +196,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#transition-rules">Transition Rules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisRule.html">netket.sampler.MetropolisRule</a></li>
 <li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.LocalRule.html">netket.sampler.rules.LocalRule</a></li>
 <li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.ExchangeRule.html">netket.sampler.rules.ExchangeRule</a></li>
 <li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.HamiltonianRule.html">netket.sampler.rules.HamiltonianRule</a></li>
@@ -203,6 +206,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#internal-state">Internal State</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="netket.sampler.SamplerState.html">netket.sampler.SamplerState</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisSamplerState.html">netket.sampler.MetropolisSamplerState</a></li>
 </ul>
 </li>
 </ul>
@@ -277,10 +281,64 @@
       
   <div class="section" id="netket-sampler-metropolishamiltonian">
 <h1>netket.sampler.MetropolisHamiltonian<a class="headerlink" href="#netket-sampler-metropolishamiltonian" title="Permalink to this headline">¶</a></h1>
-<dl class="py attribute">
+<dl class="py class">
 <dt id="netket.sampler.MetropolisHamiltonian">
-<code class="sig-prename descclassname"><span class="pre">netket.sampler.</span></code><code class="sig-name descname"><span class="pre">MetropolisHamiltonian</span></code><a class="headerlink" href="#netket.sampler.MetropolisHamiltonian" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.sampler.metropolis_numpy.MetropolisHamiltonianNumpy</span></code></p>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.sampler.</span></code><code class="sig-name descname"><span class="pre">MetropolisHamiltonian</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilbert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hamiltonian</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/metropolis.html#MetropolisHamiltonian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.MetropolisHamiltonian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sampling based on the off-diagonal elements of a Hamiltonian (or a generic Operator).
+In this case, the transition matrix is taken to be:</p>
+<div class="math notranslate nohighlight">
+\[T( \mathbf{s} \rightarrow \mathbf{s}^\prime) = \frac{1}{\mathcal{N}(\mathbf{s})}\theta(|H_{\mathbf{s},\mathbf{s}^\prime}|),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta(x)\)</span> is the Heaviside step function, and <span class="math notranslate nohighlight">\(\mathcal{N}(\mathbf{s})\)</span>
+is a state-dependent normalization.
+The effect of this transition probability is then to connect (with uniform probability)
+a given state <span class="math notranslate nohighlight">\(\mathbf{s}\)</span> to all those states <span class="math notranslate nohighlight">\(\mathbf{s}^\prime\)</span> for which the Hamiltonian has
+finite matrix elements.
+Notice that this sampler preserves by construction all the symmetries
+of the Hamiltonian. This is in generally not true for the local samplers instead.</p>
+<p>This sampler only works on the CPU. To use the Hamiltonian smapler with GPUs,
+you should use <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.sampler.MetropolisHamiltonianNumpy</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>machine</strong> – A machine <span class="math notranslate nohighlight">\(\Psi(s)\)</span> used for the sampling.
+The probability distribution being sampled
+from is <span class="math notranslate nohighlight">\(F(\Psi(s))\)</span>, where the function
+<span class="math notranslate nohighlight">\(F(X)\)</span>, is arbitrary, by default <span class="math notranslate nohighlight">\(F(X)=|X|^2\)</span>.</p></li>
+<li><p><strong>hamiltonian</strong> – The operator used to perform off-diagonal transition.</p></li>
+<li><p><strong>n_chains</strong> – The number of Markov Chain to be run in parallel on a single process.</p></li>
+<li><p><strong>sweep_size</strong> – The number of exchanges that compose a single sweep.
+If None, sweep_size is equal to the number of degrees of freedom (n_visible).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Sampling from a RBM machine in a 1D lattice of spin 1/2</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">netket</span> <span class="k">as</span> <span class="nn">nk</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">=</span><span class="n">nk</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">Hypercube</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">n_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">pbc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hi</span><span class="o">=</span><span class="n">nk</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">Spin</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">graph</span><span class="o">=</span><span class="n">g</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># RBM Spin Machine</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ma</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">machine</span><span class="o">.</span><span class="n">RbmSpin</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hilbert</span><span class="o">=</span><span class="n">hi</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Transverse-field Ising Hamiltonian</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ha</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">Ising</span><span class="p">(</span><span class="n">hilbert</span><span class="o">=</span><span class="n">hi</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Construct a MetropolisHamiltonian Sampler</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sa</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">MetropolisHamiltonian</span><span class="p">(</span><span class="n">machine</span><span class="o">=</span><span class="n">ma</span><span class="p">,</span><span class="n">hamiltonian</span><span class="o">=</span><span class="n">ha</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">MetropolisSampler</span></code></p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="netket.sampler.MetropolisHamiltonian.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.MetropolisHamiltonian.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>

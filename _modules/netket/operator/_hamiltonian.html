@@ -417,6 +417,17 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_J</span><span class="p">,</span>
         <span class="p">)</span></div>
 
+    <span class="k">def</span> <span class="nf">_get_conn_flattened_closure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">_edges</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span>
+        <span class="n">_h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_h</span>
+        <span class="n">_J</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_J</span>
+        <span class="n">fun</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flattened_kernel</span>
+
+        <span class="k">def</span> <span class="nf">gccf_fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sections</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sections</span><span class="p">,</span> <span class="n">_edges</span><span class="p">,</span> <span class="n">_h</span><span class="p">,</span> <span class="n">_J</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)(</span><span class="n">gccf_fun</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Ising(J=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_J</span><span class="si">}</span><span class="s2">, h=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_h</span><span class="si">}</span><span class="s2">; dim=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s2">)&quot;</span></div>
 
@@ -800,7 +811,36 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_mu</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_n_max</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_max_conn</span><span class="p">,</span>
-        <span class="p">)</span></div></div>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_conn_flattened_closure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">_edges</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_edges</span><span class="p">,)</span>
+        <span class="n">_max_mels</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_mels</span><span class="p">,)</span>
+        <span class="n">_max_xprime</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_xprime</span><span class="p">,)</span>
+        <span class="n">_U</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_U</span><span class="p">,)</span>
+        <span class="n">_V</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_V</span><span class="p">,)</span>
+        <span class="n">_J</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_J</span><span class="p">,)</span>
+        <span class="n">_mu</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mu</span><span class="p">,)</span>
+        <span class="n">_n_max</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_max</span><span class="p">,)</span>
+        <span class="n">_max_conn</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_conn</span><span class="p">,)</span>
+        <span class="n">fun</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flattened_kernel</span>
+
+        <span class="k">def</span> <span class="nf">gccf_fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sections</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">fun</span><span class="p">(</span>
+                <span class="n">x</span><span class="p">,</span>
+                <span class="n">sections</span><span class="p">,</span>
+                <span class="n">_edges</span><span class="p">,</span>
+                <span class="n">_max_mels</span><span class="p">,</span>
+                <span class="n">_max_xprime</span><span class="p">,</span>
+                <span class="n">_U</span><span class="p">,</span>
+                <span class="n">_V</span><span class="p">,</span>
+                <span class="n">_J</span><span class="p">,</span>
+                <span class="n">_mu</span><span class="p">,</span>
+                <span class="n">_n_max</span><span class="p">,</span>
+                <span class="n">_max_conn</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)(</span><span class="n">gccf_fun</span><span class="p">)</span></div>
 </pre></div>
 
     </div>

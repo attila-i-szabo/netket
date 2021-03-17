@@ -196,6 +196,7 @@
 </ul>
 </li>
 <li class="toctree-l3 current"><a class="reference internal" href="../../api.html#transition-rules">Transition Rules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisRule.html">netket.sampler.MetropolisRule</a></li>
 <li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.LocalRule.html">netket.sampler.rules.LocalRule</a></li>
 <li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.ExchangeRule.html">netket.sampler.rules.ExchangeRule</a></li>
 <li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.HamiltonianRule.html">netket.sampler.rules.HamiltonianRule</a></li>
@@ -205,6 +206,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#internal-state">Internal State</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="netket.sampler.SamplerState.html">netket.sampler.SamplerState</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisSamplerState.html">netket.sampler.MetropolisSamplerState</a></li>
 </ul>
 </li>
 </ul>
@@ -283,21 +285,23 @@
 <dt id="netket.sampler.rules.HamiltonianRuleNumpy">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.sampler.rules.</span></code><code class="sig-name descname"><span class="pre">HamiltonianRuleNumpy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ô</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/rules/hamiltonian_numpy.html#HamiltonianRuleNumpy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.rules.HamiltonianRuleNumpy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.sampler.metropolis.MetropolisRule</span></code></p>
-<blockquote>
-<div><p>Rule for Numpy sampler backend proposing moves according to the terms in an operator.</p>
+<p>Rule for Numpy sampler backend proposing moves according to the terms in an operator.</p>
 <p>In this case, the transition matrix is taken to be:</p>
 <div class="math notranslate nohighlight">
-\[T( \mathbf{s}\]</div>
-</div></blockquote>
-<p>ightarrow mathbf{s}^prime) =
-rac{1}{mathcal{N}(mathbf{s})} heta(<a href="#id1"><span class="problematic" id="id2">|H_{\mathbf{s},\mathbf{s}^\prime}|</span></a>),</p>
+\[T( \mathbf{s} \rightarrow \mathbf{s}^\prime) = \frac{1}{\mathcal{N}(\mathbf{s})}\theta(|H_{\mathbf{s},\mathbf{s}^\prime}|),\]</div>
+<dl class="py attribute">
+<dt>
+<code class="sig-name descname"><span class="pre">Ô</span></code></dt>
+<dd><p>The (hermitian) operator giving the transition amplitudes.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt id="netket.sampler.rules.HamiltonianRuleNumpy.__init__">
 <code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ô</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.rules.HamiltonianRuleNumpy.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>Ô</strong> (<em>Any</em>) – </p>
+<dd class="field-odd"><p><strong>Ô</strong> (<em>netket.operator._abstract_operator.AbstractOperator</em>) – </p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>

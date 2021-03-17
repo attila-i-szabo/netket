@@ -18,6 +18,8 @@
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script src="../../../_static/js/rtd_theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -194,6 +196,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#transition-rules">Transition Rules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisRule.html">netket.sampler.MetropolisRule</a></li>
 <li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.LocalRule.html">netket.sampler.rules.LocalRule</a></li>
 <li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.ExchangeRule.html">netket.sampler.rules.ExchangeRule</a></li>
 <li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.HamiltonianRule.html">netket.sampler.rules.HamiltonianRule</a></li>
@@ -203,6 +206,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#internal-state">Internal State</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="netket.sampler.SamplerState.html">netket.sampler.SamplerState</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisSamplerState.html">netket.sampler.MetropolisSamplerState</a></li>
 </ul>
 </li>
 </ul>
@@ -281,9 +285,9 @@
 <dt id="netket.sampler.ExactSampler">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.sampler.</span></code><code class="sig-name descname"><span class="pre">ExactSampler</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">hilbert</span></em>, <em class="sig-param"><span class="pre">n_chains=16</span></em>, <em class="sig-param"><span class="pre">machine_pow=2</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float32'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/exact.html#ExactSampler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.ExactSampler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.sampler.base.Sampler</span></code></p>
-<p>This sampler generates i.i.d. samples from $|Psi(s)|^2$.</p>
-<p>In order to perform exact sampling, $|Psi(s)|^2$ is precomputed an all
-the possible values of the quantum numbers $$s$$. This sampler has thus an
+<p>This sampler generates i.i.d. samples from <span class="math notranslate nohighlight">\(|\Psi(\sigma)|^2\)</span>.</p>
+<p>In order to perform exact sampling, <span class="math notranslate nohighlight">\(|\Psi(\sigma)|^2\)</span> is precomputed an all
+the possible values of the quantum numbers <span class="math notranslate nohighlight">\(\sigma\)</span>. This sampler has thus an
 exponential cost with the number of degrees of freedom, and cannot be used
 for large systems, where Metropolis-based sampling are instead a viable
 option.</p>

@@ -123,6 +123,7 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 
 <span class="kn">from</span> <span class="nn">netket.operator</span> <span class="kn">import</span> <span class="n">AbstractOperator</span>
+<span class="kn">from</span> <span class="nn">netket.jax</span> <span class="kn">import</span> <span class="n">numba_to_jax</span><span class="p">,</span> <span class="n">njit4jax</span>
 
 <span class="kn">from</span> <span class="nn">..metropolis</span> <span class="kn">import</span> <span class="n">MetropolisRule</span>
 
@@ -135,10 +136,19 @@
 <span class="sd">    In this case, the transition matrix is taken to be:</span>
 
 <span class="sd">    .. math::</span>
-<span class="sd">       T( \mathbf{s} \rightarrow \mathbf{s}^\prime) = \frac{1}{\mathcal{N}(\mathbf{s})}\theta(|H_{\mathbf{s},\mathbf{s}^\prime}|),</span>
+<span class="sd">       T( \\mathbf{s} \\rightarrow \\mathbf{s}^\\prime) = \\frac{1}{\\mathcal{N}(\\mathbf{s})}\\theta(|H_{\\mathbf{s},\\mathbf{s}^\\prime}|),</span>
+
+<span class="sd">    This rule only works on CPU! If you want to use it on GPU, you</span>
+<span class="sd">    must use the numpy variant :class:`netket.sampler.rules.HamiltonianRuleNumpy`</span>
+<span class="sd">    together with the numpy metropolis sampler</span>
+<span class="sd">    :class:`netket.sampler.MetropolisSamplerNumpy`.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        Ô: The (hermitian) operator giving the transition amplitudes.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">Ô</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">pytree_node</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">Ô</span><span class="p">:</span> <span class="n">AbstractOperator</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">pytree_node</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Raise errors if hilbert is not an Hilbert</span>
@@ -150,17 +160,33 @@
             <span class="p">)</span>
 
 <div class="viewcode-block" id="HamiltonianRule.transition"><a class="viewcode-back" href="../../../../docs/_generated/samplers/netket.sampler.rules.HamiltonianRule.html#netket.sampler.rules.HamiltonianRule.transition">[docs]</a>    <span class="k">def</span> <span class="nf">transition</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">σ</span><span class="p">):</span>
+
+        <span class="n">hilbert</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">hilbert</span>
+        <span class="n">get_conn_flattened</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">Ô</span><span class="o">.</span><span class="n">_get_conn_flattened_closure</span><span class="p">()</span>
+        <span class="n">n_conn_from_sections</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">Ô</span><span class="o">.</span><span class="n">_n_conn_from_sections</span>
+
+        <span class="nd">@njit4jax</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="n">jax</span><span class="o">.</span><span class="n">abstract_arrays</span><span class="o">.</span><span class="n">ShapedArray</span><span class="p">(</span><span class="n">σ</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">σ</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+                <span class="n">jax</span><span class="o">.</span><span class="n">abstract_arrays</span><span class="o">.</span><span class="n">ShapedArray</span><span class="p">((</span><span class="n">σ</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],),</span> <span class="n">σ</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
         <span class="k">def</span> <span class="nf">_transition</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
             <span class="c1"># unpack arguments</span>
-            <span class="n">σ</span><span class="p">,</span> <span class="n">rand_vec</span> <span class="o">=</span> <span class="n">args</span>
-            <span class="c1"># rgen = np.random.default_rng(key)</span>
+            <span class="n">v_proposed</span><span class="p">,</span> <span class="n">log_prob_corr</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">rand_vec</span> <span class="o">=</span> <span class="n">args</span>
 
-            <span class="n">sections</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">σ</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
-            <span class="n">σp</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">Ô</span><span class="o">.</span><span class="n">get_conn_flattened</span><span class="p">(</span><span class="n">σ</span><span class="p">,</span> <span class="n">sections</span><span class="p">)</span>
+            <span class="n">log_prob_corr</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">sections</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+            <span class="n">vp</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_conn_flattened</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">sections</span><span class="p">)</span>
 
-            <span class="n">σ_proposed</span><span class="p">,</span> <span class="n">log_prob_corr</span> <span class="o">=</span> <span class="n">_choose</span><span class="p">(</span><span class="n">σp</span><span class="p">,</span> <span class="n">sections</span><span class="p">,</span> <span class="n">rand_vec</span><span class="p">)</span>
+            <span class="n">_choose</span><span class="p">(</span><span class="n">vp</span><span class="p">,</span> <span class="n">sections</span><span class="p">,</span> <span class="n">rand_vec</span><span class="p">,</span> <span class="n">v_proposed</span><span class="p">,</span> <span class="n">log_prob_corr</span><span class="p">)</span>
 
-            <span class="k">return</span> <span class="n">σ_proposed</span><span class="p">,</span> <span class="n">log_prob_corr</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sections</span><span class="p">)</span>
+            <span class="c1"># TODO: n_conn(v_proposed, sections) implemented below, but</span>
+            <span class="c1"># might be slower than fast implementations like ising</span>
+            <span class="n">get_conn_flattened</span><span class="p">(</span><span class="n">v_proposed</span><span class="p">,</span> <span class="n">sections</span><span class="p">)</span>
+            <span class="n">n_conn_from_sections</span><span class="p">(</span><span class="n">sections</span><span class="p">)</span>
+
+            <span class="n">log_prob_corr</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sections</span><span class="p">)</span>
 
         <span class="c1"># ideally we would pass the key to python/numba in _choose, initialise a</span>
         <span class="c1"># np.random.default_rng(key) and use it to generatee random uniform integers.</span>
@@ -169,14 +195,7 @@
         <span class="c1"># to python</span>
         <span class="n">rand_vec</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">σ</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],))</span>
 
-        <span class="n">σp</span><span class="p">,</span> <span class="n">log_prob_correction</span> <span class="o">=</span> <span class="n">hcb</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
-            <span class="n">_transition</span><span class="p">,</span>
-            <span class="p">(</span><span class="n">σ</span><span class="p">,</span> <span class="n">rand_vec</span><span class="p">),</span>
-            <span class="n">result_shape</span><span class="o">=</span><span class="p">(</span>
-                <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">(</span><span class="n">σ</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">σ</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
-                <span class="n">jax</span><span class="o">.</span><span class="n">ShapeDtypeStruct</span><span class="p">((</span><span class="n">σ</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],),</span> <span class="n">σ</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
-            <span class="p">),</span>
-        <span class="p">)</span>
+        <span class="n">σp</span><span class="p">,</span> <span class="n">log_prob_correction</span> <span class="o">=</span> <span class="n">_transition</span><span class="p">(</span><span class="n">σ</span><span class="p">,</span> <span class="n">rand_vec</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">σp</span><span class="p">,</span> <span class="n">log_prob_correction</span></div>
 
@@ -185,18 +204,13 @@
 
 
 <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">_choose</span><span class="p">(</span><span class="n">σp</span><span class="p">,</span> <span class="n">sections</span><span class="p">,</span> <span class="n">rand_vec</span><span class="p">):</span>
-    <span class="n">out_σ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">sections</span><span class="p">),</span> <span class="n">σp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">σp</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-    <span class="n">out_log_prob_corr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">sections</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
+<span class="k">def</span> <span class="nf">_choose</span><span class="p">(</span><span class="n">vp</span><span class="p">,</span> <span class="n">sections</span><span class="p">,</span> <span class="n">rand_vec</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
     <span class="n">low_range</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sections</span><span class="p">):</span>
-        <span class="n">n_rand</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rand_vec</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span>
-        <span class="n">out_σ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">σp</span><span class="p">[</span><span class="n">n_rand</span><span class="p">]</span>
-        <span class="n">out_log_prob_corr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">low_range</span><span class="p">)</span>
+        <span class="n">n_rand</span> <span class="o">=</span> <span class="n">low_range</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">rand_vec</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">low_range</span><span class="p">)))</span>
+        <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">vp</span><span class="p">[</span><span class="n">n_rand</span><span class="p">]</span>
+        <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">low_range</span><span class="p">)</span>
         <span class="n">low_range</span> <span class="o">=</span> <span class="n">s</span>
-
-    <span class="k">return</span> <span class="n">out_σ</span><span class="p">,</span> <span class="n">out_log_prob_corr</span>
 </pre></div>
 
     </div>

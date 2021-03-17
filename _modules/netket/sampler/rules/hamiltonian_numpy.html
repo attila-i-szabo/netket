@@ -138,10 +138,14 @@
 <span class="sd">    In this case, the transition matrix is taken to be:</span>
 
 <span class="sd">    .. math::</span>
-<span class="sd">       T( \mathbf{s} \rightarrow \mathbf{s}^\prime) = \frac{1}{\mathcal{N}(\mathbf{s})}\theta(|H_{\mathbf{s},\mathbf{s}^\prime}|),</span>
+<span class="sd">       T( \\mathbf{s} \\rightarrow \\mathbf{s}^\\prime) = \\frac{1}{\\mathcal{N}(\\mathbf{s})}\\theta(|H_{\\mathbf{s},\\mathbf{s}^\\prime}|),</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        Ô: The (hermitian) operator giving the transition amplitudes.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">Ô</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">pytree_node</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">Ô</span><span class="p">:</span> <span class="n">AbstractOperator</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">pytree_node</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Raise errors if hilbert is not an Hilbert</span>

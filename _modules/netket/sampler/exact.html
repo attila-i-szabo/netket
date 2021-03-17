@@ -135,10 +135,10 @@
 <div class="viewcode-block" id="ExactSampler"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.ExactSampler.html#netket.sampler.ExactSampler">[docs]</a><span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">ExactSampler</span><span class="p">(</span><span class="n">Sampler</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This sampler generates i.i.d. samples from $|\Psi(s)|^2$.</span>
+<span class="sd">    This sampler generates i.i.d. samples from :math:`|\\Psi(\\sigma)|^2`.</span>
 
-<span class="sd">    In order to perform exact sampling, $|\Psi(s)|^2$ is precomputed an all</span>
-<span class="sd">    the possible values of the quantum numbers $$s$$. This sampler has thus an</span>
+<span class="sd">    In order to perform exact sampling, :math:`|\\Psi(\\sigma)|^2` is precomputed an all</span>
+<span class="sd">    the possible values of the quantum numbers :math:`\\sigma`. This sampler has thus an</span>
 <span class="sd">    exponential cost with the number of degrees of freedom, and cannot be used</span>
 <span class="sd">    for large systems, where Metropolis-based sampling are instead a viable</span>
 <span class="sd">    option.</span>
