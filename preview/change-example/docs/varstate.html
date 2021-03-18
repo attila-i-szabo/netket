@@ -537,7 +537,7 @@ through that interface.</p>
 Therefore, if you wish to reload the parameters of a variational state, saved by the json logger, you should
 use the same procedure outlined above, only that the list line should be:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;parameters.mpack&quot;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-  <span class="n">vstate</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">flax</span><span class="o">.</span><span class="n">serialization</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">vstate</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+  <span class="n">vstate</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="n">flax</span><span class="o">.</span><span class="n">serialization</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">vstate</span><span class="o">.</span><span class="n">variables</span><span class="p">,</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>

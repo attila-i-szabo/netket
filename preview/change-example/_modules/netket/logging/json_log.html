@@ -158,7 +158,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="JsonLog.__init__"><a class="viewcode-back" href="../../../docs/_generated/driver/netket.logging.JsonLog.html#netket.logging.JsonLog.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">output_prefix</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;write&quot;</span><span class="p">,</span> <span class="n">save_params_every</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">write_every</span><span class="o">=</span><span class="mi">50</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">output_prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;write&quot;</span><span class="p">,</span>
+        <span class="n">save_params_every</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">write_every</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">save_params</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Construct a Json Logger.</span>
@@ -171,6 +176,7 @@
 <span class="sd">                - `[w]rite`: (default) overwrites file if it already exists;</span>
 <span class="sd">                - `[a]ppend`: appends to the file if it exists, overwise creates a new file;</span>
 <span class="sd">                - `[x]` or `fail`: fails if file already exists;</span>
+<span class="sd">            save_params: bool flag indicating whever parameters should be serialized</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
@@ -214,7 +220,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_save_params_every</span> <span class="o">=</span> <span class="n">save_params_every</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_old_step</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_steps_notflushed_write</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_steps_notflushed_pars</span> <span class="o">=</span> <span class="mi">0</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_steps_notflushed_pars</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save_params</span> <span class="o">=</span> <span class="n">save_params</span></div>
 
 <div class="viewcode-block" id="JsonLog.__call__"><a class="viewcode-back" href="../../../docs/_generated/driver/netket.logging.JsonLog.html#netket.logging.JsonLog.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">variational_state</span><span class="p">):</span>
         <span class="n">old_step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_old_step</span>
@@ -242,6 +249,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_steps_notflushed_write</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">_flush_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variational_state</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_params</span><span class="p">:</span>
+            <span class="k">return</span>
+
         <span class="n">binary_data</span> <span class="o">=</span> <span class="n">serialization</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">variational_state</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prefix</span> <span class="o">+</span> <span class="s2">&quot;.mpack&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
             <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">binary_data</span><span class="p">)</span>

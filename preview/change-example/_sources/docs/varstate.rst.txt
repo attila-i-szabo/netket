@@ -273,5 +273,5 @@ Note that this also serializes the state of the sampler.
     .. code:: python
 
         with open("parameters.mpack", 'rb') as file: 
-          vstate.parameters = flax.serialization.from_bytes(vstate.parameters, file.read())
+          vstate.variables = flax.serialization.from_bytes(vstate.variables, file.read())
 
