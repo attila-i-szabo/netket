@@ -69,10 +69,6 @@ If you don't want to use Flax, Haiku or other supported methods, you can define 
 pass it to the Variational State constructor. Keep in mind, however, that those two functions will be executed 
 inside :code:`jax.jit` blocks, so they must be jit-compatible.
 
-The signature of the init and apply functions must be the following:
-
-.. code:: python
-
 
 MCState
 ^^^^^^^
