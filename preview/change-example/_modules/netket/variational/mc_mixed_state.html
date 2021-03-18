@@ -213,7 +213,7 @@
                 <span class="n">nkjax</span><span class="o">.</span><span class="n">PRNGKey</span><span class="p">(</span><span class="n">sampler_seed</span><span class="p">)</span>
             <span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_diagonal</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="n">hilbert_physical</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">physical</span>
 
@@ -410,7 +410,6 @@
     <span class="p">)</span>
     <span class="n">new_vstate</span><span class="o">.</span><span class="n">n_samples</span> <span class="o">=</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;n_samples&quot;</span><span class="p">]</span>
     <span class="n">new_vstate</span><span class="o">.</span><span class="n">n_discard</span> <span class="o">=</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;n_discard&quot;</span><span class="p">]</span>
-    <span class="n">new_state</span>
 
     <span class="k">return</span> <span class="n">new_vstate</span>
 
