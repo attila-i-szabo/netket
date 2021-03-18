@@ -147,6 +147,7 @@
 <span class="sd">    If the model state is serialized, then it is serialized using the msgpack protocol of flax.</span>
 <span class="sd">    For more information on how to de-serialize the output, see</span>
 <span class="sd">    `here &lt;https://flax.readthedocs.io/en/latest/flax.serialization.html&gt;`_.</span>
+<span class="sd">    The target of the serialization is the variational state itself.</span>
 
 <span class="sd">    Data is serialized to json as several nested dictionaries. You can deserialize by simply calling</span>
 <span class="sd">    :code:`json.load(open(filename))`.</span>

@@ -18,6 +18,8 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script src="../_static/js/rtd_theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -128,9 +130,18 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">The Variational State Interface</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#constructing-a-variational-state">Constructing a Variational State</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#flax">Flax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-models-flax">Defining models: Flax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-models-init-and-apply-functions">Defining models: init and apply functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcstate">MCState</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#using-a-monte-carlo-variational-state">Using a Monte Carlo Variational State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#expectation-values">Expectation values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sampling">Sampling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#collecting-the-state-vector">Collecting the state-vector</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#saving-and-loading-a-variational-state">Saving and Loading a Variational State</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="drivers.html">The Drivers API</a><ul>
@@ -335,8 +346,8 @@ want to do that, you can have a look at the automatic conversion <a class="refer
 especially if mutable, might not work. If you have problems don’t hesitate opening issues on
 GitHub so that we can address them. They are mostly easy fixes.</p>
 </div>
-<div class="section" id="flax">
-<h3>Flax<a class="headerlink" href="#flax" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="defining-models-flax">
+<h3>Defining models: Flax<a class="headerlink" href="#defining-models-flax" title="Permalink to this headline">¶</a></h3>
 <p>In general, the most-well supported way to define Models for NetKet is through Flax.</p>
 <p>If you are not familiar with Flax, it’s a package that allows to define Neural Networks or other
 parametrized functions. While we suggest to read carefully the <a class="reference external" href="https://flax.readthedocs.io/en/latest/notebooks/flax_basics.html">introduction to Flax</a>, if you are impatient and just want to define some simple, easy
@@ -350,6 +361,184 @@ more complicated examples.</p>
 parameters we invite you to use <code class="code docutils literal notranslate"><span class="pre">netket.nn</span></code> in place of <code class="code docutils literal notranslate"><span class="pre">flax.linen</span></code> and <code class="code docutils literal notranslate"><span class="pre">flax.nn</span></code>.</p>
 <p><code class="code docutils literal notranslate"><span class="pre">netket.nn</span></code> re-exports some Flax functionality ensuring that it works nicely with complex numbers.
 If you don’t find something from Flax in <code class="code docutils literal notranslate"><span class="pre">netket.nn</span></code>, please <a class="reference external" href="https://github.com/netket/netket/issues">open an issue</a> in GitHub.</p>
+</div>
+</div>
+<div class="section" id="defining-models-init-and-apply-functions">
+<h3>Defining models: init and apply functions<a class="headerlink" href="#defining-models-init-and-apply-functions" title="Permalink to this headline">¶</a></h3>
+<p>Internally, variational states don’t need a Flax model to work with, but only two functions: an initialization
+function, used to initialize the parameters and the state of the model, and an apply function, used to evaluate
+the model.</p>
+<p>If you don’t want to use Flax, Haiku or other supported methods, you can define your own tuple of functions and
+pass it to the Variational State constructor. Keep in mind, however, that those two functions will be executed
+inside <code class="code docutils literal notranslate"><span class="pre">jax.jit</span></code> blocks, so they must be jit-compatible.</p>
+<p>The signature of the init and apply functions must be the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mcstate">
+<h3>MCState<a class="headerlink" href="#mcstate" title="Permalink to this headline">¶</a></h3>
+<p>Let’s now assume we have a Flax module, <a class="reference internal" href="_generated/models/netket.models.RBM.html#netket.models.RBM" title="netket.models.RBM"><code class="xref py py-class docutils literal notranslate"><span class="pre">RBM</span></code></a> and we want to construct a variational state
+on sampled with a simple <a class="reference internal" href="_generated/samplers/netket.sampler.MetropolisLocal.html#netket.sampler.MetropolisLocal" title="netket.sampler.MetropolisLocal"><code class="xref py py-func docutils literal notranslate"><span class="pre">MetropolisLocal()</span></code></a> sampler.</p>
+<p>To do this, first you need to construct the model and the sampler, and then you can pass them, together with several
+parameters, to the constructor.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hilbert</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">Spin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">10</span>
+
+<span class="n">sampler</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">MetropolisLocal</span><span class="p">(</span><span class="n">hilbert</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">RBM</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">kernel_init</span><span class="o">=</span><span class="n">nk</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">stddev</span><span class="o">=</span><span class="mf">0.01</span><span class="p">))</span>
+
+<span class="n">vstate</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">variational</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">sampler</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When constructed, the variational state will call the model’s init method to generate the state and the
+parameters, and will also initialize the sampler.</p>
+<p>When constructing a variational state you can also pass a seed, that will be used to initialize both the
+weights and the sampler. You can also pass two different seeds for the sampler and the weights.</p>
+</div>
+</div>
+<div class="section" id="using-a-monte-carlo-variational-state">
+<h2>Using a Monte Carlo Variational State<a class="headerlink" href="#using-a-monte-carlo-variational-state" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="expectation-values">
+<h3>Expectation values<a class="headerlink" href="#expectation-values" title="Permalink to this headline">¶</a></h3>
+<p>One you have a variational state, you can do many things with it.
+First of all, you can probe expectation values:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>Ĥ = nk.operator.Ising(hilbert, nk.graph.Chain(hilbert.size), h=0.5)
+
+vstate.expect(Ĥ)
+
+&gt;&gt;&gt; -4.98 ± 0.14 [σ²=9.51, R̂=1.0006]
+</pre></div>
+</div>
+<p>Notice that if you call multiple times <code class="code docutils literal notranslate"><span class="pre">expect</span></code>, the same set of
+samples will be used, and you will get the same result. To force sampling
+to happen again, you can call <a class="reference internal" href="_generated/variational/netket.variational.MCState.html#netket.variational.MCState.sample" title="netket.variational.MCState.sample"><code class="xref py py-meth docutils literal notranslate"><span class="pre">sample()</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>vstate.expect(Ĥ)
+
+&gt;&gt;&gt; -4.98 ± 0.14 [σ²=9.51, R̂=1.0006]
+
+vstate.sample();
+
+vstate.expect(Ĥ)
+
+&gt;&gt;&gt; -4.90 ± 0.14 [σ²=9.54, R̂=1.0062]
+</pre></div>
+</div>
+<p>The set of the last sampled samples can be accessed from the attribute
+<a class="reference internal" href="_generated/variational/netket.variational.MCState.html#netket.variational.MCState.samples" title="netket.variational.MCState.samples"><code class="xref py py-attr docutils literal notranslate"><span class="pre">samples</span></code></a>. If you access the samples
+from this attribute, but you haven’t sampled already, <code class="code docutils literal notranslate"><span class="pre">sample()</span></code> will
+be called automatically.</p>
+<p>Note that when you update the parameters, the samples are automatically
+discarded.</p>
+<p>Parameters can be accessed through the attribute <a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html#netket.variational.VariationalState.parameters" title="netket.variational.VariationalState.parameters"><code class="xref py py-attr docutils literal notranslate"><span class="pre">parameters</span></code></a>,
+and you can modify them by assigning a new set of parameters to this attribute.</p>
+<p>Note that parameters cannot in general be modified in place, as they are
+of type <cite>FrozenDict</cite> (they are frozen, aka can’t be modified). A typical way
+to modify them, for example to add 0.1 to all parameters is to do the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax</span>
+
+<span class="c1"># See the value of some parameters</span>
+<span class="n">vstate</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;visible_bias&#39;</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">DeviceArray</span><span class="p">([</span><span class="o">-</span><span class="mf">0.10806808</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.14987472</span><span class="p">,</span>  <span class="mf">0.13069461</span><span class="p">,</span>  <span class="mf">0.0125838</span> <span class="p">,</span>
+              <span class="mf">0.06278384</span><span class="p">,</span>  <span class="mf">0.00275547</span><span class="p">,</span>  <span class="mf">0.05843748</span><span class="p">,</span>  <span class="mf">0.07516951</span><span class="p">,</span>
+              <span class="mf">0.21897993</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.01632223</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="n">vstate</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">tree_map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">vstate</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
+
+<span class="c1"># Look at the new values</span>
+<span class="n">vstate</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;visible_bias&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">DeviceArray</span><span class="p">([</span><span class="o">-</span><span class="mf">0.00806808</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.04987472</span><span class="p">,</span>  <span class="mf">0.23069461</span><span class="p">,</span>  <span class="mf">0.1125838</span> <span class="p">,</span>
+              <span class="mf">0.16278384</span><span class="p">,</span>  <span class="mf">0.10275547</span><span class="p">,</span>  <span class="mf">0.15843748</span><span class="p">,</span>  <span class="mf">0.17516951</span><span class="p">,</span>
+              <span class="mf">0.31897993</span><span class="p">,</span>  <span class="mf">0.08367777</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float64</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sampling">
+<h3>Sampling<a class="headerlink" href="#sampling" title="Permalink to this headline">¶</a></h3>
+<p>You can also change the number of samples to extract (note: this will
+trigger recompilation of the sample function, so you should not this
+in a hot loop) by changing <a class="reference internal" href="_generated/variational/netket.variational.MCState.html#netket.variational.MCState.n_samples" title="netket.variational.MCState.n_samples"><code class="xref py py-attr docutils literal notranslate"><span class="pre">n_samples</span></code></a>, and
+the number of discarded samples at the beginning of every markov chain by
+changing <a class="reference internal" href="_generated/variational/netket.variational.MCState.html#netket.variational.MCState.n_discard" title="netket.variational.MCState.n_discard"><code class="xref py py-attr docutils literal notranslate"><span class="pre">n_discard</span></code></a>.</p>
+<p>By default, <a class="reference internal" href="_generated/variational/netket.variational.MCState.html#netket.variational.MCState.n_discard" title="netket.variational.MCState.n_discard"><code class="xref py py-attr docutils literal notranslate"><span class="pre">n_discard</span></code></a> is 10% of
+<a class="reference internal" href="_generated/variational/netket.variational.MCState.html#netket.variational.MCState.n_samples" title="netket.variational.MCState.n_samples"><code class="xref py py-attr docutils literal notranslate"><span class="pre">n_samples</span></code></a>.</p>
+<p>The number of samples is then split among the number of chains/batches of the sampler.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hilbert</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">Spin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">6</span>
+
+<span class="n">sampler</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">MetropolisLocal</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">n_chains</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">vstate</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">variational</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">sampler</span><span class="p">,</span> <span class="n">nk</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">RBM</span><span class="p">(),</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">vstate</span><span class="o">.</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="mi">504</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">vstate</span><span class="o">.</span><span class="n">chain_length</span><span class="p">)</span>
+<span class="mi">63</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">vstate</span><span class="o">.</span><span class="n">n_discard</span><span class="p">)</span>
+<span class="mi">50</span>
+</pre></div>
+</div>
+<p>You can see that 500 samples are split among 8 chains, giving <span class="math notranslate nohighlight">\(500/8=62.5\)</span> (rounded to
+the next largest integer, 63). Therefore 8 chains of length 63 will be run.
+n_discard gives the number of discarded steps taken in the markov chain before actually storing
+them, so the Markov Chains are actually <code class="code docutils literal notranslate"><span class="pre">chain_length</span> <span class="pre">+</span> <span class="pre">n_discard</span></code> long. The default
+n_discard is 10% of the total samples, but you can change that to any number.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When running your code under MPI, the length of the chain is computed not only by dividing the
+total number of samples by <code class="code docutils literal notranslate"><span class="pre">n_chains</span></code>, but also by diving it by the number of MPI processes.</p>
+<p>Therefore, considering the number from the example above, if we had 4 MPI processes, we would have
+found a chain length of <span class="math notranslate nohighlight">\(500/(8*4) = 15.625 \rightarrow 16\)</span>.</p>
+</div>
+</div>
+<div class="section" id="collecting-the-state-vector">
+<h3>Collecting the state-vector<a class="headerlink" href="#collecting-the-state-vector" title="Permalink to this headline">¶</a></h3>
+<p>A variational state can be evaluated on the whole Hilbert space in order to obtain
+the ket it represents.</p>
+<p>This is achieved by using the <a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html#netket.variational.VariationalState.to_array" title="netket.variational.VariationalState.to_array"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_array()</span></code></a> method,
+which by defaults normalises the <span class="math notranslate nohighlight">\(L_2\)</span> norm of the vector to 1 (but can be turned off).</p>
+<p>Mixed state ansatzes can be converted to their matrix representation with
+<a class="reference internal" href="_generated/variational/netket.variational.MCMixedState.html#netket.variational.MCMixedState.to_matrix" title="netket.variational.MCMixedState.to_matrix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_matrix()</span></code></a>. In this case, the default
+normalisation sets the trace to 1.</p>
+</div>
+</div>
+<div class="section" id="saving-and-loading-a-variational-state">
+<h2>Saving and Loading a Variational State<a class="headerlink" href="#saving-and-loading-a-variational-state" title="Permalink to this headline">¶</a></h2>
+<p>Variational States conform to the <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.serialization.html">Flax serialization interface</a> and can be serialized and deserialized with it.</p>
+<p>Moreover, the Json Logger <a class="reference internal" href="_generated/driver/netket.logging.JsonLog.html#netket.logging.JsonLog" title="netket.logging.JsonLog"><code class="xref py py-class docutils literal notranslate"><span class="pre">JsonLog</span></code></a> serializes the variational state
+through that interface.</p>
+<p>A simple example to serialize data is provided below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct an RBM model on 10 spins</span>
+<span class="n">vstate</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">variational</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">nk</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">MetropolisLocal</span><span class="p">(</span><span class="n">nk</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">Spin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">10</span><span class="p">),</span>
+                                <span class="n">nk</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">RBM</span><span class="p">())</span>
+
+<span class="kn">import</span> <span class="nn">flax</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;test.mpack&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+  <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">flax</span><span class="o">.</span><span class="n">serialization</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">vstate</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>And here we de-serialize it:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct a new RBM model on 10 spins</span>
+<span class="n">vstate</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">variational</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">nk</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">MetropolisLocal</span><span class="p">(</span><span class="n">nk</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">Spin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">10</span><span class="p">),</span>
+                                <span class="n">nk</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">RBM</span><span class="p">())</span>
+
+<span class="c1"># load</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;test.mpack&quot;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+  <span class="n">vstate</span> <span class="o">=</span> <span class="n">flax</span><span class="o">.</span><span class="n">serialization</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">vstate</span><span class="p">,</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Note that this also serializes the state of the sampler.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The JSonLog serializer only serializes the parameters of the model, and not the whole variational state.
+Therefore, if you wish to reload the parameters of a variational state, saved by the json logger, you should
+use the same procedure outlined above, only that the list line should be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;parameters.mpack&quot;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+  <span class="n">vstate</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">flax</span><span class="o">.</span><span class="n">serialization</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">vstate</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
 </div>
 </div>
 </div>

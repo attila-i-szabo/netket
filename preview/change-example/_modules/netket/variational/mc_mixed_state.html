@@ -122,6 +122,7 @@
 
 <span class="kn">import</span> <span class="nn">flax</span>
 <span class="kn">from</span> <span class="nn">flax</span> <span class="kn">import</span> <span class="n">linen</span> <span class="k">as</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">flax</span> <span class="kn">import</span> <span class="n">serialization</span>
 
 <span class="kn">import</span> <span class="nn">netket</span>
 <span class="kn">from</span> <span class="nn">netket</span> <span class="kn">import</span> <span class="n">jax</span> <span class="k">as</span> <span class="n">nkjax</span>
@@ -237,7 +238,7 @@
             <span class="k">if</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
                 <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">kw</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">diagonal</span> <span class="o">=</span> <span class="n">MCState</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_diagonal</span> <span class="o">=</span> <span class="n">MCState</span><span class="p">(</span>
             <span class="n">sampler_diag</span><span class="p">,</span>
             <span class="n">apply_fun</span><span class="o">=</span><span class="n">diagonal_apply_fun</span><span class="p">,</span>
             <span class="n">n_samples</span><span class="o">=</span><span class="n">n_samples_diag</span><span class="p">,</span>
@@ -252,6 +253,10 @@
 
     <span class="c1"># def init(self, *args, **kwargs):</span>
     <span class="c1">#    super().init(*args, **kwargs)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">diagonal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_diagonal</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">sampler_diag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sampler</span><span class="p">:</span>
@@ -370,6 +375,51 @@
             <span class="o">+</span> <span class="s2">&quot;sampler = </span><span class="si">{}</span><span class="s2">, &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="p">)</span>
             <span class="o">+</span> <span class="s2">&quot;n_samples = </span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span><span class="p">)</span>
         <span class="p">)</span></div>
+
+
+<span class="c1"># serialization</span>
+
+
+<span class="k">def</span> <span class="nf">serialize_MCMixedState</span><span class="p">(</span><span class="n">vstate</span><span class="p">):</span>
+    <span class="n">state_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;variables&quot;</span><span class="p">:</span> <span class="n">serialization</span><span class="o">.</span><span class="n">to_state_dict</span><span class="p">(</span><span class="n">vstate</span><span class="o">.</span><span class="n">variables</span><span class="p">),</span>
+        <span class="s2">&quot;sampler_state&quot;</span><span class="p">:</span> <span class="n">serialization</span><span class="o">.</span><span class="n">to_state_dict</span><span class="p">(</span><span class="n">vstate</span><span class="o">.</span><span class="n">sampler_state</span><span class="p">),</span>
+        <span class="s2">&quot;diagonal&quot;</span><span class="p">:</span> <span class="n">serialization</span><span class="o">.</span><span class="n">to_state_dict</span><span class="p">(</span><span class="n">vstate</span><span class="o">.</span><span class="n">diagonal</span><span class="p">),</span>
+        <span class="s2">&quot;n_samples&quot;</span><span class="p">:</span> <span class="n">vstate</span><span class="o">.</span><span class="n">n_samples</span><span class="p">,</span>
+        <span class="s2">&quot;n_discard&quot;</span><span class="p">:</span> <span class="n">vstate</span><span class="o">.</span><span class="n">n_discard</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">state_dict</span>
+
+
+<span class="k">def</span> <span class="nf">deserialize_MCMixedState</span><span class="p">(</span><span class="n">vstate</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">copy</span>
+
+    <span class="n">new_vstate</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">vstate</span><span class="p">)</span>
+    <span class="n">new_vstate</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+    <span class="c1"># restore the diagonal first so we can relink the samples</span>
+    <span class="n">new_vstate</span><span class="o">.</span><span class="n">_diagonal</span> <span class="o">=</span> <span class="n">serialization</span><span class="o">.</span><span class="n">from_state_dict</span><span class="p">(</span>
+        <span class="n">vstate</span><span class="o">.</span><span class="n">_diagonal</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;diagonal&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="n">new_vstate</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="n">serialization</span><span class="o">.</span><span class="n">from_state_dict</span><span class="p">(</span>
+        <span class="n">vstate</span><span class="o">.</span><span class="n">variables</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;variables&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">new_vstate</span><span class="o">.</span><span class="n">sampler_state</span> <span class="o">=</span> <span class="n">serialization</span><span class="o">.</span><span class="n">from_state_dict</span><span class="p">(</span>
+        <span class="n">vstate</span><span class="o">.</span><span class="n">sampler_state</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;sampler_state&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">new_vstate</span><span class="o">.</span><span class="n">n_samples</span> <span class="o">=</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;n_samples&quot;</span><span class="p">]</span>
+    <span class="n">new_vstate</span><span class="o">.</span><span class="n">n_discard</span> <span class="o">=</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;n_discard&quot;</span><span class="p">]</span>
+    <span class="n">new_state</span>
+
+    <span class="k">return</span> <span class="n">new_vstate</span>
+
+
+<span class="n">serialization</span><span class="o">.</span><span class="n">register_serialization_state</span><span class="p">(</span>
+    <span class="n">MCMixedState</span><span class="p">,</span>
+    <span class="n">serialize_MCMixedState</span><span class="p">,</span>
+    <span class="n">deserialize_MCMixedState</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 
     </div>
