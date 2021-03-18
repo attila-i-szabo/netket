@@ -1,7 +1,60 @@
-.. _variationalstate-interface:
-
 *******************************
 The Variational State Interface
 *******************************
 
-In this page we discuss the API of the variational state interface
+A central element of NetKet is the :class:`~netket.variational.VariationalState` interface.
+A Variational State represents an approximate, variational description of a system, and can be used to 
+probe it. 
+
+As of now, NetKet has two types of Variational state implementations: 
+
+- :class:`~netket.variational.MCState`, which is a classical variational approximation of a pure state.
+
+- :class:`~netket.variational.MCMixedState`, which is a classical variational approximation of a mixed state.
+
+
+It is our plan to build upon this interface for new kind of variational states in the future. For example, we
+are interested in implementing a new kind of variational state that encodes a state into a Qiskit circuit.
+
+Constructing a Variational State
+--------------------------------
+
+To construct the two variational states above you need to provide at least a Monte Carlo sampler (you can see
+the list of available ones :ref:`here <sampler-api>`) and a model.
+The hilbert space of the variational state will be inferred from the sampler, as they all reference the
+hilbert space they are sampling.
+
+The model can be specified in several ways. The most standard way is to pass a `Flax Linen Module <https://flax.readthedocs.io/en/latest/flax.linen.html#module>`_, but you can also pass a Jax-style pair
+of functions :code:`(init, apply)` or an haiku module obtained by calling :code:`haiku.transform()`.
+It's also easy to use another jax-based framework with NetKet (though it's not yet documented). If you
+want to do that, you can have a look at the automatic conversion `code <https://github.com/netket/netket/tree/master/netket/utils/model_frameworks>`_ and get in touch with us.
+
+.. warning:: 
+	
+	Initializing a Variational State with non-Flax modules is still experimental. Complex modules,
+	especially if mutable, might not work. If you have problems don't hesitate opening issues on
+	GitHub so that we can address them. They are mostly easy fixes.
+
+
+Flax
+^^^^
+
+In general, the most-well supported way to define Models for NetKet is through Flax.
+
+If you are not familiar with Flax, it's a package that allows to define Neural Networks or other
+parametrized functions. While we suggest to read carefully the `introduction to Flax <https://flax.readthedocs.io/en/latest/notebooks/flax_basics.html>`_, if you are impatient and just want to define some simple, easy
+models you can find some examples in the `Model Surgery <https://flax.readthedocs.io/en/latest/howtos/model_surgery.html>`_ section of Flax documentation.
+
+Over examples can be found in the source of the :ref:`Pre-built models <_Models>` distributed with NetKet, such as 
+:class:`~netket.models.RBM` (the simplest one), :class:`~netket.models.MPSPeriodic` and :class:`~netket.models.NDM` for
+more complicated examples.
+
+.. warning::
+
+	Flax modules do not always work well with complex numbers. For that reason, if your model has complex
+	parameters we invite you to use :code:`netket.nn` in place of :code:`flax.linen` and :code:`flax.nn`.
+
+	:code:`netket.nn` re-exports some Flax functionality ensuring that it works nicely with complex numbers.
+	If you don't find something from Flax in :code:`netket.nn`, please `open an issue <https://github.com/netket/netket/issues>`_ in GitHub.
+
+

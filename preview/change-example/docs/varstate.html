@@ -21,6 +21,8 @@
     <script src="../_static/js/rtd_theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Drivers API" href="drivers.html" />
+    <link rel="prev" title="What’s New in v3.0" href="whats_new.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -108,7 +110,7 @@
   ---->
 </div>
 
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation-and-requirements">Installation and requirements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="getting_started.html#mpi">MPI</a></li>
@@ -122,6 +124,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="whats_new.html">What’s New in v3.0</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="whats_new.html#api-changes">API Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The Variational State Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#constructing-a-variational-state">Constructing a Variational State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#flax">Flax</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="drivers.html">The Drivers API</a><ul>
@@ -299,8 +308,51 @@
     <div class="body col-md-9 content" role="main">
       
   <div class="section" id="the-variational-state-interface">
-<span id="variationalstate-interface"></span><h1>The Variational State Interface<a class="headerlink" href="#the-variational-state-interface" title="Permalink to this headline">¶</a></h1>
-<p>In this page we discuss the API of the variational state interface</p>
+<h1>The Variational State Interface<a class="headerlink" href="#the-variational-state-interface" title="Permalink to this headline">¶</a></h1>
+<p>A central element of NetKet is the <a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html#netket.variational.VariationalState" title="netket.variational.VariationalState"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariationalState</span></code></a> interface.
+A Variational State represents an approximate, variational description of a system, and can be used to
+probe it.</p>
+<p>As of now, NetKet has two types of Variational state implementations:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="_generated/variational/netket.variational.MCState.html#netket.variational.MCState" title="netket.variational.MCState"><code class="xref py py-class docutils literal notranslate"><span class="pre">MCState</span></code></a>, which is a classical variational approximation of a pure state.</p></li>
+<li><p><a class="reference internal" href="_generated/variational/netket.variational.MCMixedState.html#netket.variational.MCMixedState" title="netket.variational.MCMixedState"><code class="xref py py-class docutils literal notranslate"><span class="pre">MCMixedState</span></code></a>, which is a classical variational approximation of a mixed state.</p></li>
+</ul>
+<p>It is our plan to build upon this interface for new kind of variational states in the future. For example, we
+are interested in implementing a new kind of variational state that encodes a state into a Qiskit circuit.</p>
+<div class="section" id="constructing-a-variational-state">
+<h2>Constructing a Variational State<a class="headerlink" href="#constructing-a-variational-state" title="Permalink to this headline">¶</a></h2>
+<p>To construct the two variational states above you need to provide at least a Monte Carlo sampler (you can see
+the list of available ones <a class="reference internal" href="api.html#sampler-api"><span class="std std-ref">here</span></a>) and a model.
+The hilbert space of the variational state will be inferred from the sampler, as they all reference the
+hilbert space they are sampling.</p>
+<p>The model can be specified in several ways. The most standard way is to pass a <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#module">Flax Linen Module</a>, but you can also pass a Jax-style pair
+of functions <code class="code docutils literal notranslate"><span class="pre">(init,</span> <span class="pre">apply)</span></code> or an haiku module obtained by calling <code class="code docutils literal notranslate"><span class="pre">haiku.transform()</span></code>.
+It’s also easy to use another jax-based framework with NetKet (though it’s not yet documented). If you
+want to do that, you can have a look at the automatic conversion <a class="reference external" href="https://github.com/netket/netket/tree/master/netket/utils/model_frameworks">code</a> and get in touch with us.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Initializing a Variational State with non-Flax modules is still experimental. Complex modules,
+especially if mutable, might not work. If you have problems don’t hesitate opening issues on
+GitHub so that we can address them. They are mostly easy fixes.</p>
+</div>
+<div class="section" id="flax">
+<h3>Flax<a class="headerlink" href="#flax" title="Permalink to this headline">¶</a></h3>
+<p>In general, the most-well supported way to define Models for NetKet is through Flax.</p>
+<p>If you are not familiar with Flax, it’s a package that allows to define Neural Networks or other
+parametrized functions. While we suggest to read carefully the <a class="reference external" href="https://flax.readthedocs.io/en/latest/notebooks/flax_basics.html">introduction to Flax</a>, if you are impatient and just want to define some simple, easy
+models you can find some examples in the <a class="reference external" href="https://flax.readthedocs.io/en/latest/howtos/model_surgery.html">Model Surgery</a> section of Flax documentation.</p>
+<p>Over examples can be found in the source of the <span class="xref std std-ref">Pre-built models</span> distributed with NetKet, such as
+<a class="reference internal" href="_generated/models/netket.models.RBM.html#netket.models.RBM" title="netket.models.RBM"><code class="xref py py-class docutils literal notranslate"><span class="pre">RBM</span></code></a> (the simplest one), <a class="reference internal" href="_generated/models/netket.models.MPSPeriodic.html#netket.models.MPSPeriodic" title="netket.models.MPSPeriodic"><code class="xref py py-class docutils literal notranslate"><span class="pre">MPSPeriodic</span></code></a> and <a class="reference internal" href="_generated/models/netket.models.NDM.html#netket.models.NDM" title="netket.models.NDM"><code class="xref py py-class docutils literal notranslate"><span class="pre">NDM</span></code></a> for
+more complicated examples.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Flax modules do not always work well with complex numbers. For that reason, if your model has complex
+parameters we invite you to use <code class="code docutils literal notranslate"><span class="pre">netket.nn</span></code> in place of <code class="code docutils literal notranslate"><span class="pre">flax.linen</span></code> and <code class="code docutils literal notranslate"><span class="pre">flax.nn</span></code>.</p>
+<p><code class="code docutils literal notranslate"><span class="pre">netket.nn</span></code> re-exports some Flax functionality ensuring that it works nicely with complex numbers.
+If you don’t find something from Flax in <code class="code docutils literal notranslate"><span class="pre">netket.nn</span></code>, please <a class="reference external" href="https://github.com/netket/netket/issues">open an issue</a> in GitHub.</p>
+</div>
+</div>
+</div>
 </div>
 
 
