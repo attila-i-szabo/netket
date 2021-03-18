@@ -1552,9 +1552,11 @@ html .tabbed-set > label:hover {
 }
 
 ul, ol {
-   list-style-position: inside;
+    list-style-position: outside;
+    margin-left: 1em;
 }
 
 ol.arabic {
-   list-style-position: inside;
+   list-style-position: outside;
+   margin-left: 1em;
 }

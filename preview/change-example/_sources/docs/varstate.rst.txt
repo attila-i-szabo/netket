@@ -1,0 +1,7 @@
+.. _variationalstate-interface:
+
+*******************************
+The Variational State Interface
+*******************************
+
+In this page we discuss the API of the variational state interface

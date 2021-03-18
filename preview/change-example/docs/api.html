@@ -24,7 +24,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="netket.graph.AbstractGraph" href="_generated/graph/netket.graph.AbstractGraph.html" />
-    <link rel="prev" title="What’s New in v3.0" href="whats_new.html" />
+    <link rel="prev" title="The Drivers API" href="drivers.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -128,6 +128,11 @@
 <li class="toctree-l2"><a class="reference internal" href="whats_new.html#api-changes">API Changes</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="drivers.html">The Drivers API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="drivers.html#constructing-a-driver">Constructing a driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drivers.html#running-the-optimisation">Running the optimisation</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Public API: netket package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
@@ -148,6 +153,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#operators">Operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.AbstractOperator.html">netket.operator.AbstractOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.BoseHubbard.html">netket.operator.BoseHubbard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.GraphOperator.html">netket.operator.GraphOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.LocalOperator.html">netket.operator.LocalOperator</a></li>
@@ -264,6 +270,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#optimization-drivers">Optimization drivers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.drivers.AbstractVariationalDriver.html">netket.drivers.AbstractVariationalDriver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.drivers.VMC.html">netket.drivers.VMC</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.drivers.SteadyState.html">netket.drivers.SteadyState</a></li>
 </ul>
@@ -272,6 +279,11 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.JsonLog.html">netket.logging.JsonLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.RuntimeLog.html">netket.logging.RuntimeLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.TBLog.html">netket.logging.TBLog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#callbacks">Callbacks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/callbacks/netket.callbacks.EarlyStopping.html">netket.callbacks.EarlyStopping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/callbacks/netket.callbacks.Timeout.html">netket.callbacks.Timeout</a></li>
 </ul>
 </li>
 </ul>
@@ -358,19 +370,22 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/operator/netket.operator.BoseHubbard.html#netket.operator.BoseHubbard" title="netket.operator.BoseHubbard"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.BoseHubbard</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/operator/netket.operator.AbstractOperator.html#netket.operator.AbstractOperator" title="netket.operator.AbstractOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.AbstractOperator</span></code></a></p></td>
+<td><p>Abstract class for quantum Operators.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/operator/netket.operator.BoseHubbard.html#netket.operator.BoseHubbard" title="netket.operator.BoseHubbard"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.BoseHubbard</span></code></a></p></td>
 <td><p>An extended Bose Hubbard model Hamiltonian operator, containing both on-site interactions and nearest-neighboring density-density interactions.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/operator/netket.operator.GraphOperator.html#netket.operator.GraphOperator" title="netket.operator.GraphOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.GraphOperator</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/operator/netket.operator.GraphOperator.html#netket.operator.GraphOperator" title="netket.operator.GraphOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.GraphOperator</span></code></a></p></td>
 <td><p>A graph-based quantum operator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/operator/netket.operator.LocalOperator.html#netket.operator.LocalOperator" title="netket.operator.LocalOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.LocalOperator</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/operator/netket.operator.LocalOperator.html#netket.operator.LocalOperator" title="netket.operator.LocalOperator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.LocalOperator</span></code></a></p></td>
 <td><p>A custom local operator.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/operator/netket.operator.Ising.html#netket.operator.Ising" title="netket.operator.Ising"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.Ising</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/operator/netket.operator.Ising.html#netket.operator.Ising" title="netket.operator.Ising"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.Ising</span></code></a></p></td>
 <td><p>The Transverse-Field Ising Hamiltonian <span class="math notranslate nohighlight">\(-h\sum_i \sigma_i^{(x)} +J\sum_{\langle i,j\rangle} \sigma_i^{(z)}\sigma_j^{(z)}\)</span>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/operator/netket.operator.Heisenberg.html#netket.operator.Heisenberg" title="netket.operator.Heisenberg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.Heisenberg</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/operator/netket.operator.Heisenberg.html#netket.operator.Heisenberg" title="netket.operator.Heisenberg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.Heisenberg</span></code></a></p></td>
 <td><p>The Heisemberg hamiltonian on a lattice.</p></td>
 </tr>
 </tbody>
@@ -764,10 +779,13 @@ optimisers, and it’s extremely easy to use step-dependent schedulers.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/driver/netket.drivers.VMC.html#netket.drivers.VMC" title="netket.drivers.VMC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.drivers.VMC</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/driver/netket.drivers.AbstractVariationalDriver.html#netket.drivers.AbstractVariationalDriver" title="netket.drivers.AbstractVariationalDriver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.drivers.AbstractVariationalDriver</span></code></a></p></td>
+<td><p>Abstract base class for NetKet Variational Monte Carlo drivers</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/driver/netket.drivers.VMC.html#netket.drivers.VMC" title="netket.drivers.VMC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.drivers.VMC</span></code></a></p></td>
 <td><p>Energy minimization using Variational Monte Carlo (VMC).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/driver/netket.drivers.SteadyState.html#netket.drivers.SteadyState" title="netket.drivers.SteadyState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.drivers.SteadyState</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/driver/netket.drivers.SteadyState.html#netket.drivers.SteadyState" title="netket.drivers.SteadyState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.drivers.SteadyState</span></code></a></p></td>
 <td><p>Steady-state driver minimizing L^†L.</p></td>
 </tr>
 </tbody>
@@ -790,6 +808,24 @@ optimisers, and it’s extremely easy to use step-dependent schedulers.</p>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/driver/netket.logging.TBLog.html#netket.logging.TBLog" title="netket.logging.TBLog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.logging.TBLog</span></code></a></p></td>
 <td><p>Creates a tensorboard logger using tensorboardX’s summarywriter.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="callbacks">
+<span id="callbacks-api"></span><h2>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this headline">¶</a></h2>
+<p>Those callbacks can be used with the optimisation drivers.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/callbacks/netket.callbacks.EarlyStopping.html#netket.callbacks.EarlyStopping" title="netket.callbacks.EarlyStopping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.callbacks.EarlyStopping</span></code></a></p></td>
+<td><p>A simple callback to stop NetKet if there are no improvements in the training</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/callbacks/netket.callbacks.Timeout.html#netket.callbacks.Timeout" title="netket.callbacks.Timeout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.callbacks.Timeout</span></code></a></p></td>
+<td><p>A simple callback to stop NetKet after some time has passed.</p></td>
 </tr>
 </tbody>
 </table>
