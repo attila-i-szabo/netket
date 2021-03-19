@@ -397,7 +397,7 @@
             <span class="n">n_discard</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_n_discard</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="nb">int</span><span class="p">(</span><span class="n">n_discard</span><span class="p">)</span> <span class="k">if</span> <span class="n">n_discard</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">chain_length</span> <span class="o">//</span> <span class="mi">10</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">n_discard</span><span class="p">)</span> <span class="k">if</span> <span class="n">n_discard</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span> <span class="o">//</span> <span class="mi">10</span>
         <span class="p">)</span>
 
 <div class="viewcode-block" id="MCState.reset"><a class="viewcode-back" href="../../../docs/_generated/variational/netket.variational.MCState.html#netket.variational.MCState.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -877,23 +877,28 @@
 <span class="c1"># serialization</span>
 
 
-<span class="k">def</span> <span class="nf">serialize_classical_variational_state</span><span class="p">(</span><span class="n">vstate</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">serialize_MCState</span><span class="p">(</span><span class="n">vstate</span><span class="p">):</span>
     <span class="n">state_dict</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;variables&quot;</span><span class="p">:</span> <span class="n">vstate</span><span class="o">.</span><span class="n">variables</span><span class="p">,</span>
-        <span class="s2">&quot;sampler_state&quot;</span><span class="p">:</span> <span class="n">vstate</span><span class="o">.</span><span class="n">sampler_state</span><span class="p">,</span>
+        <span class="s2">&quot;variables&quot;</span><span class="p">:</span> <span class="n">serialization</span><span class="o">.</span><span class="n">to_state_dict</span><span class="p">(</span><span class="n">vstate</span><span class="o">.</span><span class="n">variables</span><span class="p">),</span>
+        <span class="s2">&quot;sampler_state&quot;</span><span class="p">:</span> <span class="n">serialization</span><span class="o">.</span><span class="n">to_state_dict</span><span class="p">(</span><span class="n">vstate</span><span class="o">.</span><span class="n">sampler_state</span><span class="p">),</span>
         <span class="s2">&quot;n_samples&quot;</span><span class="p">:</span> <span class="n">vstate</span><span class="o">.</span><span class="n">n_samples</span><span class="p">,</span>
         <span class="s2">&quot;n_discard&quot;</span><span class="p">:</span> <span class="n">vstate</span><span class="o">.</span><span class="n">n_discard</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">state_dict</span>
 
 
-<span class="k">def</span> <span class="nf">deserialize_classical_variational_state</span><span class="p">(</span><span class="n">vstate</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">deserialize_MCState</span><span class="p">(</span><span class="n">vstate</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">copy</span>
 
     <span class="n">new_vstate</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">vstate</span><span class="p">)</span>
+    <span class="n">new_vstate</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
-    <span class="n">new_vstate</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;variables&quot;</span><span class="p">]</span>
-    <span class="n">new_vstate</span><span class="o">.</span><span class="n">sampler_state</span> <span class="o">=</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;sampler_state&quot;</span><span class="p">]</span>
+    <span class="n">new_vstate</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="n">serialization</span><span class="o">.</span><span class="n">from_state_dict</span><span class="p">(</span>
+        <span class="n">vstate</span><span class="o">.</span><span class="n">variables</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;variables&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">new_vstate</span><span class="o">.</span><span class="n">sampler_state</span> <span class="o">=</span> <span class="n">serialization</span><span class="o">.</span><span class="n">from_state_dict</span><span class="p">(</span>
+        <span class="n">vstate</span><span class="o">.</span><span class="n">sampler_state</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;sampler_state&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
     <span class="n">new_vstate</span><span class="o">.</span><span class="n">n_samples</span> <span class="o">=</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;n_samples&quot;</span><span class="p">]</span>
     <span class="n">new_vstate</span><span class="o">.</span><span class="n">n_discard</span> <span class="o">=</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;n_discard&quot;</span><span class="p">]</span>
 
@@ -902,8 +907,8 @@
 
 <span class="n">serialization</span><span class="o">.</span><span class="n">register_serialization_state</span><span class="p">(</span>
     <span class="n">MCState</span><span class="p">,</span>
-    <span class="n">serialize_classical_variational_state</span><span class="p">,</span>
-    <span class="n">deserialize_classical_variational_state</span><span class="p">,</span>
+    <span class="n">serialize_MCState</span><span class="p">,</span>
+    <span class="n">deserialize_MCState</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 

@@ -229,7 +229,7 @@
 <span class="sd">            otherwise for a mixed state $\rho$, this is $&lt;O&gt; = \Tr[\rho \hat{O}/\Tr[\rho]$.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            Ô (netket.operator.AbstractOperator): the operator O.</span>
+<span class="sd">            Ô: the operator O.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            An estimation of the quantum expectation value &lt;O&gt;.</span>
@@ -261,9 +261,16 @@
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Estimates both the gradient of the quantum expectation value of a given operator O.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            Ô: the operator O</span>
+<span class="sd">            Ô: the operator Ô for which we compute the expectation value and it&#39;s gradient</span>
+<span class="sd">            mutable: Can be bool, str, or list. Specifies which collections in the model_state should</span>
+<span class="sd">                     be treated as  mutable: bool: all/no collections are mutable. str: The name of a</span>
+<span class="sd">                     single mutable  collection. list: A list of names of mutable collections.</span>
+<span class="sd">                     This is used to mutate the state of the model while you train it (for example</span>
+<span class="sd">                     to implement BatchNorm. Consult</span>
+<span class="sd">                     `Flax&#39;s Module.apply documentation &lt;https://flax.readthedocs.io/en/latest/_modules/flax/linen/module.html#Module.apply&gt;`_</span>
+<span class="sd">                     for a more in-depth exaplanation).</span>
 <span class="sd">            is_hermitian: optional override for whever to use or not the hermitian logic. By default</span>
-<span class="sd">                it&#39;s automatically detected.</span>
+<span class="sd">                          it&#39;s automatically detected.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            An estimation of the quantum expectation value &lt;O&gt;.</span>

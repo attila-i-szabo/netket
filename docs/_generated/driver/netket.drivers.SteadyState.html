@@ -126,6 +126,27 @@
 <li class="toctree-l2"><a class="reference internal" href="../../whats_new.html#api-changes">API Changes</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../varstate.html">The Variational State Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../varstate.html#constructing-a-variational-state">Constructing a Variational State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../varstate.html#defining-models-flax">Defining models: Flax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../varstate.html#defining-models-init-and-apply-functions">Defining models: init and apply functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../varstate.html#mcstate">MCState</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../varstate.html#using-a-monte-carlo-variational-state">Using a Monte Carlo Variational State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../varstate.html#expectation-values">Expectation values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../varstate.html#sampling">Sampling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../varstate.html#collecting-the-state-vector">Collecting the state-vector</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../varstate.html#saving-and-loading-a-variational-state">Saving and Loading a Variational State</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers.html">The Drivers API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../drivers.html#constructing-a-driver">Constructing a driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../drivers.html#running-the-optimisation">Running the optimisation</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../api.html">Public API: netket package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
@@ -146,6 +167,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#operators">Operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.AbstractOperator.html">netket.operator.AbstractOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.BoseHubbard.html">netket.operator.BoseHubbard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.GraphOperator.html">netket.operator.GraphOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.LocalOperator.html">netket.operator.LocalOperator</a></li>
@@ -262,6 +284,7 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../api.html#optimization-drivers">Optimization drivers</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="netket.drivers.AbstractVariationalDriver.html">netket.drivers.AbstractVariationalDriver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.drivers.VMC.html">netket.drivers.VMC</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">netket.drivers.SteadyState</a></li>
 </ul>
@@ -270,6 +293,11 @@
 <li class="toctree-l3"><a class="reference internal" href="netket.logging.JsonLog.html">netket.logging.JsonLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.logging.RuntimeLog.html">netket.logging.RuntimeLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.logging.TBLog.html">netket.logging.TBLog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#callbacks">Callbacks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../callbacks/netket.callbacks.EarlyStopping.html">netket.callbacks.EarlyStopping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../callbacks/netket.callbacks.Timeout.html">netket.callbacks.Timeout</a></li>
 </ul>
 </li>
 </ul>
@@ -414,6 +442,9 @@ count is set to 0.</p>
 stored in this driver for <cite>n_iter</cite> steps and dumping values of the observables <cite>obs</cite>
 in the output <cite>logger</cite>. If no logger is specified, creates a json file at <cite>out</cite>,
 overwriting files with the same prefix.</p>
+<p>By default uses <span class="xref std std-ref">netket.logging.JsonLogger</span>. To know about the output format
+check it’s documentation. The logger object is also returned at the end of this function
+so that you can inspect the results without reading the json output.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">

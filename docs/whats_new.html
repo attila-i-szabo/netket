@@ -21,7 +21,7 @@
     <script src="../_static/js/rtd_theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Public API: netket package" href="api.html" />
+    <link rel="next" title="The Variational State Interface" href="varstate.html" />
     <link rel="prev" title="Getting Started" href="getting_started.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -126,6 +126,27 @@
 <li class="toctree-l2"><a class="reference internal" href="#api-changes">API Changes</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="varstate.html">The Variational State Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="varstate.html#constructing-a-variational-state">Constructing a Variational State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="varstate.html#defining-models-flax">Defining models: Flax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varstate.html#defining-models-init-and-apply-functions">Defining models: init and apply functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varstate.html#mcstate">MCState</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="varstate.html#using-a-monte-carlo-variational-state">Using a Monte Carlo Variational State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="varstate.html#expectation-values">Expectation values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varstate.html#sampling">Sampling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varstate.html#collecting-the-state-vector">Collecting the state-vector</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="varstate.html#saving-and-loading-a-variational-state">Saving and Loading a Variational State</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="drivers.html">The Drivers API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="drivers.html#constructing-a-driver">Constructing a driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drivers.html#running-the-optimisation">Running the optimisation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Public API: netket package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
@@ -146,6 +167,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#operators">Operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.AbstractOperator.html">netket.operator.AbstractOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.BoseHubbard.html">netket.operator.BoseHubbard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.GraphOperator.html">netket.operator.GraphOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.LocalOperator.html">netket.operator.LocalOperator</a></li>
@@ -262,6 +284,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#optimization-drivers">Optimization drivers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.drivers.AbstractVariationalDriver.html">netket.drivers.AbstractVariationalDriver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.drivers.VMC.html">netket.drivers.VMC</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.drivers.SteadyState.html">netket.drivers.SteadyState</a></li>
 </ul>
@@ -270,6 +293,11 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.JsonLog.html">netket.logging.JsonLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.RuntimeLog.html">netket.logging.RuntimeLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.TBLog.html">netket.logging.TBLog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#callbacks">Callbacks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/callbacks/netket.callbacks.EarlyStopping.html">netket.callbacks.EarlyStopping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/callbacks/netket.callbacks.Timeout.html">netket.callbacks.Timeout</a></li>
 </ul>
 </li>
 </ul>
@@ -316,7 +344,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="api.html#sampler"><span class="std std-ref">Samplers</span></a> no longer take a machine as an argument.</p></li>
 <li><p><a class="reference internal" href="api.html#sampler"><span class="std std-ref">Samplers</span></a> are now immutable (frozen) <cite>dataclasses</cite> (defined through <cite>flax.struct.dataclass</cite>) that only hold the sampling parameters. As a consequence it is no longer possible to change their settings such as <cite>n_chains</cite> or <cite>n_sweeps</cite> without creating a new sampler. If you wish to update only one parameter, it is possible to construct the new sampler with the updated value by using the <cite>sampler.replace(parameter=new_value)</cite> function.</p></li>
-<li><p><a class="reference internal" href="api.html#sampler"><span class="std std-ref">Samplers</span></a> are no longer stateful objects. Instead, they can construct an immutable state object <span class="xref std std-ref">sampler.init_state</span>, which can be passed to sampling functions such as <span class="xref std std-ref">sampler.sample</span>, which now return also the updated state. However, unless you have particoular use-cases we advise you use the variational state <span class="xref std std-ref">MCState</span> instead.</p></li>
+<li><p><a class="reference internal" href="api.html#sampler"><span class="std std-ref">Samplers</span></a> are no longer stateful objects. Instead, they can construct an immutable state object <span class="xref std std-ref">sampler.init_state</span>, which can be passed to sampling functions such as <span class="xref std std-ref">sampler.sample</span>, which now return also the updated state. However, unless you have particoular use-cases we advise you use the variational state <a class="reference internal" href="varstate.html#mcstate"><span class="std std-ref">MCState</span></a> instead.</p></li>
 <li><p>The <a class="reference internal" href="api.html#optimizer"><span class="std std-ref">Optimizer</span></a> module has been overhauled, and now only re-exports flax optim module. We advise not to use netket’s optimizer but instead to use <a class="reference external" href="https://github.com/deepmind/optax">optax</a> or <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.optim.html">flax.optim</a> directly.</p></li>
 <li><p>The <span class="xref std std-ref">SR</span> object now is only a set of options used to compute the SR matrix. The SR matrix, now called <cite>quantum_geometric_tensor</cite> can be optained by calling <span class="xref std std-ref">MCState.quantum_geometric_tensor(sr)</span>. Depending on the settings, this can be a lazy object.</p></li>
 <li><p><span class="xref std std-ref">netket.Vmc</span> hasa been renamed to <span class="xref std std-ref">netkt.VMC</span></p></li>
