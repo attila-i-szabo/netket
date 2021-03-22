@@ -309,6 +309,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#parallelization">Parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#running-on-cpu-when-gpus-are-present">Running on CPU when GPUs are present</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#using-gpus">Using GPUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#nans-in-training-and-loss-of-precision">NaNs in training and loss of precision</a></li>
 </ul>
 </li>
 </ul>
@@ -482,7 +483,7 @@ the next largest integer, 63). Therefore 8 chains of length 63 will be run.
 n_discard gives the number of discarded steps taken in the markov chain before actually storing
 them, so the Markov Chains are actually <code class="code docutils literal notranslate"><span class="pre">chain_length</span> <span class="pre">+</span> <span class="pre">n_discard</span></code> long. The default
 n_discard is 10% of the total samples, but you can change that to any number.</p>
-<div class="admonition warning">
+<div class="admonition warning" id="warn-mpi-sampling">
 <p class="admonition-title">Warning</p>
 <p>When running your code under MPI, the length of the chain is computed not only by dividing the
 total number of samples by <code class="code docutils literal notranslate"><span class="pre">n_chains</span></code>, but also by diving it by the number of MPI processes.</p>

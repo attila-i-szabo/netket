@@ -196,6 +196,10 @@
 <span class="sd">        Re-initializes all the parameters with the provided initialization function, defaulting to</span>
 <span class="sd">        the normal distribution of standard deviation 0.01.</span>
 
+<span class="sd">        .. warn::</span>
+<span class="sd">            The init function will not change the dtype of the parameters, which is determined by the</span>
+<span class="sd">            model. DO NOT SPECIFY IT INSIDE THE INIT FUNCTION</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            init_fun: a jax initializer such as :ref:`netket.nn.initializers.normal`. Must be a Callable</span>
 <span class="sd">                taking 3 inputs, the jax PRNG key, the shape and the dtype, and outputting an array with</span>

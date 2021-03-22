@@ -307,6 +307,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#parallelization">Parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#running-on-cpu-when-gpus-are-present">Running on CPU when GPUs are present</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#using-gpus">Using GPUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#nans-in-training-and-loss-of-precision">NaNs in training and loss of precision</a></li>
 </ul>
 </li>
 </ul>
@@ -337,18 +338,22 @@
 <li><p>Some models (previously machines) such as the RBM (Restricted Bolzmann Machine) Machine, NDM (Neural Density Matrix) or MPS (Matrix Product State ansatz) are available in <a class="reference internal" href="api.html#pre-built-models"><span class="std std-ref">Pre-built models</span></a>.</p></li>
 <li><p>Machines, now called models, should be written using <a class="reference external" href="https://flax.readthedocs.io/en/latest">flax</a> or another jax framework.</p></li>
 <li><p>Serialization and deserialization functionality has now been moved to <span class="xref std std-ref">variational.MCState</span>, which support the standard Flax interface through MsgPack. See <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.serialization.html">Flax docs</a> for more information</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">AbstractMachine.init_random_parameters</span></code> functionality has now been absorbed into <a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html#netket.variational.VariationalState.init_parameters" title="netket.variational.VariationalState.init_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">netket.variational.VariationalState.init_parameters()</span></code></a>, which however has a different syntax.</p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="api.html#sampler"><span class="std std-ref">Samplers</span></a> now require the hilbert space upon which they sample to be passed in to the constructor.</p></li>
 </ul>
 <p>Also note that several keyword arguments of the samplers have changed, and new one are available.</p>
 <ul class="simple">
+<li><p>It’s now possible to change <a class="reference internal" href="api.html#sampler"><span class="std std-ref">Samplers</span></a> dtype, which controls the type of the output. By default they use double-precision samples (<cite>np.float64</cite>). Be wary of type promotion issues with your models.</p></li>
 <li><p><a class="reference internal" href="api.html#sampler"><span class="std std-ref">Samplers</span></a> no longer take a machine as an argument.</p></li>
 <li><p><a class="reference internal" href="api.html#sampler"><span class="std std-ref">Samplers</span></a> are now immutable (frozen) <cite>dataclasses</cite> (defined through <cite>flax.struct.dataclass</cite>) that only hold the sampling parameters. As a consequence it is no longer possible to change their settings such as <cite>n_chains</cite> or <cite>n_sweeps</cite> without creating a new sampler. If you wish to update only one parameter, it is possible to construct the new sampler with the updated value by using the <cite>sampler.replace(parameter=new_value)</cite> function.</p></li>
 <li><p><a class="reference internal" href="api.html#sampler"><span class="std std-ref">Samplers</span></a> are no longer stateful objects. Instead, they can construct an immutable state object <span class="xref std std-ref">sampler.init_state</span>, which can be passed to sampling functions such as <span class="xref std std-ref">sampler.sample</span>, which now return also the updated state. However, unless you have particoular use-cases we advise you use the variational state <a class="reference internal" href="varstate.html#mcstate"><span class="std std-ref">MCState</span></a> instead.</p></li>
-<li><p>The <a class="reference internal" href="api.html#optimizer"><span class="std std-ref">Optimizer</span></a> module has been overhauled, and now only re-exports flax optim module. We advise not to use netket’s optimizer but instead to use <a class="reference external" href="https://github.com/deepmind/optax">optax</a> or <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.optim.html">flax.optim</a> directly.</p></li>
+<li><p>The <a class="reference internal" href="api.html#optimizer"><span class="std std-ref">Optimizer</span></a> module has been overhauled, and now only re-exports flax optim module. We advise not to use netket’s optimizer but instead to use <a class="reference external" href="https://github.com/deepmind/optax">optax</a> .</p></li>
 <li><p>The <span class="xref std std-ref">SR</span> object now is only a set of options used to compute the SR matrix. The SR matrix, now called <cite>quantum_geometric_tensor</cite> can be optained by calling <span class="xref std std-ref">MCState.quantum_geometric_tensor(sr)</span>. Depending on the settings, this can be a lazy object.</p></li>
-<li><p><span class="xref std std-ref">netket.Vmc</span> hasa been renamed to <span class="xref std std-ref">netkt.VMC</span></p></li>
+<li><p><span class="xref std std-ref">netket.Vmc</span> has been renamed to <span class="xref std std-ref">netkt.VMC</span></p></li>
+<li><p><a class="reference internal" href="_generated/models/netket.models.RBM.html#netket-models-rbm"><span class="std std-ref">netket.models.RBM</span></a> replaces the old <code class="code docutils literal notranslate"><span class="pre">RBM</span></code> machine, but has real parameters by default.</p></li>
+<li><p>As we rely on Jax, using <code class="code docutils literal notranslate"><span class="pre">dtype=float</span></code> or <code class="code docutils literal notranslate"><span class="pre">dtype=complex</span></code>, which are weak types, will sometimes lead to loss of precision because they might be converted to <cite>float32</cite>. Use <code class="code docutils literal notranslate"><span class="pre">np.float64</span></code> or <code class="code docutils literal notranslate"><span class="pre">np.complex128</span></code> instead if you want double precision when defining your models.</p></li>
 </ul>
 </div>
 </div>

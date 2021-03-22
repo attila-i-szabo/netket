@@ -307,6 +307,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#parallelization">Parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#running-on-cpu-when-gpus-are-present">Running on CPU when GPUs are present</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#using-gpus">Using GPUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#nans-in-training-and-loss-of-precision">NaNs in training and loss of precision</a></li>
 </ul>
 </li>
 </ul>
@@ -325,29 +326,31 @@
 <h2>Installation and requirements<a class="headerlink" href="#installation-and-requirements" title="Permalink to this headline">¶</a></h2>
 <p>Netket v3.0 requires <cite>python&gt;= 3.8</cite> and optionally a recent MPI install.
 To install, run one of the two following commands</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">pre</span> <span class="n">netket</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">pre</span> <span class="n">netket</span><span class="p">[</span><span class="n">mpi</span><span class="p">]</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install --pre netket
 </pre></div>
 </div>
-<p>The latter enables MPI-related functionalities.
-Additionally, if you don’t have it installed (yet) you must install <cite>libjax</cite>
-with one of the following commands.</p>
 <p>The flag <code class="code docutils literal notranslate"><span class="pre">--pre</span></code> tells pip to also install pre-release versions. As NetKet 3 is in beta, this is necessary.</p>
 <p>If you want to run NetKet on a GPU, you must install a GPU-compatible <code class="code docutils literal notranslate"><span class="pre">jaxlib</span></code>. For that, we advise you to
 look at the instructions on <a class="reference external" href="https://github.com/google/jax#pip-installation">jax repository</a>, however at the time
 of writing, this means you should run the following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">jax</span> <span class="n">jaxlib</span><span class="o">==</span><span class="n">X</span><span class="o">.</span><span class="n">XX</span><span class="o">.</span><span class="n">XX</span><span class="o">+</span><span class="n">cudaYYY</span> <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">storage</span><span class="o">.</span><span class="n">googleapis</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jax</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="n">jax_releases</span><span class="o">.</span><span class="n">html</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -U jax <span class="nv">jaxlib</span><span class="o">==</span>X.XX.XX+cudaYYY -f https://storage.googleapis.com/jax-releases/jax_releases.html
 </pre></div>
 </div>
 <p>where X.XX.XX should be a recent jaxlib version and YYY the cuda version installed on your computer.
 At the time of writing, Netket was tested with X=0.1.62 and cuda=111</p>
 <p>To query the installed <cite>netket</cite> version you can run the following command in your shell</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;import netket; print(netket.version)&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -e <span class="s2">&quot;import netket; print(netket.version)&quot;</span>
 </pre></div>
 </div>
 <div class="section" id="mpi">
 <h3>MPI<a class="headerlink" href="#mpi" title="Permalink to this headline">¶</a></h3>
-<p>If you want to use MPI, you will need to have a working MPI compiler</p>
+<p>If you want to use MPI, you will need to have a working MPI compiler. You can install the
+dependencies necessary to run with MPI with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install --pre netket<span class="o">[</span>mpi<span class="o">]</span>
+</pre></div>
+</div>
+<p>Subsequently, NetKet will exploit MPI-level parallelism for the Monte-Carlo sampling.
+See <a class="reference internal" href="varstate.html#warn-mpi-sampling"><span class="std std-ref">this block</span></a> to understand how NetKet behaves under MPI.</p>
 </div>
 </div>
 <div class="section" id="introduction">
@@ -374,8 +377,7 @@ usage of Neural-Networks.</p>
 As such, netket exports a module, <cite>netket.nn</cite> which re-exports the functionality in <cite>flax.nn</cite>, but
 with the additional support of complex numbers.
 Also <cite>netket.optim</cite> is a re-export of <cite>flax.optim</cite> with few added functionalities.</p>
-<p>Lastly, in <cite>netket.jax</cite> there are a few functions, notably <cite>jax.grad</cite> and <cite>jax.vjp</cite> adapted to work with
-arbitrary real or complex functions, and/or with MPI.</p>
+<p>Lastly, in <cite>netket.jax</cite> there are a few functions, notably <cite>jax.grad</cite> and <cite>jax.vjp</cite> adapted to work with arbitrary real or complex functions, and/or with MPI.</p>
 </div>
 <div class="section" id="legacy-api-support-api-before-2021">
 <h2>Legacy API support (API before 2021)<a class="headerlink" href="#legacy-api-support-api-before-2021" title="Permalink to this headline">¶</a></h2>
@@ -399,6 +401,7 @@ probably be of poor quality.</p>
 <div class="section" id="commented-example">
 <h2>Commented Example<a class="headerlink" href="#commented-example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">netket</span> <span class="k">as</span> <span class="nn">nk</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 <p>The first thing to do is import NetKet. We usually shorten it to <cite>nk</cite>.</p>
@@ -424,7 +427,7 @@ submodule.</p>
 <span class="xref std std-ref">Ising</span> and <span class="xref std std-ref">Bose-Hubbard</span>, but you can also build the operators
 yourself by summing all the local terms. See the <a class="reference internal" href="api.html#operators"><span class="std std-ref">Operators</span></a> documentation
 for more informations.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ma</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">RBM</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ma</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">RBM</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
 <span class="n">sa</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">MetropolisLocal</span><span class="p">(</span><span class="n">hi</span><span class="p">,</span> <span class="n">n_chains</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 </pre></div>
@@ -432,9 +435,21 @@ for more informations.</p>
 <p>Then, one must chose the model to use as a Neural Quantum State. Netket provides
 a few pre-built models in the <a class="reference internal" href="api.html#models"><span class="std std-ref">Pre-built models</span></a> sub-module.
 Netket models are simply <a class="reference external" href="https://flax.readthedocs.io">Flax</a> modules: check out the <span class="xref std std-ref">define-your-model</span>
-section for more informations on how to define or use custom models.</p>
+section for more informations on how to define or use custom models.
+We specify <code class="code docutils literal notranslate"><span class="pre">dtype=float</span></code> (which is the default, but we want to show
+it to you) which means that weights will be stored as double-precision.
+We advise you that Jax (and therefore netket) does not follow completely the standard NumPy
+promotion rules, instead treating <code class="code docutils literal notranslate"><span class="pre">float</span></code> as a weak double-precision type
+which can _loose_ precision in some cases.
+This can happen if you mix single and double precision in your models and the sampler and
+is described in <a class="reference external" href="https://jax.readthedocs.io/en/latest/type_promotion.html">Jax:Type promotion semantics</a>.</p>
 <p>Hilbert space samplers are defined in the <a class="reference internal" href="api.html#sampler"><span class="std std-ref">Sampler</span></a> submodule. In general
-you must provide the constructor the hilbert space to be sampled and some options.</p>
+you must provide the constructor the hilbert space to be sampled and some options.
+In this case we aask for 16 markov chains and to use single-precision (the default,
+anyhow).
+Samples don’t need double precision at all, so it makes sense to use the lower
+precision, but you have to be careful with the dtype of your model in order
+not to reduce the precision.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optimizer</span>
 <span class="n">op</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">Sgd</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 </pre></div>

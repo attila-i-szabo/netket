@@ -309,6 +309,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../sharp-bits.html#parallelization">Parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../sharp-bits.html#running-on-cpu-when-gpus-are-present">Running on CPU when GPUs are present</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../sharp-bits.html#using-gpus">Using GPUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sharp-bits.html#nans-in-training-and-loss-of-precision">NaNs in training and loss of precision</a></li>
 </ul>
 </li>
 </ul>
@@ -323,7 +324,7 @@
 <h1>netket.sampler.ExactSampler<a class="headerlink" href="#netket-sampler-exactsampler" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="netket.sampler.ExactSampler">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.sampler.</span></code><code class="sig-name descname"><span class="pre">ExactSampler</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">hilbert</span></em>, <em class="sig-param"><span class="pre">n_chains=16</span></em>, <em class="sig-param"><span class="pre">machine_pow=2</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float32'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/exact.html#ExactSampler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.ExactSampler" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.sampler.</span></code><code class="sig-name descname"><span class="pre">ExactSampler</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">hilbert</span></em>, <em class="sig-param"><span class="pre">n_chains=16</span></em>, <em class="sig-param"><span class="pre">machine_pow=2</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float64'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/exact.html#ExactSampler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.ExactSampler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.sampler.base.Sampler</span></code></p>
 <p>This sampler generates i.i.d. samples from <span class="math notranslate nohighlight">\(|\Psi(\sigma)|^2\)</span>.</p>
 <p>In order to perform exact sampling, <span class="math notranslate nohighlight">\(|\Psi(\sigma)|^2\)</span> is precomputed an all
@@ -333,7 +334,7 @@ for large systems, where Metropolis-based sampling are instead a viable
 option.</p>
 <dl class="py method">
 <dt id="netket.sampler.ExactSampler.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">hilbert</span></em>, <em class="sig-param"><span class="pre">n_chains=16</span></em>, <em class="sig-param"><span class="pre">machine_pow=2</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float32'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.ExactSampler.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">hilbert</span></em>, <em class="sig-param"><span class="pre">n_chains=16</span></em>, <em class="sig-param"><span class="pre">machine_pow=2</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float64'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.ExactSampler.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

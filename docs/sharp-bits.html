@@ -306,6 +306,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#parallelization">Parallelization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#running-on-cpu-when-gpus-are-present">Running on CPU when GPUs are present</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-gpus">Using GPUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nans-in-training-and-loss-of-precision">NaNs in training and loss of precision</a></li>
 </ul>
 </li>
 </ul>
@@ -355,6 +356,20 @@ something like <code class="code docutils literal notranslate"><span class="pre"
 </ul>
 <p>Eventually we would like the selection to be automatic, but this has not yet been implemented.</p>
 <p>Please open tickets if you find issues!</p>
+</div>
+<div class="section" id="nans-in-training-and-loss-of-precision">
+<span id="nan"></span><h2>NaNs in training and loss of precision<a class="headerlink" href="#nans-in-training-and-loss-of-precision" title="Permalink to this headline">¶</a></h2>
+<p>If you find NaNs while training, especially if you are using your own model, there might be a few reasons:</p>
+<ul class="simple">
+<li><p>It might simply be a precision issue, as you might be using single precision (<code class="code docutils literal notranslate"><span class="pre">np.float32</span></code>, <code class="code docutils literal notranslate"><span class="pre">np.complex64</span></code>) instead of double precision (<code class="code docutils literal notranslate"><span class="pre">np.float64</span></code>, <code class="code docutils literal notranslate"><span class="pre">np.complex128</span></code>). Be careful that if you use <code class="code docutils literal notranslate"><span class="pre">float</span></code> and <code class="code docutils literal notranslate"><span class="pre">complex</span></code> as dtype, they will not always behave as you expect!
+They are known as <a class="reference external" href="https://jax.readthedocs.io/en/latest/type_promotion.html?highlight=type-promotion">weak dtypes</a>, and when multiplied by a single-precision number they will be converted to single precision.
+This issue might manifest especially when using Flax, which respects type promotion, as opposed to <cite>jax.experimental.stax</cite>, which does not.</p></li>
+<li><p>Check the initial parameters. In the NetKet 2 models were always initialized with weights normally distributed.
+In Netket 3, <cite>netket.nn</cite> layers use the same default (normal distribution with standard deviation 0.01) but
+if you use general flax layers they might use different initializers.
+different initialisation distributions have particoularly strong effects when working with complex-valued models.
+A good way to enforce the same distribution across all your weights, similar to NetKet 2 behaviour, is to use <a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html#netket.variational.VariationalState.init_parameters" title="netket.variational.VariationalState.init_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">init_parameters()</span></code></a>.</p></li>
+</ul>
 </div>
 </div>
 

@@ -408,6 +408,15 @@ for edge in graph.edges():
 </pre></div>
 </div>
 </div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="Defining-a-JAX-module-to-be-used-as-a-wave-function">
 <h2>Defining a JAX module to be used as a wave function<a class="headerlink" href="#Defining-a-JAX-module-to-be-used-as-a-wave-function" title="Permalink to this headline">¶</a></h2>
@@ -441,13 +450,13 @@ model=stax.serial(stax.Dense(2 * graph.n_nodes, W_init=nk.nn.initializers.normal
 #class Model(nk.nn.Module):
 #    @nk.nn.compact
 #    def __call__(self, x):
-#        x = nk.nn.Dense(features=2*x.shape[-1], dtype=complex, kernel_init=nk.nn.initializers.normal(stddev=0.1), bias_init=nk.nn.initializers.normal(stddev=0.1))(x)
+#        x = nk.nn.Dense(features=2*x.shape[-1], dtype=complex, kernel_init=nk.nn.initializers.normal(stddev=0.01), bias_init=nk.nn.initializers.normal(stddev=0.01))(x)
 #        x = jax.numpy.tanh(x)
 #        return jax.numpy.sum(x, axis=-1)
 #model = Model()
 
 # Alternatively #2 we could have used the built in RBM model:
-#model = nk.models.RBM(alpha=2, use_visible_bias=False, dtype=complex)
+#model = nk.models.RBM(alpha=2, use_visible_bias=False, dtype=np.complex128)
 </pre></div>
 </div>
 </div>
@@ -476,7 +485,7 @@ vs = nk.variational.MCState(sa, model, n_samples=1000)
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
@@ -496,11 +505,33 @@ vmc = nk.Vmc(
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+&lt;ipython-input-5-2d9f06ce1f1d&gt;:10: UserWarning: Vmc has been renamed to VMC. The old name is
+                now deprecated and will be removed in the next minor version.
+
+                Please updaate your code.
+
+  vmc = nk.Vmc(
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="Running-the-training-loop">
 <h3>Running the training loop<a class="headerlink" href="#Running-the-training-loop" title="Permalink to this headline">¶</a></h3>
 <p>The last version of NetKet also allows for a finer control of the vmc loop. In the simplest case, one can just iterate through the vmc object and print the current value of the energy. More sophisticated output schemes based on tensorboard have been also implemented, but are not discussed in this Tutorial.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -516,16 +547,43 @@ for it in vmc.iter(500,50):
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0 8.62-0.02j ± 0.10 [σ²=8.47, R̂=0.9991]
-50 -6.81+0.09j ± 0.10 [σ²=5.67, R̂=0.9991]
-100 -10.281+0.008j ± 0.051 [σ²=1.575, R̂=0.9992]
-150 -11.034+0.004j ± 0.028 [σ²=0.565, R̂=0.9993]
-200 -11.203-0.025j ± 0.016 [σ²=0.306, R̂=0.9993]
-250 -11.260-0.002j ± 0.013 [σ²=0.188, R̂=0.9990]
-300 -11.271-0.008j ± 0.011 [σ²=0.126, R̂=0.9991]
-350 -11.2832-0.0032j ± 0.0100 [σ²=0.1114, R̂=0.9995]
-400 -11.282-0.019j ± 0.010 [σ²=0.103, R̂=0.9992]
-450 -11.2934+0.0047j ± 0.0086 [σ²=0.0811, R̂=0.9993]
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-7-90e763cb2b85&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-red-fg"># Running the learning loop and printing the energy every 50 steps</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-red-fg"># [notice that the very first iteration is slow because of JIT compilation]</span>
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">for</span> it <span class="ansi-green-fg">in</span> vmc<span class="ansi-blue-fg">.</span>iter<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">500</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">50</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span>     print<span class="ansi-blue-fg">(</span>it<span class="ansi-blue-fg">,</span>vmc<span class="ansi-blue-fg">.</span>energy<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/Dropbox/Ricerca/Codes/Python/netket/netket/drivers/abstract_variational_driver.py</span> in <span class="ansi-cyan-fg">iter</span><span class="ansi-blue-fg">(self, n_steps, step)</span>
+<span class="ansi-green-intense-fg ansi-bold">    161</span>         <span class="ansi-green-fg">for</span> _ <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> n_steps<span class="ansi-blue-fg">,</span> step<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    162</span>             <span class="ansi-green-fg">for</span> i <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> step<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 163</span><span class="ansi-red-fg">                 </span>dp <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_forward_and_backward<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    164</span>                 <span class="ansi-green-fg">if</span> i <span class="ansi-blue-fg">==</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    165</span>                     <span class="ansi-green-fg">yield</span> self<span class="ansi-blue-fg">.</span>step_count
+
+<span class="ansi-green-fg">~/Dropbox/Ricerca/Codes/Python/netket/netket/drivers/vmc.py</span> in <span class="ansi-cyan-fg">_forward_and_backward</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">     84</span>
+<span class="ansi-green-intense-fg ansi-bold">     85</span>         <span class="ansi-red-fg"># Compute the local energy estimator and average Energy</span>
+<span class="ansi-green-fg">---&gt; 86</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_loss_stats<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>_loss_grad <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>state<span class="ansi-blue-fg">.</span>expect_and_grad<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_ham<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     87</span>
+<span class="ansi-green-intense-fg ansi-bold">     88</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>sr <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/Dropbox/Ricerca/Codes/Python/netket/netket/variational/mc_state.py</span> in <span class="ansi-cyan-fg">expect_and_grad</span><span class="ansi-blue-fg">(self, Ô, mutable, is_hermitian)</span>
+<span class="ansi-green-intense-fg ansi-bold">    429</span>
+<span class="ansi-green-intense-fg ansi-bold">    430</span>         σ <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>samples
+<span class="ansi-green-fg">--&gt; 431</span><span class="ansi-red-fg">         </span>σp<span class="ansi-blue-fg">,</span> mels <span class="ansi-blue-fg">=</span> O<span class="ansi-red-fg">̂</span><span class="ansi-blue-fg">.</span>get_conn_padded<span class="ansi-blue-fg">(</span>np<span class="ansi-blue-fg">.</span>asarray<span class="ansi-blue-fg">(</span>σ<span class="ansi-blue-fg">.</span>reshape<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">-</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> σ<span class="ansi-blue-fg">.</span>shape<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">-</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    432</span>
+<span class="ansi-green-intense-fg ansi-bold">    433</span>         <span class="ansi-green-fg">if</span> is_hermitian<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/Dropbox/Ricerca/Codes/Python/netket/netket/operator/_abstract_operator.py</span> in <span class="ansi-cyan-fg">get_conn_padded</span><span class="ansi-blue-fg">(self, x)</span>
+<span class="ansi-green-intense-fg ansi-bold">    128</span>         &#34;&#34;&#34;
+<span class="ansi-green-intense-fg ansi-bold">    129</span>         sections <span class="ansi-blue-fg">=</span> np<span class="ansi-blue-fg">.</span>empty<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">.</span>shape<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> dtype<span class="ansi-blue-fg">=</span>np<span class="ansi-blue-fg">.</span>int32<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 130</span><span class="ansi-red-fg">         </span>x_primes<span class="ansi-blue-fg">,</span> mels <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>get_conn_flattened<span class="ansi-blue-fg">(</span>x<span class="ansi-blue-fg">,</span> sections<span class="ansi-blue-fg">,</span> pad<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    131</span>
+<span class="ansi-green-intense-fg ansi-bold">    132</span>         n_primes <span class="ansi-blue-fg">=</span> sections<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
+
+<span class="ansi-red-fg">TypeError</span>: cannot unpack non-iterable NoneType object
 </pre></div></div>
 </div>
 </div>
