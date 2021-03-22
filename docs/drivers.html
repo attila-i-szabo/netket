@@ -285,9 +285,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#optimization-drivers">Optimization drivers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.drivers.AbstractVariationalDriver.html">netket.drivers.AbstractVariationalDriver</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.drivers.VMC.html">netket.drivers.VMC</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.drivers.SteadyState.html">netket.drivers.SteadyState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.driver.AbstractVariationalDriver.html">netket.driver.AbstractVariationalDriver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.driver.VMC.html">netket.driver.VMC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.driver.SteadyState.html">netket.driver.SteadyState</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#logging-output">Logging output</a><ul>
@@ -324,8 +324,8 @@ This page assumes that you have already read and are familiar witht the <a href=
 State interface &lt;variational_state&gt;`</span></a>.</p>
 <p>In Netket there are two drivers, even though you can define your own; those are:</p>
 <ol class="arabic simple">
-<li><p><a class="reference internal" href="_generated/driver/netket.drivers.VMC.html#netket.drivers.VMC" title="netket.drivers.VMC"><code class="xref py py-class docutils literal notranslate"><span class="pre">VMC</span></code></a>, to find the ground state of an Hamiltonian</p></li>
-<li><p><a class="reference internal" href="_generated/driver/netket.drivers.SteadyState.html#netket.drivers.SteadyState" title="netket.drivers.SteadyState"><code class="xref py py-class docutils literal notranslate"><span class="pre">SteadyState</span></code></a>, to find the steady-state of a liouvillian</p></li>
+<li><p><a class="reference internal" href="_generated/driver/netket.driver.VMC.html#netket.driver.VMC" title="netket.driver.VMC"><code class="xref py py-class docutils literal notranslate"><span class="pre">VMC</span></code></a>, to find the ground state of an Hamiltonian</p></li>
+<li><p><a class="reference internal" href="_generated/driver/netket.driver.SteadyState.html#netket.driver.SteadyState" title="netket.driver.SteadyState"><code class="xref py py-class docutils literal notranslate"><span class="pre">SteadyState</span></code></a>, to find the steady-state of a liouvillian</p></li>
 </ol>
 <p>A driver, will run your optimisation loop, computing the loss function and the gradient,
 using the gradient to update the parameters, and logging to yours sinks any data that you
@@ -348,7 +348,7 @@ The resulting code looks a bit like this:</p>
 
 <span class="n">vstate</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">variational</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">sampler</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
-<span class="n">gs</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">drivers</span><span class="o">.</span><span class="n">VMC</span><span class="p">(</span><span class="n">hamiltonian</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">variational_state</span><span class="o">=</span><span class="n">vstate</span><span class="p">)</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">VMC</span><span class="p">(</span><span class="n">hamiltonian</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">variational_state</span><span class="o">=</span><span class="n">vstate</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>There also exist an alternative syntax, where instead of passing the variational state you pass the arguments needed to construct the variational state to the driver itself.</p>
@@ -356,7 +356,7 @@ The resulting code looks a bit like this:</p>
 
 <span class="n">optimizer</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 
-<span class="n">gs</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">drivers</span><span class="o">.</span><span class="n">VMC</span><span class="p">(</span><span class="n">hamiltonian</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">VMC</span><span class="p">(</span><span class="n">hamiltonian</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>And you can then access the variational state contructed like that through the attribute <cite>gs.state</cite>.
@@ -365,7 +365,7 @@ use the more first API, where the variational state is built explicitly.</p>
 </div>
 <div class="section" id="running-the-optimisation">
 <h2>Running the optimisation<a class="headerlink" href="#running-the-optimisation" title="Permalink to this headline">¶</a></h2>
-<p>The simplest way to use optimization drivers to perform the optimisation is to use their <a class="reference internal" href="_generated/driver/netket.drivers.AbstractVariationalDriver.html#netket.drivers.AbstractVariationalDriver.run" title="netket.drivers.AbstractVariationalDriver.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> method.</p>
+<p>The simplest way to use optimization drivers to perform the optimisation is to use their <a class="reference internal" href="_generated/driver/netket.driver.AbstractVariationalDriver.html#netket.driver.AbstractVariationalDriver.run" title="netket.driver.AbstractVariationalDriver.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> method.</p>
 <p>This method will run the optimisation for the desired number of steps, while logging data to the
 desired output.</p>
 <p>The most important arguments are the following:</p>
