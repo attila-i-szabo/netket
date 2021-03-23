@@ -95,7 +95,22 @@
     <div class="body col-md-12 content" role="main">
       
   <h1>Source code for netket.graph.grid</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span></span><span class="c1"># Copyright 2020, 2021 The NetKet Authors - All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#    http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="kn">from</span> <span class="nn">.graph</span> <span class="kn">import</span> <span class="n">NetworkX</span>
 
@@ -158,7 +173,10 @@
             <span class="n">periodic</span> <span class="o">=</span> <span class="n">pbc</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="n">length</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pbc</span> <span class="o">=</span> <span class="n">pbc</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pbc</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pbc</span> <span class="o">=</span> <span class="n">pbc</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pbc</span> <span class="o">=</span> <span class="p">[</span><span class="n">pbc</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
 
         <span class="n">graph</span> <span class="o">=</span> <span class="n">_nx</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">grid_graph</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">periodic</span><span class="o">=</span><span class="n">periodic</span><span class="p">)</span>
 
@@ -192,7 +210,36 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">graph</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;Grid(length=</span><span class="si">{}</span><span class="s2">, pbc=</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pbc</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pbc</span><span class="p">):</span>
+            <span class="n">pbc</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pbc</span><span class="p">):</span>
+            <span class="n">pbc</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pbc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pbc</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Grid(length=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="si">}</span><span class="s2">, pbc=</span><span class="si">{</span><span class="n">pbc</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+<div class="viewcode-block" id="Grid.periodic_translations"><a class="viewcode-back" href="../../../docs/_generated/graph/netket.graph.Grid.html#netket.graph.Grid.periodic_translations">[docs]</a>    <span class="k">def</span> <span class="nf">periodic_translations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns all permutations of lattice sites that correspond to translations</span>
+<span class="sd">        along the grid directions with periodic boundary conditions.</span>
+
+<span class="sd">        The periodic translations are a subset of the permutations returned by</span>
+<span class="sd">        `self.automorphisms()`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">basis</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">if</span> <span class="n">is_per</span> <span class="k">else</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">is_per</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">pbc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="p">]</span>
+
+        <span class="n">translation_group</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">basis</span><span class="p">)</span>
+        <span class="n">identity</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">()))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">sites</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">el</span><span class="p">):</span>
+                <span class="n">sites</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">sites</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">sites</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">translate</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">identity</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">translation_group</span><span class="p">]</span></div></div>
 
 
 <div class="viewcode-block" id="Hypercube"><a class="viewcode-back" href="../../../docs/_generated/graph/netket.graph.Hypercube.html#netket.graph.Hypercube">[docs]</a><span class="k">def</span> <span class="nf">Hypercube</span><span class="p">(</span><span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n_dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">pbc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Grid</span><span class="p">:</span>

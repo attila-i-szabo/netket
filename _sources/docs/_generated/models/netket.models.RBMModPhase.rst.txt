@@ -16,7 +16,7 @@
       .. autoattribute:: RBMModPhase.name
       .. autoattribute:: RBMModPhase.parent
       .. autoattribute:: RBMModPhase.scope
-      .. autoattribute:: RBMModPhase.use_bias
+      .. autoattribute:: RBMModPhase.use_hidden_bias
       .. autoattribute:: RBMModPhase.variables
    
       
@@ -25,10 +25,10 @@
       .. automethod:: RBMModPhase.__call__
       .. automethod:: RBMModPhase.activation
       .. automethod:: RBMModPhase.apply
-      .. automethod:: RBMModPhase.bias_init
       .. automethod:: RBMModPhase.clone
       .. automethod:: RBMModPhase.get_variable
       .. automethod:: RBMModPhase.has_variable
+      .. automethod:: RBMModPhase.hidden_bias_init
       .. automethod:: RBMModPhase.init
       .. automethod:: RBMModPhase.init_with_output
       .. automethod:: RBMModPhase.is_mutable_collection

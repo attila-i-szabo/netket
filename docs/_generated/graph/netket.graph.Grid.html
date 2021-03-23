@@ -234,6 +234,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#pre-built-models">Pre-built models</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.RBM.html">netket.models.RBM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../models/netket.models.RBMSymm.html">netket.models.RBMSymm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.RBMModPhase.html">netket.models.RBMModPhase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.NDM.html">netket.models.NDM</a></li>
@@ -244,6 +245,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#linear-modules">Linear Modules</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.Dense.html">netket.nn.Dense</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.DenseGeneral.html">netket.nn.DenseGeneral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.DenseSymm.html">netket.nn.DenseSymm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.Conv.html">netket.nn.Conv</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.Embed.html">netket.nn.Embed</a></li>
 </ul>
@@ -460,6 +462,20 @@ The fact that some node may not be reachable from another is represented by -1</
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Generator</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.graph.Grid.periodic_translations">
+<code class="sig-name descname"><span class="pre">periodic_translations</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/graph/grid.html#Grid.periodic_translations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.graph.Grid.periodic_translations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all permutations of lattice sites that correspond to translations
+along the grid directions with periodic boundary conditions.</p>
+<p>The periodic translations are a subset of the permutations returned by
+<cite>self.automorphisms()</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]</p>
 </dd>
 </dl>
 </dd></dl>

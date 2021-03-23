@@ -21,7 +21,7 @@
     <script src="../../../_static/js/rtd_theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="netket.models.RBMModPhase" href="netket.models.RBMModPhase.html" />
+    <link rel="next" title="netket.models.RBMSymm" href="netket.models.RBMSymm.html" />
     <link rel="prev" title="netket.sampler.MetropolisSamplerState" href="../samplers/netket.sampler.MetropolisSamplerState.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -234,6 +234,7 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../api.html#pre-built-models">Pre-built models</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">netket.models.RBM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.models.RBMSymm.html">netket.models.RBMSymm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.models.RBMModPhase.html">netket.models.RBMModPhase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.models.NDM.html">netket.models.NDM</a></li>
@@ -244,6 +245,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#linear-modules">Linear Modules</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.Dense.html">netket.nn.Dense</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.DenseGeneral.html">netket.nn.DenseGeneral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.DenseSymm.html">netket.nn.DenseSymm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.Conv.html">netket.nn.Conv</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.Embed.html">netket.nn.Embed</a></li>
 </ul>
@@ -322,7 +324,7 @@
 <h1>netket.models.RBM<a class="headerlink" href="#netket-models-rbm" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="netket.models.RBM">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.models.</span></code><code class="sig-name descname"><span class="pre">RBM</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float64'&gt;</span></em>, <em class="sig-param"><span class="pre">activation=&lt;function</span> <span class="pre">logcosh&gt;</span></em>, <em class="sig-param"><span class="pre">alpha=1</span></em>, <em class="sig-param"><span class="pre">use_bias=True</span></em>, <em class="sig-param"><span class="pre">use_visible_bias=True</span></em>, <em class="sig-param"><span class="pre">kernel_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">bias_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">visible_bias_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">parent=&lt;flax.linen.module._Sentinel</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">name=None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/models/rbm.html#RBM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.models.RBM" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.models.</span></code><code class="sig-name descname"><span class="pre">RBM</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float64'&gt;</span></em>, <em class="sig-param"><span class="pre">activation=&lt;function</span> <span class="pre">logcosh&gt;</span></em>, <em class="sig-param"><span class="pre">alpha=1</span></em>, <em class="sig-param"><span class="pre">use_hidden_bias=True</span></em>, <em class="sig-param"><span class="pre">use_visible_bias=True</span></em>, <em class="sig-param"><span class="pre">kernel_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">hidden_bias_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">visible_bias_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">parent=&lt;flax.linen.module._Sentinel</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">name=None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/models/rbm.html#RBM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.models.RBM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">flax.linen.module.Module</span></code></p>
 <p>A restricted boltzman Machine, equivalent to a 2-layer FFNN with a
 nonlinear activation function in between</p>
@@ -360,8 +362,8 @@ nonlinear activation function in between</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="netket.models.RBM.use_bias">
-<code class="sig-name descname"><span class="pre">use_bias</span></code><a class="headerlink" href="#netket.models.RBM.use_bias" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.models.RBM.use_hidden_bias">
+<code class="sig-name descname"><span class="pre">use_hidden_bias</span></code><a class="headerlink" href="#netket.models.RBM.use_hidden_bias" title="Permalink to this definition">¶</a></dt>
 <dd><p>if True uses a bias in the dense layer (hidden layer bias)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -393,8 +395,8 @@ nonlinear activation function in between</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="netket.models.RBM.bias_init">
-<code class="sig-name descname"><span class="pre">bias_init</span></code><a class="headerlink" href="#netket.models.RBM.bias_init" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.models.RBM.hidden_bias_init">
+<code class="sig-name descname"><span class="pre">hidden_bias_init</span></code><a class="headerlink" href="#netket.models.RBM.hidden_bias_init" title="Permalink to this definition">¶</a></dt>
 <dd><p>initializer function for the bias.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -416,7 +418,7 @@ nonlinear activation function in between</p>
 
 <dl class="py method">
 <dt id="netket.models.RBM.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float64'&gt;</span></em>, <em class="sig-param"><span class="pre">activation=&lt;function</span> <span class="pre">logcosh&gt;</span></em>, <em class="sig-param"><span class="pre">alpha=1</span></em>, <em class="sig-param"><span class="pre">use_bias=True</span></em>, <em class="sig-param"><span class="pre">use_visible_bias=True</span></em>, <em class="sig-param"><span class="pre">kernel_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">bias_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">visible_bias_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">parent=&lt;flax.linen.module._Sentinel</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">name=None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.models.RBM.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float64'&gt;</span></em>, <em class="sig-param"><span class="pre">activation=&lt;function</span> <span class="pre">logcosh&gt;</span></em>, <em class="sig-param"><span class="pre">alpha=1</span></em>, <em class="sig-param"><span class="pre">use_hidden_bias=True</span></em>, <em class="sig-param"><span class="pre">use_visible_bias=True</span></em>, <em class="sig-param"><span class="pre">kernel_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">hidden_bias_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">visible_bias_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">parent=&lt;flax.linen.module._Sentinel</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">name=None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.models.RBM.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -424,10 +426,10 @@ nonlinear activation function in between</p>
 <li><p><strong>dtype</strong> (<em>Any</em>) – </p></li>
 <li><p><strong>activation</strong> (<em>Any</em>) – </p></li>
 <li><p><strong>alpha</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – </p></li>
-<li><p><strong>use_bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – </p></li>
+<li><p><strong>use_hidden_bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – </p></li>
 <li><p><strong>use_visible_bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – </p></li>
 <li><p><strong>kernel_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
-<li><p><strong>bias_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+<li><p><strong>hidden_bias_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
 <li><p><strong>visible_bias_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
 <li><p><strong>parent</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>Type</em><em>[</em><a class="reference internal" href="../nn/netket.nn.Module.html#netket.nn.Module" title="netket.nn.Module"><em>Module</em></a><em>]</em><em>, </em><em>Type</em><em>[</em><em>Scope</em><em>]</em><em>, </em><em>Type</em><em>[</em><em>_Sentinel</em><em>]</em><em>]</em><em>]</em>) – </p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p></li>
@@ -462,7 +464,7 @@ nonlinear activation function in between</p>
 
 <dl class="py attribute">
 <dt id="id1">
-<code class="sig-name descname"><span class="pre">use_bias</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">use_hidden_bias</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -540,11 +542,6 @@ of the modified collections.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="id4">
-<code class="sig-name descname"><span class="pre">bias_init</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'jax._src.numpy.lax_numpy.float32'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id4" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt id="netket.models.RBM.clone">
 <code class="sig-name descname"><span class="pre">clone</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">updates</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.models.RBM.clone" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a clone of this Module, with optionally updated arguments.</p>
@@ -609,6 +606,11 @@ collections.</p>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt id="id4">
+<code class="sig-name descname"><span class="pre">hidden_bias_init</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'jax._src.numpy.lax_numpy.float32'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="netket.models.RBM.init">

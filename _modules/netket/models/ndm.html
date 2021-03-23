@@ -142,7 +142,7 @@
     <span class="n">dtype</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span>
     <span class="n">activation</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">nknn</span><span class="o">.</span><span class="n">logcosh</span>
     <span class="n">alpha</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">use_bias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">use_hidden_bias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">use_visible_bias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="n">kernel_init</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">PRNGKey</span><span class="p">,</span> <span class="n">Shape</span><span class="p">,</span> <span class="n">Dtype</span><span class="p">],</span> <span class="n">Array</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_kernel_init</span>
@@ -155,7 +155,7 @@
             <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Dense&quot;</span><span class="p">,</span>
             <span class="n">features</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">σr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
             <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
-            <span class="n">use_bias</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_bias</span><span class="p">,</span>
+            <span class="n">use_bias</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_hidden_bias</span><span class="p">,</span>
             <span class="n">kernel_init</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kernel_init</span><span class="p">,</span>
             <span class="n">bias_init</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bias_init</span><span class="p">,</span>
         <span class="p">)</span>
@@ -190,7 +190,7 @@
     <span class="n">dtype</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span>
     <span class="n">activation</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">nknn</span><span class="o">.</span><span class="n">logcosh</span>
     <span class="n">alpha</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">use_bias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">use_hidden_bias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="n">kernel_init</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">PRNGKey</span><span class="p">,</span> <span class="n">Shape</span><span class="p">,</span> <span class="n">Dtype</span><span class="p">],</span> <span class="n">Array</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_kernel_init</span>
     <span class="n">bias_init</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">PRNGKey</span><span class="p">,</span> <span class="n">Shape</span><span class="p">,</span> <span class="n">Dtype</span><span class="p">],</span> <span class="n">Array</span><span class="p">]</span> <span class="o">=</span> <span class="n">zeros</span>
@@ -213,7 +213,7 @@
         <span class="p">)</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">U_S</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">σr</span> <span class="o">+</span> <span class="n">σc</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">U_A</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">σr</span> <span class="o">-</span> <span class="n">σc</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_bias</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_hidden_bias</span><span class="p">:</span>
             <span class="n">bias</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">(</span>
                 <span class="s2">&quot;bias&quot;</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">bias_init</span><span class="p">,</span>
@@ -250,7 +250,7 @@
     <span class="n">activation</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">nknn</span><span class="o">.</span><span class="n">logcosh</span>
     <span class="n">alpha</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">beta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">use_bias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">use_hidden_bias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">use_visible_bias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">dtype</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span>
 
@@ -267,7 +267,7 @@
             <span class="n">alpha</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span>
             <span class="n">activation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">,</span>
             <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
-            <span class="n">use_bias</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_bias</span><span class="p">,</span>
+            <span class="n">use_hidden_bias</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_hidden_bias</span><span class="p">,</span>
             <span class="n">use_visible_bias</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_visible_bias</span><span class="p">,</span>
             <span class="n">visible_bias_init</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">visible_bias_init</span><span class="p">,</span>
             <span class="n">kernel_init</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kernel_init</span><span class="p">,</span>
@@ -279,7 +279,7 @@
             <span class="n">alpha</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span>
             <span class="n">activation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">,</span>
             <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
-            <span class="n">use_bias</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_bias</span><span class="p">,</span>
+            <span class="n">use_hidden_bias</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_hidden_bias</span><span class="p">,</span>
             <span class="n">use_visible_bias</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_visible_bias</span><span class="p">,</span>
             <span class="n">visible_bias_init</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">visible_bias_init</span><span class="p">,</span>
             <span class="n">kernel_init</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kernel_init</span><span class="p">,</span>
@@ -290,7 +290,7 @@
             <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Mixed&quot;</span><span class="p">,</span>
             <span class="n">alpha</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span><span class="p">,</span>
             <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
-            <span class="n">use_bias</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_bias</span><span class="p">,</span>
+            <span class="n">use_hidden_bias</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_hidden_bias</span><span class="p">,</span>
             <span class="n">activation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">,</span>
             <span class="n">kernel_init</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kernel_init</span><span class="p">,</span>
             <span class="n">bias_init</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bias_init</span><span class="p">,</span>

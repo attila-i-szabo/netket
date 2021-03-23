@@ -25,5 +25,6 @@
       .. automethod:: Grid.is_bipartite
       .. automethod:: Grid.is_connected
       .. automethod:: Grid.nodes
+      .. automethod:: Grid.periodic_translations
 
    

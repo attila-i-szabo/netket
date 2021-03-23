@@ -120,6 +120,7 @@
 <span class="kn">from</span> <span class="nn">flax.linen.module</span> <span class="kn">import</span> <span class="n">Module</span><span class="p">,</span> <span class="n">compact</span>
 <span class="kn">from</span> <span class="nn">netket.nn.initializers</span> <span class="kn">import</span> <span class="n">lecun_normal</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">variance_scaling</span><span class="p">,</span> <span class="n">zeros</span>
 <span class="kn">from</span> <span class="nn">netket</span> <span class="kn">import</span> <span class="n">jax</span> <span class="k">as</span> <span class="n">nkjax</span>
+<span class="kn">from</span> <span class="nn">netket.graph</span> <span class="kn">import</span> <span class="n">AbstractGraph</span>
 
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">lax</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
@@ -302,6 +303,134 @@
             <span class="n">bias</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">bias</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
             <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">bias</span>
         <span class="k">return</span> <span class="n">y</span></div></div>
+
+
+<div class="viewcode-block" id="DenseSymm"><a class="viewcode-back" href="../../../docs/_generated/nn/netket.nn.DenseSymm.html#netket.nn.DenseSymm">[docs]</a><span class="k">class</span> <span class="nc">DenseSymm</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A symmetrized linear transformation applied over the last dimension of the input.</span>
+<span class="sd">    This layer uses a reduced number of parameters, which are arranged so that the full</span>
+<span class="sd">    affine transformation is invariant under all of the given permutations when applied to s.</span>
+
+<span class="sd">    See :ref:`netket.nn.create_DenseSymm` for a more convenient constructor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">permutations</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="n">Array</span><span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;Callable returning a sequence of permutations over which the layer should be invariant.&quot;&quot;&quot;</span>
+    <span class="n">features</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="sd">&quot;&quot;&quot;The number of symmetry-reduced features. The full output size is len(permutations) * features.&quot;&quot;&quot;</span>
+    <span class="n">use_bias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="sd">&quot;&quot;&quot;Whether to add a bias to the output (default: True).&quot;&quot;&quot;</span>
+    <span class="n">dtype</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">float64</span>
+    <span class="sd">&quot;&quot;&quot;The dtype of the weights.&quot;&quot;&quot;</span>
+    <span class="n">precision</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="sd">&quot;&quot;&quot;numerical precision of the computation see `jax.lax.Precision`for details.&quot;&quot;&quot;</span>
+
+    <span class="n">kernel_init</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">PRNGKey</span><span class="p">,</span> <span class="n">Shape</span><span class="p">,</span> <span class="n">Dtype</span><span class="p">],</span> <span class="n">Array</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_kernel_init</span>
+    <span class="sd">&quot;&quot;&quot;Initializer for the Dense layer matrix.&quot;&quot;&quot;</span>
+    <span class="n">bias_init</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">PRNGKey</span><span class="p">,</span> <span class="n">Shape</span><span class="p">,</span> <span class="n">Dtype</span><span class="p">],</span> <span class="n">Array</span><span class="p">]</span> <span class="o">=</span> <span class="n">zeros</span>
+    <span class="sd">&quot;&quot;&quot;Initializer for the bias.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DenseSymm.setup"><a class="viewcode-back" href="../../../docs/_generated/nn/netket.nn.DenseSymm.html#netket.nn.DenseSymm.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">perms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">permutations</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_symm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_sites</span> <span class="o">=</span> <span class="n">perms</span><span class="o">.</span><span class="n">shape</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_symm</span>
+
+        <span class="c1"># symmetrization tensor, maps Wsymm to full W</span>
+        <span class="c1"># note that this should be a sparse object, once jax supports them</span>
+        <span class="k">def</span> <span class="nf">symmetrizer_ijkl</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">l</span><span class="p">):</span>
+            <span class="n">jsymm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor_divide</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_symm</span><span class="p">)</span>
+            <span class="n">cond_k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">==</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">perms</span><span class="p">)[</span><span class="n">j</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_symm</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+            <span class="n">cond_l</span> <span class="o">=</span> <span class="n">l</span> <span class="o">==</span> <span class="n">jsymm</span>
+            <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">cond_k</span><span class="p">,</span> <span class="n">cond_l</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">symmetrizer</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">fromfunction</span><span class="p">(</span>
+                <span class="n">symmetrizer_ijkl</span><span class="p">,</span>
+                <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_sites</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_hidden</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_sites</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">),</span>
+                <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_sites</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DenseSymm.full_kernel"><a class="viewcode-back" href="../../../docs/_generated/nn/netket.nn.DenseSymm.html#netket.nn.DenseSymm.full_kernel">[docs]</a>    <span class="k">def</span> <span class="nf">full_kernel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kernel</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts the symmetry-reduced kernel of shape (n_sites, features) to</span>
+<span class="sd">        the full Dense kernel of shape (n_sites, features * n_symm).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># equivalent to: kernel = jnp.einsum(&quot;ijkl,kl-&gt;ij&quot;, self.symmetrizer, kernel)</span>
+        <span class="c1"># for appropriately shaped symmetrizer</span>
+        <span class="n">kvec</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symmetrizer</span><span class="p">,</span> <span class="n">kvec</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_sites</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DenseSymm.full_bias"><a class="viewcode-back" href="../../../docs/_generated/nn/netket.nn.DenseSymm.html#netket.nn.DenseSymm.full_bias">[docs]</a>    <span class="k">def</span> <span class="nf">full_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bias</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert symmetry-reduced bias of shape (features,) to the full bias of</span>
+<span class="sd">        shape (n_symm * features,).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">bias</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_symm</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DenseSymm.__call__"><a class="viewcode-back" href="../../../docs/_generated/nn/netket.nn.DenseSymm.html#netket.nn.DenseSymm.__call__">[docs]</a>    <span class="nd">@compact</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">Array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Applies the symmetrized linear transformation to the inputs along the last dimension.</span>
+<span class="sd">        Args:</span>
+<span class="sd">          inputs: The nd-array to be transformed.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">          The transformed input.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">promote_types</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
+
+        <span class="n">kernel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">(</span>
+            <span class="s2">&quot;kernel&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel_init</span><span class="p">,</span> <span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span>
+        <span class="p">)</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">full_kernel</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="n">lax</span><span class="o">.</span><span class="n">dot_general</span><span class="p">(</span>
+            <span class="n">inputs</span><span class="p">,</span>
+            <span class="n">kernel</span><span class="p">,</span>
+            <span class="p">(((</span><span class="n">inputs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,)),</span> <span class="p">((),</span> <span class="p">())),</span>
+            <span class="n">precision</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">precision</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_bias</span><span class="p">:</span>
+            <span class="n">bias</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">(</span><span class="s2">&quot;bias&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias_init</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">,),</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+            <span class="n">bias</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">full_bias</span><span class="p">(</span><span class="n">bias</span><span class="p">),</span> <span class="n">dtype</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">+=</span> <span class="n">bias</span>
+
+        <span class="k">return</span> <span class="n">y</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">create_DenseSymm</span><span class="p">(</span>
+    <span class="n">permutations</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[],</span> <span class="n">Array</span><span class="p">],</span> <span class="n">AbstractGraph</span><span class="p">,</span> <span class="n">Array</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A symmetrized linear transformation applied over the last dimension of the input.</span>
+<span class="sd">    This layer uses a reduced number of parameters, which are arranged so that the full</span>
+<span class="sd">    affine transformation is invariant under all of the given permutations when applied to s.</span>
+
+<span class="sd">    This is a convenienence wrapper for creating a :ref:`netket.nn.DenseSymm` layer.</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">      permutations: Sequence of permutations over which the layer should be invariant.</span>
+<span class="sd">        Should be either an array-like object of shape (n_permutations, input_size),</span>
+<span class="sd">        an argument-less callable returning such an array, or :ref:`netket.graph.AbstractGraph`, in which</span>
+<span class="sd">        case the graph automorphisms are used.</span>
+
+<span class="sd">    See :ref:`netket.nn.DenseSymm` for the remaining arguments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">permutations</span><span class="p">,</span> <span class="n">Callable</span><span class="p">):</span>
+        <span class="n">perm_fn</span> <span class="o">=</span> <span class="n">permutations</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">permutations</span><span class="p">,</span> <span class="n">AbstractGraph</span><span class="p">):</span>
+        <span class="n">perm_fn</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">permutations</span><span class="o">.</span><span class="n">automorphisms</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">permutations</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">permutations</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;permutations must be an array of shape (#permutations, #sites).&quot;</span>
+            <span class="p">)</span>
+        <span class="n">perm_fn</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">permutations</span>
+
+    <span class="k">return</span> <span class="n">DenseSymm</span><span class="p">(</span><span class="n">permutations</span><span class="o">=</span><span class="n">perm_fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Conv"><a class="viewcode-back" href="../../../docs/_generated/nn/netket.nn.Conv.html#netket.nn.Conv">[docs]</a><span class="k">class</span> <span class="nc">Conv</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
