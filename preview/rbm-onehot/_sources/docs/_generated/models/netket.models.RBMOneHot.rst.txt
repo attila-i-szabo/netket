@@ -1,0 +1,45 @@
+﻿netket.models.RBMOneHot
+=======================
+
+.. currentmodule:: netket.models
+
+.. autoclass:: RBMOneHot
+   :show-inheritance:
+
+   .. automethod:: RBMOneHot.__init__
+
+   
+      
+   .. rst-class:: class-dl-groups
+   Attributes
+      .. autoattribute:: RBMOneHot.alpha
+      .. autoattribute:: RBMOneHot.name
+      .. autoattribute:: RBMOneHot.parent
+      .. autoattribute:: RBMOneHot.precision
+      .. autoattribute:: RBMOneHot.scope
+      .. autoattribute:: RBMOneHot.use_hidden_bias
+      .. autoattribute:: RBMOneHot.use_visible_bias
+      .. autoattribute:: RBMOneHot.variables
+   
+      
+   .. rst-class:: class-dl-groups
+   Methods
+      .. automethod:: RBMOneHot.__call__
+      .. automethod:: RBMOneHot.activation
+      .. automethod:: RBMOneHot.apply
+      .. automethod:: RBMOneHot.clone
+      .. automethod:: RBMOneHot.get_variable
+      .. automethod:: RBMOneHot.has_variable
+      .. automethod:: RBMOneHot.hidden_bias_init
+      .. automethod:: RBMOneHot.init
+      .. automethod:: RBMOneHot.init_with_output
+      .. automethod:: RBMOneHot.is_mutable_collection
+      .. automethod:: RBMOneHot.kernel_init
+      .. automethod:: RBMOneHot.make_rng
+      .. automethod:: RBMOneHot.param
+      .. automethod:: RBMOneHot.setup
+      .. automethod:: RBMOneHot.sow
+      .. automethod:: RBMOneHot.variable
+      .. automethod:: RBMOneHot.visible_bias_init
+
+   
