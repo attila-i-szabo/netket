@@ -15,6 +15,7 @@
       .. autoattribute:: RBMModPhase.alpha
       .. autoattribute:: RBMModPhase.name
       .. autoattribute:: RBMModPhase.parent
+      .. autoattribute:: RBMModPhase.precision
       .. autoattribute:: RBMModPhase.scope
       .. autoattribute:: RBMModPhase.use_hidden_bias
       .. autoattribute:: RBMModPhase.variables

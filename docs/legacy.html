@@ -127,7 +127,6 @@
 <li class="toctree-l1"><a class="reference internal" href="varstate.html">The Variational State Interface</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="varstate.html#constructing-a-variational-state">Constructing a Variational State</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="varstate.html#defining-models-flax">Defining models: Flax</a></li>
-<li class="toctree-l3"><a class="reference internal" href="varstate.html#defining-models-init-and-apply-functions">Defining models: init and apply functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="varstate.html#mcstate">MCState</a></li>
 </ul>
 </li>
@@ -135,6 +134,7 @@
 <li class="toctree-l3"><a class="reference internal" href="varstate.html#expectation-values">Expectation values</a></li>
 <li class="toctree-l3"><a class="reference internal" href="varstate.html#sampling">Sampling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="varstate.html#collecting-the-state-vector">Collecting the state-vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="varstate.html#manipulating-the-parameters">Manipulating the parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="varstate.html#saving-and-loading-a-variational-state">Saving and Loading a Variational State</a></li>
@@ -143,6 +143,23 @@
 <li class="toctree-l1"><a class="reference internal" href="drivers.html">The Drivers API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="drivers.html#constructing-a-driver">Constructing a driver</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drivers.html#running-the-optimisation">Running the optimisation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom_models.html">Defining Custom Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="custom_models.html#commonalities">Commonalities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="custom_models.html#defining-models-init-and-apply-functions">Defining models: init and apply functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="custom_models.html#using-flax-linen">Using Flax Linen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_models.html#using-jax-stax">Using Jax/Stax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_models.html#id1">Using Jax/Stax</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#parallelization">Parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#running-on-cpu-when-gpus-are-present">Running on CPU when GPUs are present</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#using-gpus">Using GPUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#nans-in-training-and-loss-of-precision">NaNs in training and loss of precision</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">Public API: netket package</a><ul>
@@ -232,8 +249,10 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#pre-built-models">Pre-built models</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.RBM.html">netket.models.RBM</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.RBMSymm.html">netket.models.RBMSymm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.RBMModPhase.html">netket.models.RBMModPhase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.RBMMultiVal.html">netket.models.RBMMultiVal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.RBMSymm.html">netket.models.RBMSymm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.create_RBMSymm.html">netket.models.create_RBMSymm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.NDM.html">netket.models.NDM</a></li>
 </ul>
@@ -301,13 +320,6 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/callbacks/netket.callbacks.Timeout.html">netket.callbacks.Timeout</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#parallelization">Parallelization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#running-on-cpu-when-gpus-are-present">Running on CPU when GPUs are present</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#using-gpus">Using GPUs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#nans-in-training-and-loss-of-precision">NaNs in training and loss of precision</a></li>
 </ul>
 </li>
 </ul>

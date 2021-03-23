@@ -725,7 +725,7 @@
     <span class="nd">@staticmethod</span>
     <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">_flattened_kernel</span><span class="p">(</span>
-        <span class="n">x</span><span class="p">,</span> <span class="n">sections</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">mels</span><span class="p">,</span> <span class="n">x_prime</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">n_max</span><span class="p">,</span> <span class="n">max_conn</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">sections</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">mels</span><span class="p">,</span> <span class="n">x_prime</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">n_max</span><span class="p">,</span> <span class="n">max_conn</span><span class="p">,</span> <span class="n">pad</span>
     <span class="p">):</span>
 
         <span class="n">batch_size</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -734,6 +734,10 @@
         <span class="k">if</span> <span class="n">mels</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="n">batch_size</span> <span class="o">*</span> <span class="n">max_conn</span><span class="p">:</span>
             <span class="n">mels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">batch_size</span> <span class="o">*</span> <span class="n">max_conn</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="n">U</span><span class="p">))</span>
             <span class="n">x_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">batch_size</span> <span class="o">*</span> <span class="n">max_conn</span><span class="p">,</span> <span class="n">n_sites</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">pad</span><span class="p">:</span>
+            <span class="n">x_prime</span><span class="p">[:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">mels</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="n">sqrt</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span>
         <span class="n">Uh</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">U</span>
@@ -772,13 +776,16 @@
                     <span class="n">x_prime</span><span class="p">[</span><span class="n">odiag_ind</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">1.0</span>
                     <span class="n">odiag_ind</span> <span class="o">+=</span> <span class="mi">1</span>
 
+            <span class="k">if</span> <span class="n">pad</span><span class="p">:</span>
+                <span class="n">odiag_ind</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">max_conn</span>
+
             <span class="n">diag_ind</span> <span class="o">=</span> <span class="n">odiag_ind</span>
 
             <span class="n">sections</span><span class="p">[</span><span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="n">odiag_ind</span>
 
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">x_prime</span><span class="p">[:</span><span class="n">odiag_ind</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">mels</span><span class="p">[:</span><span class="n">odiag_ind</span><span class="p">])</span>
 
-<div class="viewcode-block" id="BoseHubbard.get_conn_flattened"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.BoseHubbard.html#netket.operator.BoseHubbard.get_conn_flattened">[docs]</a>    <span class="k">def</span> <span class="nf">get_conn_flattened</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">sections</span><span class="p">):</span>
+<div class="viewcode-block" id="BoseHubbard.get_conn_flattened"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.BoseHubbard.html#netket.operator.BoseHubbard.get_conn_flattened">[docs]</a>    <span class="k">def</span> <span class="nf">get_conn_flattened</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">sections</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Finds the connected elements of the Operator. Starting</span>
 <span class="sd">        from a given quantum number x, it finds all other quantum numbers x&#39; such</span>
 <span class="sd">        that the matrix element :math:`O(x,x&#39;)` is different from zero. In general there</span>
@@ -811,6 +818,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_mu</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_n_max</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_max_conn</span><span class="p">,</span>
+            <span class="n">pad</span><span class="p">,</span>
         <span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_get_conn_flattened_closure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

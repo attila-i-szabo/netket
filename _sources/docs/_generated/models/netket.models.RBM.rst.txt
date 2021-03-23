@@ -15,6 +15,7 @@
       .. autoattribute:: RBM.alpha
       .. autoattribute:: RBM.name
       .. autoattribute:: RBM.parent
+      .. autoattribute:: RBM.precision
       .. autoattribute:: RBM.scope
       .. autoattribute:: RBM.use_hidden_bias
       .. autoattribute:: RBM.use_visible_bias
