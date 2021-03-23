@@ -402,7 +402,7 @@ desired output.</p>
 </div>
 <p>The first argument is the step number, the second argument is the dictionary holding data that will be logged, and it can be modified by the callback, and the third is the driver itself, which can be used to access the current state or any other quantity.
 The output of the callback must be a boolean, which signals whever to continue the optimisation or not. When any one of the callbacks return <code class="code docutils literal notranslate"><span class="pre">False</span></code>, the optimisation will be stopped.
-Netket comes with a few built-in callbacks, listed <span class="xref std std-ref">in the API</span>, but you can also implement your own.</p>
+Netket comes with a few built-in callbacks, listed <a class="reference internal" href="api.html#callbacks-api"><span class="std std-ref">in the API</span></a>, but you can also implement your own.</p>
 </li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">step_size</span></code>: Data will be logged and callbacks will be called every <code class="code docutils literal notranslate"><span class="pre">step_size</span></code> optimisation steps. Useful if your callbacks have a high computational cost. If unspecified, logs at every step.</p></li>
 </ul>
