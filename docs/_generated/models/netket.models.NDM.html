@@ -255,6 +255,7 @@
 <li class="toctree-l3"><a class="reference internal" href="netket.models.RBMMultiVal.html">netket.models.RBMMultiVal</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.models.RBMSymm.html">netket.models.RBMSymm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.models.create_RBMSymm.html">netket.models.create_RBMSymm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.models.Jastrow.html">netket.models.Jastrow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">netket.models.NDM</a></li>
 </ul>
@@ -410,7 +411,7 @@ given in Vicentini et Al, PRL 122, 250503 (2019).</p>
 <dd><p>the initializer for the dense kernels.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Callable[[Any, Tuple[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>], Any], Any]</p>
+<dd class="field-odd"><p>Callable[[Any, Sequence[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>], Any], Any]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -421,7 +422,7 @@ given in Vicentini et Al, PRL 122, 250503 (2019).</p>
 <dd><p>the initializer for the biases.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Callable[[Any, Tuple[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>], Any], Any]</p>
+<dd class="field-odd"><p>Callable[[Any, Sequence[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>], Any], Any]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -432,7 +433,7 @@ given in Vicentini et Al, PRL 122, 250503 (2019).</p>
 <dd><p>the initialzier for the visible bias.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Callable[[Any, Tuple[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>], Any], Any]</p>
+<dd class="field-odd"><p>Callable[[Any, Sequence[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>], Any], Any]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -450,9 +451,9 @@ given in Vicentini et Al, PRL 122, 250503 (2019).</p>
 <li><p><strong>use_hidden_bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – </p></li>
 <li><p><strong>use_visible_bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – </p></li>
 <li><p><strong>dtype</strong> (<em>Any</em>) – </p></li>
-<li><p><strong>kernel_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
-<li><p><strong>bias_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
-<li><p><strong>visible_bias_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+<li><p><strong>kernel_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+<li><p><strong>bias_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+<li><p><strong>visible_bias_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
 <li><p><strong>parent</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>Type</em><em>[</em><a class="reference internal" href="../nn/netket.nn.Module.html#netket.nn.Module" title="netket.nn.Module"><em>Module</em></a><em>]</em><em>, </em><em>Type</em><em>[</em><em>Scope</em><em>]</em><em>, </em><em>Type</em><em>[</em><em>_Sentinel</em><em>]</em><em>]</em><em>]</em>) – </p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p></li>
 </ul>

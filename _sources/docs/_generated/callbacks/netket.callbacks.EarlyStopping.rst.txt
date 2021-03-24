@@ -10,6 +10,12 @@
 
    
       
+   .. rst-class:: class-dl-groups
+   Attributes
+      .. autoattribute:: EarlyStopping.baseline
+      .. autoattribute:: EarlyStopping.min_delta
+      .. autoattribute:: EarlyStopping.monitor
+      .. autoattribute:: EarlyStopping.patience
    
       
    .. rst-class:: class-dl-groups

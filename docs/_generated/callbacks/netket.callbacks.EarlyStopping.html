@@ -255,6 +255,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.RBMMultiVal.html">netket.models.RBMMultiVal</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.RBMSymm.html">netket.models.RBMSymm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.create_RBMSymm.html">netket.models.create_RBMSymm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../models/netket.models.Jastrow.html">netket.models.Jastrow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.NDM.html">netket.models.NDM</a></li>
 </ul>
@@ -336,26 +337,56 @@
 <h1>netket.callbacks.EarlyStopping<a class="headerlink" href="#netket-callbacks-earlystopping" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="netket.callbacks.EarlyStopping">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.callbacks.</span></code><code class="sig-name descname"><span class="pre">EarlyStopping</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patience</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/callbacks/earlystopping.html#EarlyStopping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.callbacks.EarlyStopping" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.callbacks.</span></code><code class="sig-name descname"><span class="pre">EarlyStopping</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patience</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monitor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/callbacks/earlystopping.html#EarlyStopping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.callbacks.EarlyStopping" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>A simple callback to stop NetKet if there are no improvements in the training</p>
+<p>A simple callback to stop NetKet if there are no more improvements in the training.
+based on <cite>driver._loss_name</cite>.</p>
 <dl class="py method">
 <dt id="netket.callbacks.EarlyStopping.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patience</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/callbacks/earlystopping.html#EarlyStopping.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.callbacks.EarlyStopping.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructs a new EarlyStopping object that monitors whether a driver is improving
-over optimisation epochs based on <cite>driver._loss_name</cite>.</p>
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patience</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monitor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.callbacks.EarlyStopping.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>min_delta</strong> – Minimum change in the monitored quantity to qualify as an improvement.</p></li>
-<li><p><strong>patience</strong> – Number of epochs with no improvement after which training will be stopped.</p></li>
-<li><p><strong>baseline</strong> – Baseline value for the monitored quantity. Training will stop if the driver
-hits the baseline.</p></li>
+<li><p><strong>min_delta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – </p></li>
+<li><p><strong>patience</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>]</em>) – </p></li>
+<li><p><strong>baseline</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>]</em>) – </p></li>
+<li><p><strong>monitor</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p></li>
 </ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
 </dd>
 </dl>
 </dd></dl>
 
+<dl class="class-dl-groups">
+<dt>Attributes</dt><dd><dl class="py attribute">
+<dt id="netket.callbacks.EarlyStopping.baseline">
+<code class="sig-name descname"><span class="pre">baseline</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><span class="pre">float</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#netket.callbacks.EarlyStopping.baseline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Baseline value for the monitored quantity. Training will stop if the driver hits the baseline.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="netket.callbacks.EarlyStopping.min_delta">
+<code class="sig-name descname"><span class="pre">min_delta</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><span class="pre">float</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">0.0</span></em><a class="headerlink" href="#netket.callbacks.EarlyStopping.min_delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum change in the monitored quantity to qualify as an improvement.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="netket.callbacks.EarlyStopping.monitor">
+<code class="sig-name descname"><span class="pre">monitor</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'mean'</span></em><a class="headerlink" href="#netket.callbacks.EarlyStopping.monitor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loss statistic to monitor. Should be one of ‘mean’, ‘variance’, ‘sigma’.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="netket.callbacks.EarlyStopping.patience">
+<code class="sig-name descname"><span class="pre">patience</span></code><em class="property"><span class="pre">:</span> <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#netket.callbacks.EarlyStopping.patience" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of epochs with no improvement after which training will be stopped.</p>
+</dd></dl>
+
+</dd>
+</dl>
 <dl class="class-dl-groups">
 <dt>Methods</dt><dd><dl class="py method">
 <dt id="netket.callbacks.EarlyStopping.__call__">
