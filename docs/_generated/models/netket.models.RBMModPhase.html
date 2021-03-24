@@ -342,20 +342,15 @@
 <dt id="netket.models.RBMModPhase">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.models.</span></code><code class="sig-name descname"><span class="pre">RBMModPhase</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float64'&gt;</span></em>, <em class="sig-param"><span class="pre">activation=&lt;function</span> <span class="pre">logcosh&gt;</span></em>, <em class="sig-param"><span class="pre">alpha=1</span></em>, <em class="sig-param"><span class="pre">use_hidden_bias=True</span></em>, <em class="sig-param"><span class="pre">precision=None</span></em>, <em class="sig-param"><span class="pre">kernel_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">hidden_bias_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">parent=&lt;flax.linen.module._Sentinel</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">name=None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/models/rbm.html#RBMModPhase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.models.RBMModPhase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">flax.linen.module.Module</span></code></p>
-<blockquote>
-<div><p>A fully connected Restricted Boltzmann Machine (RBM) with real-valued parameters.</p>
+<p>A fully connected Restricted Boltzmann Machine (RBM) with real-valued parameters.</p>
 <p>In this case, two RBMs are taken to parameterize, respectively, the real
 and imaginary part of the log-wave-function, as introduced in Torlai et al.,
 Nature Physics 14, 447–450(2018).</p>
 <p>This type of RBM has spin 1/2 hidden units and is defined by:</p>
 <div class="math notranslate nohighlight">
-\[\Psi(s_1,\dots s_N) = e^{\sum_i^N a_i s_i}        imes \Pi_{j=1}^M
-\cosh \left(\sum_i^N W_{ij} s_i + b_j\]</div>
-</div></blockquote>
-<p>ight)</p>
-<blockquote>
-<div><p>for arbitrary local quantum numbers <span class="math notranslate nohighlight">\(s_i\)</span>.</p>
-</div></blockquote>
+\[\Psi(s_1,\dots s_N) = e^{\sum_i^N a_i s_i} \times \Pi_{j=1}^M
+\cosh \left(\sum_i^N W_{ij} s_i + b_j \right)\]</div>
+<p>for arbitrary local quantum numbers <span class="math notranslate nohighlight">\(s_i\)</span>.</p>
 <dl class="py method">
 <dt id="netket.models.RBMModPhase.__init__">
 <code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float64'&gt;</span></em>, <em class="sig-param"><span class="pre">activation=&lt;function</span> <span class="pre">logcosh&gt;</span></em>, <em class="sig-param"><span class="pre">alpha=1</span></em>, <em class="sig-param"><span class="pre">use_hidden_bias=True</span></em>, <em class="sig-param"><span class="pre">precision=None</span></em>, <em class="sig-param"><span class="pre">kernel_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">hidden_bias_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">parent=&lt;flax.linen.module._Sentinel</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">name=None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.models.RBMModPhase.__init__" title="Permalink to this definition">¶</a></dt>
