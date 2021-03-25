@@ -257,7 +257,6 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.RBMModPhase.html">netket.models.RBMModPhase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.RBMMultiVal.html">netket.models.RBMMultiVal</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.RBMSymm.html">netket.models.RBMSymm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.create_RBMSymm.html">netket.models.create_RBMSymm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.Jastrow.html">netket.models.Jastrow</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.NDM.html">netket.models.NDM</a></li>
@@ -269,6 +268,7 @@
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.Dense.html">netket.nn.Dense</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.DenseGeneral.html">netket.nn.DenseGeneral</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.DenseSymm.html">netket.nn.DenseSymm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.create_DenseSymm.html">netket.nn.create_DenseSymm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.Conv.html">netket.nn.Conv</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.Embed.html">netket.nn.Embed</a></li>
 </ul>
@@ -638,16 +638,13 @@ neural quantum states.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/models/netket.models.RBMSymm.html#netket.models.RBMSymm" title="netket.models.RBMSymm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.models.RBMSymm</span></code></a></p></td>
 <td><p>A symmetrized RBM using the <a class="reference internal" href="_generated/nn/netket.nn.DenseSymm.html#netket-nn-densesymm"><span class="std std-ref">netket.nn.DenseSymm</span></a> layer internally.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/models/netket.models.create_RBMSymm.html#netket.models.create_RBMSymm" title="netket.models.create_RBMSymm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.models.create_RBMSymm</span></code></a></p></td>
-<td><p>A symmetrized RBM using the <a class="reference internal" href="_generated/nn/netket.nn.DenseSymm.html#netket-nn-densesymm"><span class="std std-ref">netket.nn.DenseSymm</span></a> layer internally.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/models/netket.models.Jastrow.html#netket.models.Jastrow" title="netket.models.Jastrow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.models.Jastrow</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/models/netket.models.Jastrow.html#netket.models.Jastrow" title="netket.models.Jastrow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.models.Jastrow</span></code></a></p></td>
 <td><p>Jastrow wave function <span class="math notranslate nohighlight">\(\Psi(s) = \exp(\sum_{ij} s_i W_{ij} s_j)\)</span>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/models/netket.models.MPSPeriodic.html#netket.models.MPSPeriodic" title="netket.models.MPSPeriodic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.models.MPSPeriodic</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/models/netket.models.MPSPeriodic.html#netket.models.MPSPeriodic" title="netket.models.MPSPeriodic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.models.MPSPeriodic</span></code></a></p></td>
 <td><p>A periodic Matrix Product State (MPS) for a quantum state of discrete degrees of freedom, wrapped as Jax machine.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/models/netket.models.NDM.html#netket.models.NDM" title="netket.models.NDM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.models.NDM</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/models/netket.models.NDM.html#netket.models.NDM" title="netket.models.NDM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.models.NDM</span></code></a></p></td>
 <td><p>Encodes a Positive-Definite Neural Density Matrix using the ansatz from Torlai and Melko, PRL 120, 240503 (2018).</p></td>
 </tr>
 </tbody>
@@ -685,10 +682,13 @@ Read more about the design goal of this module in their <a class="reference exte
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/nn/netket.nn.DenseSymm.html#netket.nn.DenseSymm" title="netket.nn.DenseSymm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.nn.DenseSymm</span></code></a></p></td>
 <td><p>A symmetrized linear transformation applied over the last dimension of the input.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/nn/netket.nn.Conv.html#netket.nn.Conv" title="netket.nn.Conv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.nn.Conv</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/nn/netket.nn.create_DenseSymm.html#netket.nn.create_DenseSymm" title="netket.nn.create_DenseSymm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.nn.create_DenseSymm</span></code></a></p></td>
+<td><p>A symmetrized linear transformation applied over the last dimension of the input.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/nn/netket.nn.Conv.html#netket.nn.Conv" title="netket.nn.Conv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.nn.Conv</span></code></a></p></td>
 <td><p>Convolution Module wrapping lax.conv_general_dilated.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/nn/netket.nn.Embed.html#netket.nn.Embed" title="netket.nn.Embed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.nn.Embed</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/nn/netket.nn.Embed.html#netket.nn.Embed" title="netket.nn.Embed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.nn.Embed</span></code></a></p></td>
 <td><p>Embedding Module.</p></td>
 </tr>
 </tbody>
