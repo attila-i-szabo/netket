@@ -351,24 +351,19 @@ div.rendered_html tbody tr:hover {
 <p>This feature will be available in the upcoming major release (version 3.0). While version 3.0 is still in beta development, users can already try this feature.</p>
 <div class="section" id="Prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#Prerequisites" title="Permalink to this headline">¶</a></h2>
-<p>To try out integration with JAX, you first need to fetch the development version of NetKet (v3.0) We recommend using a virtual environment (either a python environment or a conda environment), for example</p>
+<p>To try out integration with JAX, you first need to fetch the beta version of NetKet v3 We recommend using a virtual environment (either a python environment or a conda environment), for example</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3 -m venv nk_env
 <span class="nb">source</span> nk_env/bin/activate
-pip install git+https://github.com/netket/netket@v3.0
+pip install --pre -U netket
 </pre></div>
 </div>
-<p>Frameworks such as JAX and Pytorch are add-ons for NetKet 3.0, thus they require separate installation. In this case, we can easily get JAX doing</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install --upgrade jax jaxlib
-</pre></div>
-</div>
-<p>More information can also be found <a class="reference external" href="https://github.com/google/jax#installation">here</a>.</p>
 </div>
 <div class="section" id="Defining-the-quantum-system">
 <h2>Defining the quantum system<a class="headerlink" href="#Defining-the-quantum-system" title="Permalink to this headline">¶</a></h2>
 <p>NetKet allows for full flexibility in defining quantum systems, for example when tackling a ground-state search problem. While there are a few pre-defined hamiltonians, it is relatively straightforward to implement new quantum operators/ Hamiltonians.</p>
 <p>In the following, we consider the case of a transverse-field Ising model defined on a graph with random edges.</p>
 <div class="math notranslate nohighlight">
-\[H = -\sum_{i\in\textrm{nodes}}^{L} \sigma^x_{i} + J \sum_{(i,j)\in\textrm{edges}}\sigma_{i}^{z}\sigma_{i}^{z}\]</div>
+\[H = -\sum_{i\in\textrm{nodes}}^{L} \sigma^x_{i} + J \sum_{(i,j)\in\textrm{edges}}\sigma_{i}^{z}\sigma_{j}^{z}\]</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
