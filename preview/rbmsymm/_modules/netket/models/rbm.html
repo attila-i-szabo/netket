@@ -294,7 +294,7 @@
     <span class="sd">&quot;&quot;&quot;A symmetrized RBM using the :ref:`netket.nn.DenseSymm` layer internally.&quot;&quot;&quot;</span>
 
     <span class="n">permutations</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="n">Array</span><span class="p">]</span>
-    <span class="sd">&quot;&quot;&quot;See documentstion of :ref:`netket.nn.DenseSymm`.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;See documentation of :ref:`netket.nn.DenseSymm`.&quot;&quot;&quot;</span>
     <span class="n">dtype</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span>
     <span class="sd">&quot;&quot;&quot;The dtype of the weights.&quot;&quot;&quot;</span>
     <span class="n">activation</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">nknn</span><span class="o">.</span><span class="n">logcosh</span>
@@ -352,6 +352,20 @@
 <span class="k">def</span> <span class="nf">create_RBMSymm</span><span class="p">(</span>
     <span class="n">permutations</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[],</span> <span class="n">Array</span><span class="p">],</span> <span class="n">AbstractGraph</span><span class="p">,</span> <span class="n">Array</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A symmetrized RBM using the :ref:`netket.nn.DenseSymm` layer internally.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        permutations: See documentation of :func:`~netket.nn.create_DenseSymm`.</span>
+<span class="sd">        dtype: The dtype of the weights.</span>
+<span class="sd">        activation: The nonlinear activation function.</span>
+<span class="sd">        alpha: Feature density. Number of features equal to alpha * input.shape[-1]</span>
+<span class="sd">        use_hidden_bias: if True uses a bias in the dense layer (hidden layer bias).</span>
+<span class="sd">        use_visible_bias: if True adds a bias to the input not passed through the nonlinear layer.</span>
+<span class="sd">        percision: numerical precision of the computation see `jax.lax.Precision`for details.</span>
+<span class="sd">        kernel_init: Initializer for the Dense layer matrix.</span>
+<span class="sd">        hidden_bias_init: Initializer for the hidden bias.</span>
+<span class="sd">        visible_bias_init: Initializer for the visible bias.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">permutations</span><span class="p">,</span> <span class="n">Callable</span><span class="p">):</span>
         <span class="n">perm_fn</span> <span class="o">=</span> <span class="n">permutations</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">permutations</span><span class="p">,</span> <span class="n">AbstractGraph</span><span class="p">):</span>
@@ -365,9 +379,6 @@
         <span class="n">perm_fn</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">permutations</span>
 
     <span class="k">return</span> <span class="n">RBMSymm</span><span class="p">(</span><span class="n">permutations</span><span class="o">=</span><span class="n">perm_fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-
-<span class="n">create_RBMSymm</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">RBMSymm</span><span class="o">.</span><span class="vm">__doc__</span>
 </pre></div>
 
     </div>

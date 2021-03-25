@@ -311,7 +311,7 @@
 <span class="sd">    This layer uses a reduced number of parameters, which are arranged so that the full</span>
 <span class="sd">    affine transformation is invariant under all of the given permutations when applied to s.</span>
 
-<span class="sd">    See :ref:`netket.nn.create_DenseSymm` for a more convenient constructor.</span>
+<span class="sd">    See :func:`~netket.nn.create_DenseSymm` for a more convenient constructor.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">permutations</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="n">Array</span><span class="p">]</span>
@@ -402,14 +402,14 @@
         <span class="k">return</span> <span class="n">y</span></div></div>
 
 
-<span class="k">def</span> <span class="nf">create_DenseSymm</span><span class="p">(</span>
+<div class="viewcode-block" id="create_DenseSymm"><a class="viewcode-back" href="../../../docs/_generated/nn/netket.nn.create_DenseSymm.html#netket.nn.create_DenseSymm">[docs]</a><span class="k">def</span> <span class="nf">create_DenseSymm</span><span class="p">(</span>
     <span class="n">permutations</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[],</span> <span class="n">Array</span><span class="p">],</span> <span class="n">AbstractGraph</span><span class="p">,</span> <span class="n">Array</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A symmetrized linear transformation applied over the last dimension of the input.</span>
 <span class="sd">    This layer uses a reduced number of parameters, which are arranged so that the full</span>
 <span class="sd">    affine transformation is invariant under all of the given permutations when applied to s.</span>
 
-<span class="sd">    This is a convenienence wrapper for creating a :ref:`netket.nn.DenseSymm` layer.</span>
+<span class="sd">    This is a convenience wrapper for creating a :ref:`netket.nn.DenseSymm` layer.</span>
 
 <span class="sd">    Arguments:</span>
 <span class="sd">      permutations: Sequence of permutations over which the layer should be invariant.</span>
@@ -417,7 +417,7 @@
 <span class="sd">        an argument-less callable returning such an array, or :ref:`netket.graph.AbstractGraph`, in which</span>
 <span class="sd">        case the graph automorphisms are used.</span>
 
-<span class="sd">    See :ref:`netket.nn.DenseSymm` for the remaining arguments.</span>
+<span class="sd">    See :ref:`netket.nn.DenseSymm` for the remaining parameters.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">permutations</span><span class="p">,</span> <span class="n">Callable</span><span class="p">):</span>
         <span class="n">perm_fn</span> <span class="o">=</span> <span class="n">permutations</span>
@@ -431,7 +431,7 @@
             <span class="p">)</span>
         <span class="n">perm_fn</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">permutations</span>
 
-    <span class="k">return</span> <span class="n">DenseSymm</span><span class="p">(</span><span class="n">permutations</span><span class="o">=</span><span class="n">perm_fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">DenseSymm</span><span class="p">(</span><span class="n">permutations</span><span class="o">=</span><span class="n">perm_fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Conv"><a class="viewcode-back" href="../../../docs/_generated/nn/netket.nn.Conv.html#netket.nn.Conv">[docs]</a><span class="k">class</span> <span class="nc">Conv</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
