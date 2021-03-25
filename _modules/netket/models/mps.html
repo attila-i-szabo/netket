@@ -123,7 +123,7 @@
 
 <span class="kn">from</span> <span class="nn">netket.hilbert</span> <span class="kn">import</span> <span class="n">AbstractHilbert</span>
 <span class="kn">from</span> <span class="nn">netket.graph</span> <span class="kn">import</span> <span class="n">AbstractGraph</span>
-<span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">PRNGKey</span><span class="p">,</span> <span class="n">Shape</span><span class="p">,</span> <span class="n">Dtype</span><span class="p">,</span> <span class="n">Array</span>
+<span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">PRNGKey</span><span class="p">,</span> <span class="n">Shape</span><span class="p">,</span> <span class="n">Dtype</span><span class="p">,</span> <span class="n">Array</span><span class="p">,</span> <span class="n">NNInitFunc</span>
 
 <span class="n">default_kernel_init</span> <span class="o">=</span> <span class="n">lecun_normal</span><span class="p">()</span>
 
@@ -160,7 +160,7 @@
     <span class="n">bond_dim</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">diag</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">symperiod</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">kernel_init</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">PRNGKey</span><span class="p">,</span> <span class="n">Shape</span><span class="p">,</span> <span class="n">Dtype</span><span class="p">],</span> <span class="n">Array</span><span class="p">]</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span>
+    <span class="n">kernel_init</span><span class="p">:</span> <span class="n">NNInitFunc</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span>
         <span class="n">stddev</span><span class="o">=</span><span class="mf">0.01</span>
     <span class="p">)</span>  <span class="c1"># default standard deviation equals 1e-2</span>
     <span class="n">dtype</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">complex64</span>

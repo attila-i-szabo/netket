@@ -16,7 +16,9 @@
       .. autoattribute:: NDM.beta
       .. autoattribute:: NDM.name
       .. autoattribute:: NDM.parent
+      .. autoattribute:: NDM.precision
       .. autoattribute:: NDM.scope
+      .. autoattribute:: NDM.use_ancilla_bias
       .. autoattribute:: NDM.use_hidden_bias
       .. autoattribute:: NDM.use_visible_bias
       .. autoattribute:: NDM.variables
