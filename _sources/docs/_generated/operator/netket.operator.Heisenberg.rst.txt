@@ -11,6 +11,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Attributes
       .. autoattribute:: Heisenberg.H
       .. autoattribute:: Heisenberg.J
@@ -29,6 +30,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Methods
       .. automethod:: Heisenberg.__call__
       .. automethod:: Heisenberg.apply

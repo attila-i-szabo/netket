@@ -114,10 +114,10 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">DTypeLike</span>
 
 <span class="kn">from</span> <span class="nn">netket.graph</span> <span class="kn">import</span> <span class="n">AbstractGraph</span><span class="p">,</span> <span class="n">Graph</span>
 <span class="kn">from</span> <span class="nn">netket.hilbert</span> <span class="kn">import</span> <span class="n">AbstractHilbert</span><span class="p">,</span> <span class="n">Fock</span>
+<span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">Dtype</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">spin</span><span class="p">,</span> <span class="n">boson</span>
 <span class="kn">from</span> <span class="nn">._local_operator</span> <span class="kn">import</span> <span class="n">LocalOperator</span>
@@ -204,7 +204,7 @@
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Transverse-Field Ising Hamiltonian :math:`-h\sum_i \sigma_i^{(x)} +J\sum_{\langle i,j\rangle} \sigma_i^{(z)}\sigma_j^{(z)}`.</span>
 
-<span class="sd">    This implementation is considerably faster than the Ising hamiltonian constructed by summing :class:`~LocalOperator`s.</span>
+<span class="sd">    This implementation is considerably faster than the Ising hamiltonian constructed by summing :class:`~netket.operator.LocalOperator` s.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Ising.__init__"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.Ising.html#netket.operator.Ising.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -213,17 +213,17 @@
         <span class="n">graph</span><span class="p">:</span> <span class="n">AbstractGraph</span><span class="p">,</span>
         <span class="n">h</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">J</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-        <span class="n">dtype</span><span class="p">:</span> <span class="n">DTypeLike</span> <span class="o">=</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">=</span> <span class="nb">float</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Constructs a new ``Ising`` given a hilbert space, a transverse field,</span>
-<span class="sd">        and (if specified) a coupling constant.</span>
+<span class="sd">        Constructs the Ising Operator from an hilbert space and a</span>
+<span class="sd">        graph specifying the connectivity.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            hilbert: Hilbert space the operator acts on.</span>
 <span class="sd">            h: The strength of the transverse field.</span>
 <span class="sd">            J: The strength of the coupling. Default is 1.0.</span>
-<span class="sd">            dtype: The dtype of the underlying matrix elements</span>
+<span class="sd">            dtype: The dtype of the matrix elements.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            Constructs an ``Ising`` operator for a 1D system.</span>
@@ -266,7 +266,7 @@
         <span class="k">return</span> <span class="kc">True</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DTypeLike</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dtype</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span>
 
 <div class="viewcode-block" id="Ising.conjugate"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.Ising.html#netket.operator.Ising.conjugate">[docs]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concrete</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -449,22 +449,23 @@
 
 <div class="viewcode-block" id="Heisenberg"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.Heisenberg.html#netket.operator.Heisenberg">[docs]</a><span class="k">class</span> <span class="nc">Heisenberg</span><span class="p">(</span><span class="n">GraphOperator</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The Heisemberg hamiltonian on a lattice.</span>
+<span class="sd">    The Heisenberg hamiltonian on a lattice.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Heisenberg.__init__"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.Heisenberg.html#netket.operator.Heisenberg.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">hilbert</span><span class="p">,</span>
-        <span class="n">graph</span><span class="p">,</span>
-        <span class="n">J</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">hilbert</span><span class="p">:</span> <span class="n">AbstractHilbert</span><span class="p">,</span>
+        <span class="n">graph</span><span class="p">:</span> <span class="n">AbstractGraph</span><span class="p">,</span>
+        <span class="n">J</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
         <span class="n">sign_rule</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Constructs a new ``Heisenberg`` given a hilbert space.</span>
+<span class="sd">        Constructs an Heisenberg operator given a hilbert space and a graph providing the</span>
+<span class="sd">        connectivity of the lattice.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            hilbert: Hilbert space the operator acts on.</span>
-<span class="sd">            grah: The graph upon which this hamiltonian is defined.</span>
+<span class="sd">            graph: The graph upon which this hamiltonian is defined.</span>
 <span class="sd">            J: The strength of the coupling. Default is 1.</span>
 <span class="sd">            sign_rule: If enabled, Marshal&#39;s sign rule will be used. On a bipartite</span>
 <span class="sd">                       lattice, this corresponds to a basis change flipping the Sz direction</span>
@@ -518,7 +519,8 @@
         <span class="p">)</span></div>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">J</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">J</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;The coupling strength.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_J</span>
 
     <span class="nd">@property</span>
@@ -543,27 +545,29 @@
         <span class="n">V</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
         <span class="n">J</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-        <span class="n">dtype</span><span class="p">:</span> <span class="n">DTypeLike</span> <span class="o">=</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">=</span> <span class="nb">float</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Constructs a new ``BoseHubbard`` given a hilbert space and a Hubbard</span>
-<span class="sd">        interaction strength. The chemical potential and the density-density interaction strenght</span>
+<span class="sd">        Constructs a new BoseHubbard operator given a hilbert space, a graph</span>
+<span class="sd">        specifying the connectivity and the interaction strength.</span>
+<span class="sd">        The chemical potential and the density-density interaction strenght</span>
 <span class="sd">        can be specified as well.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">           hilbert (netket.hilbert.Boson): Hilbert space the operator acts on.</span>
-<span class="sd">           U (float): The Hubbard interaction term.</span>
-<span class="sd">           V (float): The strenght of density-density interaction term.</span>
-<span class="sd">           J (float): The hopping amplitude.</span>
-<span class="sd">           mu (float): The chemical potential.</span>
+<span class="sd">           hilbert: Hilbert space the operator acts on.</span>
+<span class="sd">           U: The on-site interaction term.</span>
+<span class="sd">           V: The strength of density-density interaction term.</span>
+<span class="sd">           J: The hopping amplitude.</span>
+<span class="sd">           mu: The chemical potential.</span>
+<span class="sd">           dtype: The dtype of the matrix eleements.</span>
 
 <span class="sd">        Examples:</span>
-<span class="sd">           Constructs a ``BoseHubbard`` operator for a 2D system.</span>
+<span class="sd">           Constructs a BoseHubbard operator for a 2D system.</span>
 
 <span class="sd">           &gt;&gt;&gt; import netket as nk</span>
 <span class="sd">           &gt;&gt;&gt; g = nk.graph.Hypercube(length=3, n_dim=2, pbc=True)</span>
-<span class="sd">           &gt;&gt;&gt; hi = nk.hilbert.Boson(n_max=3, n_bosons=6, graph=g)</span>
-<span class="sd">           &gt;&gt;&gt; op = nk.operator.BoseHubbard(U=4.0, hilbert=hi)</span>
+<span class="sd">           &gt;&gt;&gt; hi = nk.hilbert.Boson(n_max=3, n_bosons=6, N=g.n_nodes)</span>
+<span class="sd">           &gt;&gt;&gt; op = nk.operator.BoseHubbard(U=4.0, hilbert=hi, graph=g)</span>
 <span class="sd">           &gt;&gt;&gt; print(op.hilbert.size)</span>
 <span class="sd">           9</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -603,18 +607,22 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">U</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The strength of on-site interaction term.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_U</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">V</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The strength of density-density interaction term.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_V</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">J</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The hopping amplitude.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_J</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">mu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The chemical potential.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mu</span>
 
     <span class="nd">@property</span>

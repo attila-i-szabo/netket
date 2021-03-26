@@ -11,6 +11,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Attributes
       .. autoattribute:: LocalOperator.H
       .. autoattribute:: LocalOperator.T
@@ -26,6 +27,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Methods
       .. automethod:: LocalOperator.__call__
       .. automethod:: LocalOperator.apply

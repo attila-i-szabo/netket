@@ -155,7 +155,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-flax-linen">Using Flax Linen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-jax-stax">Using Jax/Stax</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#id1">Using Jax/Stax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-haiku">Using Haiku</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
@@ -191,6 +191,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.LocalOperator.html">netket.operator.LocalOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.Ising.html">netket.operator.Ising</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.Heisenberg.html">netket.operator.Heisenberg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.PauliStrings.html">netket.operator.PauliStrings</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.LocalLiouvillian.html">netket.operator.LocalLiouvillian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#pre-defined-operators">Pre-defined operators</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.create.html">netket.operator.boson.create</a></li>
@@ -347,24 +348,27 @@
 <dd><p>Constructs a netket graph from a networkx graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>graph</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code>) – A networkx graph (might be a networkx.Graph or a networkx.MultiGraph)</p>
+<dd class="field-odd"><p><strong>graph</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code>) – A networkx graph (might be a <code class="xref py py-class docutils literal notranslate"><span class="pre">networkx.Graph</span></code> or a <code class="xref py py-class docutils literal notranslate"><span class="pre">networkx.MultiGraph</span></code>)</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<p>A graph of nodes [0,1,2] with edges [(0,1), (0,2), (1,2)]
-&gt;&gt;&gt; import netket
-&gt;&gt;&gt; import networkx
-&gt;&gt;&gt; nx_g = networkx.Graph([(0,1), (0,2), (1,2)])
-&gt;&gt;&gt; nk_g = netket.graph.NetworkX(nx_g)
-&gt;&gt;&gt; print(nk_g.n_nodes)
-3</p>
+<p>A graph of nodes [0,1,2] with edges [(0,1), (0,2), (1,2)]</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">netket</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">networkx</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nx_g</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">Graph</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nk_g</span> <span class="o">=</span> <span class="n">netket</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">NetworkX</span><span class="p">(</span><span class="n">nx_g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">nk_g</span><span class="o">.</span><span class="n">n_nodes</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="class-dl-groups">
 <dt>Attributes</dt><dd><dl class="py attribute">
 <dt id="netket.graph.NetworkX.n_edges">
 <code class="sig-name descname"><span class="pre">n_edges</span></code><a class="headerlink" href="#netket.graph.NetworkX.n_edges" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The number of edges in the graph.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
@@ -374,7 +378,8 @@
 <dl class="py attribute">
 <dt id="netket.graph.NetworkX.n_nodes">
 <code class="sig-name descname"><span class="pre">n_nodes</span></code><a class="headerlink" href="#netket.graph.NetworkX.n_nodes" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The number of nodes (or vertices) in the graph</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>

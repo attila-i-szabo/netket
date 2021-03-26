@@ -119,7 +119,7 @@
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">_nx</span>
 
 
-<div class="viewcode-block" id="Grid"><a class="viewcode-back" href="../../../docs/graphs.html#netket.graph.Grid">[docs]</a><span class="k">class</span> <span class="nc">Grid</span><span class="p">(</span><span class="n">NetworkX</span><span class="p">):</span>
+<div class="viewcode-block" id="Grid"><a class="viewcode-back" href="../../../docs/_generated/graph/netket.graph.Grid.html#netket.graph.Grid">[docs]</a><span class="k">class</span> <span class="nc">Grid</span><span class="p">(</span><span class="n">NetworkX</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;A Grid lattice of d dimensions, and possibly different sizes of each dimension.</span>
 <span class="sd">    Periodic boundary conditions can also be imposed&quot;&quot;&quot;</span>
 
@@ -146,6 +146,7 @@
 <span class="sd">            50</span>
 
 <span class="sd">            Also, a 2x2x3 lattice with open boundary conditions can be constructed as follows:</span>
+
 <span class="sd">            &gt;&gt;&gt; g=netket.graph.Grid(length=[2,2,3], pbc=False)</span>
 <span class="sd">            &gt;&gt;&gt; print(g.n_nodes)</span>
 <span class="sd">            12</span>
@@ -269,7 +270,7 @@
     <span class="k">return</span> <span class="n">Grid</span><span class="p">(</span><span class="n">length_vector</span><span class="p">,</span> <span class="n">pbc</span><span class="o">=</span><span class="n">pbc</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Square"><a class="viewcode-back" href="../../../docs/_generated/graph/netket.graph.Square.html#netket.graph.Square">[docs]</a><span class="k">def</span> <span class="nf">Square</span><span class="p">(</span><span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">pbc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Grid</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">Square</span><span class="p">(</span><span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">pbc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Grid</span><span class="p">:</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;A square lattice of side L.</span>
 <span class="sd">    Periodic boundary conditions can also be imposed</span>
 
@@ -290,7 +291,7 @@
 <span class="sd">        &gt;&gt;&gt; print(g.n_nodes)</span>
 <span class="sd">        100</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">Hypercube</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pbc</span><span class="o">=</span><span class="n">pbc</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">Hypercube</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pbc</span><span class="o">=</span><span class="n">pbc</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Chain"><a class="viewcode-back" href="../../../docs/_generated/graph/netket.graph.Chain.html#netket.graph.Chain">[docs]</a><span class="k">def</span> <span class="nf">Chain</span><span class="p">(</span><span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">pbc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Grid</span><span class="p">:</span>

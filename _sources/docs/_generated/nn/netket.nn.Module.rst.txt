@@ -11,11 +11,13 @@
    
       
    .. rst-class:: class-dl-groups
+
    Attributes
       .. autoattribute:: Module.variables
    
       
    .. rst-class:: class-dl-groups
+
    Methods
       .. automethod:: Module.apply
       .. automethod:: Module.clone

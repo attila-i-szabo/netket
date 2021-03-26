@@ -11,6 +11,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Attributes
       .. autoattribute:: MCMixedState.chain_length
       .. autoattribute:: MCMixedState.chain_length_diag
@@ -31,6 +32,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Methods
       .. automethod:: MCMixedState.evaluate
       .. automethod:: MCMixedState.expect

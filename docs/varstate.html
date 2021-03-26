@@ -157,7 +157,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="custom_models.html#using-flax-linen">Using Flax Linen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_models.html#using-jax-stax">Using Jax/Stax</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_models.html#id1">Using Jax/Stax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_models.html#using-haiku">Using Haiku</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
@@ -193,6 +193,7 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.LocalOperator.html">netket.operator.LocalOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.Ising.html">netket.operator.Ising</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.Heisenberg.html">netket.operator.Heisenberg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.PauliStrings.html">netket.operator.PauliStrings</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.LocalLiouvillian.html">netket.operator.LocalLiouvillian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#pre-defined-operators">Pre-defined operators</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="_generated/hilbert/netket.operator.boson.create.html">netket.operator.boson.create</a></li>
@@ -517,6 +518,15 @@ the <a class="reference internal" href="_generated/variational/netket.variationa
 In Jax jargon, Parameters are a PyTree (see <a class="reference external" href="https://jax.readthedocs.io/en/latest/pytrees.html">PyTree documentation</a>) and they
 can be operated upon with functions like <a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.tree_util.html?highlight=tree_map#jax.tree_util.tree_map">jax.tree_map</a>.</p>
 <p>You can also modify the parameters by _unfreezing_ them, using the command <cite>flax.core.unfreeze</cite>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">flax</span>
+
+<span class="n">pars</span> <span class="o">=</span> <span class="n">flax</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">unfreeze</span><span class="p">(</span><span class="n">varstate</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span>
+
+<span class="n">pars</span><span class="p">[</span><span class="s1">&#39;Dense&#39;</span><span class="p">][</span><span class="s1">&#39;kernel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pars</span><span class="p">[</span><span class="s1">&#39;Dense&#39;</span><span class="p">][</span><span class="s1">&#39;kernel&#39;</span><span class="p">]</span> <span class="o">+</span><span class="mi">1</span>
+
+<span class="n">varstate</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">pars</span>
+</pre></div>
+</div>
 <p>The parameter dict will be automatically frozen upon assignment.</p>
 </div>
 </div>

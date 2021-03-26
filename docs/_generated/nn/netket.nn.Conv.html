@@ -155,7 +155,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-flax-linen">Using Flax Linen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-jax-stax">Using Jax/Stax</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#id1">Using Jax/Stax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-haiku">Using Haiku</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
@@ -191,6 +191,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.LocalOperator.html">netket.operator.LocalOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.Ising.html">netket.operator.Ising</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.Heisenberg.html">netket.operator.Heisenberg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.PauliStrings.html">netket.operator.PauliStrings</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.LocalLiouvillian.html">netket.operator.LocalLiouvillian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#pre-defined-operators">Pre-defined operators</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.create.html">netket.operator.boson.create</a></li>
@@ -615,7 +616,7 @@ that method:</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>variables</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Mapping" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Mapping" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]) – A dictionary containing variables keyed by variable
-collections. See <code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code> for more details
+collections. See <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#module-flax.core.variables" title="(in Flax)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code></a> for more details
 about variables.</p></li>
 <li><p><strong>rngs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]) – The rngs for the variable collections.</p></li>
 <li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[…, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]) – The literal name of a method in this class. If provided, applies
@@ -696,7 +697,7 @@ doesn’t exist in this scope.</p>
 <dt id="netket.nn.Conv.has_variable">
 <code class="sig-name descname"><span class="pre">has_variable</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.nn.Conv.has_variable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if a variable of given collection and name exists in this Module.</p>
-<p>See <code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code> for more explanation on variables and
+<p>See <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#module-flax.core.variables" title="(in Flax)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code></a> for more explanation on variables and
 collections.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -809,7 +810,7 @@ reproducibility.</p>
 <code class="sig-name descname"><span class="pre">param</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_fn</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">init_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.nn.Conv.param" title="Permalink to this definition">¶</a></dt>
 <dd><p>Declares and returns a parameter in this Module.</p>
 <p>Parameters are read-only variables in the collection named “params”. See
-<code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code> for more details on variables.</p>
+<a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#module-flax.core.variables" title="(in Flax)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code></a> for more details on variables.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -929,7 +930,7 @@ The default is an empty tuple.</p></li>
 <dt id="netket.nn.Conv.variable">
 <code class="sig-name descname"><span class="pre">variable</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_fn</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">init_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.nn.Conv.variable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Declares and returns a variable in this Module.</p>
-<p>See <code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code> for more information. See also <a class="reference internal" href="#netket.nn.Conv.param" title="netket.nn.Conv.param"><code class="xref py py-meth docutils literal notranslate"><span class="pre">param()</span></code></a>
+<p>See <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#module-flax.core.variables" title="(in Flax)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code></a> for more information. See also <a class="reference internal" href="#netket.nn.Conv.param" title="netket.nn.Conv.param"><code class="xref py py-meth docutils literal notranslate"><span class="pre">param()</span></code></a>
 for a shorthand way to define read-only variables in the “params”
 collection.</p>
 <dl class="field-list simple">
@@ -947,7 +948,7 @@ this variable is used in this module.</p></li>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">flax.core.variables.Variable</span></code> that can be read or set via
+<dd class="field-odd"><p>A <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#flax.core.variables.Variable" title="(in Flax)"><code class="xref py py-class docutils literal notranslate"><span class="pre">flax.core.variables.Variable</span></code></a> that can be read or set via
 “.value” attribute. Throws an error if the variable exists already.</p>
 </dd>
 </dl>

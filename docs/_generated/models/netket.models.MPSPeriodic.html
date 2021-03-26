@@ -157,7 +157,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-flax-linen">Using Flax Linen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-jax-stax">Using Jax/Stax</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#id1">Using Jax/Stax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-haiku">Using Haiku</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
@@ -193,6 +193,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.LocalOperator.html">netket.operator.LocalOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.Ising.html">netket.operator.Ising</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.Heisenberg.html">netket.operator.Heisenberg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.PauliStrings.html">netket.operator.PauliStrings</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.LocalLiouvillian.html">netket.operator.LocalLiouvillian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#pre-defined-operators">Pre-defined operators</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.create.html">netket.operator.boson.create</a></li>
@@ -349,88 +350,6 @@ degrees of freedom, wrapped as Jax machine.</p>
 \[\Psi(s_1,\dots s_N) = \mathrm{Tr} \left[ A[s_1]\dots A[s_N] \right] ,\]</div>
 <p>for arbitrary local quantum numbers <span class="math notranslate nohighlight">\(s_i\)</span>, where <span class="math notranslate nohighlight">\(A[s_1]\)</span> is a matrix
 of dimension (bdim,bdim), depending on the value of the local quantum number <span class="math notranslate nohighlight">\(s_i\)</span>.</p>
-<dl class="py attribute">
-<dt id="netket.models.MPSPeriodic.hilbert">
-<code class="sig-name descname"><span class="pre">hilbert</span></code><a class="headerlink" href="#netket.models.MPSPeriodic.hilbert" title="Permalink to this definition">¶</a></dt>
-<dd><p>Hilbert space on which the state is defined.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>netket.hilbert.abstract_hilbert.AbstractHilbert</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="netket.models.MPSPeriodic.graph">
-<code class="sig-name descname"><span class="pre">graph</span></code><a class="headerlink" href="#netket.models.MPSPeriodic.graph" title="Permalink to this definition">¶</a></dt>
-<dd><p>The graph on which the system is defined.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>netket.graph.abstract_graph.AbstractGraph</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="netket.models.MPSPeriodic.bond_dim">
-<code class="sig-name descname"><span class="pre">bond_dim</span></code><a class="headerlink" href="#netket.models.MPSPeriodic.bond_dim" title="Permalink to this definition">¶</a></dt>
-<dd><p>Virtual dimension of the MPS tensors.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="netket.models.MPSPeriodic.diag">
-<code class="sig-name descname"><span class="pre">diag</span></code><a class="headerlink" href="#netket.models.MPSPeriodic.diag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Whether or not to use diagonal matrices in the MPS tensors.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="netket.models.MPSPeriodic.symperiod">
-<code class="sig-name descname"><span class="pre">symperiod</span></code><a class="headerlink" href="#netket.models.MPSPeriodic.symperiod" title="Permalink to this definition">¶</a></dt>
-<dd><p>Periodicity in the chain of MPS tensors. The chain of
-MPS tensors is constructed as a sequence of identical unit cells
-consisting of symperiod tensors. if None, symperiod equals the
-number of physical degrees of freedom.
-default=None</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="netket.models.MPSPeriodic.kernel_init">
-<code class="sig-name descname"><span class="pre">kernel_init</span></code><a class="headerlink" href="#netket.models.MPSPeriodic.kernel_init" title="Permalink to this definition">¶</a></dt>
-<dd><p>the initializer for the MPS weights.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Callable[[Any, Sequence[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>], Any], Any]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="netket.models.MPSPeriodic.dtype">
-<code class="sig-name descname"><span class="pre">dtype</span></code><a class="headerlink" href="#netket.models.MPSPeriodic.dtype" title="Permalink to this definition">¶</a></dt>
-<dd><p>complex or float, whether the variational parameters of the MPS
-are real or complex. default=complex</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>Any</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt id="netket.models.MPSPeriodic.__init__">
 <code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">hilbert</span></em>, <em class="sig-param"><span class="pre">graph</span></em>, <em class="sig-param"><span class="pre">bond_dim</span></em>, <em class="sig-param"><span class="pre">diag=False</span></em>, <em class="sig-param"><span class="pre">symperiod=None</span></em>, <em class="sig-param"><span class="pre">kernel_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.complex64'&gt;</span></em>, <em class="sig-param"><span class="pre">parent=&lt;flax.linen.module._Sentinel</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">name=None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.models.MPSPeriodic.__init__" title="Permalink to this definition">¶</a></dt>
@@ -457,9 +376,10 @@ are real or complex. default=complex</p>
 
 <dl class="class-dl-groups">
 <dt>Attributes</dt><dd><dl class="py attribute">
-<dt id="id0">
-<code class="sig-name descname"><span class="pre">diag</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="netket.models.MPSPeriodic.diag">
+<code class="sig-name descname"><span class="pre">diag</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#netket.models.MPSPeriodic.diag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether or not to use diagonal matrices in the MPS tensors.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="netket.models.MPSPeriodic.name">
@@ -477,9 +397,13 @@ are real or complex. default=complex</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="id1">
-<code class="sig-name descname"><span class="pre">symperiod</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="netket.models.MPSPeriodic.symperiod">
+<code class="sig-name descname"><span class="pre">symperiod</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#netket.models.MPSPeriodic.symperiod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Periodicity in the chain of MPS tensors.</p>
+<p>The chain of MPS tensors is constructed as a sequence of identical
+unit cells consisting of symperiod tensors. if None, symperiod equals the
+number of physical degrees of freedom.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="netket.models.MPSPeriodic.variables">
@@ -517,7 +441,7 @@ that method:</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>variables</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Mapping" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Mapping" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]) – A dictionary containing variables keyed by variable
-collections. See <code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code> for more details
+collections. See <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#module-flax.core.variables" title="(in Flax)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code></a> for more details
 about variables.</p></li>
 <li><p><strong>rngs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]) – The rngs for the variable collections.</p></li>
 <li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[…, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]) – The literal name of a method in this class. If provided, applies
@@ -593,7 +517,7 @@ doesn’t exist in this scope.</p>
 <dt id="netket.models.MPSPeriodic.has_variable">
 <code class="sig-name descname"><span class="pre">has_variable</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.models.MPSPeriodic.has_variable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if a variable of given collection and name exists in this Module.</p>
-<p>See <code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code> for more explanation on variables and
+<p>See <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#module-flax.core.variables" title="(in Flax)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code></a> for more explanation on variables and
 collections.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -676,8 +600,8 @@ collections.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="id2">
-<code class="sig-name descname"><span class="pre">kernel_init</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'jax._src.numpy.lax_numpy.float32'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.models.MPSPeriodic.kernel_init">
+<code class="sig-name descname"><span class="pre">kernel_init</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">shape</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'jax._src.numpy.lax_numpy.float32'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.models.MPSPeriodic.kernel_init" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -706,7 +630,7 @@ reproducibility.</p>
 <code class="sig-name descname"><span class="pre">param</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_fn</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">init_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.models.MPSPeriodic.param" title="Permalink to this definition">¶</a></dt>
 <dd><p>Declares and returns a parameter in this Module.</p>
 <p>Parameters are read-only variables in the collection named “params”. See
-<code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code> for more details on variables.</p>
+<a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#module-flax.core.variables" title="(in Flax)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code></a> for more details on variables.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -826,7 +750,7 @@ The default is an empty tuple.</p></li>
 <dt id="netket.models.MPSPeriodic.variable">
 <code class="sig-name descname"><span class="pre">variable</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_fn</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">init_args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.models.MPSPeriodic.variable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Declares and returns a variable in this Module.</p>
-<p>See <code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code> for more information. See also <a class="reference internal" href="#netket.models.MPSPeriodic.param" title="netket.models.MPSPeriodic.param"><code class="xref py py-meth docutils literal notranslate"><span class="pre">param()</span></code></a>
+<p>See <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#module-flax.core.variables" title="(in Flax)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">flax.core.variables</span></code></a> for more information. See also <a class="reference internal" href="#netket.models.MPSPeriodic.param" title="netket.models.MPSPeriodic.param"><code class="xref py py-meth docutils literal notranslate"><span class="pre">param()</span></code></a>
 for a shorthand way to define read-only variables in the “params”
 collection.</p>
 <dl class="field-list simple">
@@ -844,7 +768,7 @@ this variable is used in this module.</p></li>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">flax.core.variables.Variable</span></code> that can be read or set via
+<dd class="field-odd"><p>A <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#flax.core.variables.Variable" title="(in Flax)"><code class="xref py py-class docutils literal notranslate"><span class="pre">flax.core.variables.Variable</span></code></a> that can be read or set via
 “.value” attribute. Throws an error if the variable exists already.</p>
 </dd>
 </dl>

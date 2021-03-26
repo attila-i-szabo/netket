@@ -11,6 +11,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Attributes
       .. autoattribute:: Lattice.atoms_coord
       .. autoattribute:: Lattice.basis_vectors
@@ -19,6 +20,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Methods
       .. automethod:: Lattice.adjacency_list
       .. automethod:: Lattice.atom_label

@@ -157,7 +157,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="custom_models.html#using-flax-linen">Using Flax Linen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_models.html#using-jax-stax">Using Jax/Stax</a></li>
-<li class="toctree-l2"><a class="reference internal" href="custom_models.html#id1">Using Jax/Stax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_models.html#using-haiku">Using Haiku</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
@@ -193,6 +193,7 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.LocalOperator.html">netket.operator.LocalOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.Ising.html">netket.operator.Ising</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.Heisenberg.html">netket.operator.Heisenberg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.PauliStrings.html">netket.operator.PauliStrings</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/operator/netket.operator.LocalLiouvillian.html">netket.operator.LocalLiouvillian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pre-defined-operators">Pre-defined operators</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="_generated/hilbert/netket.operator.boson.create.html">netket.operator.boson.create</a></li>
@@ -346,10 +347,10 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="graphs.html#netket.graph.AbstractGraph" title="netket.graph.AbstractGraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.AbstractGraph</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/graph/netket.graph.AbstractGraph.html#netket.graph.AbstractGraph" title="netket.graph.AbstractGraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.AbstractGraph</span></code></a></p></td>
 <td><p>Abstract class for NetKet graph objects.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="graphs.html#netket.graph.NetworkX" title="netket.graph.NetworkX"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.NetworkX</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/graph/netket.graph.NetworkX.html#netket.graph.NetworkX" title="netket.graph.NetworkX"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.NetworkX</span></code></a></p></td>
 <td><p>Wrapper for a networkx graph</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Edgeless.html#netket.graph.Edgeless" title="netket.graph.Edgeless"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Edgeless</span></code></a></p></td>
@@ -364,7 +365,7 @@
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Chain.html#netket.graph.Chain" title="netket.graph.Chain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Chain</span></code></a></p></td>
 <td><p>A chain of L sites.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="graphs.html#netket.graph.Grid" title="netket.graph.Grid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Grid</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Grid.html#netket.graph.Grid" title="netket.graph.Grid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Grid</span></code></a></p></td>
 <td><p>A Grid lattice of d dimensions, and possibly different sizes of each dimension.</p></td>
 </tr>
 </tbody>
@@ -420,9 +421,12 @@
 <td><p>The Transverse-Field Ising Hamiltonian <span class="math notranslate nohighlight">\(-h\sum_i \sigma_i^{(x)} +J\sum_{\langle i,j\rangle} \sigma_i^{(z)}\sigma_j^{(z)}\)</span>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/operator/netket.operator.Heisenberg.html#netket.operator.Heisenberg" title="netket.operator.Heisenberg"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.Heisenberg</span></code></a></p></td>
-<td><p>The Heisemberg hamiltonian on a lattice.</p></td>
+<td><p>The Heisenberg hamiltonian on a lattice.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/operator/netket.operator.LocalLiouvillian.html#netket.operator.LocalLiouvillian" title="netket.operator.LocalLiouvillian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.LocalLiouvillian</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/operator/netket.operator.PauliStrings.html#netket.operator.PauliStrings" title="netket.operator.PauliStrings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.PauliStrings</span></code></a></p></td>
+<td><p>A Hamiltonian consisiting of the sum of products of Pauli operators.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/operator/netket.operator.LocalLiouvillian.html#netket.operator.LocalLiouvillian" title="netket.operator.LocalLiouvillian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.operator.LocalLiouvillian</span></code></a></p></td>
 <td><p>LocalLiouvillian super-operator, acting on the DoubledHilbert (tensor product) space ℋ⊗ℋ.</p></td>
 </tr>
 </tbody>

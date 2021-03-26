@@ -11,6 +11,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Attributes
       .. autoattribute:: GraphOperator.H
       .. autoattribute:: GraphOperator.T
@@ -27,6 +28,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Methods
       .. automethod:: GraphOperator.__call__
       .. automethod:: GraphOperator.apply

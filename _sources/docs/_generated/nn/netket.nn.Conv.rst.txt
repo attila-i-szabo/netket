@@ -11,6 +11,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Attributes
       .. autoattribute:: Conv.feature_group_count
       .. autoattribute:: Conv.input_dilation
@@ -26,6 +27,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Methods
       .. automethod:: Conv.__call__
       .. automethod:: Conv.apply

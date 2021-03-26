@@ -11,6 +11,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Attributes
       .. autoattribute:: LocalLiouvillian.H
       .. autoattribute:: LocalLiouvillian.T
@@ -25,6 +26,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Methods
       .. automethod:: LocalLiouvillian.__call__
       .. automethod:: LocalLiouvillian.add_jump_operator

@@ -233,7 +233,7 @@
 <span class="sd">        a flax&#39;s dataclass), and it can be serialized using Flax serialization methods.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            machine: a Flax module or callable apply_fun with the forward pass of the log-pdf.</span>
+<span class="sd">            machine: a Flax module or callable with the forward pass of the log-pdf.</span>
 <span class="sd">            parameters: The PyTree of parameters of the model.</span>
 <span class="sd">            seed: An optional seed or jax PRNGKey. If not specified, a random seed will be used.</span>
 
@@ -254,14 +254,13 @@
         <span class="n">state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SamplerState</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplerState</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Resets the state of the sampler. To be used every time</span>
-<span class="sd">        the parameters are changed.</span>
+<span class="sd">        Resets the state of the sampler. To be used every time the parameters are changed.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            machine: a Flax module or callable apply_fun with the forward pass of the log-pdf.</span>
+<span class="sd">            machine: a Flax module or callable with the forward pass of the log-pdf.</span>
 <span class="sd">            parameters: The PyTree of parameters of the model.</span>
 <span class="sd">            state: The current state of the sampler. If it&#39;s not provided, it will be constructed</span>
-<span class="sd">            by calling `sampler.init_state(machine, parameters)` with a random seed.</span>
+<span class="sd">                by calling :code:`sampler.init_state(machine, parameters)` with a random seed.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A valid sampler state.</span>
@@ -281,10 +280,10 @@
 <span class="sd">        Samples the next state in the markov chain.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            machine: a Flax module or callable apply_fun with the forward pass of the log-pdf.</span>
+<span class="sd">            machine: a Flax module or callable apply function with the forward pass of the log-pdf.</span>
 <span class="sd">            parameters: The PyTree of parameters of the model.</span>
 <span class="sd">            state: The current state of the sampler. If it&#39;s not provided, it will be constructed</span>
-<span class="sd">            by calling `sampler.reset(machine, parameters)` with a random seed.</span>
+<span class="sd">                by calling :code:`sampler.reset(machine, parameters)` with a random seed.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            state: The new state of the sampler</span>
@@ -308,8 +307,8 @@
 
 <span class="sd">        Arguments:</span>
 <span class="sd">            sampler: The Monte Carlo sampler.</span>
-<span class="sd">            machine: The model or apply_fun to sample from (if it&#39;s a function it should have</span>
-<span class="sd">                the signature f(parameters, σ) -&gt; jnp.ndarray).</span>
+<span class="sd">            machine: The model or callable to sample from (if it&#39;s a function it should have</span>
+<span class="sd">                the signature :code:`f(parameters, σ) -&gt; jnp.ndarray`).</span>
 <span class="sd">            parameters: The PyTree of parameters of the model.</span>
 <span class="sd">            state: current state of the sampler. If None, then initialises it.</span>
 <span class="sd">            chain_length: (default=1), the length of the chains.</span>
@@ -391,7 +390,7 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        sampler: The Monte Carlo sampler.</span>
-<span class="sd">        machine: a Flax module or callable apply_fun with the forward pass of the log-pdf.</span>
+<span class="sd">        machine: a Flax module or callable with the forward pass of the log-pdf.</span>
 <span class="sd">        parameters: The PyTree of parameters of the model.</span>
 <span class="sd">        seed: An optional seed or jax PRNGKey. If not specified, a random seed will be used.</span>
 
@@ -409,15 +408,14 @@
     <span class="n">state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SamplerState</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplerState</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Resets the state of the sampler. To be used every time</span>
-<span class="sd">    the parameters are changed.</span>
+<span class="sd">    Resets the state of the sampler. To be used every time the parameters are changed.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        sampler: The Monte Carlo sampler.</span>
-<span class="sd">        machine: a Flax module or callable apply_fun with the forward pass of the log-pdf.</span>
+<span class="sd">        machine: a Flax module or Callable with the forward pass of the log-pdf.</span>
 <span class="sd">        parameters: The PyTree of parameters of the model.</span>
 <span class="sd">        state: The current state of the sampler. If it&#39;s not provided, it will be constructed</span>
-<span class="sd">        by calling `sampler.init_state(machine, parameters)` with a random seed.</span>
+<span class="sd">            by calling :code:`sampler.init_state(machine, parameters)` with a random seed.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A valid sampler state.</span>
@@ -436,10 +434,10 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        sampler: The Monte Carlo sampler.</span>
-<span class="sd">        machine: a Flax module or callable apply_fun with the forward pass of the log-pdf.</span>
+<span class="sd">        machine: a Flax module or callable with the forward pass of the log-pdf.</span>
 <span class="sd">        parameters: The PyTree of parameters of the model.</span>
 <span class="sd">        state: The current state of the sampler. If it&#39;s not provided, it will be constructed</span>
-<span class="sd">        by calling `sampler.reset(machine, parameters)` with a random seed.</span>
+<span class="sd">            by calling :code:`sampler.reset(machine, parameters)` with a random seed.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        state: The new state of the sampler</span>
@@ -461,8 +459,8 @@
 
 <span class="sd">    Arguments:</span>
 <span class="sd">        sampler: The Monte Carlo sampler.</span>
-<span class="sd">        machine: The model or apply_fun to sample from (if it&#39;s a function it should have</span>
-<span class="sd">            the signature f(parameters, σ) -&gt; jnp.ndarray).</span>
+<span class="sd">        machine: The model or Callable to sample from (if it&#39;s a function it should have</span>
+<span class="sd">            the signature :code:`f(parameters, σ) -&gt; jnp.ndarray`).</span>
 <span class="sd">        parameters: The PyTree of parameters of the model.</span>
 <span class="sd">        state: current state of the sampler. If None, then initialises it.</span>
 <span class="sd">        chain_length: (default=1), the length of the chains.</span>
@@ -490,8 +488,8 @@
 
 <span class="sd">    Arguments:</span>
 <span class="sd">        sampler: The Monte Carlo sampler.</span>
-<span class="sd">        machine: The model or apply_fun to sample from (if it&#39;s a function it should have</span>
-<span class="sd">            the signature f(parameters, σ) -&gt; jnp.ndarray).</span>
+<span class="sd">        machine: The model or Callable to sample from (if it&#39;s a function it should have</span>
+<span class="sd">            the signature :code:`f(parameters, σ) -&gt; jnp.ndarray`).</span>
 <span class="sd">        parameters: The PyTree of parameters of the model.</span>
 <span class="sd">        state: current state of the sampler. If None, then initialises it.</span>
 <span class="sd">        chain_length: (default=1), the length of the chains.</span>

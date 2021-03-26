@@ -24,7 +24,7 @@
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="netket.operator.LocalLiouvillian" href="netket.operator.LocalLiouvillian.html" />
+    <link rel="next" title="netket.operator.PauliStrings" href="netket.operator.PauliStrings.html" />
     <link rel="prev" title="netket.operator.Ising" href="netket.operator.Ising.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -157,7 +157,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-flax-linen">Using Flax Linen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-jax-stax">Using Jax/Stax</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#id1">Using Jax/Stax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-haiku">Using Haiku</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
@@ -193,6 +193,7 @@
 <li class="toctree-l3"><a class="reference internal" href="netket.operator.LocalOperator.html">netket.operator.LocalOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.operator.Ising.html">netket.operator.Ising</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">netket.operator.Heisenberg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.operator.PauliStrings.html">netket.operator.PauliStrings</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.operator.LocalLiouvillian.html">netket.operator.LocalLiouvillian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#pre-defined-operators">Pre-defined operators</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.create.html">netket.operator.boson.create</a></li>
@@ -342,17 +343,18 @@
 <dt id="netket.operator.Heisenberg">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.operator.</span></code><code class="sig-name descname"><span class="pre">Heisenberg</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilbert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sign_rule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_hamiltonian.html#Heisenberg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.Heisenberg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.operator._graph_operator.GraphOperator</span></code></p>
-<p>The Heisemberg hamiltonian on a lattice.</p>
+<p>The Heisenberg hamiltonian on a lattice.</p>
 <dl class="py method">
 <dt id="netket.operator.Heisenberg.__init__">
 <code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilbert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sign_rule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_hamiltonian.html#Heisenberg.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.Heisenberg.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Constructs a new <code class="docutils literal notranslate"><span class="pre">Heisenberg</span></code> given a hilbert space.</p>
+<dd><p>Constructs an Heisenberg operator given a hilbert space and a graph providing the
+connectivity of the lattice.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>hilbert</strong> – Hilbert space the operator acts on.</p></li>
-<li><p><strong>grah</strong> – The graph upon which this hamiltonian is defined.</p></li>
-<li><p><strong>J</strong> – The strength of the coupling. Default is 1.</p></li>
+<li><p><strong>hilbert</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractHilbert</span></code>) – Hilbert space the operator acts on.</p></li>
+<li><p><strong>graph</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractGraph</span></code>) – The graph upon which this hamiltonian is defined.</p></li>
+<li><p><strong>J</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – The strength of the coupling. Default is 1.</p></li>
 <li><p><strong>sign_rule</strong> – If enabled, Marshal’s sign rule will be used. On a bipartite
 lattice, this corresponds to a basis change flipping the Sz direction
 at every odd site of the lattice. For non-bipartite lattices, the
@@ -388,7 +390,13 @@ bipartite, False otherwise.</p></li>
 <dl class="py attribute">
 <dt id="netket.operator.Heisenberg.J">
 <code class="sig-name descname"><span class="pre">J</span></code><a class="headerlink" href="#netket.operator.Heisenberg.J" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The coupling strength.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="netket.operator.Heisenberg.T">

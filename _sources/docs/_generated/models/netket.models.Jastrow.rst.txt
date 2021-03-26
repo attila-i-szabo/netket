@@ -11,6 +11,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Attributes
       .. autoattribute:: Jastrow.name
       .. autoattribute:: Jastrow.parent
@@ -19,6 +20,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Methods
       .. automethod:: Jastrow.__call__
       .. automethod:: Jastrow.apply

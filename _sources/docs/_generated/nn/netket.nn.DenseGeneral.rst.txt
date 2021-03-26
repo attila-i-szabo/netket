@@ -11,6 +11,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Attributes
       .. autoattribute:: DenseGeneral.axis
       .. autoattribute:: DenseGeneral.batch_dims
@@ -23,6 +24,7 @@
    
       
    .. rst-class:: class-dl-groups
+
    Methods
       .. automethod:: DenseGeneral.__call__
       .. automethod:: DenseGeneral.apply

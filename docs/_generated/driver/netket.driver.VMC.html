@@ -155,7 +155,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-flax-linen">Using Flax Linen</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-jax-stax">Using Jax/Stax</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#id1">Using Jax/Stax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-haiku">Using Haiku</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
@@ -191,6 +191,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.LocalOperator.html">netket.operator.LocalOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.Ising.html">netket.operator.Ising</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.Heisenberg.html">netket.operator.Heisenberg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.PauliStrings.html">netket.operator.PauliStrings</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.LocalLiouvillian.html">netket.operator.LocalLiouvillian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#pre-defined-operators">Pre-defined operators</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.create.html">netket.operator.boson.create</a></li>
@@ -477,7 +478,7 @@ count is set to 0.</p>
 stored in this driver for <cite>n_iter</cite> steps and dumping values of the observables <cite>obs</cite>
 in the output <cite>logger</cite>. If no logger is specified, creates a json file at <cite>out</cite>,
 overwriting files with the same prefix.</p>
-<p>By default uses <span class="xref std std-ref">netket.logging.JsonLogger</span>. To know about the output format
+<p>By default uses <a class="reference internal" href="netket.logging.JsonLog.html#netket-logging-jsonlog"><span class="std std-ref">netket.logging.JsonLog</span></a>. To know about the output format
 check it’s documentation. The logger object is also returned at the end of this function
 so that you can inspect the results without reading the json output.</p>
 <dl class="field-list simple">
