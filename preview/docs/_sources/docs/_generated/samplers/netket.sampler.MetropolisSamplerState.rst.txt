@@ -1,0 +1,25 @@
+﻿netket.sampler.MetropolisSamplerState
+=====================================
+
+.. currentmodule:: netket.sampler
+
+.. autoclass:: MetropolisSamplerState
+   :show-inheritance:
+
+   .. automethod:: MetropolisSamplerState.__init__
+
+   
+      
+   .. rst-class:: class-dl-groups
+
+   Attributes
+      .. autoattribute:: MetropolisSamplerState.n_accepted
+      .. autoattribute:: MetropolisSamplerState.n_samples
+   
+      
+   .. rst-class:: class-dl-groups
+
+   Methods
+      .. automethod:: MetropolisSamplerState.replace
+
+   
