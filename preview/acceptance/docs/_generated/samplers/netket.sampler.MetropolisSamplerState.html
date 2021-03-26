@@ -339,14 +339,14 @@
 <h1>netket.sampler.MetropolisSamplerState<a class="headerlink" href="#netket-sampler-metropolissamplerstate" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="netket.sampler.MetropolisSamplerState">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.sampler.</span></code><code class="sig-name descname"><span class="pre">MetropolisSamplerState</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">σ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_accepted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/metropolis.html#MetropolisSamplerState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.MetropolisSamplerState" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.sampler.</span></code><code class="sig-name descname"><span class="pre">MetropolisSamplerState</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">σ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps_proc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_accepted_proc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/metropolis.html#MetropolisSamplerState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.MetropolisSamplerState" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.sampler.base.SamplerState</span></code></p>
 <p>State for a metropolis sampler.
 Contains the current configuration, the rng state and the (optional)
 state of the transition rule.</p>
 <dl class="py method">
 <dt id="netket.sampler.MetropolisSamplerState.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">σ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_accepted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.MetropolisSamplerState.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">σ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_steps_proc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_accepted_proc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.MetropolisSamplerState.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -354,8 +354,8 @@ state of the transition rule.</p>
 <li><p><strong>σ</strong> (<em>jax._src.numpy.lax_numpy.ndarray</em>) – </p></li>
 <li><p><strong>rng</strong> (<em>jax._src.numpy.lax_numpy.ndarray</em>) – </p></li>
 <li><p><strong>rule_state</strong> (<em>Optional</em><em>[</em><em>Any</em><em>]</em>) – </p></li>
-<li><p><strong>n_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
-<li><p><strong>n_accepted</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
+<li><p><strong>n_steps_proc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
+<li><p><strong>n_accepted_proc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -368,7 +368,9 @@ state of the transition rule.</p>
 <dt>Attributes</dt><dd><dl class="py attribute">
 <dt id="netket.sampler.MetropolisSamplerState.acceptance_ratio">
 <code class="sig-name descname"><span class="pre">acceptance_ratio</span></code><a class="headerlink" href="#netket.sampler.MetropolisSamplerState.acceptance_ratio" title="Permalink to this definition">¶</a></dt>
-<dd><p>The percentage of accepted moves since the last reset.</p>
+<dd><p>The percentage of accepted moves across all chains and MPI processes.</p>
+<p>The rate is computed since the last reset of the sampler.
+Will return None if no sampling has been performed since then.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
@@ -377,15 +379,26 @@ state of the transition rule.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="netket.sampler.MetropolisSamplerState.n_accepted">
-<code class="sig-name descname"><span class="pre">n_accepted</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#netket.sampler.MetropolisSamplerState.n_accepted" title="Permalink to this definition">¶</a></dt>
-<dd><p>Number of accepted transitions along the chains since the last reset.</p>
+<dt id="netket.sampler.MetropolisSamplerState.n_accepted_proc">
+<code class="sig-name descname"><span class="pre">n_accepted_proc</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#netket.sampler.MetropolisSamplerState.n_accepted_proc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of accepted transitions among the chains in this process since the last reset.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="netket.sampler.MetropolisSamplerState.n_samples">
-<code class="sig-name descname"><span class="pre">n_samples</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#netket.sampler.MetropolisSamplerState.n_samples" title="Permalink to this definition">¶</a></dt>
-<dd><p>Number of moves performed along the chains since the last reset.</p>
+<dt id="netket.sampler.MetropolisSamplerState.n_steps">
+<code class="sig-name descname"><span class="pre">n_steps</span></code><a class="headerlink" href="#netket.sampler.MetropolisSamplerState.n_steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total number of moves accepted across all processes since the last reset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="netket.sampler.MetropolisSamplerState.n_steps_proc">
+<code class="sig-name descname"><span class="pre">n_steps_proc</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#netket.sampler.MetropolisSamplerState.n_steps_proc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of moves performed along the chains in this process since the last reset.</p>
 </dd></dl>
 
 </dd>
