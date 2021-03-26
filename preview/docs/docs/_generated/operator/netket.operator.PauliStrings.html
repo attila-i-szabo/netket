@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>netket.operator.AbstractOperator &#8212; netket v3.0 documentation</title>
+    <title>netket.operator.PauliStrings &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
@@ -24,8 +24,8 @@
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="netket.operator.BoseHubbard" href="netket.operator.BoseHubbard.html" />
-    <link rel="prev" title="netket.hilbert.DoubledHilbert" href="../hilbert/netket.hilbert.DoubledHilbert.html" />
+    <link rel="next" title="netket.operator.LocalLiouvillian" href="netket.operator.LocalLiouvillian.html" />
+    <link rel="prev" title="netket.operator.Heisenberg" href="netket.operator.Heisenberg.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -187,13 +187,13 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../api.html#operators">Operators</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">netket.operator.AbstractOperator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.operator.AbstractOperator.html">netket.operator.AbstractOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.operator.BoseHubbard.html">netket.operator.BoseHubbard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.operator.GraphOperator.html">netket.operator.GraphOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.operator.LocalOperator.html">netket.operator.LocalOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.operator.Ising.html">netket.operator.Ising</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.operator.Heisenberg.html">netket.operator.Heisenberg</a></li>
-<li class="toctree-l3"><a class="reference internal" href="netket.operator.PauliStrings.html">netket.operator.PauliStrings</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">netket.operator.PauliStrings</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.operator.LocalLiouvillian.html">netket.operator.LocalLiouvillian</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#pre-defined-operators">Pre-defined operators</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../hilbert/netket.operator.boson.create.html">netket.operator.boson.create</a></li>
@@ -337,31 +337,41 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <div class="section" id="netket-operator-abstractoperator">
-<h1>netket.operator.AbstractOperator<a class="headerlink" href="#netket-operator-abstractoperator" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="netket-operator-paulistrings">
+<h1>netket.operator.PauliStrings<a class="headerlink" href="#netket-operator-paulistrings" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="netket.operator.AbstractOperator">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.operator.</span></code><code class="sig-name descname"><span class="pre">AbstractOperator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilbert</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
-<p>Abstract class for quantum Operators. This class prototypes the methods
-needed by a class satisfying the Operator concept. Users interested in
-implementing new quantum Operators should derive they own class from this
-class</p>
+<dt id="netket.operator.PauliStrings">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.operator.</span></code><code class="sig-name descname"><span class="pre">PauliStrings</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">operators</span></em>, <em class="sig-param"><span class="pre">weights</span></em>, <em class="sig-param"><span class="pre">cutoff=1e-10</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'complex'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_pauli_strings.html#PauliStrings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.PauliStrings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.operator._abstract_operator.AbstractOperator</span></code></p>
+<p>A Hamiltonian consisiting of the sum of products of Pauli operators.</p>
 <dl class="py method">
-<dt id="netket.operator.AbstractOperator.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilbert</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dt id="netket.operator.PauliStrings.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">operators</span></em>, <em class="sig-param"><span class="pre">weights</span></em>, <em class="sig-param"><span class="pre">cutoff=1e-10</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'complex'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_pauli_strings.html#PauliStrings.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.PauliStrings.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a new <code class="docutils literal notranslate"><span class="pre">PauliStrings</span></code> operator given a set of Pauli operators.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>hilbert</strong> (<em>netket.hilbert.abstract_hilbert.AbstractHilbert</em>) – </p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>operators</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a><em>(</em><em>string</em><em>)</em>) – A list of Pauli operators in string format, e.g. [‘IXX’, ‘XZI’].</p></li>
+<li><p><strong>weights</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#complex" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">complex</span></code></a>]]) – A list of amplitudes of the corresponding Pauli operator.</p></li>
+<li><p><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – a cutoff to remove small matrix elements</p></li>
+<li><p><strong>dtype</strong> (<em>Any</em>) – </p></li>
+</ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<p>Constructs a new <code class="docutils literal notranslate"><span class="pre">PauliStrings</span></code> operator X_0*X_1 + 3.*Z_0*Z_1.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">netket</span> <span class="k">as</span> <span class="nn">nk</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">op</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">PauliStrings</span><span class="p">(</span><span class="n">operators</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;XX&#39;</span><span class="p">,</span><span class="s1">&#39;ZZ&#39;</span><span class="p">],</span> <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">op</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">size</span>
+<span class="go">2</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="class-dl-groups">
 <dt>Attributes</dt><dd><dl class="py attribute">
-<dt id="netket.operator.AbstractOperator.H">
-<code class="sig-name descname"><span class="pre">H</span></code><a class="headerlink" href="#netket.operator.AbstractOperator.H" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.H">
+<code class="sig-name descname"><span class="pre">H</span></code><a class="headerlink" href="#netket.operator.PauliStrings.H" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the Conjugate-Transposed operator</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -371,8 +381,8 @@ class</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="netket.operator.AbstractOperator.T">
-<code class="sig-name descname"><span class="pre">T</span></code><a class="headerlink" href="#netket.operator.AbstractOperator.T" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.T">
+<code class="sig-name descname"><span class="pre">T</span></code><a class="headerlink" href="#netket.operator.PauliStrings.T" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the transposed operator</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -382,19 +392,19 @@ class</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="netket.operator.AbstractOperator.dtype">
-<code class="sig-name descname"><span class="pre">dtype</span></code><a class="headerlink" href="#netket.operator.AbstractOperator.dtype" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.dtype">
+<code class="sig-name descname"><span class="pre">dtype</span></code><a class="headerlink" href="#netket.operator.PauliStrings.dtype" title="Permalink to this definition">¶</a></dt>
 <dd><p>The dtype of the operator’s matrix elements ⟨σ|Ô|σ’⟩.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">_SupportsDType</span></code>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>], <code class="xref py py-class docutils literal notranslate"><span class="pre">_DTypeDict</span></code>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="netket.operator.AbstractOperator.hilbert">
-<code class="sig-name descname"><span class="pre">hilbert</span></code><a class="headerlink" href="#netket.operator.AbstractOperator.hilbert" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.hilbert">
+<code class="sig-name descname"><span class="pre">hilbert</span></code><a class="headerlink" href="#netket.operator.PauliStrings.hilbert" title="Permalink to this definition">¶</a></dt>
 <dd><p>The hilbert space associated to this operator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -404,8 +414,8 @@ class</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="netket.operator.AbstractOperator.is_hermitian">
-<code class="sig-name descname"><span class="pre">is_hermitian</span></code><a class="headerlink" href="#netket.operator.AbstractOperator.is_hermitian" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.is_hermitian">
+<code class="sig-name descname"><span class="pre">is_hermitian</span></code><a class="headerlink" href="#netket.operator.PauliStrings.is_hermitian" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns true if this operator is hermitian.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -415,8 +425,8 @@ class</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="netket.operator.AbstractOperator.size">
-<code class="sig-name descname"><span class="pre">size</span></code><a class="headerlink" href="#netket.operator.AbstractOperator.size" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.size">
+<code class="sig-name descname"><span class="pre">size</span></code><a class="headerlink" href="#netket.operator.PauliStrings.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>The total number number of local degrees of freedom.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -429,8 +439,8 @@ class</p>
 </dl>
 <dl class="class-dl-groups">
 <dt>Methods</dt><dd><dl class="py method">
-<dt id="netket.operator.AbstractOperator.__call__">
-<code class="sig-name descname"><span class="pre">__call__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator.__call__" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.__call__">
+<code class="sig-name descname"><span class="pre">__call__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.PauliStrings.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call self as a function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -443,8 +453,8 @@ class</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="netket.operator.AbstractOperator.apply">
-<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator.apply" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.apply">
+<code class="sig-name descname"><span class="pre">apply</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.PauliStrings.apply" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
@@ -456,8 +466,8 @@ class</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="netket.operator.AbstractOperator.collect">
-<code class="sig-name descname"><span class="pre">collect</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator.collect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator.collect" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.collect">
+<code class="sig-name descname"><span class="pre">collect</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.PauliStrings.collect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a guranteed concrete instancce of an operator.</p>
 <p>As some operations on operators return lazy wrapperes (such as transpose,
 hermitian conjugate…), this is used to obtain a guaranteed non-lazy
@@ -470,8 +480,8 @@ operator.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="netket.operator.AbstractOperator.conj">
-<code class="sig-name descname"><span class="pre">conj</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concrete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator.conj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator.conj" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.conj">
+<code class="sig-name descname"><span class="pre">conj</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concrete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.PauliStrings.conj" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractOperator</span></code></p>
@@ -480,8 +490,8 @@ operator.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="netket.operator.AbstractOperator.conjugate">
-<code class="sig-name descname"><span class="pre">conjugate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concrete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator.conjugate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator.conjugate" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.conjugate">
+<code class="sig-name descname"><span class="pre">conjugate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concrete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.PauliStrings.conjugate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the complex-conjugate of this operator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -498,8 +508,8 @@ complex-conjugated operator otherwise</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="netket.operator.AbstractOperator.get_conn">
-<code class="sig-name descname"><span class="pre">get_conn</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator.get_conn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator.get_conn" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.get_conn">
+<code class="sig-name descname"><span class="pre">get_conn</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.PauliStrings.get_conn" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds the connected elements of the Operator. Starting
 from a given quantum number x, it finds all other quantum numbers x’ such
 that the matrix element <span class="math notranslate nohighlight">\(O(x,x')\)</span> is different from zero. In general there
@@ -520,8 +530,8 @@ array: An array containing the matrix elements <span class="math notranslate noh
 </dd></dl>
 
 <dl class="py method">
-<dt id="netket.operator.AbstractOperator.get_conn_flattened">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">get_conn_flattened</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator.get_conn_flattened"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator.get_conn_flattened" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.get_conn_flattened">
+<code class="sig-name descname"><span class="pre">get_conn_flattened</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sections</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_pauli_strings.html#PauliStrings.get_conn_flattened"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.PauliStrings.get_conn_flattened" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds the connected elements of the Operator. Starting
 from a given quantum number x, it finds all other quantum numbers x’ such
 that the matrix element <span class="math notranslate nohighlight">\(O(x,x')\)</span> is different from zero. In general there
@@ -533,7 +543,8 @@ condition, and they are denoted here <span class="math notranslate nohighlight">
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> (<em>matrix</em>) – A matrix of shape (batch_size,hilbert.size) containing
 the batch of quantum numbers x.</p></li>
-<li><p><strong>sections</strong> (<em>array</em>) – An array of sections for the flattened x’.
+<li><p><strong>sections</strong> (<em>array</em>) – An array of size (batch_size) useful to unflatten
+the output of this function.
 See numpy.split for the meaning of sections.</p></li>
 </ul>
 </dd>
@@ -548,8 +559,8 @@ array: An array containing the matrix elements <span class="math notranslate noh
 </dd></dl>
 
 <dl class="py method">
-<dt id="netket.operator.AbstractOperator.get_conn_padded">
-<code class="sig-name descname"><span class="pre">get_conn_padded</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator.get_conn_padded"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator.get_conn_padded" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.get_conn_padded">
+<code class="sig-name descname"><span class="pre">get_conn_padded</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.PauliStrings.get_conn_padded" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds the connected elements of the Operator.
 Starting from a batch of quantum numbers x={x_1, … x_n} of size B x M
 where B size of the batch and M size of the hilbert space, finds all states
@@ -572,8 +583,8 @@ array: A matrix containing the matrix elements <span class="math notranslate noh
 </dd></dl>
 
 <dl class="py method">
-<dt id="netket.operator.AbstractOperator.n_conn">
-<code class="sig-name descname"><span class="pre">n_conn</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator.n_conn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator.n_conn" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.n_conn">
+<code class="sig-name descname"><span class="pre">n_conn</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.PauliStrings.n_conn" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the number of states connected to x.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -593,8 +604,8 @@ the batch of quantum numbers x.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="netket.operator.AbstractOperator.to_dense">
-<code class="sig-name descname"><span class="pre">to_dense</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator.to_dense"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator.to_dense" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.to_dense">
+<code class="sig-name descname"><span class="pre">to_dense</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.PauliStrings.to_dense" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the dense matrix representation of the operator. Note that,
 in general, the size of the matrix is exponential in the number of quantum
 numbers, and this operation should thus only be performed for
@@ -611,13 +622,13 @@ low-dimensional Hilbert spaces or sufficiently sparse operators.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="netket.operator.AbstractOperator.to_linear_operator">
-<code class="sig-name descname"><span class="pre">to_linear_operator</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator.to_linear_operator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator.to_linear_operator" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.to_linear_operator">
+<code class="sig-name descname"><span class="pre">to_linear_operator</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.PauliStrings.to_linear_operator" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="netket.operator.AbstractOperator.to_sparse">
-<code class="sig-name descname"><span class="pre">to_sparse</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator.to_sparse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator.to_sparse" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.to_sparse">
+<code class="sig-name descname"><span class="pre">to_sparse</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.PauliStrings.to_sparse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the sparse matrix representation of the operator. Note that,
 in general, the size of the matrix is exponential in the number of quantum
 numbers, and this operation should thus only be performed for
@@ -634,8 +645,8 @@ low-dimensional Hilbert spaces or sufficiently sparse operators.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="netket.operator.AbstractOperator.transpose">
-<code class="sig-name descname"><span class="pre">transpose</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concrete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_abstract_operator.html#AbstractOperator.transpose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.AbstractOperator.transpose" title="Permalink to this definition">¶</a></dt>
+<dt id="netket.operator.PauliStrings.transpose">
+<code class="sig-name descname"><span class="pre">transpose</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concrete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.PauliStrings.transpose" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the transpose of this operator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
