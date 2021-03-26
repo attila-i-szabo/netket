@@ -449,7 +449,7 @@
 
 <div class="viewcode-block" id="Heisenberg"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.Heisenberg.html#netket.operator.Heisenberg">[docs]</a><span class="k">class</span> <span class="nc">Heisenberg</span><span class="p">(</span><span class="n">GraphOperator</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    The Heisemberg hamiltonian on a lattice.</span>
+<span class="sd">    The Heisenberg hamiltonian on a lattice.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Heisenberg.__init__"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.Heisenberg.html#netket.operator.Heisenberg.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -460,7 +460,8 @@
         <span class="n">sign_rule</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Constructs a new ``Heisenberg`` given a hilbert space.</span>
+<span class="sd">        Constructs an Heisenberg operator given a hilbert space and a graph providing the</span>
+<span class="sd">        connectivity of the lattice.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            hilbert: Hilbert space the operator acts on.</span>
