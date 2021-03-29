@@ -125,10 +125,10 @@
 <span class="kn">from</span> <span class="nn">netket</span> <span class="kn">import</span> <span class="n">jax</span> <span class="k">as</span> <span class="n">nkjax</span>
 <span class="kn">from</span> <span class="nn">netket.hilbert</span> <span class="kn">import</span> <span class="n">AbstractHilbert</span>
 <span class="kn">from</span> <span class="nn">netket.utils</span> <span class="kn">import</span> <span class="n">get_afun_if_module</span>
-<span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">PyTree</span><span class="p">,</span> <span class="n">PRNGKey</span>
+<span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">PyTree</span><span class="p">,</span> <span class="n">PRNGKeyT</span>
 <span class="kn">from</span> <span class="nn">netket.jax</span> <span class="kn">import</span> <span class="n">HashablePartial</span>
 
-<span class="n">SeedType</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">PRNGKey</span><span class="p">]</span>
+<span class="n">SeedType</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">PRNGKeyT</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="SamplerState"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.SamplerState.html#netket.sampler.SamplerState">[docs]</a><span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
