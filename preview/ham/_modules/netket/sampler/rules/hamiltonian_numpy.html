@@ -157,11 +157,11 @@
             <span class="p">)</span>
 
 <div class="viewcode-block" id="HamiltonianRuleNumpy.init_state"><a class="viewcode-back" href="../../../../docs/_generated/samplers/netket.sampler.rules.HamiltonianRuleNumpy.html#netket.sampler.rules.HamiltonianRuleNumpy.init_state">[docs]</a>    <span class="k">def</span> <span class="nf">init_state</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">sampler</span><span class="o">.</span><span class="n">hilbert</span> <span class="o">!=</span> <span class="n">rule</span><span class="o">.</span><span class="n">Ô</span><span class="o">.</span><span class="n">hilbert</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">sampler</span><span class="o">.</span><span class="n">hilbert</span> <span class="o">!=</span> <span class="n">rule</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">hilbert</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">            The hilbert space of the sampler (</span><span class="si">{</span><span class="n">sampler</span><span class="o">.</span><span class="n">hilbert</span><span class="si">}</span><span class="s2">) and the hilbert space</span>
-<span class="s2">            of the operator (</span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="n">Ô</span><span class="o">.</span><span class="n">hilbert</span><span class="si">}</span><span class="s2">) for HamiltonianRule must be the same.</span>
+<span class="s2">            of the operator (</span><span class="si">{</span><span class="n">rule</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">hilbert</span><span class="si">}</span><span class="s2">) for HamiltonianRule must be the same.</span>
 <span class="s2">            &quot;&quot;&quot;</span>
             <span class="p">)</span>
 
