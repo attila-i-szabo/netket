@@ -117,7 +117,7 @@
 
 <span class="kn">from</span> <span class="nn">netket.graph</span> <span class="kn">import</span> <span class="n">AbstractGraph</span><span class="p">,</span> <span class="n">Graph</span>
 <span class="kn">from</span> <span class="nn">netket.hilbert</span> <span class="kn">import</span> <span class="n">AbstractHilbert</span><span class="p">,</span> <span class="n">Fock</span>
-<span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">Dtype</span>
+<span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">DType</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">spin</span><span class="p">,</span> <span class="n">boson</span>
 <span class="kn">from</span> <span class="nn">._local_operator</span> <span class="kn">import</span> <span class="n">LocalOperator</span>
@@ -213,7 +213,7 @@
         <span class="n">graph</span><span class="p">:</span> <span class="n">AbstractGraph</span><span class="p">,</span>
         <span class="n">h</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">J</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-        <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">=</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="p">:</span> <span class="n">DType</span> <span class="o">=</span> <span class="nb">float</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructs the Ising Operator from an hilbert space and a</span>
@@ -266,7 +266,7 @@
         <span class="k">return</span> <span class="kc">True</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dtype</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DType</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span>
 
 <div class="viewcode-block" id="Ising.conjugate"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.Ising.html#netket.operator.Ising.conjugate">[docs]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">concrete</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -545,7 +545,7 @@
         <span class="n">V</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
         <span class="n">J</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-        <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">=</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="p">:</span> <span class="n">DType</span> <span class="o">=</span> <span class="nb">float</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructs a new BoseHubbard operator given a hilbert space, a graph</span>

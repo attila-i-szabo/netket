@@ -124,12 +124,11 @@
 <span class="kn">from</span> <span class="nn">netket.hilbert</span> <span class="kn">import</span> <span class="n">AbstractHilbert</span>
 <span class="kn">from</span> <span class="nn">netket.utils</span> <span class="kn">import</span> <span class="n">n_nodes</span>
 <span class="kn">from</span> <span class="nn">netket.stats</span> <span class="kn">import</span> <span class="n">sum_inplace</span>
+<span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">PyTree</span><span class="p">,</span> <span class="n">PRNGKeyT</span>
 
 <span class="kn">from</span> <span class="nn">.metropolis</span> <span class="kn">import</span> <span class="n">MetropolisSampler</span>
 
-<span class="n">PyTree</span> <span class="o">=</span> <span class="n">Any</span>
-<span class="n">PRNGKeyType</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="n">SeedType</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">PRNGKeyType</span><span class="p">]</span>
+<span class="n">SeedType</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">PRNGKeyT</span><span class="p">]</span>
 
 
 <span class="nd">@dataclass</span>

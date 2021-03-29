@@ -115,13 +115,13 @@
 
 <span class="kn">import</span> <span class="nn">netket</span> <span class="k">as</span> <span class="nn">nk</span>
 <span class="kn">from</span> <span class="nn">netket.nn.initializers</span> <span class="kn">import</span> <span class="n">normal</span>
-<span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">Dtype</span><span class="p">,</span> <span class="n">Array</span><span class="p">,</span> <span class="n">NNInitFunc</span>
+<span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">DType</span><span class="p">,</span> <span class="n">Array</span><span class="p">,</span> <span class="n">NNInitFunc</span>
 
 
 <div class="viewcode-block" id="Jastrow"><a class="viewcode-back" href="../../../docs/_generated/models/netket.models.Jastrow.html#netket.models.Jastrow">[docs]</a><span class="k">class</span> <span class="nc">Jastrow</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Jastrow wave function :math:`\Psi(s) = \exp(\sum_{ij} s_i W_{ij} s_j)`.&quot;&quot;&quot;</span>
 
-    <span class="n">dtype</span><span class="p">:</span> <span class="n">Dtype</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">complex128</span>
+    <span class="n">dtype</span><span class="p">:</span> <span class="n">DType</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">complex128</span>
     <span class="sd">&quot;&quot;&quot;The dtype of the weights.&quot;&quot;&quot;</span>
     <span class="n">kernel_init</span><span class="p">:</span> <span class="n">NNInitFunc</span> <span class="o">=</span> <span class="n">normal</span><span class="p">()</span>
     <span class="sd">&quot;&quot;&quot;Initializer for the weights.&quot;&quot;&quot;</span>
