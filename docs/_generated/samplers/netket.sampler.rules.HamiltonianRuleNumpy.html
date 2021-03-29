@@ -341,25 +341,19 @@
 <h1>netket.sampler.rules.HamiltonianRuleNumpy<a class="headerlink" href="#netket-sampler-rules-hamiltonianrulenumpy" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="netket.sampler.rules.HamiltonianRuleNumpy">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.sampler.rules.</span></code><code class="sig-name descname"><span class="pre">HamiltonianRuleNumpy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ô</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/rules/hamiltonian_numpy.html#HamiltonianRuleNumpy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.rules.HamiltonianRuleNumpy" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.sampler.rules.</span></code><code class="sig-name descname"><span class="pre">HamiltonianRuleNumpy</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/rules/hamiltonian_numpy.html#HamiltonianRuleNumpy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.rules.HamiltonianRuleNumpy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.sampler.metropolis.MetropolisRule</span></code></p>
 <p>Rule for Numpy sampler backend proposing moves according to the terms in an operator.</p>
 <p>In this case, the transition matrix is taken to be:</p>
 <div class="math notranslate nohighlight">
 \[T( \mathbf{s} \rightarrow \mathbf{s}^\prime) = \frac{1}{\mathcal{N}(\mathbf{s})}\theta(|H_{\mathbf{s},\mathbf{s}^\prime}|),\]</div>
-<dl class="py attribute">
-<dt>
-<code class="sig-name descname"><span class="pre">Ô</span></code></dt>
-<dd><p>The (hermitian) operator giving the transition amplitudes.</p>
-</dd></dl>
-
 <dl class="py method">
 <dt id="netket.sampler.rules.HamiltonianRuleNumpy.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ô</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.rules.HamiltonianRuleNumpy.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">operator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.rules.HamiltonianRuleNumpy.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>Ô</strong> (<em>netket.operator._abstract_operator.AbstractOperator</em>) – </p>
+<dd class="field-odd"><p><strong>operator</strong> (<em>netket.operator._abstract_operator.AbstractOperator</em>) – </p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
