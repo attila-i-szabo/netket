@@ -369,9 +369,9 @@
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">permutations</span><span class="p">,</span> <span class="n">Callable</span><span class="p">):</span>
         <span class="n">perm_fn</span> <span class="o">=</span> <span class="n">permutations</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">permutations</span><span class="p">,</span> <span class="n">AbstractGraph</span><span class="p">):</span>
-        <span class="n">perm_fn</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">permutations</span><span class="o">.</span><span class="n">automorphisms</span><span class="p">())</span>
+        <span class="n">perm_fn</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">permutations</span><span class="o">.</span><span class="n">automorphisms</span><span class="p">())</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">permutations</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
+        <span class="n">permutations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">permutations</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">permutations</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;permutations must be an array of shape (#permutations, #sites).&quot;</span>
