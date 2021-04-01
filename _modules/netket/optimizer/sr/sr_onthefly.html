@@ -272,18 +272,20 @@
 <span class="sd">            x0: optional initial guess for the solution.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            the PyTree solving thhe system.s</span>
+<span class="sd">            x: the PyTree solving the system.</span>
+<span class="sd">            info: optional additional informations provided by the solver. Might be</span>
+<span class="sd">                None if there are no additional informations provided.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">x0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">x0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">x0</span>
 
-        <span class="n">out</span> <span class="o">=</span> <span class="n">apply_onthefly</span><span class="p">(</span>
+        <span class="n">out</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">apply_onthefly</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">y</span><span class="p">,</span>
             <span class="n">x0</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">out</span></div>
+        <span class="k">return</span> <span class="n">out</span><span class="p">,</span> <span class="n">info</span></div>
 
 <div class="viewcode-block" id="LazySMatrix.to_dense"><a class="viewcode-back" href="../../../../docs/_generated/optim/netket.optimizer.sr.LazySMatrix.html#netket.optimizer.LazySMatrix.to_dense">[docs]</a>    <span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
     <span class="k">def</span> <span class="nf">to_dense</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
@@ -323,8 +325,8 @@
         <span class="n">centered</span><span class="o">=</span><span class="n">S</span><span class="o">.</span><span class="n">sr</span><span class="o">.</span><span class="n">centered</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">solve_fun</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">sr</span><span class="o">.</span><span class="n">solve_fun</span><span class="p">()</span>
-    <span class="n">out</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">solve_fun</span><span class="p">(</span><span class="n">_mat_vec</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">out</span>
+    <span class="n">out</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">solve_fun</span><span class="p">(</span><span class="n">_mat_vec</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span><span class="p">,</span> <span class="n">info</span>
 
 
 <span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
