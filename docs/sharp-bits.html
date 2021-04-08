@@ -3,7 +3,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
     <title>🔪 The Sharp Bits 🔪 &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
@@ -335,10 +336,10 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <div class="section" id="the-sharp-bits">
+  <section id="the-sharp-bits">
 <h1>🔪 The Sharp Bits 🔪<a class="headerlink" href="#the-sharp-bits" title="Permalink to this headline">¶</a></h1>
 <p>Read ahead for some pitfalls, counter-intuitive behavior, and sharp edges that we had to introduce in order to make this work.</p>
-<div class="section" id="parallelization">
+<section id="parallelization">
 <span id="id1"></span><h2>Parallelization<a class="headerlink" href="#parallelization" title="Permalink to this headline">¶</a></h2>
 <p>Netket computations run mostly via Jax’s XLA.
 Compared to NetKet 2, this means that we can automatically benefit from multiple CPUs without having to use MPI.
@@ -349,8 +350,8 @@ To disable this behaviour, refer to <a class="reference external" href="https://
 </pre></div>
 </div>
 <p>Usually we have noticed that the best performance is achieved by combining both BLAS parallelism and MPI, for example by guaranteeing between 2-4 (depending on your problem size) cpus to every MPI thread.</p>
-</div>
-<div class="section" id="running-on-cpu-when-gpus-are-present">
+</section>
+<section id="running-on-cpu-when-gpus-are-present">
 <span id="running-on-cpu"></span><h2>Running on CPU when GPUs are present<a class="headerlink" href="#running-on-cpu-when-gpus-are-present" title="Permalink to this headline">¶</a></h2>
 <p>If you have the CUDA version of jaxlib installed, then computations will, by default, run on the GPU.
 For small systems this will be very inefficient. To check if this is the case, run the following code:</p>
@@ -364,8 +365,8 @@ something like <code class="code docutils literal notranslate"><span class="pre"
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">JAX_PLATFORM_NAME</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="using-gpus">
+</section>
+<section id="using-gpus">
 <span id="gpus"></span><h2>Using GPUs<a class="headerlink" href="#using-gpus" title="Permalink to this headline">¶</a></h2>
 <p>Jax supports GPUs, so your calculations should run fine on GPU, however there are a few gotchas:</p>
 <ul class="simple">
@@ -374,8 +375,8 @@ something like <code class="code docutils literal notranslate"><span class="pre"
 </ul>
 <p>Eventually we would like the selection to be automatic, but this has not yet been implemented.</p>
 <p>Please open tickets if you find issues!</p>
-</div>
-<div class="section" id="nans-in-training-and-loss-of-precision">
+</section>
+<section id="nans-in-training-and-loss-of-precision">
 <span id="nan"></span><h2>NaNs in training and loss of precision<a class="headerlink" href="#nans-in-training-and-loss-of-precision" title="Permalink to this headline">¶</a></h2>
 <p>If you find NaNs while training, especially if you are using your own model, there might be a few reasons:</p>
 <ul class="simple">
@@ -388,8 +389,8 @@ if you use general flax layers they might use different initializers.
 different initialisation distributions have particoularly strong effects when working with complex-valued models.
 A good way to enforce the same distribution across all your weights, similar to NetKet 2 behaviour, is to use <a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html#netket.variational.VariationalState.init_parameters" title="netket.variational.VariationalState.init_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">init_parameters()</span></code></a>.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>

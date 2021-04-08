@@ -3,7 +3,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
     <title>Getting Started &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
@@ -335,11 +336,11 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <div class="section" id="getting-started">
+  <section id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
 <p>Welcome to the documentation for Netket 3.0 (alpha).</p>
 <p>Please read the release notes to see what has changed since the last release.</p>
-<div class="section" id="installation-and-requirements">
+<section id="installation-and-requirements">
 <h2>Installation and requirements<a class="headerlink" href="#installation-and-requirements" title="Permalink to this headline">¶</a></h2>
 <p>Netket v3.0 requires <cite>python&gt;= 3.8</cite> and optionally a recent MPI install.
 To install, run one of the two following commands</p>
@@ -359,7 +360,7 @@ At the time of writing, Netket was tested with X=0.1.62 and cuda=111</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -e <span class="s2">&quot;import netket; print(netket.version)&quot;</span>
 </pre></div>
 </div>
-<div class="section" id="mpi">
+<section id="mpi">
 <h3>MPI<a class="headerlink" href="#mpi" title="Permalink to this headline">¶</a></h3>
 <p>If you want to use MPI, you will need to have a working MPI compiler. You can install the
 dependencies necessary to run with MPI with the following command:</p>
@@ -368,9 +369,9 @@ dependencies necessary to run with MPI with the following command:</p>
 </div>
 <p>Subsequently, NetKet will exploit MPI-level parallelism for the Monte-Carlo sampling.
 See <a class="reference internal" href="varstate.html#warn-mpi-sampling"><span class="std std-ref">this block</span></a> to understand how NetKet behaves under MPI.</p>
-</div>
-</div>
-<div class="section" id="introduction">
+</section>
+</section>
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Netket is a numerical framework written in Python to simulate many-body quantum systems using
 variational methods. In general, netket allows the user to parametrize quantum states using
@@ -385,8 +386,8 @@ wish to extend netket.</p>
 <p>This documentation is divided into several modules, each explaining in-depth how a sub-module of netket works.
 You can select a module from the list on the left, or you can read the following example which contains links
 to all relevant parts of the documentation.</p>
-</div>
-<div class="section" id="jax-flax-extensions">
+</section>
+<section id="jax-flax-extensions">
 <h2>Jax/Flax extensions<a class="headerlink" href="#jax-flax-extensions" title="Permalink to this headline">¶</a></h2>
 <p>Netket v3 API is centered around <a class="reference external" href="https://flax.readthedocs.io">flax</a>, a jax library to simplify the definition and
 usage of Neural-Networks.
@@ -397,8 +398,8 @@ As such, netket exports a module, <cite>netket.nn</cite> which re-exports the fu
 with the additional support of complex numbers.
 Also <cite>netket.optim</cite> is a re-export of <cite>flax.optim</cite> with few added functionalities.</p>
 <p>Lastly, in <cite>netket.jax</cite> there are a few functions, notably <cite>jax.grad</cite> and <cite>jax.vjp</cite> adapted to work with arbitrary real or complex functions, and/or with MPI.</p>
-</div>
-<div class="section" id="legacy-api-support-api-before-2021">
+</section>
+<section id="legacy-api-support-api-before-2021">
 <h2>Legacy API support (API before 2021)<a class="headerlink" href="#legacy-api-support-api-before-2021" title="Permalink to this headline">¶</a></h2>
 <p>With the 3.0 official release in the beginning of 2021, we have drastically
 changed the API of Netket, which are no longer compatible with the old version.</p>
@@ -416,8 +417,8 @@ improvement.</p>
 but please be advised that it is no longer-supported and documentation will
 probably be of poor quality.</p>
 <p>For more information on new features and API changes, please consult <span class="xref std std-ref">Whats New</span>.</p>
-</div>
-<div class="section" id="commented-example">
+</section>
+<section id="commented-example">
 <h2>Commented Example<a class="headerlink" href="#commented-example" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">netket</span> <span class="k">as</span> <span class="nn">nk</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -490,8 +491,8 @@ sampler, mahcine and various options.</p>
 <p>Once that is done, you can run the simulation by calling the <span class="xref std std-ref">run</span> method
 in the driver, specifying the output loggers and the number of iterations in
 the optimisation.</p>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>

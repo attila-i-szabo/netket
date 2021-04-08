@@ -3,7 +3,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
     <title>The Drivers API &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
@@ -335,7 +336,7 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <div class="section" id="the-drivers-api">
+  <section id="the-drivers-api">
 <h1>The Drivers API<a class="headerlink" href="#the-drivers-api" title="Permalink to this headline">¶</a></h1>
 <p>In this section we will briefly describe the capabilities of the drivers API.
 This page assumes that you have already read and are familiar witht the <span class="xref std std-ref">Variational
@@ -348,7 +349,7 @@ State interface</span>.</p>
 <p>A driver, will run your optimisation loop, computing the loss function and the gradient,
 using the gradient to update the parameters, and logging to yours sinks any data that you
 may wish.</p>
-<div class="section" id="constructing-a-driver">
+<section id="constructing-a-driver">
 <h2>Constructing a driver<a class="headerlink" href="#constructing-a-driver" title="Permalink to this headline">¶</a></h2>
 <p>There are two objects both drivers above need in order to be constructed:</p>
 <ul class="simple">
@@ -380,8 +381,8 @@ The resulting code looks a bit like this:</p>
 <p>And you can then access the variational state contructed like that through the attribute <cite>gs.state</cite>.
 The latter is there to guarantee better compatibility with legacy codebases, therefore we suggest to
 use the more first API, where the variational state is built explicitly.</p>
-</div>
-<div class="section" id="running-the-optimisation">
+</section>
+<section id="running-the-optimisation">
 <h2>Running the optimisation<a class="headerlink" href="#running-the-optimisation" title="Permalink to this headline">¶</a></h2>
 <p>The simplest way to use optimization drivers to perform the optimisation is to use their <a class="reference internal" href="_generated/driver/netket.driver.AbstractVariationalDriver.html#netket.driver.AbstractVariationalDriver.run" title="netket.driver.AbstractVariationalDriver.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> method.</p>
 <p>This method will run the optimisation for the desired number of steps, while logging data to the
@@ -410,8 +411,8 @@ Netket comes with a few built-in callbacks, listed <a class="reference internal"
 </li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">step_size</span></code>: Data will be logged and callbacks will be called every <code class="code docutils literal notranslate"><span class="pre">step_size</span></code> optimisation steps. Useful if your callbacks have a high computational cost. If unspecified, logs at every step.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
