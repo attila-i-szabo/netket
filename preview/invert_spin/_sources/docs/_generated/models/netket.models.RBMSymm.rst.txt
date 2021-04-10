@@ -1,6 +1,0 @@
-﻿netket.models.RBMSymm
-=====================
-
-.. currentmodule:: netket.models
-
-.. autofunction:: RBMSymm
