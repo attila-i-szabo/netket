@@ -3,8 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Variational State Interface &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
@@ -338,7 +337,7 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <section id="the-variational-state-interface">
+  <div class="section" id="the-variational-state-interface">
 <h1>The Variational State Interface<a class="headerlink" href="#the-variational-state-interface" title="Permalink to this headline">¶</a></h1>
 <p>A central element of NetKet is the <a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html#netket.variational.VariationalState" title="netket.variational.VariationalState"><code class="xref py py-class docutils literal notranslate"><span class="pre">VariationalState</span></code></a> interface.
 A Variational State represents an approximate, variational description of a system, and can be used to
@@ -350,7 +349,7 @@ probe it.</p>
 </ul>
 <p>It is our plan to build upon this interface for new kind of variational states in the future. For example, we
 are interested in implementing a new kind of variational state that encodes a state into a Qiskit circuit.</p>
-<section id="constructing-a-variational-state">
+<div class="section" id="constructing-a-variational-state">
 <h2>Constructing a Variational State<a class="headerlink" href="#constructing-a-variational-state" title="Permalink to this headline">¶</a></h2>
 <p>To construct the two variational states above you need to provide at least a Monte Carlo sampler (you can see
 the list of available ones <a class="reference internal" href="api.html#sampler-api"><span class="std std-ref">here</span></a>) and a model.
@@ -366,7 +365,7 @@ want to do that, you can have a look at the automatic conversion <a class="refer
 especially if mutable, might not work. If you have problems don’t hesitate opening issues on
 GitHub so that we can address them. They are mostly easy fixes.</p>
 </div>
-<section id="defining-models-flax">
+<div class="section" id="defining-models-flax">
 <h3>Defining models: Flax<a class="headerlink" href="#defining-models-flax" title="Permalink to this headline">¶</a></h3>
 <p>In general, the most-well supported way to define Models for NetKet is through Flax.</p>
 <p>If you are not familiar with Flax, it’s a package that allows to define Neural Networks or other
@@ -382,8 +381,8 @@ parameters we invite you to use <code class="code docutils literal notranslate">
 <p><code class="code docutils literal notranslate"><span class="pre">netket.nn</span></code> re-exports some Flax functionality ensuring that it works nicely with complex numbers.
 If you don’t find something from Flax in <code class="code docutils literal notranslate"><span class="pre">netket.nn</span></code>, please <a class="reference external" href="https://github.com/netket/netket/issues">open an issue</a> in GitHub.</p>
 </div>
-</section>
-<section id="mcstate">
+</div>
+<div class="section" id="mcstate">
 <h3>MCState<a class="headerlink" href="#mcstate" title="Permalink to this headline">¶</a></h3>
 <p>Let’s now assume we have a Flax module, <a class="reference internal" href="_generated/models/netket.models.RBM.html#netket.models.RBM" title="netket.models.RBM"><code class="xref py py-class docutils literal notranslate"><span class="pre">RBM</span></code></a> and we want to construct a variational state
 on sampled with a simple <a class="reference internal" href="_generated/samplers/netket.sampler.MetropolisLocal.html#netket.sampler.MetropolisLocal" title="netket.sampler.MetropolisLocal"><code class="xref py py-func docutils literal notranslate"><span class="pre">MetropolisLocal()</span></code></a> sampler.</p>
@@ -402,11 +401,11 @@ parameters, to the constructor.</p>
 parameters, and will also initialize the sampler.</p>
 <p>When constructing a variational state you can also pass a seed, that will be used to initialize both the
 weights and the sampler. You can also pass two different seeds for the sampler and the weights.</p>
-</section>
-</section>
-<section id="using-a-monte-carlo-variational-state">
+</div>
+</div>
+<div class="section" id="using-a-monte-carlo-variational-state">
 <h2>Using a Monte Carlo Variational State<a class="headerlink" href="#using-a-monte-carlo-variational-state" title="Permalink to this headline">¶</a></h2>
-<section id="expectation-values">
+<div class="section" id="expectation-values">
 <h3>Expectation values<a class="headerlink" href="#expectation-values" title="Permalink to this headline">¶</a></h3>
 <p>One you have a variational state, you can do many things with it.
 First of all, you can probe expectation values:</p>
@@ -460,8 +459,8 @@ to modify them, for example to add 0.1 to all parameters is to do the following:
               <span class="mf">0.31897993</span><span class="p">,</span>  <span class="mf">0.08367777</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float64</span><span class="p">)</span>
 </pre></div>
 </div>
-</section>
-<section id="sampling">
+</div>
+<div class="section" id="sampling">
 <h3>Sampling<a class="headerlink" href="#sampling" title="Permalink to this headline">¶</a></h3>
 <p>You can also change the number of samples to extract (note: this will
 trigger recompilation of the sample function, so you should not this
@@ -499,8 +498,8 @@ total number of samples by <code class="code docutils literal notranslate"><span
 <p>Therefore, considering the number from the example above, if we had 4 MPI processes, we would have
 found a chain length of <span class="math notranslate nohighlight">\(500/(8*4) = 15.625 \rightarrow 16\)</span>.</p>
 </div>
-</section>
-<section id="collecting-the-state-vector">
+</div>
+<div class="section" id="collecting-the-state-vector">
 <h3>Collecting the state-vector<a class="headerlink" href="#collecting-the-state-vector" title="Permalink to this headline">¶</a></h3>
 <p>A variational state can be evaluated on the whole Hilbert space in order to obtain
 the ket it represents.</p>
@@ -509,8 +508,8 @@ which by defaults normalises the <span class="math notranslate nohighlight">\(L_
 <p>Mixed state ansatzes can be converted to their matrix representation with
 <a class="reference internal" href="_generated/variational/netket.variational.MCMixedState.html#netket.variational.MCMixedState.to_matrix" title="netket.variational.MCMixedState.to_matrix"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_matrix()</span></code></a>. In this case, the default
 normalisation sets the trace to 1.</p>
-</section>
-<section id="manipulating-the-parameters">
+</div>
+<div class="section" id="manipulating-the-parameters">
 <h3>Manipulating the parameters<a class="headerlink" href="#manipulating-the-parameters" title="Permalink to this headline">¶</a></h3>
 <p>You can access the parameters of a variational state through the <a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html#netket.variational.VariationalState.parameters" title="netket.variational.VariationalState.parameters"><code class="xref py py-attr docutils literal notranslate"><span class="pre">parameters</span></code></a> attribute.
 Similarly, if your model has also a mutable state, you can access it through
@@ -529,9 +528,9 @@ can be operated upon with functions like <a class="reference external" href="htt
 </pre></div>
 </div>
 <p>The parameter dict will be automatically frozen upon assignment.</p>
-</section>
-</section>
-<section id="saving-and-loading-a-variational-state">
+</div>
+</div>
+<div class="section" id="saving-and-loading-a-variational-state">
 <h2>Saving and Loading a Variational State<a class="headerlink" href="#saving-and-loading-a-variational-state" title="Permalink to this headline">¶</a></h2>
 <p>Variational States conform to the <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.serialization.html">Flax serialization interface</a> and can be serialized and deserialized with it.</p>
 <p>Moreover, the Json Logger <a class="reference internal" href="_generated/driver/netket.logging.JsonLog.html#netket.logging.JsonLog" title="netket.logging.JsonLog"><code class="xref py py-class docutils literal notranslate"><span class="pre">JsonLog</span></code></a> serializes the variational state
@@ -568,8 +567,8 @@ use the same procedure outlined above, only that the list line should be:</p>
 </pre></div>
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
     </div>
@@ -585,7 +584,7 @@ use the same procedure outlined above, only that the list line should be:</p>
     </p>
     <p>
         &copy; Copyright 2019-2021, The Netket authors - All rights reserved.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br/>
     </p>
   </div>
 </footer>

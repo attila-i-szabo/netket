@@ -130,11 +130,13 @@
         <span class="n">min_dists</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_dist</span>
     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">_np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">id1</span><span class="p">):</span>
         <span class="n">min_dist</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">id1</span> <span class="o">==</span> <span class="n">node</span><span class="p">])</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">id1</span> <span class="o">==</span> <span class="n">node</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">values</span> <span class="o">==</span> <span class="n">min_dist</span><span class="p">)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">id1</span> <span class="o">==</span> <span class="n">node</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">min_dist</span><span class="p">))</span>
         <span class="n">first</span> <span class="o">=</span> <span class="n">id1</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
         <span class="n">second</span> <span class="o">=</span> <span class="n">id2</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">min_dist</span> <span class="o">==</span> <span class="n">min_dists</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="ow">and</span> <span class="n">min_dist</span> <span class="o">==</span> <span class="n">min_dists</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]]:</span>
+            <span class="k">if</span> <span class="n">_np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">min_dist</span><span class="p">,</span> <span class="n">min_dists</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span> <span class="ow">and</span> <span class="n">_np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span>
+                <span class="n">min_dist</span><span class="p">,</span> <span class="n">min_dists</span><span class="p">[</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="p">):</span>
                 <span class="n">pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">pairs</span>
 
@@ -353,7 +355,7 @@
     </p>
     <p>
         &copy; Copyright 2019-2021, The Netket authors - All rights reserved.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br/>
     </p>
   </div>
 </footer>
