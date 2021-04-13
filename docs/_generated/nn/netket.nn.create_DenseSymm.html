@@ -174,6 +174,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Chain.html">netket.graph.Chain</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Grid.html">netket.graph.Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.SymmGroup.html">netket.graph.SymmGroup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#hilbert">Hilbert</a><ul>
@@ -339,17 +340,18 @@
 <h1>netket.nn.create_DenseSymm<a class="headerlink" href="#netket-nn-create-densesymm" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="netket.nn.create_DenseSymm">
-<code class="sig-prename descclassname"><span class="pre">netket.nn.</span></code><code class="sig-name descname"><span class="pre">create_DenseSymm</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">permutations</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/nn/linear.html#create_DenseSymm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.nn.create_DenseSymm" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">netket.nn.</span></code><code class="sig-name descname"><span class="pre">create_DenseSymm</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symmetries</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/nn/linear.html#create_DenseSymm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.nn.create_DenseSymm" title="Permalink to this definition">¶</a></dt>
 <dd><p>A symmetrized linear transformation applied over the last dimension of the input.
 This layer uses a reduced number of parameters, which are arranged so that the full
 affine transformation is invariant under all of the given permutations when applied to s.</p>
 <p>This is a convenience wrapper for creating a <a class="reference internal" href="netket.nn.DenseSymm.html#netket-nn-densesymm"><span class="std std-ref">netket.nn.DenseSymm</span></a> layer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>permutations</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>[[], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>], <code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractGraph</span></code>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]) – Sequence of permutations over which the layer should be invariant.
-Should be either an array-like object of shape (n_permutations, input_size),
-an argument-less callable returning such an array, or <a class="reference internal" href="../graph/netket.graph.AbstractGraph.html#netket-graph-abstractgraph"><span class="std std-ref">netket.graph.AbstractGraph</span></a>, in which
-case the graph automorphisms are used.</p>
+<dd class="field-odd"><p><strong>symmetries</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractGraph</span></code>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]) – Sequence of permutations over which the layer should be invariant.
+Should be either an array-like object of shape (n_permutations, input_size)
+(note that this includes to <a class="reference internal" href="../graph/netket.graph.SymmGroup.html#netket-graph-symmgroup"><span class="std std-ref">netket.graph.SymmGroup</span></a>), or
+<a class="reference internal" href="../graph/netket.graph.AbstractGraph.html#netket-graph-abstractgraph"><span class="std std-ref">netket.graph.AbstractGraph</span></a>, in which case the <cite>graph.automorphisms()</cite>
+is used.</p>
 </dd>
 </dl>
 <p>See <a class="reference internal" href="netket.nn.DenseSymm.html#netket-nn-densesymm"><span class="std std-ref">netket.nn.DenseSymm</span></a> for the remaining parameters.</p>
