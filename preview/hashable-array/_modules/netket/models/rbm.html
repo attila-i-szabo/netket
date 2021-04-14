@@ -295,7 +295,9 @@
     <span class="sd">&quot;&quot;&quot;A symmetrized RBM using the :ref:`netket.nn.DenseSymm` layer internally.&quot;&quot;&quot;</span>
 
     <span class="n">symmetries</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">HashableArray</span><span class="p">,</span> <span class="n">SymmGroup</span><span class="p">]</span>
-    <span class="sd">&quot;&quot;&quot;A group of symmetry operations (or array of permutation indices) over which the layer should be invariant.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;A group of symmetry operations (or array of permutation indices) over which the layer should be invariant.</span>
+<span class="sd">    Numpy/Jax arrays must be wrapped into an :class:`netket.utils.HashableArray`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dtype</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span>
     <span class="sd">&quot;&quot;&quot;The dtype of the weights.&quot;&quot;&quot;</span>
     <span class="n">activation</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">nknn</span><span class="o">.</span><span class="n">logcosh</span>
