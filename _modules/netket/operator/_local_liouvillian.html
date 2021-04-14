@@ -204,19 +204,14 @@
     <span class="k">def</span> <span class="nf">_compute_hnh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># There is no i here because it&#39;s inserted in the kernel</span>
         <span class="n">Hnh</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_H</span>
-        <span class="n">max_conn_size</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_max_dissipator_conn_size</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">L</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jump_ops</span><span class="p">:</span>
             <span class="n">Hnh</span> <span class="o">=</span> <span class="n">Hnh</span> <span class="o">-</span> <span class="mf">0.5</span><span class="n">j</span> <span class="o">*</span> <span class="n">L</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span> <span class="o">@</span> <span class="n">L</span>
-            <span class="n">dim</span> <span class="o">=</span> <span class="n">L</span><span class="o">.</span><span class="n">n_operators</span> <span class="o">*</span> <span class="n">L</span><span class="o">.</span><span class="n">_max_op_size</span>
-            <span class="n">max_conn_size</span> <span class="o">+=</span> <span class="n">dim</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dim</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_max_dissipator_conn_size</span> <span class="o">=</span> <span class="n">max_conn_size</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_max_dissipator_conn_size</span> <span class="o">+=</span> <span class="n">L</span><span class="o">.</span><span class="n">max_conn_size</span> <span class="o">**</span> <span class="mi">2</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_Hnh</span> <span class="o">=</span> <span class="n">Hnh</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
 
-        <span class="n">max_conn_size</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_max_dissipator_conn_size</span> <span class="o">+</span> <span class="n">Hnh</span><span class="o">.</span><span class="n">n_operators</span> <span class="o">*</span> <span class="n">Hnh</span><span class="o">.</span><span class="n">_max_op_size</span>
-        <span class="p">)</span>
+        <span class="n">max_conn_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_dissipator_conn_size</span> <span class="o">+</span> <span class="n">Hnh</span><span class="o">.</span><span class="n">max_conn_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_max_conn_size</span> <span class="o">=</span> <span class="n">max_conn_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_xprime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">max_conn_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_xr_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">max_conn_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">physical</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>

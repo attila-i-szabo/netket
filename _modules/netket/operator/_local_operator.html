@@ -159,6 +159,17 @@
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cannot deduce dtype of object type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">obj</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
+<span class="k">def</span> <span class="nf">has_nonzero_diagonal</span><span class="p">(</span><span class="n">op</span><span class="p">:</span> <span class="s2">&quot;LocalOperator&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns True if at least one element in the diagonal of the operator</span>
+<span class="sd">    is nonzero.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">_diag_mels</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">op</span><span class="o">.</span><span class="n">mel_cutoff</span><span class="p">)</span>
+        <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">op</span><span class="o">.</span><span class="n">_constant</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">op</span><span class="o">.</span><span class="n">mel_cutoff</span>
+    <span class="p">)</span>
+
+
 <span class="k">def</span> <span class="nf">_is_sorted</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
@@ -232,8 +243,8 @@
 <span class="sd">    operators in such a way to sort acting_on.</span>
 
 <span class="sd">    A conceptual example is the following:</span>
-<span class="sd">    if `mat = Â ⊗ B̂ ⊗ Ĉ` and `acting_on = [[2],[1],[3]`</span>
-<span class="sd">    you will get `result = B̂ ⊗ Â ⊗ Ĉ, [[1], [2], [3]].</span>
+<span class="sd">    if `mat = Â ⊗ B̂ ⊗ Ĉ` and `acting_on = [[2],[1],[3]`</span>
+<span class="sd">    you will get `result = B̂ ⊗ Â ⊗ Ĉ, [[1], [2], [3]].</span>
 
 <span class="sd">    However, essentially, A,B,C represent some operators acting on</span>
 <span class="sd">    thei sub-space acting_on[1], [2] and [3] of the hilbert space.</span>
@@ -279,10 +290,6 @@
     <span class="n">mat_sorted</span> <span class="o">=</span> <span class="n">mat</span><span class="p">[</span><span class="n">n_unsorted</span><span class="p">,</span> <span class="p">:][:,</span> <span class="n">n_unsorted</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">mat_sorted</span><span class="p">,</span> <span class="n">acting_on_sorted</span>
-
-
-<span class="k">def</span> <span class="nf">_sort_hilbert_states_and_matrix</span><span class="p">(</span><span class="n">hi</span><span class="p">,</span> <span class="n">mat</span><span class="p">,</span> <span class="n">acting_sites</span><span class="p">):</span>
-    <span class="k">pass</span>
 
 
 <div class="viewcode-block" id="LocalOperator"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.LocalOperator.html#netket.operator.LocalOperator">[docs]</a><span class="k">class</span> <span class="nc">LocalOperator</span><span class="p">(</span><span class="n">AbstractOperator</span><span class="p">):</span>
@@ -355,6 +362,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_init_zero</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">mel_cutoff</span> <span class="o">=</span> <span class="mf">1.0e-6</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nonzero_diagonal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_constant</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mel_cutoff</span>
+        <span class="sd">&quot;&quot;&quot;True if at least one element in the diagonal of the operator is</span>
+<span class="sd">        nonzero&quot;&quot;&quot;</span>
 
         <span class="k">for</span> <span class="n">op</span><span class="p">,</span> <span class="n">act</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">operators</span><span class="p">,</span> <span class="n">acting_on</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">act</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -435,6 +446,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_add_operator</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="n">acting_on</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">_constant</span> <span class="o">+=</span> <span class="n">other</span><span class="o">.</span><span class="n">constant</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_nonzero_diagonal</span> <span class="o">=</span> <span class="n">has_nonzero_diagonal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="bp">self</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Number</span><span class="p">):</span>
@@ -445,6 +457,7 @@
                 <span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">_constant</span> <span class="o">+=</span> <span class="n">other</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_nonzero_diagonal</span> <span class="o">=</span> <span class="n">has_nonzero_diagonal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
 
         <span class="k">return</span> <span class="bp">NotImplemented</span>
@@ -477,6 +490,8 @@
         <span class="k">for</span> <span class="n">_op</span> <span class="ow">in</span> <span class="n">op</span><span class="o">.</span><span class="n">_operators</span><span class="p">:</span>
             <span class="n">_op</span> <span class="o">*=</span> <span class="n">other</span>
 
+        <span class="n">op</span><span class="o">.</span><span class="n">_nonzero_diagonal</span> <span class="o">=</span> <span class="n">has_nonzero_diagonal</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">op</span>
 
     <span class="k">def</span> <span class="fm">__imul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -496,6 +511,8 @@
 
         <span class="k">for</span> <span class="n">_op</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_operators</span><span class="p">:</span>
             <span class="n">_op</span> <span class="o">*=</span> <span class="n">other</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nonzero_diagonal</span> <span class="o">=</span> <span class="n">has_nonzero_diagonal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span>
 
@@ -543,6 +560,8 @@
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">self_constant</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mel_cutoff</span><span class="p">:</span>
             <span class="bp">self</span> <span class="o">+=</span> <span class="n">other</span> <span class="o">*</span> <span class="n">self_constant</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nonzero_diagonal</span> <span class="o">=</span> <span class="n">has_nonzero_diagonal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span>
 
@@ -648,6 +667,7 @@
                 <span class="n">isherm</span> <span class="o">=</span> <span class="n">isherm</span> <span class="ow">and</span> <span class="n">is_hermitian</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">_is_hermitian</span> <span class="o">=</span> <span class="n">isherm</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_nonzero_diagonal</span> <span class="o">=</span> <span class="n">has_nonzero_diagonal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__add_new_operator__</span><span class="p">(</span><span class="n">operator</span><span class="p">,</span> <span class="n">acting_on</span><span class="p">)</span>
 
@@ -760,6 +780,8 @@
             <span class="n">isherm</span> <span class="o">=</span> <span class="n">isherm</span> <span class="ow">and</span> <span class="n">is_hermitian</span><span class="p">(</span><span class="n">op</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_is_hermitian</span> <span class="o">=</span> <span class="n">isherm</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nonzero_diagonal</span> <span class="o">=</span> <span class="n">has_nonzero_diagonal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
     <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -899,6 +921,18 @@
             <span class="n">constant</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_constant</span><span class="p">),</span>
         <span class="p">)</span></div>
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">max_conn_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;The maximum number of non zero ⟨x|O|x&#39;⟩ for every x.&quot;&quot;&quot;</span>
+        <span class="n">max_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_operators</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nonzero_diagonal</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_operators</span><span class="p">:</span>
+            <span class="n">nnz_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">op</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mel_cutoff</span>
+            <span class="n">nnz_mat</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">diag_indices</span><span class="p">(</span><span class="n">nnz_mat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">nnz_rows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nnz_mat</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">max_size</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">nnz_rows</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">max_size</span>
+
 <div class="viewcode-block" id="LocalOperator.get_conn_flattened"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.LocalOperator.html#netket.operator.LocalOperator.get_conn_flattened">[docs]</a>    <span class="k">def</span> <span class="nf">get_conn_flattened</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">sections</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Finds the connected elements of the Operator. Starting</span>
 <span class="sd">        from a given quantum number x, it finds all other quantum numbers x&#39; such</span>
@@ -934,6 +968,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_x_prime</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_acting_on</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_acting_size</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_nonzero_diagonal</span><span class="p">,</span>
             <span class="n">pad</span><span class="p">,</span>
         <span class="p">)</span></div>
 
@@ -947,6 +982,8 @@
         <span class="n">_x_prime</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x_prime</span>
         <span class="n">_acting_on</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acting_on</span>
         <span class="n">_acting_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acting_size</span>
+        <span class="n">_nonzero_diagonal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nonzero_diagonal</span>
+
         <span class="n">fun</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_conn_flattened_kernel</span>
 
         <span class="k">def</span> <span class="nf">gccf_fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sections</span><span class="p">):</span>
@@ -962,6 +999,7 @@
                 <span class="n">_x_prime</span><span class="p">,</span>
                 <span class="n">_acting_on</span><span class="p">,</span>
                 <span class="n">_acting_size</span><span class="p">,</span>
+                <span class="n">_nonzero_diagonal</span><span class="p">,</span>
             <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)(</span><span class="n">gccf_fun</span><span class="p">)</span>
@@ -980,6 +1018,7 @@
         <span class="n">all_x_prime</span><span class="p">,</span>
         <span class="n">acting_on</span><span class="p">,</span>
         <span class="n">acting_size</span><span class="p">,</span>
+        <span class="n">nonzero_diagonal</span><span class="p">,</span>
         <span class="n">pad</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="n">batch_size</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -996,7 +1035,7 @@
 
         <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
             <span class="c1"># diagonal element</span>
-            <span class="n">conn_b</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">conn_b</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">nonzero_diagonal</span> <span class="k">else</span> <span class="mi">0</span>
 
             <span class="c1"># counting the off-diagonal elements</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_operators</span><span class="p">):</span>
@@ -1031,13 +1070,19 @@
         <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
             <span class="n">c_diag</span> <span class="o">=</span> <span class="n">c</span>
-            <span class="n">mels</span><span class="p">[</span><span class="n">c_diag</span><span class="p">]</span> <span class="o">=</span> <span class="n">constant</span>
             <span class="n">x_batch</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">b</span><span class="p">]</span>
-            <span class="n">x_prime</span><span class="p">[</span><span class="n">c_diag</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">x_batch</span><span class="p">)</span>
-            <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="n">nonzero_diagonal</span><span class="p">:</span>
+                <span class="n">mels</span><span class="p">[</span><span class="n">c_diag</span><span class="p">]</span> <span class="o">=</span> <span class="n">constant</span>
+                <span class="n">x_prime</span><span class="p">[</span><span class="n">c_diag</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">x_batch</span><span class="p">)</span>
+                <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_operators</span><span class="p">):</span>
 
                 <span class="c1"># Diagonal part</span>
+                <span class="c1">#  If nonzero_diagonal, this goes to c_diag = 0 ....</span>
+                <span class="c1"># if zero_diagonal this just sets the last element to 0</span>
+                <span class="c1"># so it&#39;s not worth it skipping it</span>
                 <span class="n">mels</span><span class="p">[</span><span class="n">c_diag</span><span class="p">]</span> <span class="o">+=</span> <span class="n">diag_mels</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">xs_n</span><span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="n">i</span><span class="p">]]</span>
                 <span class="n">n_conn_i</span> <span class="o">=</span> <span class="n">n_conns</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">xs_n</span><span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="n">i</span><span class="p">]]</span>
 

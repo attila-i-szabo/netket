@@ -275,7 +275,6 @@
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.Dense.html">netket.nn.Dense</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.DenseGeneral.html">netket.nn.DenseGeneral</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.DenseSymm.html">netket.nn.DenseSymm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.create_DenseSymm.html">netket.nn.create_DenseSymm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.Conv.html">netket.nn.Conv</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.Embed.html">netket.nn.Embed</a></li>
 </ul>
@@ -326,6 +325,10 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.JsonLog.html">netket.logging.JsonLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.RuntimeLog.html">netket.logging.RuntimeLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.TBLog.html">netket.logging.TBLog</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#utils">Utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/utils/netket.utils.HashableArray.html">netket.utils.HashableArray</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#callbacks">Callbacks</a><ul>
@@ -695,13 +698,10 @@ Read more about the design goal of this module in their <a class="reference exte
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/nn/netket.nn.DenseSymm.html#netket.nn.DenseSymm" title="netket.nn.DenseSymm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.nn.DenseSymm</span></code></a></p></td>
 <td><p>A symmetrized linear transformation applied over the last dimension of the input.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/nn/netket.nn.create_DenseSymm.html#netket.nn.create_DenseSymm" title="netket.nn.create_DenseSymm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.nn.create_DenseSymm</span></code></a></p></td>
-<td><p>A symmetrized linear transformation applied over the last dimension of the input.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/nn/netket.nn.Conv.html#netket.nn.Conv" title="netket.nn.Conv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.nn.Conv</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/nn/netket.nn.Conv.html#netket.nn.Conv" title="netket.nn.Conv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.nn.Conv</span></code></a></p></td>
 <td><p>Convolution Module wrapping lax.conv_general_dilated.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/nn/netket.nn.Embed.html#netket.nn.Embed" title="netket.nn.Embed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.nn.Embed</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/nn/netket.nn.Embed.html#netket.nn.Embed" title="netket.nn.Embed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.nn.Embed</span></code></a></p></td>
 <td><p>Embedding Module.</p></td>
 </tr>
 </tbody>
@@ -873,6 +873,21 @@ optimisers, and it’s extremely easy to use step-dependent schedulers.</p>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/driver/netket.logging.TBLog.html#netket.logging.TBLog" title="netket.logging.TBLog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.logging.TBLog</span></code></a></p></td>
 <td><p>Creates a tensorboard logger using tensorboardX’s summarywriter.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="utils">
+<span id="utils-api"></span><h2>Utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h2>
+<p>Utility functions and classes.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/utils/netket.utils.HashableArray.html#netket.utils.HashableArray" title="netket.utils.HashableArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.utils.HashableArray</span></code></a></p></td>
+<td><p>This class wraps a numpy or jax array in order to make it hashable and equality comparable (which is necessary since a well-defined hashable object needs to satisfy <code class="code docutils literal notranslate"><span class="pre">obj1</span> <span class="pre">==</span> <span class="pre">obj2</span></code> whenever <code class="code docutils literal notranslate"><span class="pre">hash(obj1)</span> <span class="pre">==</span> <span class="pre">hash(obj2)</span></code>.</p></td>
 </tr>
 </tbody>
 </table>

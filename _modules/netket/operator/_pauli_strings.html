@@ -269,6 +269,12 @@
         <span class="sd">&quot;&quot;&quot;Returns true if this operator is hermitian.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_hermitian</span>
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">max_conn_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;The maximum number of non zero ⟨x|O|x&#39;⟩ for every x.&quot;&quot;&quot;</span>
+        <span class="c1"># 1 connection for every operator X, Y, Z...</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_operators</span>
+
     <span class="nd">@staticmethod</span>
     <span class="nd">@jit</span><span class="p">(</span><span class="n">nopython</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">_flattened_kernel</span><span class="p">(</span>

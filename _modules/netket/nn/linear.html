@@ -122,6 +122,7 @@
 <span class="kn">from</span> <span class="nn">netket.nn.initializers</span> <span class="kn">import</span> <span class="n">lecun_normal</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">variance_scaling</span><span class="p">,</span> <span class="n">zeros</span>
 <span class="kn">from</span> <span class="nn">netket</span> <span class="kn">import</span> <span class="n">jax</span> <span class="k">as</span> <span class="n">nkjax</span>
 <span class="kn">from</span> <span class="nn">netket.graph</span> <span class="kn">import</span> <span class="n">AbstractGraph</span><span class="p">,</span> <span class="n">SymmGroup</span>
+<span class="kn">from</span> <span class="nn">netket.utils</span> <span class="kn">import</span> <span class="n">HashableArray</span>
 
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">lax</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
@@ -336,12 +337,12 @@
     <span class="sd">&quot;&quot;&quot;A symmetrized linear transformation applied over the last dimension of the input.</span>
 <span class="sd">    This layer uses a reduced number of parameters, which are arranged so that the full</span>
 <span class="sd">    affine transformation is invariant under all of the given permutations when applied to s.</span>
-
-<span class="sd">    See :func:`~netket.nn.create_DenseSymm` for a more convenient constructor.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">symmetries</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="n">Array</span><span class="p">]</span>
-    <span class="sd">&quot;&quot;&quot;Callable returning a sequence of symmetry operations over which the layer should be invariant.&quot;&quot;&quot;</span>
+    <span class="n">symmetries</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">HashableArray</span><span class="p">,</span> <span class="n">SymmGroup</span><span class="p">]</span>
+    <span class="sd">&quot;&quot;&quot;A group of symmetry operations (or array of permutation indices) over which the layer should be invariant.</span>
+<span class="sd">        Numpy/Jax arrays must be wrapped into an :class:`netket.utils.HashableArray`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">features</span><span class="p">:</span> <span class="nb">int</span>
     <span class="sd">&quot;&quot;&quot;The number of symmetry-reduced features. The full output size is len(symmetries) * features.&quot;&quot;&quot;</span>
     <span class="n">use_bias</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
@@ -357,7 +358,7 @@
     <span class="sd">&quot;&quot;&quot;Initializer for the bias.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="DenseSymm.setup"><a class="viewcode-back" href="../../../docs/_generated/nn/netket.nn.DenseSymm.html#netket.nn.DenseSymm.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">perms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symmetries</span><span class="p">()</span>
+        <span class="n">perms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symmetries</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_symm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_sites</span> <span class="o">=</span> <span class="n">perms</span><span class="o">.</span><span class="n">shape</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_symm</span>
 
@@ -409,40 +410,6 @@
             <span class="n">y</span> <span class="o">+=</span> <span class="n">bias</span>
 
         <span class="k">return</span> <span class="n">y</span></div></div>
-
-
-<div class="viewcode-block" id="create_DenseSymm"><a class="viewcode-back" href="../../../docs/_generated/nn/netket.nn.create_DenseSymm.html#netket.nn.create_DenseSymm">[docs]</a><span class="k">def</span> <span class="nf">create_DenseSymm</span><span class="p">(</span>
-    <span class="n">symmetries</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">AbstractGraph</span><span class="p">,</span> <span class="n">Array</span><span class="p">],</span>
-    <span class="o">*</span><span class="n">args</span><span class="p">,</span>
-    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A symmetrized linear transformation applied over the last dimension of the input.</span>
-<span class="sd">    This layer uses a reduced number of parameters, which are arranged so that the full</span>
-<span class="sd">    affine transformation is invariant under all of the given permutations when applied to s.</span>
-
-<span class="sd">    This is a convenience wrapper for creating a :ref:`netket.nn.DenseSymm` layer.</span>
-
-<span class="sd">    Arguments:</span>
-<span class="sd">      symmetries: Sequence of permutations over which the layer should be invariant.</span>
-<span class="sd">        Should be either an array-like object of shape (n_permutations, input_size)</span>
-<span class="sd">        (note that this includes to :ref:`netket.graph.SymmGroup`), or</span>
-<span class="sd">        :ref:`netket.graph.AbstractGraph`, in which case the `graph.automorphisms()`</span>
-<span class="sd">        is used.</span>
-
-<span class="sd">    See :ref:`netket.nn.DenseSymm` for the remaining parameters.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">symmetries</span><span class="p">,</span> <span class="n">AbstractGraph</span><span class="p">):</span>
-        <span class="n">autom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">symmetries</span><span class="o">.</span><span class="n">automorphisms</span><span class="p">())</span>
-        <span class="n">perm_fn</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">autom</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">symmetries</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">symmetries</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">symmetries</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;symmetries must be an array of shape (#symmetries, #sites).&quot;</span>
-            <span class="p">)</span>
-        <span class="n">perm_fn</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">symmetries</span>
-
-    <span class="k">return</span> <span class="n">DenseSymm</span><span class="p">(</span><span class="n">symmetries</span><span class="o">=</span><span class="n">perm_fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Conv"><a class="viewcode-back" href="../../../docs/_generated/nn/netket.nn.Conv.html#netket.nn.Conv">[docs]</a><span class="k">class</span> <span class="nc">Conv</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
