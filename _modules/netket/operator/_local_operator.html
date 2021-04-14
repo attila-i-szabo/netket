@@ -113,6 +113,7 @@
 <span class="kn">import</span> <span class="nn">numbers</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">DType</span><span class="p">,</span> <span class="n">Array</span>
+<span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">dedent</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
@@ -156,6 +157,13 @@
         <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">dtype</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cannot deduce dtype of object type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">obj</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_is_sorted</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
 
 
 <span class="k">def</span> <span class="nf">resize</span><span class="p">(</span>
@@ -218,7 +226,23 @@
     <span class="k">return</span> <span class="n">new_arr</span>
 
 
-<span class="k">def</span> <span class="nf">_reorder_matrix</span><span class="p">(</span><span class="n">hi</span><span class="p">,</span> <span class="n">mat</span><span class="p">,</span> <span class="n">acting_on</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_reorder_kronecker_product</span><span class="p">(</span><span class="n">hi</span><span class="p">,</span> <span class="n">mat</span><span class="p">,</span> <span class="n">acting_on</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reorders the matrix resulting from a kronecker product of several</span>
+<span class="sd">    operators in such a way to sort acting_on.</span>
+
+<span class="sd">    A conceptual example is the following:</span>
+<span class="sd">    if `mat = Â ⊗ B̂ ⊗ Ĉ` and `acting_on = [[2],[1],[3]`</span>
+<span class="sd">    you will get `result = B̂ ⊗ Â ⊗ Ĉ, [[1], [2], [3]].</span>
+
+<span class="sd">    However, essentially, A,B,C represent some operators acting on</span>
+<span class="sd">    thei sub-space acting_on[1], [2] and [3] of the hilbert space.</span>
+
+<span class="sd">    This function also handles any possible set of values in acting_on.</span>
+
+<span class="sd">    The inner logic uses the Fock.all_states(), number_to_state and</span>
+<span class="sd">    state_to_number to perform the re-ordering.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">acting_on_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">acting_on</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">acting_on_sorted</span> <span class="o">==</span> <span class="n">acting_on</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">mat</span><span class="p">,</span> <span class="n">acting_on</span>
@@ -257,6 +281,10 @@
     <span class="k">return</span> <span class="n">mat_sorted</span><span class="p">,</span> <span class="n">acting_on_sorted</span>
 
 
+<span class="k">def</span> <span class="nf">_sort_hilbert_states_and_matrix</span><span class="p">(</span><span class="n">hi</span><span class="p">,</span> <span class="n">mat</span><span class="p">,</span> <span class="n">acting_sites</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
 <div class="viewcode-block" id="LocalOperator"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.LocalOperator.html#netket.operator.LocalOperator">[docs]</a><span class="k">class</span> <span class="nc">LocalOperator</span><span class="p">(</span><span class="n">AbstractOperator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A custom local operator. This is a sum of an arbitrary number of operators</span>
 <span class="sd">    acting locally on a limited set of k quantum numbers (i.e. k-local,</span>
@@ -293,6 +321,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hilbert</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_constant</span> <span class="o">=</span> <span class="n">constant</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">_is_sorted</span><span class="p">(</span><span class="n">hilbert</span><span class="o">.</span><span class="n">states_at_index</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">hilbert</span><span class="o">.</span><span class="n">size</span><span class="p">)]</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="n">dedent</span><span class="p">(</span>
+                    <span class="sd">&quot;&quot;&quot;LocalOperator needs an hilbert space with sorted state values at</span>
+<span class="sd">                every site.</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
 
         <span class="c1"># check if passing a single operator or a list of operators</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">acting_on</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Number</span><span class="p">):</span>
@@ -571,7 +610,9 @@
             <span class="k">return</span>
 
         <span class="c1"># re-sort the operator</span>
-        <span class="n">operator</span><span class="p">,</span> <span class="n">acting_on</span> <span class="o">=</span> <span class="n">_reorder_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">acting_on</span><span class="p">)</span>
+        <span class="n">operator</span><span class="p">,</span> <span class="n">acting_on</span> <span class="o">=</span> <span class="n">_reorder_kronecker_product</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">acting_on</span>
+        <span class="p">)</span>
 
         <span class="c1"># find overlapping support</span>
         <span class="n">support_i</span> <span class="o">=</span> <span class="kc">None</span>
@@ -798,8 +839,8 @@
                             <span class="n">_op_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">_op_i</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
 
                 <span class="c1"># reorder</span>
-                <span class="n">_op</span><span class="p">,</span> <span class="n">_act</span> <span class="o">=</span> <span class="n">_reorder_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">_op</span><span class="p">,</span> <span class="n">_act</span><span class="p">)</span>
-                <span class="n">_op_i</span><span class="p">,</span> <span class="n">_act_i</span> <span class="o">=</span> <span class="n">_reorder_matrix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">_op_i</span><span class="p">,</span> <span class="n">_act_i</span><span class="p">)</span>
+                <span class="n">_op</span><span class="p">,</span> <span class="n">_act</span> <span class="o">=</span> <span class="n">_reorder_kronecker_product</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">_op</span><span class="p">,</span> <span class="n">_act</span><span class="p">)</span>
+                <span class="n">_op_i</span><span class="p">,</span> <span class="n">_act_i</span> <span class="o">=</span> <span class="n">_reorder_kronecker_product</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">_op_i</span><span class="p">,</span> <span class="n">_act_i</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_act</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">_act_i</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">_act</span><span class="p">,</span> <span class="n">_act_i</span><span class="p">):</span>
                     <span class="c1"># non-interesecting with same support</span>
