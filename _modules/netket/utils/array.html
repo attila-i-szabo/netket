@@ -128,10 +128,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">wrapped</span><span class="p">:</span> <span class="n">Array</span>
-    <span class="sd">&quot;&quot;&quot;The wrapped array. Note that this array is read-only and modifying it without</span>
-<span class="sd">    recreating `HashableArray` will result in incorrect behavior.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;The wrapped array. Note that this array is read-only.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;wrapped&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_HashableArray__hash&quot;</span><span class="p">,</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()))</span>
