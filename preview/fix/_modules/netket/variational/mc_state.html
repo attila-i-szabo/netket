@@ -500,7 +500,7 @@
         <span class="n">σp</span><span class="p">,</span> <span class="n">mels</span> <span class="o">=</span> <span class="n">Ô</span><span class="o">.</span><span class="n">get_conn_padded</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">σ</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
 
         <span class="k">return</span> <span class="n">_expect</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">machine_pow</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_apply_fun</span><span class="p">,</span>
             <span class="n">kernel</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span>
