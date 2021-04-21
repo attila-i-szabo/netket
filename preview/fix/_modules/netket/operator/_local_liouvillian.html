@@ -201,6 +201,11 @@
         <span class="sd">&quot;&quot;&quot;The list of local operators in this Liouvillian&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_jump_ops</span>
 
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">max_conn_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;The maximum number of non zero ⟨x|O|x&#39;⟩ for every x.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_conn_size</span>
+
     <span class="k">def</span> <span class="nf">_compute_hnh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># There is no i here because it&#39;s inserted in the kernel</span>
         <span class="n">Hnh</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_H</span>
@@ -211,7 +216,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_Hnh</span> <span class="o">=</span> <span class="n">Hnh</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
 
-        <span class="n">max_conn_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_dissipator_conn_size</span> <span class="o">+</span> <span class="n">Hnh</span><span class="o">.</span><span class="n">max_conn_size</span>
+        <span class="n">max_conn_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_dissipator_conn_size</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">Hnh</span><span class="o">.</span><span class="n">max_conn_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_max_conn_size</span> <span class="o">=</span> <span class="n">max_conn_size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_xprime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">max_conn_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_xr_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">max_conn_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">physical</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
