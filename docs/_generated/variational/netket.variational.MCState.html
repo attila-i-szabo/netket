@@ -18,6 +18,8 @@
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <script src="../../../_static/js/rtd_theme.js"></script>
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -638,8 +640,13 @@ a random seed.</p></li>
 <dl class="py method">
 <dt id="netket.variational.MCState.log_value">
 <code class="sig-name descname"><span class="pre">log_value</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">σ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/variational/mc_state.html#MCState.log_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.variational.MCState.log_value" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate the variational state for a batch of states and return
-the logarithm of the probability amplitude for those inputs.</p>
+<dd><p>Evaluate the variational state for a batch of states and returns
+the logarithm of the amplitude of the quantum state. For pure states,
+this is <span class="math notranslate nohighlight">\(log(&lt;σ|ψ&gt;)\)</span>, whereas for mixed states this is
+<span class="math notranslate nohighlight">\(log(&lt;σr|ρ|σc&gt;)\)</span>, where ψ and ρ are respectively a pure state
+(wavefunction) and a mixed state (density matrix).
+For the density matrix, the left and right-acting states (row and column)
+are obtained as <code class="code docutils literal notranslate"><span class="pre">σr=σ[::,0:N]</span></code> and <code class="code docutils literal notranslate"><span class="pre">σc=σ[::,N:]</span></code>.</p>
 <p>Given a batch of inputs (Nb, N), returns a batch of outputs (Nb,).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
