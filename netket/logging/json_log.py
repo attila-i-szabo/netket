@@ -16,6 +16,9 @@ import json
 import dataclasses
 import orjson
 import time
+import tarfile
+from io import BytesIO
+
 
 import os
 from os import path as _path
@@ -57,6 +60,17 @@ def default(obj):
     raise TypeError
 
 
+def save_binary_to_tar(tar_file, byte_data, name):
+    abuf = BytesIO(byte_data)
+
+    # Contruct the info object with the correct length
+    info = tarfile.TarInfo(name=name)
+    info.size = len(abuf.getbuffer())
+
+    # actually save the data to the tar file
+    tar_file.addfile(tarinfo=info, fileobj=abuf)
+
+
 class JsonLog(RuntimeLog):
     """
     Json Logger, that can be passed with keyword argument `logger` to Monte
@@ -82,6 +96,7 @@ class JsonLog(RuntimeLog):
         save_params_every: int = 50,
         write_every: int = 50,
         save_params: bool = True,
+        tar_variables: bool = False,
         autoflush_cost: float = 0.005,
     ):
         """
@@ -95,7 +110,11 @@ class JsonLog(RuntimeLog):
                 - `[w]rite`: (default) overwrites file if it already exists;
                 - `[a]ppend`: appends to the file if it exists, overwise creates a new file;
                 - `[x]` or `fail`: fails if file already exists;
-            save_params: bool flag indicating whever parameters should be serialized
+            save_params: bool flag indicating whever variables of the variational state should be serialized
+                at some interval. The output file is overwritten every time variables are saved again
+            tar_variables: bool flag indicating whever to store variables in a tar file. The tar archive will
+                contain a file with numbers going from 0 to N, and every file corresponds to the variables of
+                the variational state at that step.
             autoflush_cost: Maximum fraction of runtime that can be dedicated to serializing data. Defaults to
                 0.005 (0.5 per cent)
         """
@@ -113,6 +132,8 @@ class JsonLog(RuntimeLog):
             raise ValueError(
                 "Mode not recognized: should be one of `[w]rite`, `[a]ppend` or `[x]`(fail)."
             )
+
+        self._file_mode = mode
 
         file_exists = _exists_json(output_prefix)
 
@@ -143,10 +164,40 @@ class JsonLog(RuntimeLog):
         self._steps_notflushed_write = 0
         self._steps_notflushed_pars = 0
         self._save_params = save_params
+        self._files_open = [output_prefix + ".log", output_prefix + ".mpack"]
 
         self._autoflush_cost = autoflush_cost
         self._last_flush_time = time.time()
         self._last_flush_runtime = 0.0
+
+        self._flush_log_time = 0.0
+        self._flush_pars_time = 0.0
+        self._flush_tar_time = 0.0
+
+        self._closed = False
+
+        # tar
+        self._tar_params = tar_variables
+        self._tar_file = None
+        if tar_variables:
+            self._tar_file_created = False
+
+    def close(self):
+        self._closed = True
+        if self._tar_file is not None:
+            self._tar_file.close()
+
+    def __del__(self):
+        if not self._closed:
+            self.close()
+
+    def _create_tar_file(self):
+        self._tar_file = tarfile.TarFile(self._prefix + ".tar", self._file_mode[0])
+        self._files_open.append(self._prefix + ".tar")
+        self._tar_file_created = True
+        self._tar_step = 0
+        if self._file_mode == "a":
+            self._tar_step = int(self._tar_file.getnames()[-1]) + 1
 
     def __call__(self, step, item, variational_state):
         old_step = self._old_step
@@ -169,6 +220,18 @@ class JsonLog(RuntimeLog):
         ):
             self._flush_params(variational_state)
 
+        if self._tar_params and variational_state is not None:
+            if not self._tar_file_created:
+                self._create_tar_file()
+
+            _time = time.time()
+            binary_data = serialization.to_bytes(variational_state.variables)
+            save_binary_to_tar(
+                self._tar_file, binary_data, str(self._tar_step) + ".mpack"
+            )
+            self._tar_step += 1
+            self._flush_tar_time += time.time() - _time
+
         self._old_step = step
         self._steps_notflushed_write += 1
         self._steps_notflushed_pars += 1
@@ -182,16 +245,20 @@ class JsonLog(RuntimeLog):
 
         # Time how long flushing data takes.
         self._last_flush_runtime = time.time() - self._last_flush_time
+        self._flush_log_time += self._last_flush_runtime
 
     def _flush_params(self, variational_state):
         if not self._save_params:
             return
+
+        _time = time.time()
 
         binary_data = serialization.to_bytes(variational_state.variables)
         with open(self._prefix + ".mpack", "wb") as outfile:
             outfile.write(binary_data)
 
         self._steps_notflushed_pars = 0
+        self._flush_pars_time += time.time() - _time
 
     def flush(self, variational_state):
         """
@@ -204,3 +271,11 @@ class JsonLog(RuntimeLog):
 
         if variational_state is not None:
             self._flush_params(variational_state)
+
+    def __repr__(self):
+        _str = f"JsonLog('{self._prefix}', mode={self._file_mode}, autoflush_cost={self._autoflush_cost})"
+        _str = _str + f"\n  Runtime cost:"
+        _str = _str + f"\n  \tLog:    {self._flush_log_time}"
+        _str = _str + f"\n  \tTar:    {self._flush_tar_time}"
+        _str = _str + f"\n  \tParams: {self._flush_pars_time}"
+        return _str
