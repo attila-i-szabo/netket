@@ -118,8 +118,15 @@
 <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">_nx</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
+<span class="n">cutoff_tol</span> <span class="o">=</span> <span class="mf">1e-5</span>
+<span class="sd">&quot;&quot;&quot;Tolerance for the maximum distance cutoff when computing the sparse distance matrix.</span>
+<span class="sd">This is necessary because of floating-point errors when computing the distance in non-trivial </span>
+<span class="sd">lattices.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
 
 <span class="k">def</span> <span class="nf">get_edges</span><span class="p">(</span><span class="n">atoms_positions</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">):</span>
+    <span class="n">cutoff</span> <span class="o">=</span> <span class="n">cutoff</span> <span class="o">+</span> <span class="n">cutoff_tol</span>
     <span class="n">kdtree</span> <span class="o">=</span> <span class="n">cKDTree</span><span class="p">(</span><span class="n">atoms_positions</span><span class="p">)</span>
     <span class="n">dist_matrix</span> <span class="o">=</span> <span class="n">kdtree</span><span class="o">.</span><span class="n">sparse_distance_matrix</span><span class="p">(</span><span class="n">kdtree</span><span class="p">,</span> <span class="n">cutoff</span><span class="p">)</span>
     <span class="n">id1</span><span class="p">,</span> <span class="n">id2</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">triu</span><span class="p">(</span><span class="n">dist_matrix</span><span class="p">))</span>

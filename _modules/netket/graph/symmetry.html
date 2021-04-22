@@ -117,6 +117,7 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">AbstractGraph</span>
 <span class="kn">from</span> <span class="nn">netket.utils.semigroup</span> <span class="kn">import</span> <span class="n">SemiGroup</span>
 <span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">Array</span>
+<span class="kn">from</span> <span class="nn">netket.utils</span> <span class="kn">import</span> <span class="n">HashableArray</span>
 
 
 <div class="viewcode-block" id="SymmGroup"><a class="viewcode-back" href="../../../docs/_generated/graph/netket.graph.SymmGroup.html#netket.graph.SymmGroup">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -177,6 +178,61 @@
             <span class="k">return</span> <span class="n">group</span><span class="p">,</span> <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">group</span></div>
+
+<div class="viewcode-block" id="SymmGroup.inverse"><a class="viewcode-back" href="../../../docs/_generated/graph/netket.graph.SymmGroup.html#netket.graph.SymmGroup.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns reordered SymmGroup where the each element is the inverse of</span>
+<span class="sd">        the original symmetry element. If :code:`g = self[element]` and :code:`h = self[self.inverse()[element]]`,</span>
+<span class="sd">        then :code:`gh = product(g, h)` will act as the identity on the sites of the graph, i.e., :code:`np.all(gh(sites) == sites)`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">automorphisms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_array</span><span class="p">()</span>
+        <span class="n">n_symm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">automorphisms</span><span class="p">)</span>
+        <span class="n">inverse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_symm</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">automorphisms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">automorphisms</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">perm1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">automorphisms</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">perm2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">automorphisms</span><span class="p">):</span>
+                <span class="n">perm_sq</span> <span class="o">=</span> <span class="n">perm1</span><span class="p">[</span><span class="n">perm2</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">perm_sq</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">perm_sq</span><span class="p">))):</span>
+                    <span class="n">inverse</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+
+        <span class="k">return</span> <span class="n">inverse</span></div>
+
+<div class="viewcode-block" id="SymmGroup.product_table"><a class="viewcode-back" href="../../../docs/_generated/graph/netket.graph.SymmGroup.html#netket.graph.SymmGroup.product_table">[docs]</a>    <span class="k">def</span> <span class="nf">product_table</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a product table over the group where the columns use the involution</span>
+<span class="sd">        of the group. If :code:`g = self[self.inverse()[element]]&#39;, :code:`h = self[element2]`</span>
+<span class="sd">        and code:`u = self[product_table()[element,element2]], we are</span>
+<span class="sd">        solving the equation u = gh</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">automorphisms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_array</span><span class="p">()</span>
+        <span class="n">n_symm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">automorphisms</span><span class="p">)</span>
+        <span class="n">inverse</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_array</span><span class="p">()[</span><span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">()]</span>
+        <span class="n">product_table</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_symm</span><span class="p">,</span> <span class="n">n_symm</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+
+        <span class="n">inv_t</span> <span class="o">=</span> <span class="n">inverse</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="n">auto_t</span> <span class="o">=</span> <span class="n">automorphisms</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="n">inv_auto</span> <span class="o">=</span> <span class="n">auto_t</span><span class="p">[</span><span class="n">inv_t</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_symm</span> <span class="o">*</span> <span class="n">n_symm</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+        <span class="n">hash_auto</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="nb">hash</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()):</span> <span class="n">index</span>
+            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">automorphisms</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="n">inds</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">hash_auto</span><span class="p">[</span><span class="nb">hash</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">tobytes</span><span class="p">())])</span>
+            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">inv_auto</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">hash</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">tobytes</span><span class="p">())</span> <span class="ow">in</span> <span class="n">hash_auto</span>
+        <span class="p">]</span>
+
+        <span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">inds</span><span class="p">)</span>
+
+        <span class="n">product_table</span><span class="p">[</span><span class="n">inds</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="n">n_symm</span><span class="p">,</span> <span class="n">inds</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="n">n_symm</span><span class="p">]</span> <span class="o">=</span> <span class="n">inds</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">product_table</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

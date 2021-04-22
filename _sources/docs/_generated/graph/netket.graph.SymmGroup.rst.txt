@@ -20,6 +20,8 @@
 
    Methods
       .. automethod:: SymmGroup.__call__
+      .. automethod:: SymmGroup.inverse
+      .. automethod:: SymmGroup.product_table
       .. automethod:: SymmGroup.remove_duplicates
       .. automethod:: SymmGroup.to_array
 
