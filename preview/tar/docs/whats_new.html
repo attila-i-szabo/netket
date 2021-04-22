@@ -297,7 +297,12 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#variational-state-interface">Variational State Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#variational-state-interface">Variational State Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html">netket.variational.VariationalState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.variational.MCState.html">netket.variational.MCState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.variational.MCMixedState.html">netket.variational.MCMixedState</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#optimizer">Optimizer</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/optim/netket.optimizer.SR.html">netket.optimizer.SR</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/optim/netket.optimizer.SRLazyCG.html">netket.optimizer.SRLazyCG</a></li>
@@ -310,7 +315,12 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/optim/netket.optimizer.RmsProp.html">netket.optimizer.RmsProp</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#optimization-drivers">Optimization drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#optimization-drivers">Optimization drivers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.driver.AbstractVariationalDriver.html">netket.driver.AbstractVariationalDriver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.driver.VMC.html">netket.driver.VMC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.driver.SteadyState.html">netket.driver.SteadyState</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#logging-output">Logging output</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.JsonLog.html">netket.logging.JsonLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.RuntimeLog.html">netket.logging.RuntimeLog</a></li>
@@ -350,13 +360,13 @@
 <li><p>Doing an operation in-place <code class="code docutils literal notranslate"><span class="pre">+=,</span> <span class="pre">-=,</span> <span class="pre">*=</span></code> on a real-valued operator will now fail if the other is complex. While this might seem annoying, it’s usefull to ensure that smaller types such as <cite>float32</cite> or <cite>complex64</cite> are preserved if the user desires to do so.</p></li>
 </ul>
 </li>
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractMachine</span></code> has been removed. It’s functionality is now split among the model itself, which is defined by the user and <code class="xref py py-class docutils literal notranslate"><span class="pre">variational.MCState</span></code> for pure states or <code class="xref py py-class docutils literal notranslate"><span class="pre">variational.MCMixedState</span></code> for mixed states.</p>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractMachine</span></code> has been removed. It’s functionality is now split among the model itself, which is defined by the user and <a class="reference internal" href="_generated/variational/netket.variational.MCState.html#netket.variational.MCState" title="netket.variational.MCState"><code class="xref py py-class docutils literal notranslate"><span class="pre">variational.MCState</span></code></a> for pure states or <a class="reference internal" href="_generated/variational/netket.variational.MCMixedState.html#netket.variational.MCMixedState" title="netket.variational.MCMixedState"><code class="xref py py-class docutils literal notranslate"><span class="pre">variational.MCMixedState</span></code></a> for mixed states.</p>
 <ul>
 <li><p>The model, in general is composed by two functions, or an object with two functions: an <cite>init(rng, sample_val)</cite> function, accepting a <span class="xref std std-ref">jax.random.PRNGKey</span> object and an input, returning the parameters and the state of the model for that particular sample shape, and a <code class="code docutils literal notranslate"><span class="pre">apply(params,</span> <span class="pre">samples,</span> <span class="pre">**kwargs)</span></code> function, evaluating the model for the given parameters and inputs.</p></li>
 <li><p>Some models (previously machines) such as the RBM (Restricted Bolzmann Machine) Machine, NDM (Neural Density Matrix) or MPS (Matrix Product State ansatz) are available in <a class="reference internal" href="api.html#pre-built-models"><span class="std std-ref">Pre-built models</span></a>.</p></li>
 <li><p>Machines, now called models, should be written using <a class="reference external" href="https://flax.readthedocs.io/en/latest">flax</a> or another jax framework.</p></li>
 <li><p>Serialization and deserialization functionality has now been moved to <span class="xref std std-ref">variational.MCState</span>, which support the standard Flax interface through MsgPack. See <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.serialization.html">Flax docs</a> for more information</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">AbstractMachine.init_random_parameters</span></code> functionality has now been absorbed into <code class="xref py py-meth docutils literal notranslate"><span class="pre">netket.variational.VariationalState.init_parameters()</span></code>, which however has a different syntax.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">AbstractMachine.init_random_parameters</span></code> functionality has now been absorbed into <a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html#netket.variational.VariationalState.init_parameters" title="netket.variational.VariationalState.init_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">netket.variational.VariationalState.init_parameters()</span></code></a>, which however has a different syntax.</p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="api.html#sampler"><span class="std std-ref">Samplers</span></a> now require the hilbert space upon which they sample to be passed in to the constructor.</p></li>

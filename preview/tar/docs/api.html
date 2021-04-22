@@ -299,7 +299,12 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#variational-state-interface">Variational State Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variational-state-interface">Variational State Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html">netket.variational.VariationalState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.variational.MCState.html">netket.variational.MCState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.variational.MCMixedState.html">netket.variational.MCMixedState</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#optimizer">Optimizer</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/optim/netket.optimizer.SR.html">netket.optimizer.SR</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/optim/netket.optimizer.SRLazyCG.html">netket.optimizer.SRLazyCG</a></li>
@@ -312,7 +317,12 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/optim/netket.optimizer.RmsProp.html">netket.optimizer.RmsProp</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#optimization-drivers">Optimization drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optimization-drivers">Optimization drivers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.driver.AbstractVariationalDriver.html">netket.driver.AbstractVariationalDriver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.driver.VMC.html">netket.driver.VMC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.driver.SteadyState.html">netket.driver.SteadyState</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#logging-output">Logging output</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.JsonLog.html">netket.logging.JsonLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.RuntimeLog.html">netket.logging.RuntimeLog</a></li>
@@ -764,6 +774,15 @@ Read more about the design goal of this module in their <a class="reference exte
 <col style="width: 90%" />
 </colgroup>
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html#netket.variational.VariationalState" title="netket.variational.VariationalState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.variational.VariationalState</span></code></a></p></td>
+<td><p>Abstract class for variational states representing either pure states or mixed quantum states.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/variational/netket.variational.MCState.html#netket.variational.MCState" title="netket.variational.MCState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.variational.MCState</span></code></a></p></td>
+<td><p>Variational State for a Variational Neural Quantum State.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/variational/netket.variational.MCMixedState.html#netket.variational.MCMixedState" title="netket.variational.MCMixedState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.variational.MCMixedState</span></code></a></p></td>
+<td><p>Variational State for a Mixed Variational Neural Quantum State.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -833,6 +852,15 @@ optimisers, and it’s extremely easy to use step-dependent schedulers.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/driver/netket.driver.AbstractVariationalDriver.html#netket.driver.AbstractVariationalDriver" title="netket.driver.AbstractVariationalDriver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.driver.AbstractVariationalDriver</span></code></a></p></td>
+<td><p>Abstract base class for NetKet Variational Monte Carlo drivers</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/driver/netket.driver.VMC.html#netket.driver.VMC" title="netket.driver.VMC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.driver.VMC</span></code></a></p></td>
+<td><p>Energy minimization using Variational Monte Carlo (VMC).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/driver/netket.driver.SteadyState.html#netket.driver.SteadyState" title="netket.driver.SteadyState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.driver.SteadyState</span></code></a></p></td>
+<td><p>Steady-state driver minimizing L^†L.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
