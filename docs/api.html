@@ -19,13 +19,13 @@
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script src="../_static/js/rtd_theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="netket.graph.AbstractGraph" href="_generated/graph/netket.graph.AbstractGraph.html" />
-    <link rel="prev" title="🔪 The Sharp Bits 🔪" href="sharp-bits.html" />
+    <link rel="prev" title="Writing Tests" href="writing-tests.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -113,7 +113,8 @@
   ---->
 </div>
 
-<ul class="current">
+<p class="caption"><span class="caption-text">Reference Documentation</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation-and-requirements">Installation and requirements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="getting_started.html#mpi">MPI</a></li>
@@ -155,6 +156,16 @@
 <li class="toctree-l2"><a class="reference internal" href="drivers.html#running-the-optimisation">Running the optimisation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#parallelization">Parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#running-on-cpu-when-gpus-are-present">Running on CPU when GPUs are present</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#using-gpus">Using GPUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#nans-in-training-and-loss-of-precision">NaNs in training and loss of precision</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Extending NetKet</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="custom_models.html">Defining Custom Models</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="custom_models.html#commonalities">Commonalities</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="custom_models.html#defining-models-init-and-apply-functions">Defining models: init and apply functions</a></li>
@@ -165,13 +176,30 @@
 <li class="toctree-l2"><a class="reference internal" href="custom_models.html#using-haiku">Using Haiku</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#parallelization">Parallelization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#running-on-cpu-when-gpus-are-present">Running on CPU when GPUs are present</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#using-gpus">Using GPUs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sharp-bits.html#nans-in-training-and-loss-of-precision">NaNs in training and loss of precision</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing to NetKet</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#ways-to-contribute">Ways to contribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#contributing-code-using-pull-requests">Contributing code using pull requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#netket-pull-request-checklist">NetKet pull request checklist</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#single-change-commits-and-pull-requests">Single-change commits and pull requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#python-coding-style">Python coding style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#docstrings-and-type-hints">Docstrings and Type Hints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#visibility-of-public-api">Visibility of public API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing.html#full-github-test-suite">Full GitHub test suite</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing-tests.html">Writing Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests.html#test-structure-and-common-files">Test structure and common files.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests.html#tests-and-mpi">Tests and MPI</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Public API: netket package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
@@ -324,8 +352,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#logging-output">Logging output</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.JsonLog.html">netket.logging.JsonLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.RuntimeLog.html">netket.logging.RuntimeLog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.JsonLog.html">netket.logging.JsonLog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.StateLog.html">netket.logging.StateLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.TBLog.html">netket.logging.TBLog</a></li>
 </ul>
 </li>
@@ -704,7 +733,7 @@ Read more about the design goal of this module in their <a class="reference exte
 <td><p>A symmetrized linear transformation applied over the last dimension of the input.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/nn/netket.nn.DenseEquivariant.html#netket.nn.DenseEquivariant" title="netket.nn.DenseEquivariant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.nn.DenseEquivariant</span></code></a></p></td>
-<td><p>Implements a G-convolution that acts on a feature map of symmetry poses of shape [batch_size,n_symm*in_features] and returns a feature map of poses of shape [batch_size,n_symm*out_features]</p></td>
+<td><p>A group convolution operation that is equivariant over a symmetry group</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/nn/netket.nn.Conv.html#netket.nn.Conv" title="netket.nn.Conv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.nn.Conv</span></code></a></p></td>
 <td><p>Convolution Module wrapping lax.conv_general_dilated.</p></td>
@@ -873,13 +902,16 @@ optimisers, and it’s extremely easy to use step-dependent schedulers.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/driver/netket.logging.JsonLog.html#netket.logging.JsonLog" title="netket.logging.JsonLog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.logging.JsonLog</span></code></a></p></td>
-<td><p>Json Logger, that can be passed with keyword argument <cite>logger</cite> to Monte Carlo drivers in order to serialize the outpit data of the simulation.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/driver/netket.logging.RuntimeLog.html#netket.logging.RuntimeLog" title="netket.logging.RuntimeLog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.logging.RuntimeLog</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/driver/netket.logging.RuntimeLog.html#netket.logging.RuntimeLog" title="netket.logging.RuntimeLog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.logging.RuntimeLog</span></code></a></p></td>
 <td><p>Runtim Logger, that can be passed with keyword argument <cite>logger</cite> to Monte Carlo drivers in order to serialize the outpit data of the simulation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/driver/netket.logging.TBLog.html#netket.logging.TBLog" title="netket.logging.TBLog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.logging.TBLog</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/driver/netket.logging.JsonLog.html#netket.logging.JsonLog" title="netket.logging.JsonLog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.logging.JsonLog</span></code></a></p></td>
+<td><p>Json Logger, that can be passed with keyword argument <cite>logger</cite> to Monte Carlo drivers in order to serialize the outpit data of the simulation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/driver/netket.logging.StateLog.html#netket.logging.StateLog" title="netket.logging.StateLog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.logging.StateLog</span></code></a></p></td>
+<td><p>A logger which serializes the variables of the variational state during a run.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/driver/netket.logging.TBLog.html#netket.logging.TBLog" title="netket.logging.TBLog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.logging.TBLog</span></code></a></p></td>
 <td><p>Creates a tensorboard logger using tensorboardX’s summarywriter.</p></td>
 </tr>
 </tbody>

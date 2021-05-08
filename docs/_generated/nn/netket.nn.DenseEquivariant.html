@@ -19,7 +19,7 @@
     <script src="../../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script src="../../../_static/js/rtd_theme.js"></script>
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -113,7 +113,8 @@
   ---->
 </div>
 
-<ul class="current">
+<p class="caption"><span class="caption-text">Reference Documentation</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../getting_started.html#installation-and-requirements">Installation and requirements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../getting_started.html#mpi">MPI</a></li>
@@ -155,6 +156,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../../drivers.html#running-the-optimisation">Running the optimisation</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../sharp-bits.html#parallelization">Parallelization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sharp-bits.html#running-on-cpu-when-gpus-are-present">Running on CPU when GPUs are present</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sharp-bits.html#using-gpus">Using GPUs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sharp-bits.html#nans-in-training-and-loss-of-precision">NaNs in training and loss of precision</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Extending NetKet</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../custom_models.html">Defining Custom Models</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#commonalities">Commonalities</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../custom_models.html#defining-models-init-and-apply-functions">Defining models: init and apply functions</a></li>
@@ -165,13 +176,30 @@
 <li class="toctree-l2"><a class="reference internal" href="../../custom_models.html#using-haiku">Using Haiku</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../sharp-bits.html">🔪 The Sharp Bits 🔪</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../sharp-bits.html#parallelization">Parallelization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sharp-bits.html#running-on-cpu-when-gpus-are-present">Running on CPU when GPUs are present</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sharp-bits.html#using-gpus">Using GPUs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sharp-bits.html#nans-in-training-and-loss-of-precision">NaNs in training and loss of precision</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Developer Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing to NetKet</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#ways-to-contribute">Ways to contribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#contributing-code-using-pull-requests">Contributing code using pull requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#netket-pull-request-checklist">NetKet pull request checklist</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#single-change-commits-and-pull-requests">Single-change commits and pull requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#python-coding-style">Python coding style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#docstrings-and-type-hints">Docstrings and Type Hints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#visibility-of-public-api">Visibility of public API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing.html#full-github-test-suite">Full GitHub test suite</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-tests.html">Writing Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../writing-tests.html#test-structure-and-common-files">Test structure and common files.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../writing-tests.html#tests-and-mpi">Tests and MPI</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">API documentation</span></p>
+<ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../../api.html">Public API: netket package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
@@ -324,8 +352,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#logging-output">Logging output</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../driver/netket.logging.JsonLog.html">netket.logging.JsonLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../driver/netket.logging.RuntimeLog.html">netket.logging.RuntimeLog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../driver/netket.logging.JsonLog.html">netket.logging.JsonLog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../driver/netket.logging.StateLog.html">netket.logging.StateLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../driver/netket.logging.TBLog.html">netket.logging.TBLog</a></li>
 </ul>
 </li>
@@ -354,9 +383,9 @@
 <dt id="netket.nn.DenseEquivariant">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.nn.</span></code><code class="sig-name descname"><span class="pre">DenseEquivariant</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">symmetry_info</span></em>, <em class="sig-param"><span class="pre">in_features</span></em>, <em class="sig-param"><span class="pre">out_features</span></em>, <em class="sig-param"><span class="pre">use_bias=True</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'jax._src.numpy.lax_numpy.float64'&gt;</span></em>, <em class="sig-param"><span class="pre">precision=None</span></em>, <em class="sig-param"><span class="pre">kernel_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">bias_init=&lt;function</span> <span class="pre">zeros&gt;</span></em>, <em class="sig-param"><span class="pre">parent=&lt;flax.linen.module._Sentinel</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">name=None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/nn/linear.html#DenseEquivariant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.nn.DenseEquivariant" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">flax.linen.module.Module</span></code></p>
-<p>Implements a G-convolution that acts on a feature map of symmetry
-poses of shape [batch_size,n_symm*in_features] and returns a feature
-map of poses of shape [batch_size,n_symm*out_features]</p>
+<p>A group convolution operation that is equivariant over a symmetry group</p>
+<p>Acts on a feature map of symmetry poses of shape [batch_size,n_symm*in_features]
+and returns a feature  map of poses of shape [batch_size,n_symm*out_features]</p>
 <p>G-convolutions are described in ` Cohen et. {it al} &lt;<a class="reference external" href="http://proceedings.mlr.press/v48/cohenc16.pdf">http://proceedings.mlr.press/v48/cohenc16.pdf</a>&gt;`_
 and applied to quantum many-body problems in ` Roth et. {it al} &lt;<a class="reference external" href="https://arxiv.org/pdf/2104.05085.pdf">https://arxiv.org/pdf/2104.05085.pdf</a>&gt;`_</p>
 <p>The G-convolution generalizes the convolution to non-commuting groups:</p>
