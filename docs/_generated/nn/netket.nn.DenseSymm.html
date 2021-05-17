@@ -207,7 +207,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Chain.html">netket.graph.Chain</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Grid.html">netket.graph.Grid</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.SymmGroup.html">netket.graph.SymmGroup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#hilbert">Hilbert</a><ul>
@@ -358,6 +357,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#utils">Utils</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../utils/netket.utils.HashableArray.html">netket.utils.HashableArray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/netket.utils.semigroup.SemiGroup.html">netket.utils.semigroup.SemiGroup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/netket.utils.semigroup.PermutationGroup.html">netket.utils.semigroup.PermutationGroup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#callbacks">Callbacks</a><ul>
@@ -379,8 +380,8 @@
 <h1>netket.nn.DenseSymm<a class="headerlink" href="#netket-nn-densesymm" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="netket.nn.DenseSymm">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.nn.</span></code><code class="sig-name descname"><span class="pre">DenseSymm</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">symmetries</span></em>, <em class="sig-param"><span class="pre">features</span></em>, <em class="sig-param"><span class="pre">use_bias=True</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'jax._src.numpy.lax_numpy.float64'&gt;</span></em>, <em class="sig-param"><span class="pre">precision=None</span></em>, <em class="sig-param"><span class="pre">kernel_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">bias_init=&lt;function</span> <span class="pre">zeros&gt;</span></em>, <em class="sig-param"><span class="pre">parent=&lt;flax.linen.module._Sentinel</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">name=None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/nn/linear.html#DenseSymm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.nn.DenseSymm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">flax.linen.module.Module</span></code></p>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.nn.</span></code><code class="sig-name descname"><span class="pre">DenseSymm</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">symmetries</span></em>, <em class="sig-param"><span class="pre">features</span></em>, <em class="sig-param"><span class="pre">use_bias=True</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'jax._src.numpy.lax_numpy.float64'&gt;</span></em>, <em class="sig-param"><span class="pre">precision=None</span></em>, <em class="sig-param"><span class="pre">kernel_init=&lt;function</span> <span class="pre">normal.&lt;locals&gt;.init&gt;</span></em>, <em class="sig-param"><span class="pre">bias_init=&lt;function</span> <span class="pre">zeros&gt;</span></em>, <em class="sig-param"><span class="pre">parent=&lt;flax.linen.module._Sentinel</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">name=None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/nn/symmetric_linear.html#DenseSymm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.nn.DenseSymm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#flax.linen.Module" title="(in Flax)"><code class="xref py py-class docutils literal notranslate"><span class="pre">flax.linen.module.Module</span></code></a></p>
 <p>A symmetrized linear transformation applied over the last dimension of the input.</p>
 <p>This layer uses a reduced number of parameters, which are arranged so that the full
 affine transformation is invariant under all of the given permutations when applied to s.</p>
@@ -391,13 +392,13 @@ affine transformation is invariant under all of the given permutations when appl
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>symmetries</strong> (<em>Union</em><em>[</em><em>netket.utils.array.HashableArray</em><em>, </em><em>netket.graph.symmetry.SymmGroup</em><em>]</em>) – </p></li>
+<li><p><strong>symmetries</strong> (<em>Union</em><em>[</em><em>netket.utils.array.HashableArray</em><em>, </em><a class="reference internal" href="../utils/netket.utils.semigroup.PermutationGroup.html#netket.utils.semigroup.PermutationGroup" title="netket.utils.semigroup.PermutationGroup"><em>netket.utils.semigroup.PermutationGroup</em></a><em>]</em>) – </p></li>
 <li><p><strong>features</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
 <li><p><strong>use_bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – </p></li>
 <li><p><strong>dtype</strong> (<em>Any</em>) – </p></li>
 <li><p><strong>precision</strong> (<em>Any</em>) – </p></li>
-<li><p><strong>kernel_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
-<li><p><strong>bias_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Any</em><em>]</em>) – </p></li>
+<li><p><strong>kernel_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Union</em><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><em>numpy.ndarray</em></a><em>, </em><a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.numpy.html#jaxlib.xla_extension.DeviceArray" title="(in JAX)"><em>jaxlib.xla_extension.DeviceArray</em></a><em>, </em><em>jax.core.Tracer</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>bias_init</strong> (<em>Callable</em><em>[</em><em>[</em><em>Any</em><em>, </em><em>Sequence</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em><em>, </em><em>Any</em><em>]</em><em>, </em><em>Union</em><em>[</em><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><em>numpy.ndarray</em></a><em>, </em><a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.numpy.html#jaxlib.xla_extension.DeviceArray" title="(in JAX)"><em>jaxlib.xla_extension.DeviceArray</em></a><em>, </em><em>jax.core.Tracer</em><em>]</em><em>]</em>) – </p></li>
 <li><p><strong>parent</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>Type</em><em>[</em><a class="reference internal" href="netket.nn.Module.html#netket.nn.Module" title="netket.nn.Module"><em>Module</em></a><em>]</em><em>, </em><em>Type</em><em>[</em><em>Scope</em><em>]</em><em>, </em><em>Type</em><em>[</em><em>_Sentinel</em><em>]</em><em>]</em><em>]</em>) – </p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – </p></li>
 </ul>
@@ -457,14 +458,14 @@ affine transformation is invariant under all of the given permutations when appl
 <dl class="class-dl-groups">
 <dt>Methods</dt><dd><dl class="py method">
 <dt id="netket.nn.DenseSymm.__call__">
-<code class="sig-name descname"><span class="pre">__call__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/nn/linear.html#DenseSymm.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.nn.DenseSymm.__call__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">__call__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/nn/symmetric_linear.html#DenseSymm.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.nn.DenseSymm.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies the symmetrized linear transformation to the inputs along the last dimension.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – The nd-array to be transformed.</p>
+<dd class="field-odd"><p><strong>inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.numpy.html#jaxlib.xla_extension.DeviceArray" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceArray</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tracer</span></code>]) – The nd-array to be transformed.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.numpy.html#jaxlib.xla_extension.DeviceArray" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceArray</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tracer</span></code>]</p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>The transformed input.</p>
@@ -596,13 +597,13 @@ list of names of mutable collections.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Scope</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – The parent of the clone. The clone will have no parent if no
+<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Scope</span></code>, <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#flax.linen.Module" title="(in Flax)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – The parent of the clone. The clone will have no parent if no
 explicit parent is specified.</p></li>
 <li><p><strong>**updates</strong> – Attribute updates.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#flax.linen.Module" title="(in Flax)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>A clone of the this Module with the updated attributes and parent.</p>
@@ -612,14 +613,14 @@ explicit parent is specified.</p></li>
 
 <dl class="py method">
 <dt id="netket.nn.DenseSymm.full_bias">
-<code class="sig-name descname"><span class="pre">full_bias</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bias</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/nn/linear.html#DenseSymm.full_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.nn.DenseSymm.full_bias" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">full_bias</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bias</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/nn/symmetric_linear.html#DenseSymm.full_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.nn.DenseSymm.full_bias" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert symmetry-reduced bias of shape (features,) to the full bias of
 shape (n_symm * features,).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="netket.nn.DenseSymm.full_kernel">
-<code class="sig-name descname"><span class="pre">full_kernel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/nn/linear.html#DenseSymm.full_kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.nn.DenseSymm.full_kernel" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">full_kernel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kernel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/nn/symmetric_linear.html#DenseSymm.full_kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.nn.DenseSymm.full_kernel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts the symmetry-reduced kernel of shape (n_sites, features) to
 the full Dense kernel of shape (n_sites, features * n_symm).</p>
 </dd></dl>
@@ -795,7 +796,7 @@ this parameter is used in this module.</p></li>
 
 <dl class="py method">
 <dt id="netket.nn.DenseSymm.setup">
-<code class="sig-name descname"><span class="pre">setup</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/nn/linear.html#DenseSymm.setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.nn.DenseSymm.setup" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">setup</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/nn/symmetric_linear.html#DenseSymm.setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.nn.DenseSymm.setup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes a Module lazily (similar to a lazy <code class="docutils literal notranslate"><span class="pre">__init__</span></code>).</p>
 <p><code class="docutils literal notranslate"><span class="pre">setup</span></code> is called once lazily on a module instance when a module
 is bound, immediately before any other methods like <code class="docutils literal notranslate"><span class="pre">__call__</span></code> are
@@ -917,7 +918,7 @@ this variable is used in this module.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#flax.core.variables.Variable" title="(in Flax)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>A <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#flax.core.variables.Variable" title="(in Flax)"><code class="xref py py-class docutils literal notranslate"><span class="pre">flax.core.variables.Variable</span></code></a> that can be read or set via

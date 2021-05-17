@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>netket.nn.elu &#8212; netket v3.0 documentation</title>
+    <title>netket.utils.semigroup.PermutationGroup &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
@@ -24,8 +24,8 @@
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="netket.nn.gelu" href="netket.nn.gelu.html" />
-    <link rel="prev" title="netket.nn.celu" href="netket.nn.celu.html" />
+    <link rel="next" title="netket.callbacks.EarlyStopping" href="../callbacks/netket.callbacks.EarlyStopping.html" />
+    <link rel="prev" title="netket.utils.semigroup.SemiGroup" href="netket.utils.semigroup.SemiGroup.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -297,31 +297,31 @@
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.GCNN.html">netket.models.GCNN</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../api.html#model-tools">Model tools</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="netket.nn.Module.html">netket.nn.Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#model-tools">Model tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../nn/netket.nn.Module.html">netket.nn.Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#linear-modules">Linear Modules</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.Dense.html">netket.nn.Dense</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.DenseGeneral.html">netket.nn.DenseGeneral</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.DenseSymm.html">netket.nn.DenseSymm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.DenseEquivariant.html">netket.nn.DenseEquivariant</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.Conv.html">netket.nn.Conv</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.Embed.html">netket.nn.Embed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.Dense.html">netket.nn.Dense</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.DenseGeneral.html">netket.nn.DenseGeneral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.DenseSymm.html">netket.nn.DenseSymm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.DenseEquivariant.html">netket.nn.DenseEquivariant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.Conv.html">netket.nn.Conv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.Embed.html">netket.nn.Embed</a></li>
 </ul>
 </li>
-<li class="toctree-l3 current"><a class="reference internal" href="../../api.html#activation-functions">Activation functions</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.celu.html">netket.nn.celu</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">netket.nn.elu</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.gelu.html">netket.nn.gelu</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.glu.html">netket.nn.glu</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.log_sigmoid.html">netket.nn.log_sigmoid</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.log_softmax.html">netket.nn.log_softmax</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.relu.html">netket.nn.relu</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.sigmoid.html">netket.nn.sigmoid</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.soft_sign.html">netket.nn.soft_sign</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.softmax.html">netket.nn.softmax</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.softplus.html">netket.nn.softplus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.swish.html">netket.nn.swish</a></li>
-<li class="toctree-l4"><a class="reference internal" href="netket.nn.logcosh.html">netket.nn.logcosh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#activation-functions">Activation functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.celu.html">netket.nn.celu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.elu.html">netket.nn.elu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.gelu.html">netket.nn.gelu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.glu.html">netket.nn.glu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.log_sigmoid.html">netket.nn.log_sigmoid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.log_softmax.html">netket.nn.log_softmax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.relu.html">netket.nn.relu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.sigmoid.html">netket.nn.sigmoid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.soft_sign.html">netket.nn.soft_sign</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.softmax.html">netket.nn.softmax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.softplus.html">netket.nn.softplus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.swish.html">netket.nn.swish</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.logcosh.html">netket.nn.logcosh</a></li>
 </ul>
 </li>
 </ul>
@@ -357,10 +357,10 @@
 <li class="toctree-l3"><a class="reference internal" href="../driver/netket.logging.TBLog.html">netket.logging.TBLog</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../api.html#utils">Utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../utils/netket.utils.HashableArray.html">netket.utils.HashableArray</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utils/netket.utils.semigroup.SemiGroup.html">netket.utils.semigroup.SemiGroup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../utils/netket.utils.semigroup.PermutationGroup.html">netket.utils.semigroup.PermutationGroup</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../api.html#utils">Utils</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="netket.utils.HashableArray.html">netket.utils.HashableArray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.utils.semigroup.SemiGroup.html">netket.utils.semigroup.SemiGroup</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">netket.utils.semigroup.PermutationGroup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#callbacks">Callbacks</a><ul>
@@ -378,27 +378,126 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <div class="section" id="netket-nn-elu">
-<h1>netket.nn.elu<a class="headerlink" href="#netket-nn-elu" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt id="netket.nn.elu">
-<code class="sig-prename descclassname"><span class="pre">netket.nn.</span></code><code class="sig-name descname"><span class="pre">elu</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/jax/_src/nn/functions.html#elu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.nn.elu" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exponential linear unit activation function.</p>
-<p>Computes the element-wise function:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\mathrm{elu}(x) = \begin{cases}
-  x, &amp; x &gt; 0\\
-  \alpha \left(\exp(x) - 1\right), &amp; x \le 0
-\end{cases}\end{split}\]</div>
+  <div class="section" id="netket-utils-semigroup-permutationgroup">
+<h1>netket.utils.semigroup.PermutationGroup<a class="headerlink" href="#netket-utils-semigroup-permutationgroup" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="netket.utils.semigroup.PermutationGroup">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.utils.semigroup.</span></code><code class="sig-name descname"><span class="pre">PermutationGroup</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elems</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/utils/semigroup.html#PermutationGroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="netket.utils.semigroup.SemiGroup.html#netket.utils.semigroup.SemiGroup" title="netket.utils.semigroup.SemiGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">netket.utils.semigroup.SemiGroup</span></code></a></p>
+<p>Collection of permutation operations acting on sequences of length <code class="code docutils literal notranslate"><span class="pre">degree</span></code>.
+Note that the group elements do not need to be of type <span class="xref std std-ref">netket.utils.semigroup.Permutation</span>,
+only act as such on a sequence when called.</p>
+<p>Note that this class can contain elements that are distinct as objects (e.g.,
+<code class="code docutils literal notranslate"><span class="pre">Identity()</span></code> and <code class="code docutils literal notranslate"><span class="pre">Translation((0,))</span></code>) but have identical action.
+Those can be removed by calling <code class="code docutils literal notranslate"><span class="pre">remove_duplicates</span></code>.</p>
+<dl class="py method">
+<dt id="netket.utils.semigroup.PermutationGroup.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elems</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – input array</p></li>
-<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – scalar or array of alpha values (default: 1.0)</p></li>
+<li><p><strong>elems</strong> (<em>List</em><em>[</em><em>netket.utils.semigroup.Element</em><em>]</em>) – </p></li>
+<li><p><strong>degree</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class-dl-groups">
+<dt>Attributes</dt><dd><dl class="py attribute">
+<dt id="netket.utils.semigroup.PermutationGroup.shape">
+<code class="sig-name descname"><span class="pre">shape</span></code><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tuple <cite>(&lt;# of group elements&gt;, &lt;degree&gt;)</cite>, same as <code class="code docutils literal notranslate"><span class="pre">self.to_array().shape</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd>
+</dl>
+<dl class="class-dl-groups">
+<dt>Methods</dt><dd><dl class="py method">
+<dt id="netket.utils.semigroup.PermutationGroup.__call__">
+<code class="sig-name descname"><span class="pre">__call__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply all group elements to all entries of <cite>initial</cite> along the last axis.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.utils.semigroup.PermutationGroup.inverse">
+<code class="sig-name descname"><span class="pre">inverse</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/utils/semigroup.html#PermutationGroup.inverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.inverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the indices of the inverse of each element.</p>
+<p>If <code class="code docutils literal notranslate"><span class="pre">g</span> <span class="pre">=</span> <span class="pre">self[idx_g]</span></code> and <code class="code docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">self[self.inverse()[idx_g]]</span></code>, then
+<code class="code docutils literal notranslate"><span class="pre">gh</span> <span class="pre">=</span> <span class="pre">product(g,</span> <span class="pre">h)</span></code> will act as the identity on any sequence,
+i.e., <code class="code docutils literal notranslate"><span class="pre">np.all(gh(seq)</span> <span class="pre">==</span> <span class="pre">seq)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.numpy.html#jaxlib.xla_extension.DeviceArray" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceArray</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tracer</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.utils.semigroup.PermutationGroup.product_table">
+<code class="sig-name descname"><span class="pre">product_table</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/utils/semigroup.html#PermutationGroup.product_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.product_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a table of indices corresponding to <span class="math notranslate nohighlight">\(g^{-1} h\)</span> over the group.</p>
+<p>That is, if <code class="code docutils literal notranslate"><span class="pre">g</span> <span class="pre">=</span> <span class="pre">self[idx_g]',</span> <span class="pre">:code:`h</span> <span class="pre">=</span> <span class="pre">self[idx_h]</span></code>, and
+<code class="code docutils literal notranslate"><span class="pre">idx_u</span> <span class="pre">=</span> <span class="pre">self.product_table()[idx_g,</span> <span class="pre">idx_h]</span></code>, then <code class="code docutils literal notranslate"><span class="pre">self[idx_u]</span></code>
+corresponds to <span class="math notranslate nohighlight">\(u = g^{-1} h\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.numpy.html#jaxlib.xla_extension.DeviceArray" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceArray</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tracer</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.utils.semigroup.PermutationGroup.remove_duplicates">
+<code class="sig-name descname"><span class="pre">remove_duplicates</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_inverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/utils/semigroup.html#PermutationGroup.remove_duplicates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.remove_duplicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new <code class="code docutils literal notranslate"><span class="pre">PermutationGroup</span></code> with duplicate elements (that is, elements which
+represent identical permutations) removed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>return_inverse</strong> – If True, also return indices to reconstruct the original
+group from the result.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>the permutation group with duplicate elements removed.
+return_inverse: Indices to reconstruct the original group from the result.</p>
+<blockquote>
+<div><p>Only returned if <cite>return_inverse</cite> is True.</p>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>group</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="netket.utils.semigroup.PermutationGroup.to_array">
+<code class="sig-name descname"><span class="pre">to_array</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/utils/semigroup.html#PermutationGroup.to_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.to_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the abstract group operations to an array of permutation indices,
+such that the <cite>i</cite>-th row contains the indices corresponding to the <cite>i</cite>-th group
+element (i.e., <cite>self.to_array()[i, j]</cite> is <span class="math notranslate nohighlight">\(g_i(j)\)</span>) and
+(for <code class="code docutils literal notranslate"><span class="pre">G</span> <span class="pre">=</span> <span class="pre">self</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">G</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">==</span> <span class="n">V</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">to_array</span><span class="p">()])</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.numpy.html#jaxlib.xla_extension.DeviceArray" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceArray</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tracer</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd>
 </dl>
 </dd></dl>

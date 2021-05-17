@@ -207,7 +207,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Chain.html">netket.graph.Chain</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Grid.html">netket.graph.Grid</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.SymmGroup.html">netket.graph.SymmGroup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#hilbert">Hilbert</a><ul>
@@ -358,6 +357,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#utils">Utils</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../utils/netket.utils.HashableArray.html">netket.utils.HashableArray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/netket.utils.semigroup.SemiGroup.html">netket.utils.semigroup.SemiGroup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/netket.utils.semigroup.PermutationGroup.html">netket.utils.semigroup.PermutationGroup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#callbacks">Callbacks</a><ul>
@@ -385,7 +386,7 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sampler</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code>) – The Monte Carlo sampler.</p></li>
-<li><p><strong>machine</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code>]) – a Flax module or callable with the forward pass of the log-pdf.</p></li>
+<li><p><strong>machine</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>, <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#flax.linen.Module" title="(in Flax)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a>]) – a Flax module or callable with the forward pass of the log-pdf.</p></li>
 <li><p><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – The PyTree of parameters of the model.</p></li>
 <li><p><strong>state</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">SamplerState</span></code>]) – The current state of the sampler. If it’s not provided, it will be constructed
 by calling <code class="code docutils literal notranslate"><span class="pre">sampler.reset(machine,</span> <span class="pre">parameters)</span></code> with a random seed.</p></li>

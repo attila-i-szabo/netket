@@ -1,0 +1,28 @@
+﻿netket.utils.semigroup.PermutationGroup
+=======================================
+
+.. currentmodule:: netket.utils.semigroup
+
+.. autoclass:: PermutationGroup
+   :show-inheritance:
+
+   .. automethod:: PermutationGroup.__init__
+
+   
+      
+   .. rst-class:: class-dl-groups
+
+   Attributes
+      .. autoattribute:: PermutationGroup.shape
+   
+      
+   .. rst-class:: class-dl-groups
+
+   Methods
+      .. automethod:: PermutationGroup.__call__
+      .. automethod:: PermutationGroup.inverse
+      .. automethod:: PermutationGroup.product_table
+      .. automethod:: PermutationGroup.remove_duplicates
+      .. automethod:: PermutationGroup.to_array
+
+   

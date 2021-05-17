@@ -207,7 +207,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Chain.html">netket.graph.Chain</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Grid.html">netket.graph.Grid</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.SymmGroup.html">netket.graph.SymmGroup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#hilbert">Hilbert</a><ul>
@@ -358,6 +357,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#utils">Utils</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../utils/netket.utils.HashableArray.html">netket.utils.HashableArray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/netket.utils.semigroup.SemiGroup.html">netket.utils.semigroup.SemiGroup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../utils/netket.utils.semigroup.PermutationGroup.html">netket.utils.semigroup.PermutationGroup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#callbacks">Callbacks</a><ul>
@@ -548,13 +549,13 @@ list of names of mutable collections.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Scope</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – The parent of the clone. The clone will have no parent if no
+<li><p><strong>parent</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Scope</span></code>, <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#flax.linen.Module" title="(in Flax)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – The parent of the clone. The clone will have no parent if no
 explicit parent is specified.</p></li>
 <li><p><strong>**updates</strong> – Attribute updates.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#flax.linen.Module" title="(in Flax)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>A clone of the this Module with the updated attributes and parent.</p>
@@ -850,7 +851,7 @@ this variable is used in this module.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#flax.core.variables.Variable" title="(in Flax)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>A <a class="reference external" href="https://flax.readthedocs.io/en/latest/flax.linen.html#flax.core.variables.Variable" title="(in Flax)"><code class="xref py py-class docutils literal notranslate"><span class="pre">flax.core.variables.Variable</span></code></a> that can be read or set via

@@ -209,7 +209,6 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Chain.html">netket.graph.Chain</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Grid.html">netket.graph.Grid</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.SymmGroup.html">netket.graph.SymmGroup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#hilbert">Hilbert</a><ul>
@@ -360,6 +359,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#utils">Utils</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/utils/netket.utils.HashableArray.html">netket.utils.HashableArray</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/utils/netket.utils.semigroup.SemiGroup.html">netket.utils.semigroup.SemiGroup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/utils/netket.utils.semigroup.PermutationGroup.html">netket.utils.semigroup.PermutationGroup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#callbacks">Callbacks</a><ul>
@@ -407,9 +408,6 @@
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Grid.html#netket.graph.Grid" title="netket.graph.Grid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Grid</span></code></a></p></td>
 <td><p>A Grid lattice of d dimensions, and possibly different sizes of each dimension.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/graph/netket.graph.SymmGroup.html#netket.graph.SymmGroup" title="netket.graph.SymmGroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.SymmGroup</span></code></a></p></td>
-<td><p>Collection of symmetry operations acting on the sites of a graph (graph automorphisms).</p></td>
 </tr>
 </tbody>
 </table>
@@ -928,6 +926,12 @@ optimisers, and it’s extremely easy to use step-dependent schedulers.</p>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/utils/netket.utils.HashableArray.html#netket.utils.HashableArray" title="netket.utils.HashableArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.utils.HashableArray</span></code></a></p></td>
 <td><p>This class wraps a numpy or jax array in order to make it hashable and equality comparable (which is necessary since a well-defined hashable object needs to satisfy <code class="code docutils literal notranslate"><span class="pre">obj1</span> <span class="pre">==</span> <span class="pre">obj2</span></code> whenever <code class="code docutils literal notranslate"><span class="pre">hash(obj1)</span> <span class="pre">==</span> <span class="pre">hash(obj2)</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/utils/netket.utils.semigroup.SemiGroup.html#netket.utils.semigroup.SemiGroup" title="netket.utils.semigroup.SemiGroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.utils.semigroup.SemiGroup</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/utils/netket.utils.semigroup.PermutationGroup.html#netket.utils.semigroup.PermutationGroup" title="netket.utils.semigroup.PermutationGroup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.utils.semigroup.PermutationGroup</span></code></a></p></td>
+<td><p>Collection of permutation operations acting on sequences of length <code class="code docutils literal notranslate"><span class="pre">degree</span></code>.</p></td>
 </tr>
 </tbody>
 </table>
