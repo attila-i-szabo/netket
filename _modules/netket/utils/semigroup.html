@@ -123,6 +123,7 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+<span class="kn">from</span> <span class="nn">netket.utils</span> <span class="kn">import</span> <span class="n">struct</span>
 <span class="kn">from</span> <span class="nn">netket.utils</span> <span class="kn">import</span> <span class="n">HashableArray</span>
 <span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">Array</span><span class="p">,</span> <span class="n">DType</span><span class="p">,</span> <span class="n">Shape</span>
 
@@ -295,7 +296,7 @@
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot;(</span><span class="se">\n</span><span class="s2">  </span><span class="si">{}</span><span class="se">\n</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;,</span><span class="se">\n</span><span class="s2">  &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">elems</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="PermutationGroup"><a class="viewcode-back" href="../../../docs/_generated/utils/netket.utils.semigroup.PermutationGroup.html#netket.utils.semigroup.PermutationGroup">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="PermutationGroup"><a class="viewcode-back" href="../../../docs/_generated/utils/netket.utils.semigroup.PermutationGroup.html#netket.utils.semigroup.PermutationGroup">[docs]</a><span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span><span class="p">()</span>
 <span class="k">class</span> <span class="nc">PermutationGroup</span><span class="p">(</span><span class="n">SemiGroup</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Collection of permutation operations acting on sequences of length :code:`degree`.</span>
@@ -314,9 +315,6 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>
         <span class="n">myhash</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">((</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">(),</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">degree</span><span class="p">)))</span>
         <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_PermutationGroup__hash&quot;</span><span class="p">,</span> <span class="n">myhash</span><span class="p">)</span>
-
-        <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_inverse&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_product_table&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__matmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;PermutationGroup&quot;</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">PermutationGroup</span><span class="p">):</span>
@@ -372,7 +370,15 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">group</span></div>
 
-    <span class="k">def</span> <span class="nf">__inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+    <span class="nd">@struct</span><span class="o">.</span><span class="n">property_cached</span>
+    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the indices of the inverse of each element.</span>
+
+<span class="sd">        If :code:`g = self[idx_g]` and :code:`h = self[self.inverse[idx_g]]`, then</span>
+<span class="sd">        :code:`gh = product(g, h)` will act as the identity on any sequence,</span>
+<span class="sd">        i.e., :code:`np.all(gh(seq) == seq)`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">perm_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_array</span><span class="p">()</span>
         <span class="n">n_symm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">perm_array</span><span class="p">)</span>
         <span class="n">inverse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_symm</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
@@ -384,9 +390,17 @@
 
         <span class="k">return</span> <span class="n">inverse</span>
 
-    <span class="k">def</span> <span class="nf">__product_table</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+    <span class="nd">@struct</span><span class="o">.</span><span class="n">property_cached</span>
+    <span class="k">def</span> <span class="nf">product_table</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a table of indices corresponding to :math:`g^{-1} h` over the group.</span>
+
+<span class="sd">        That is, if :code:`g = self[idx_g]&#39;, :code:`h = self[idx_h]`, and</span>
+<span class="sd">        :code:`idx_u = self.product_table[idx_g, idx_h]`, then :code:`self[idx_u]`</span>
+<span class="sd">        corresponds to :math:`u = g^{-1} h`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">perms</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_array</span><span class="p">()</span>
-        <span class="n">inverse</span> <span class="o">=</span> <span class="n">perms</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">()]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+        <span class="n">inverse</span> <span class="o">=</span> <span class="n">perms</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
         <span class="n">n_symm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span>
         <span class="n">product_table</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">n_symm</span><span class="p">,</span> <span class="n">n_symm</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
@@ -410,34 +424,6 @@
         <span class="n">product_table</span><span class="p">[</span><span class="n">inds</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="n">n_symm</span><span class="p">,</span> <span class="n">inds</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">%</span> <span class="n">n_symm</span><span class="p">]</span> <span class="o">=</span> <span class="n">inds</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
 
         <span class="k">return</span> <span class="n">product_table</span>
-
-<div class="viewcode-block" id="PermutationGroup.inverse"><a class="viewcode-back" href="../../../docs/_generated/utils/netket.utils.semigroup.PermutationGroup.html#netket.utils.semigroup.PermutationGroup.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the indices of the inverse of each element.</span>
-
-<span class="sd">        If :code:`g = self[idx_g]` and :code:`h = self[self.inverse()[idx_g]]`, then</span>
-<span class="sd">        :code:`gh = product(g, h)` will act as the identity on any sequence,</span>
-<span class="sd">        i.e., :code:`np.all(gh(seq) == seq)`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># pylint: disable=no-member</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_inverse&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__inverse</span><span class="p">())</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inverse</span></div>
-
-<div class="viewcode-block" id="PermutationGroup.product_table"><a class="viewcode-back" href="../../../docs/_generated/utils/netket.utils.semigroup.PermutationGroup.html#netket.utils.semigroup.PermutationGroup.product_table">[docs]</a>    <span class="k">def</span> <span class="nf">product_table</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Array</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns a table of indices corresponding to :math:`g^{-1} h` over the group.</span>
-
-<span class="sd">        That is, if :code:`g = self[idx_g]&#39;, :code:`h = self[idx_h]`, and</span>
-<span class="sd">        :code:`idx_u = self.product_table()[idx_g, idx_h]`, then :code:`self[idx_u]`</span>
-<span class="sd">        corresponds to :math:`u = g^{-1} h`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># pylint: disable=no-member</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_product_table</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_product_table&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__product_table</span><span class="p">())</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_product_table</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Shape</span><span class="p">:</span>
