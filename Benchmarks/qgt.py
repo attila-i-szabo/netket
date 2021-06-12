@@ -43,7 +43,7 @@ class FFNN(nn.Module):
 # Benchmark starts here
 
 n_nodes = 100
-key_sample, key_rhs = jax.random.split(jax.random.PRNGKey(0), 2)
+keys = jax.random.split(jax.random.PRNGKey(0), 5)
 
 graph = nk.graph.Chain(n_nodes)
 hilbert = nk.hilbert.Spin(s=0.5, N=n_nodes)
@@ -55,16 +55,30 @@ sa = nk.sampler.MetropolisExchange(hilbert=hilbert, graph=graph, d_max=2)
 vstate = nk.variational.MCState(sampler=sa, model=machine, n_samples=n_samples)
 vstate.init(seed=0)
 # We don't actually want to perform a rather slow sampling
-vstate._samples = hilbert.random_state(key=key_sample, size=n_samples)
+vstate._samples = hilbert.random_state(key=keys[0], size=n_samples)
 
-qgt = qgt.QGTOnTheFly(vstate=vstate, diag_shift=0.01)
+qgt_ = qgt.QGTOnTheFly(vstate=vstate, diag_shift=0.01)
 
 # Generate a random RHS of the same pytree shape as the parameters
 vec, unravel = nk.jax.tree_ravel(vstate.parameters)
-vec = jax.random.normal(key_rhs, shape=vec.shape, dtype=vec.dtype)
-rhs = unravel(vec)
+vec1 = jax.random.normal(keys[1], shape=vec.shape, dtype=vec.dtype)
+rhs1 = unravel(vec1)
+vec2 = jax.random.normal(keys[2], shape=vec.shape, dtype=vec.dtype)
+rhs2 = unravel(vec2)
+vecp = vec * jax.random.normal(keys[3], shape=vec.shape, dtype=vec.dtype)
+pars = unravel(vecp)
 
 start = datetime.now()
-lhs = qgt.solve(cg, rhs)
+lhs = qgt_.solve(cg, rhs1)
 end = datetime.now()
-print(f"took {(end-start).total_seconds()} seconds")
+print(f"First time took {(end-start).total_seconds()} seconds")
+
+# See what jit hath wrought us
+vstate._samples = hilbert.random_state(key=keys[4], size=n_samples)
+vstate._parameters = pars
+qgt_ = qgt.QGTOnTheFly(vstate=vstate, diag_shift=0.01)
+
+start = datetime.now()
+lhs = qgt_.solve(cg, rhs2)
+end = datetime.now()
+print(f"Second time took {(end-start).total_seconds()} seconds")
