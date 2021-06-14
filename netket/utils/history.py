@@ -18,8 +18,8 @@ import numpy as np
 from numbers import Number
 import jax.numpy as jnp
 
-from plum import dispatch
 
+from .dispatch import dispatch
 from .numbers import dtype, is_scalar
 from .types import Array, DType
 
@@ -236,7 +236,7 @@ class History:
         """
         You can iterate the values in history object.
         """
-        """ Returns the Iterator object """
+        """Returns the Iterator object """
         return iter(zip(self.iters, self.values))
 
     def __getattr__(self, attr):
