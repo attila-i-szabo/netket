@@ -5,15 +5,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>netket.sampler.metropolis &#8212; netket v3.0 documentation</title>
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jumbo-style.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_theme.css" />
-    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
@@ -362,7 +362,9 @@
     <span class="k">def</span> <span class="nf">_init_state</span><span class="p">(</span><span class="n">sampler</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="n">key_state</span><span class="p">,</span> <span class="n">key_rule</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
         <span class="n">rule_state</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">rule</span><span class="o">.</span><span class="n">init_state</span><span class="p">(</span><span class="n">sampler</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">key_rule</span><span class="p">)</span>
-        <span class="n">σ</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">,</span> <span class="n">sampler</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">sampler</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">σ</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains_per_rank</span><span class="p">,</span> <span class="n">sampler</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">sampler</span><span class="o">.</span><span class="n">dtype</span>
+        <span class="p">)</span>
 
         <span class="n">state</span> <span class="o">=</span> <span class="n">MetropolisSamplerState</span><span class="p">(</span><span class="n">σ</span><span class="o">=</span><span class="n">σ</span><span class="p">,</span> <span class="n">rng</span><span class="o">=</span><span class="n">key_state</span><span class="p">,</span> <span class="n">rule_state</span><span class="o">=</span><span class="n">rule_state</span><span class="p">)</span>
 
@@ -395,7 +397,7 @@
         <span class="k">with</span> <span class="n">loops</span><span class="o">.</span><span class="n">Scope</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
             <span class="n">s</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">rng</span>
             <span class="n">s</span><span class="o">.</span><span class="n">σ</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">σ</span>
-            <span class="n">s</span><span class="o">.</span><span class="n">log_prob</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">machine_pow</span> <span class="o">*</span> <span class="n">machine</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">σ</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">log_prob</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">machine_pow</span> <span class="o">*</span> <span class="n">machine</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">σ</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
 
             <span class="c1"># for logging</span>
             <span class="n">s</span><span class="o">.</span><span class="n">accepted</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">n_accepted_proc</span>
@@ -407,9 +409,11 @@
                 <span class="n">σp</span><span class="p">,</span> <span class="n">log_prob_correction</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">rule</span><span class="o">.</span><span class="n">transition</span><span class="p">(</span>
                     <span class="n">sampler</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">key1</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">σ</span>
                 <span class="p">)</span>
-                <span class="n">proposal_log_prob</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">machine_pow</span> <span class="o">*</span> <span class="n">machine</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">σp</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+                <span class="n">proposal_log_prob</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">sampler</span><span class="o">.</span><span class="n">machine_pow</span> <span class="o">*</span> <span class="n">machine</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">σp</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+                <span class="p">)</span>
 
-                <span class="n">uniform</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">key2</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">,))</span>
+                <span class="n">uniform</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">key2</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains_per_rank</span><span class="p">,))</span>
                 <span class="k">if</span> <span class="n">log_prob_correction</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">do_accept</span> <span class="o">=</span> <span class="n">uniform</span> <span class="o">&lt;</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
                         <span class="n">proposal_log_prob</span> <span class="o">-</span> <span class="n">s</span><span class="o">.</span><span class="n">log_prob</span> <span class="o">+</span> <span class="n">log_prob_correction</span>
@@ -429,7 +433,8 @@
                 <span class="n">rng</span><span class="o">=</span><span class="n">new_rng</span><span class="p">,</span>
                 <span class="n">σ</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">σ</span><span class="p">,</span>
                 <span class="n">n_accepted_proc</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">accepted</span><span class="p">,</span>
-                <span class="n">n_steps_proc</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">n_steps_proc</span> <span class="o">+</span> <span class="n">sampler</span><span class="o">.</span><span class="n">n_sweeps</span> <span class="o">*</span> <span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">,</span>
+                <span class="n">n_steps_proc</span><span class="o">=</span><span class="n">state</span><span class="o">.</span><span class="n">n_steps_proc</span>
+                <span class="o">+</span> <span class="n">sampler</span><span class="o">.</span><span class="n">n_sweeps</span> <span class="o">*</span> <span class="n">sampler</span><span class="o">.</span><span class="n">n_chains_per_rank</span><span class="p">,</span>
             <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">new_state</span><span class="p">,</span> <span class="n">new_state</span><span class="o">.</span><span class="n">σ</span>
@@ -634,7 +639,7 @@
     </p>
     <p>
         &copy; Copyright 2019-2021, The Netket authors - All rights reserved.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.<br/>
     </p>
   </div>
 </footer>

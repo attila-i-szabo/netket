@@ -3,29 +3,28 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>netket.utils.semigroup.PermutationGroup &#8212; netket v3.0 documentation</title>
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>netket.sampler.ARDirectSampler &#8212; netket v3.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jumbo-style.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/css/rtd_theme.css" />
-    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
     <script src="../../../_static/underscore.js"></script>
     <script src="../../../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script src="../../../_static/js/rtd_theme.js"></script>
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="netket.callbacks.EarlyStopping" href="../callbacks/netket.callbacks.EarlyStopping.html" />
-    <link rel="prev" title="netket.utils.semigroup.SemiGroup" href="netket.utils.semigroup.SemiGroup.html" />
+    <link rel="next" title="netket.sampler.MetropolisRule" href="netket.sampler.MetropolisRule.html" />
+    <link rel="prev" title="netket.sampler.MetropolisExchangePt" href="netket.sampler.MetropolisExchangePt.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -127,10 +126,16 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change Log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b2-unreleased">NetKet 3.0b2 (unreleased)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b3-unreleased">NetKet 3.0b3 (unreleased)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#new-features">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#breaking-changes">Breaking Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#bug-fixes">Bug Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b2-published-on-31-may-2021">NetKet 3.0b2 (published on 31 May 2021)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id1">New features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id2">Breaking Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id3">Bug Fixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b1-published-beta-release">NetKet 3.0b1 (published beta release)</a><ul>
@@ -228,7 +233,6 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../api.html">Public API: netket package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.NetworkX.html">netket.graph.NetworkX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
@@ -239,10 +243,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#hilbert">Hilbert</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.AbstractHilbert.html">netket.hilbert.AbstractHilbert</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Spin.html">netket.hilbert.Spin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.CustomHilbert.html">netket.hilbert.CustomHilbert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.DoubledHilbert.html">netket.hilbert.DoubledHilbert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Fock.html">netket.hilbert.Fock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Spin.html">netket.hilbert.Spin</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#operators">Operators</a><ul>
@@ -274,40 +279,41 @@
 <li class="toctree-l3"><a class="reference internal" href="../exact/netket.exact.steady_state.html">netket.exact.steady_state</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../api.html#sampler">Sampler</a><ul>
+<li class="toctree-l2 current"><a class="reference internal" href="../../api.html#sampler">Sampler</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#generic-api">Generic API</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.sampler_state.html">netket.sampler.sampler_state</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.reset.html">netket.sampler.reset</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.sample_next.html">netket.sampler.sample_next</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.sample.html">netket.sampler.sample</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.samples.html">netket.sampler.samples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.sampler_state.html">netket.sampler.sampler_state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.reset.html">netket.sampler.reset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.sample_next.html">netket.sampler.sample_next</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.sample.html">netket.sampler.sample</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.samples.html">netket.sampler.samples</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../api.html#list-of-samplers">List of Samplers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.Sampler.html">netket.sampler.Sampler</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.ExactSampler.html">netket.sampler.ExactSampler</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisSampler.html">netket.sampler.MetropolisSampler</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisSamplerNumpy.html">netket.sampler.MetropolisSamplerNumpy</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisPtSampler.html">netket.sampler.MetropolisPtSampler</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisLocal.html">netket.sampler.MetropolisLocal</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisExchange.html">netket.sampler.MetropolisExchange</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisHamiltonian.html">netket.sampler.MetropolisHamiltonian</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisLocalPt.html">netket.sampler.MetropolisLocalPt</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisExchangePt.html">netket.sampler.MetropolisExchangePt</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../api.html#list-of-samplers">List of Samplers</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.Sampler.html">netket.sampler.Sampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.ExactSampler.html">netket.sampler.ExactSampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisSampler.html">netket.sampler.MetropolisSampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisSamplerNumpy.html">netket.sampler.MetropolisSamplerNumpy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisPtSampler.html">netket.sampler.MetropolisPtSampler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisLocal.html">netket.sampler.MetropolisLocal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisExchange.html">netket.sampler.MetropolisExchange</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisHamiltonian.html">netket.sampler.MetropolisHamiltonian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisLocalPt.html">netket.sampler.MetropolisLocalPt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisExchangePt.html">netket.sampler.MetropolisExchangePt</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">netket.sampler.ARDirectSampler</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#transition-rules">Transition Rules</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisRule.html">netket.sampler.MetropolisRule</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.rules.LocalRule.html">netket.sampler.rules.LocalRule</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.rules.ExchangeRule.html">netket.sampler.rules.ExchangeRule</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.rules.HamiltonianRule.html">netket.sampler.rules.HamiltonianRule</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.rules.HamiltonianRuleNumpy.html">netket.sampler.rules.HamiltonianRuleNumpy</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.rules.CustomRuleNumpy.html">netket.sampler.rules.CustomRuleNumpy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisRule.html">netket.sampler.MetropolisRule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.LocalRule.html">netket.sampler.rules.LocalRule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.ExchangeRule.html">netket.sampler.rules.ExchangeRule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.HamiltonianRule.html">netket.sampler.rules.HamiltonianRule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.HamiltonianRuleNumpy.html">netket.sampler.rules.HamiltonianRuleNumpy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.rules.CustomRuleNumpy.html">netket.sampler.rules.CustomRuleNumpy</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#internal-state">Internal State</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.SamplerState.html">netket.sampler.SamplerState</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../samplers/netket.sampler.MetropolisSamplerState.html">netket.sampler.MetropolisSamplerState</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.SamplerState.html">netket.sampler.SamplerState</a></li>
+<li class="toctree-l4"><a class="reference internal" href="netket.sampler.MetropolisSamplerState.html">netket.sampler.MetropolisSamplerState</a></li>
 </ul>
 </li>
 </ul>
@@ -321,6 +327,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.NDM.html">netket.models.NDM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../models/netket.models.GCNN.html">netket.models.GCNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../models/netket.models.ARNN.html">netket.models.ARNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../models/netket.models.ARNNDense.html">netket.models.ARNNDense</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#model-tools">Model tools</a><ul>
@@ -332,6 +340,9 @@
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.DenseEquivariant.html">netket.nn.DenseEquivariant</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.Conv.html">netket.nn.Conv</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.Embed.html">netket.nn.Embed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.MaskedDense1D.html">netket.nn.MaskedDense1D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.MaskedConv1D.html">netket.nn.MaskedConv1D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.MaskedConv2D.html">netket.nn.MaskedConv2D</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../api.html#activation-functions">Activation functions</a><ul>
@@ -353,9 +364,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#variational-state-interface">Variational State Interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../variational/netket.variational.VariationalState.html">netket.variational.VariationalState</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../variational/netket.variational.MCState.html">netket.variational.MCState</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../variational/netket.variational.MCMixedState.html">netket.variational.MCMixedState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variational/netket.vqs.VariationalState.html">netket.vqs.VariationalState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variational/netket.vqs.MCState.html">netket.vqs.MCState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../variational/netket.vqs.MCMixedState.html">netket.vqs.MCMixedState</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#optimizer-module">Optimizer Module</a><ul>
@@ -400,10 +411,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../driver/netket.logging.TBLog.html">netket.logging.TBLog</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../api.html#utils">Utils</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="netket.utils.HashableArray.html">netket.utils.HashableArray</a></li>
-<li class="toctree-l3"><a class="reference internal" href="netket.utils.semigroup.SemiGroup.html">netket.utils.semigroup.SemiGroup</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">netket.utils.semigroup.PermutationGroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#utils">Utils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../utils/netket.utils.HashableArray.html">netket.utils.HashableArray</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#callbacks">Callbacks</a><ul>
@@ -421,117 +430,197 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <div class="section" id="netket-utils-semigroup-permutationgroup">
-<h1>netket.utils.semigroup.PermutationGroup<a class="headerlink" href="#netket-utils-semigroup-permutationgroup" title="Permalink to this headline">¶</a></h1>
+  <section id="netket-sampler-ardirectsampler">
+<h1>netket.sampler.ARDirectSampler<a class="headerlink" href="#netket-sampler-ardirectsampler" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="netket.utils.semigroup.PermutationGroup">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.utils.semigroup.</span></code><code class="sig-name descname"><span class="pre">PermutationGroup</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">__skip_preprocess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/utils/semigroup.html#PermutationGroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="netket.utils.semigroup.SemiGroup.html#netket.utils.semigroup.SemiGroup" title="netket.utils.semigroup.SemiGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">netket.utils.semigroup.SemiGroup</span></code></a></p>
-<p>Collection of permutation operations acting on sequences of length <code class="code docutils literal notranslate"><span class="pre">degree</span></code>.
-Note that the group elements do not need to be of type <span class="xref std std-ref">netket.utils.semigroup.Permutation</span>,
-only act as such on a sequence when called.</p>
-<p>Note that this class can contain elements that are distinct as objects (e.g.,
-<code class="code docutils literal notranslate"><span class="pre">Identity()</span></code> and <code class="code docutils literal notranslate"><span class="pre">Translation((0,))</span></code>) but have identical action.
-Those can be removed by calling <code class="code docutils literal notranslate"><span class="pre">remove_duplicates</span></code>.</p>
+<dt class="sig sig-object py" id="netket.sampler.ARDirectSampler">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">netket.sampler.</span></span><span class="sig-name descname"><span class="pre">ARDirectSampler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">__skip_preprocess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/sampler/autoreg.html#ARDirectSampler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.sampler.ARDirectSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="netket.sampler.Sampler.html#netket.sampler.Sampler" title="netket.sampler.base.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">netket.sampler.base.Sampler</span></code></a></p>
+<p>Direct sampler for autoregressive neural networks.</p>
 <dl class="py method">
-<dt id="netket.utils.semigroup.PermutationGroup.__init__">
-<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">__skip_preprocess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dt class="sig sig-object py" id="netket.sampler.ARDirectSampler.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">__skip_preprocess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.ARDirectSampler.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a Monte Carlo sampler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hilbert</strong> – Hilbert space to be sampled</p></li>
+<li><p><strong>n_chains</strong> – The total number of independent chains across all MPI ranks</p></li>
+<li><p><strong>n_chains_per_rank</strong> – Number of independent chains on every MPI rank</p></li>
+<li><p><strong>machine_pow</strong> – Exponent of the pdf sampled</p></li>
+<li><p><strong>dtype</strong> – DType of the computed samples</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="class-dl-groups">
 <dt>Attributes</dt><dd><dl class="py attribute">
-<dt id="netket.utils.semigroup.PermutationGroup.inverse">
-<code class="sig-name descname"><span class="pre">inverse</span></code><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.inverse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the indices of the inverse of each element.</p>
-<p>If <code class="code docutils literal notranslate"><span class="pre">g</span> <span class="pre">=</span> <span class="pre">self[idx_g]</span></code> and <code class="code docutils literal notranslate"><span class="pre">h</span> <span class="pre">=</span> <span class="pre">self[self.inverse[idx_g]]</span></code>, then
-<code class="code docutils literal notranslate"><span class="pre">gh</span> <span class="pre">=</span> <span class="pre">product(g,</span> <span class="pre">h)</span></code> will act as the identity on any sequence,
-i.e., <code class="code docutils literal notranslate"><span class="pre">np.all(gh(seq)</span> <span class="pre">==</span> <span class="pre">seq)</span></code>.</p>
+<dt class="sig sig-object py" id="netket.sampler.ARDirectSampler.is_exact">
+<span class="sig-name descname"><span class="pre">is_exact</span></span><a class="headerlink" href="#netket.sampler.ARDirectSampler.is_exact" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="netket.sampler.ARDirectSampler.machine_pow">
+<span class="sig-name descname"><span class="pre">machine_pow</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#netket.sampler.ARDirectSampler.machine_pow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exponent of the pdf sampled.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="netket.sampler.ARDirectSampler.n_batches">
+<span class="sig-name descname"><span class="pre">n_batches</span></span><a class="headerlink" href="#netket.sampler.ARDirectSampler.n_batches" title="Permalink to this definition">¶</a></dt>
+<dd><p>The batch size of the configuration $sigma$ used by this sampler.</p>
+<p>In general, it is equivalent to <a class="reference internal" href="netket.sampler.Sampler.html#netket.sampler.Sampler.n_chains" title="netket.sampler.Sampler.n_chains"><code class="xref py py-attr docutils literal notranslate"><span class="pre">n_chains</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.numpy.html#jaxlib.xla_extension.DeviceArray" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceArray</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tracer</span></code>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="netket.utils.semigroup.PermutationGroup.product_table">
-<code class="sig-name descname"><span class="pre">product_table</span></code><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.product_table" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a table of indices corresponding to <span class="math notranslate nohighlight">\(g^{-1} h\)</span> over the group.</p>
-<p>That is, if <code class="code docutils literal notranslate"><span class="pre">g</span> <span class="pre">=</span> <span class="pre">self[idx_g]',</span> <span class="pre">:code:`h</span> <span class="pre">=</span> <span class="pre">self[idx_h]</span></code>, and
-<code class="code docutils literal notranslate"><span class="pre">idx_u</span> <span class="pre">=</span> <span class="pre">self.product_table[idx_g,</span> <span class="pre">idx_h]</span></code>, then <code class="code docutils literal notranslate"><span class="pre">self[idx_u]</span></code>
-corresponds to <span class="math notranslate nohighlight">\(u = g^{-1} h\)</span>.</p>
+<dt class="sig sig-object py" id="netket.sampler.ARDirectSampler.n_chains">
+<span class="sig-name descname"><span class="pre">n_chains</span></span><a class="headerlink" href="#netket.sampler.ARDirectSampler.n_chains" title="Permalink to this definition">¶</a></dt>
+<dd><p>The total number of chains across all MPI ranks.</p>
+<p>If you are not using MPI, this is equal to <cite>n_chains_per_rank</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.numpy.html#jaxlib.xla_extension.DeviceArray" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceArray</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tracer</span></code>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="netket.utils.semigroup.PermutationGroup.shape">
-<code class="sig-name descname"><span class="pre">shape</span></code><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.shape" title="Permalink to this definition">¶</a></dt>
-<dd><p>Tuple <cite>(&lt;# of group elements&gt;, &lt;degree&gt;)</cite>, same as <code class="code docutils literal notranslate"><span class="pre">self.to_array().shape</span></code>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="netket.sampler.ARDirectSampler.n_chains_per_rank">
+<span class="sig-name descname"><span class="pre">n_chains_per_rank</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#netket.sampler.ARDirectSampler.n_chains_per_rank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of independent chains on every MPI rank.</p>
 </dd></dl>
 
 </dd>
 </dl>
 <dl class="class-dl-groups">
 <dt>Methods</dt><dd><dl class="py method">
-<dt id="netket.utils.semigroup.PermutationGroup.__call__">
-<code class="sig-name descname"><span class="pre">__call__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.__call__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Apply all group elements to all entries of <cite>initial</cite> along the last axis.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="netket.utils.semigroup.PermutationGroup.remove_duplicates">
-<code class="sig-name descname"><span class="pre">remove_duplicates</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_inverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/utils/semigroup.html#PermutationGroup.remove_duplicates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.remove_duplicates" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a new <code class="code docutils literal notranslate"><span class="pre">PermutationGroup</span></code> with duplicate elements (that is, elements which
-represent identical permutations) removed.</p>
+<dt class="sig sig-object py" id="netket.sampler.ARDirectSampler.init_state">
+<span class="sig-name descname"><span class="pre">init_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">machine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.ARDirectSampler.init_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the structure holding the state of the sampler.</p>
+<p>If you want reproducible samples, you should specify <cite>seed</cite>, otherwise the state
+will be initialised randomly.</p>
+<p>If running across several MPI processes, all sampler_states are guaranteed to be
+in a different (but deterministic) state.
+This is achieved by first reducing (summing) the seed provided to every MPI rank,
+then generating n_rank seeds starting from the reduced one, and every rank is
+initialized with one of those seeds.</p>
+<p>The resulting state is guaranteed to be a frozen python dataclass (in particular,
+a flax’s dataclass), and it can be serialized using Flax serialization methods.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>return_inverse</strong> – If True, also return indices to reconstruct the original
-group from the result.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>machine</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>, <a class="reference internal" href="../nn/netket.nn.Module.html#netket.nn.Module" title="flax.linen.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a>]) – a Flax module or callable with the forward pass of the log-pdf.</p></li>
+<li><p><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – The PyTree of parameters of the model.</p></li>
+<li><p><strong>seed</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]) – An optional seed or jax PRNGKey. If not specified, a random seed will be used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="netket.sampler.SamplerState.html#netket.sampler.SamplerState" title="netket.sampler.base.SamplerState"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamplerState</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The structure holding the state of the sampler. In general you should not expect
+it to be in a valid state, and should reset it before use.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="netket.sampler.ARDirectSampler.log_pdf">
+<span class="sig-name descname"><span class="pre">log_pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.ARDirectSampler.log_pdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a closure with the log_pdf function encoded by this sampler.</p>
+<p>Note: the result is returned as an HashablePartial so that the closure
+does not trigger recompilation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>, <a class="reference internal" href="../nn/netket.nn.Module.html#netket.nn.Module" title="flax.linen.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a>]) – The machine, or apply_fun</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the log probability density function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="netket.sampler.ARDirectSampler.replace">
+<span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">updates</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.ARDirectSampler.replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new object replacing the specified fields with new values.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="netket.sampler.ARDirectSampler.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">machine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.ARDirectSampler.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the state of the sampler. To be used every time the parameters are changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>machine</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>, <a class="reference internal" href="../nn/netket.nn.Module.html#netket.nn.Module" title="flax.linen.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a>]) – a Flax module or callable with the forward pass of the log-pdf.</p></li>
+<li><p><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – The PyTree of parameters of the model.</p></li>
+<li><p><strong>state</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="netket.sampler.SamplerState.html#netket.sampler.SamplerState" title="netket.sampler.base.SamplerState"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamplerState</span></code></a>]) – The current state of the sampler. If it’s not provided, it will be constructed
+by calling <code class="code docutils literal notranslate"><span class="pre">sampler.init_state(machine,</span> <span class="pre">parameters)</span></code> with a random seed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="netket.sampler.SamplerState.html#netket.sampler.SamplerState" title="netket.sampler.base.SamplerState"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamplerState</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A valid sampler state.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="netket.sampler.ARDirectSampler.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">machine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.ARDirectSampler.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Samples chain_length elements along the chains.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sampler</strong> – The Monte Carlo sampler.</p></li>
+<li><p><strong>machine</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>, <a class="reference internal" href="../nn/netket.nn.Module.html#netket.nn.Module" title="flax.linen.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a>]) – The model or callable to sample from (if it’s a function it should have
+the signature <code class="code docutils literal notranslate"><span class="pre">f(parameters,</span> <span class="pre">σ)</span> <span class="pre">-&gt;</span> <span class="pre">jnp.ndarray</span></code>).</p></li>
+<li><p><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – The PyTree of parameters of the model.</p></li>
+<li><p><strong>state</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="netket.sampler.SamplerState.html#netket.sampler.SamplerState" title="netket.sampler.base.SamplerState"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamplerState</span></code></a>]) – current state of the sampler. If None, then initialises it.</p></li>
+<li><p><strong>chain_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – (default=1), the length of the chains.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p>the permutation group with duplicate elements removed.
-return_inverse: Indices to reconstruct the original group from the result.</p>
-<blockquote>
-<div><p>Only returned if <cite>return_inverse</cite> is True.</p>
-</div></blockquote>
-</p>
+<dd class="field-even"><p>The next batch of samples.
+state: The new state of the sampler</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>group</p>
+<dd class="field-odd"><p>σ</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt id="netket.utils.semigroup.PermutationGroup.replace">
-<code class="sig-name descname"><span class="pre">replace</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">updates</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.replace" title="Permalink to this definition">¶</a></dt>
-<dd><p>“Returns a new object replacing the specified fields with new values.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="netket.utils.semigroup.PermutationGroup.to_array">
-<code class="sig-name descname"><span class="pre">to_array</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/utils/semigroup.html#PermutationGroup.to_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.utils.semigroup.PermutationGroup.to_array" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert the abstract group operations to an array of permutation indices,
-such that the <cite>i</cite>-th row contains the indices corresponding to the <cite>i</cite>-th group
-element (i.e., <cite>self.to_array()[i, j]</cite> is <span class="math notranslate nohighlight">\(g_i(j)\)</span>) and
-(for <code class="code docutils literal notranslate"><span class="pre">G</span> <span class="pre">=</span> <span class="pre">self</span></code>):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">G</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">==</span> <span class="n">V</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">to_array</span><span class="p">()])</span>
-</pre></div>
-</div>
+<dt class="sig sig-object py" id="netket.sampler.ARDirectSampler.sample_next">
+<span class="sig-name descname"><span class="pre">sample_next</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">machine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.sampler.ARDirectSampler.sample_next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Samples the next state in the markov chain.</p>
 <dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>machine</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code></a>, <a class="reference internal" href="../nn/netket.nn.Module.html#netket.nn.Module" title="flax.linen.module.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a>]) – a Flax module or callable apply function with the forward pass of the log-pdf.</p></li>
+<li><p><strong>parameters</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – The PyTree of parameters of the model.</p></li>
+<li><p><strong>state</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="netket.sampler.SamplerState.html#netket.sampler.SamplerState" title="netket.sampler.base.SamplerState"><code class="xref py py-class docutils literal notranslate"><span class="pre">SamplerState</span></code></a>]) – The current state of the sampler. If it’s not provided, it will be constructed
+by calling <code class="code docutils literal notranslate"><span class="pre">sampler.reset(machine,</span> <span class="pre">parameters)</span></code> with a random seed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The new state of the sampler
+σ: The next batch of samples.</p>
+</dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/jax.numpy.html#jaxlib.xla_extension.DeviceArray" title="(in JAX)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeviceArray</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tracer</span></code>]</p>
+<dd class="field-odd"><p>state</p>
 </dd>
 </dl>
 </dd></dl>
@@ -540,7 +629,7 @@ element (i.e., <cite>self.to_array()[i, j]</cite> is <span class="math notransla
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
     </div>
@@ -556,7 +645,7 @@ element (i.e., <cite>self.to_array()[i, j]</cite> is <span class="math notransla
     </p>
     <p>
         &copy; Copyright 2019-2021, The Netket authors - All rights reserved.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.<br/>
     </p>
   </div>
 </footer>

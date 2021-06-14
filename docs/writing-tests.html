@@ -3,17 +3,18 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Writing Tests &#8212; netket v3.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/jumbo-style.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/rtd_theme.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -125,10 +126,16 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-0b2-unreleased">NetKet 3.0b2 (unreleased)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-0b3-unreleased">NetKet 3.0b3 (unreleased)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#new-features">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#breaking-changes">Breaking Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#bug-fixes">Bug Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-0b2-published-on-31-may-2021">NetKet 3.0b2 (published on 31 May 2021)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#id1">New features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#id2">Breaking Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#id3">Bug Fixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-0b1-published-beta-release">NetKet 3.0b1 (published beta release)</a><ul>
@@ -226,7 +233,6 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html">Public API: netket package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.NetworkX.html">netket.graph.NetworkX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
@@ -237,10 +243,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#hilbert">Hilbert</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.AbstractHilbert.html">netket.hilbert.AbstractHilbert</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.Spin.html">netket.hilbert.Spin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.CustomHilbert.html">netket.hilbert.CustomHilbert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.DoubledHilbert.html">netket.hilbert.DoubledHilbert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.Fock.html">netket.hilbert.Fock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.Spin.html">netket.hilbert.Spin</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#operators">Operators</a><ul>
@@ -292,6 +299,7 @@
 <li class="toctree-l4"><a class="reference internal" href="_generated/samplers/netket.sampler.MetropolisHamiltonian.html">netket.sampler.MetropolisHamiltonian</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/samplers/netket.sampler.MetropolisLocalPt.html">netket.sampler.MetropolisLocalPt</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/samplers/netket.sampler.MetropolisExchangePt.html">netket.sampler.MetropolisExchangePt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/samplers/netket.sampler.ARDirectSampler.html">netket.sampler.ARDirectSampler</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#transition-rules">Transition Rules</a><ul>
@@ -319,6 +327,8 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.NDM.html">netket.models.NDM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.GCNN.html">netket.models.GCNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.ARNN.html">netket.models.ARNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.ARNNDense.html">netket.models.ARNNDense</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#model-tools">Model tools</a><ul>
@@ -330,6 +340,9 @@
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.DenseEquivariant.html">netket.nn.DenseEquivariant</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.Conv.html">netket.nn.Conv</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.Embed.html">netket.nn.Embed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.MaskedDense1D.html">netket.nn.MaskedDense1D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.MaskedConv1D.html">netket.nn.MaskedConv1D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.MaskedConv2D.html">netket.nn.MaskedConv2D</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#activation-functions">Activation functions</a><ul>
@@ -351,9 +364,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#variational-state-interface">Variational State Interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html">netket.variational.VariationalState</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.variational.MCState.html">netket.variational.MCState</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.variational.MCMixedState.html">netket.variational.MCMixedState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.vqs.VariationalState.html">netket.vqs.VariationalState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.vqs.MCState.html">netket.vqs.MCState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.vqs.MCMixedState.html">netket.vqs.MCMixedState</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#optimizer-module">Optimizer Module</a><ul>
@@ -400,8 +413,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#utils">Utils</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/utils/netket.utils.HashableArray.html">netket.utils.HashableArray</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/utils/netket.utils.semigroup.SemiGroup.html">netket.utils.semigroup.SemiGroup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/utils/netket.utils.semigroup.PermutationGroup.html">netket.utils.semigroup.PermutationGroup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#callbacks">Callbacks</a><ul>
@@ -419,7 +430,7 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <div class="section" id="writing-tests">
+  <section class="tex2jax_ignore mathjax_ignore" id="writing-tests">
 <h1>Writing Tests<a class="headerlink" href="#writing-tests" title="Permalink to this headline">¶</a></h1>
 <p>NetKet’s tests are written using the <a class="reference external" href="https://docs.pytest.org/en/stable/contents.html">PyTest</a>
 framework.
@@ -427,7 +438,7 @@ In particular, we make extensive use of <a class="reference external" href="http
 test functions on different input types.
 We also use often <a class="reference external" href="https://docs.pytest.org/en/stable/fixture.html#what-fixtures-are"><code class="docutils literal notranslate"><span class="pre">pytest.fixture</span></code></a>
 to initialize expensive objects only once among different tests.</p>
-<div class="section" id="test-structure-and-common-files">
+<section id="test-structure-and-common-files">
 <h2>Test structure and common files.<a class="headerlink" href="#test-structure-and-common-files" title="Permalink to this headline">¶</a></h2>
 <p>NetKet’s <code class="docutils literal notranslate"><span class="pre">Test</span></code> folder is a python module because every folder (aka, submodule) has an
 <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file.
@@ -439,8 +450,8 @@ the relevant submodule, too.</p>
 <code class="docutils literal notranslate"><span class="pre">Test/common.py</span></code> and every test is expected to use them if necessary.
 Some common fixtures are also defined inside <code class="docutils literal notranslate"><span class="pre">Test/conftest.py</span></code> and are available to all tests.
 Those do not need to be imported explicitly, as pytest will take care of it.</p>
-</div>
-<div class="section" id="tests-and-mpi">
+</section>
+<section id="tests-and-mpi">
 <h2>Tests and MPI<a class="headerlink" href="#tests-and-mpi" title="Permalink to this headline">¶</a></h2>
 <p>Tests are expected to run with or without mpi4py installed, under MPI and not under MPI.
 Therefore you should never import <code class="docutils literal notranslate"><span class="pre">mpi4py</span></code> or <code class="docutils literal notranslate"><span class="pre">mpi4jax</span></code> in the global test module, but only
@@ -495,8 +506,8 @@ functions to get easily those informations. See the example below:</p>
 
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
     </div>
@@ -512,7 +523,7 @@ functions to get easily those informations. See the example below:</p>
     </p>
     <p>
         &copy; Copyright 2019-2021, The Netket authors - All rights reserved.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.<br/>
     </p>
   </div>
 </footer>

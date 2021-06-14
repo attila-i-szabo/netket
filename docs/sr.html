@@ -3,23 +3,24 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Quantum Geometric Tensor and Stochastic Reconfiguration &#8212; netket v3.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/jumbo-style.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/rtd_theme.css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "tex2jax_process|mathjax_process|math"}}</script>
     <script src="../_static/js/rtd_theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -127,10 +128,16 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-0b2-unreleased">NetKet 3.0b2 (unreleased)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-0b3-unreleased">NetKet 3.0b3 (unreleased)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#new-features">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#breaking-changes">Breaking Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#bug-fixes">Bug Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-0b2-published-on-31-may-2021">NetKet 3.0b2 (published on 31 May 2021)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#id1">New features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#id2">Breaking Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#id3">Bug Fixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-0b1-published-beta-release">NetKet 3.0b1 (published beta release)</a><ul>
@@ -228,7 +235,6 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html">Public API: netket package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.NetworkX.html">netket.graph.NetworkX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
@@ -239,10 +245,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#hilbert">Hilbert</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.AbstractHilbert.html">netket.hilbert.AbstractHilbert</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.Spin.html">netket.hilbert.Spin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.CustomHilbert.html">netket.hilbert.CustomHilbert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.DoubledHilbert.html">netket.hilbert.DoubledHilbert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.Fock.html">netket.hilbert.Fock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.Spin.html">netket.hilbert.Spin</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#operators">Operators</a><ul>
@@ -294,6 +301,7 @@
 <li class="toctree-l4"><a class="reference internal" href="_generated/samplers/netket.sampler.MetropolisHamiltonian.html">netket.sampler.MetropolisHamiltonian</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/samplers/netket.sampler.MetropolisLocalPt.html">netket.sampler.MetropolisLocalPt</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/samplers/netket.sampler.MetropolisExchangePt.html">netket.sampler.MetropolisExchangePt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/samplers/netket.sampler.ARDirectSampler.html">netket.sampler.ARDirectSampler</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#transition-rules">Transition Rules</a><ul>
@@ -321,6 +329,8 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.NDM.html">netket.models.NDM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.GCNN.html">netket.models.GCNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.ARNN.html">netket.models.ARNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.ARNNDense.html">netket.models.ARNNDense</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#model-tools">Model tools</a><ul>
@@ -332,6 +342,9 @@
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.DenseEquivariant.html">netket.nn.DenseEquivariant</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.Conv.html">netket.nn.Conv</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.Embed.html">netket.nn.Embed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.MaskedDense1D.html">netket.nn.MaskedDense1D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.MaskedConv1D.html">netket.nn.MaskedConv1D</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.MaskedConv2D.html">netket.nn.MaskedConv2D</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#activation-functions">Activation functions</a><ul>
@@ -353,9 +366,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#variational-state-interface">Variational State Interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html">netket.variational.VariationalState</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.variational.MCState.html">netket.variational.MCState</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.variational.MCMixedState.html">netket.variational.MCMixedState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.vqs.VariationalState.html">netket.vqs.VariationalState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.vqs.MCState.html">netket.vqs.MCState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/variational/netket.vqs.MCMixedState.html">netket.vqs.MCMixedState</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#optimizer-module">Optimizer Module</a><ul>
@@ -402,8 +415,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#utils">Utils</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/utils/netket.utils.HashableArray.html">netket.utils.HashableArray</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/utils/netket.utils.semigroup.SemiGroup.html">netket.utils.semigroup.SemiGroup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/utils/netket.utils.semigroup.PermutationGroup.html">netket.utils.semigroup.PermutationGroup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#callbacks">Callbacks</a><ul>
@@ -421,7 +432,7 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <div class="section" id="quantum-geometric-tensor-and-stochastic-reconfiguration">
+  <section class="tex2jax_ignore mathjax_ignore" id="quantum-geometric-tensor-and-stochastic-reconfiguration">
 <span id="qgt-and-sr"></span><h1>Quantum Geometric Tensor and Stochastic Reconfiguration<a class="headerlink" href="#quantum-geometric-tensor-and-stochastic-reconfiguration" title="Permalink to this headline">¶</a></h1>
 <p>The Quantum Geometric Tensor (QGT) is the Fubini-Study metric tensor of the manifold on which a variational state is defined.
 In the general case (and in practise for any NQS ansatz), the QGT varies depending on the current quantum state and thus needs to be computed when the variational parameters <span class="math notranslate nohighlight">\(W\)</span> change.
@@ -430,7 +441,7 @@ To give an example, we consider a variational ansatz <span class="math notransla
 However, what we really are interested in when optimizing variational ansätze is not the (Euclidean) distance between those two points in parameter space, but rather the distance in the Hilbert space between the corresponding quantum states (which also properly takes into account gauge degrees of freedom).
 The quantum mechanical distance function for quantum states is the Fubini-Study distance <span class="math notranslate nohighlight">\( d(\psi, \phi) = \cos^{-1} \sqrt{\frac{\langle\psi|\phi\rangle \langle\phi|\psi\rangle}{\langle\psi|\psi\rangle \langle\phi|\phi\rangle}} \)</span>.
 This can be expanded to second order in an infinitesimal parameter change <span class="math notranslate nohighlight">\(\delta W\)</span> as <span class="math notranslate nohighlight">\( d(\psi_W, \psi_{W + \delta W}) = (\delta W)^\dagger S \delta W \)</span> where <span class="math notranslate nohighlight">\( S \)</span> is the QGT.
-In NetKet you can obtain (an approximation of) the quantum geometric tensor of a variational state by calling <a class="reference internal" href="_generated/variational/netket.variational.VariationalState.html#netket.variational.VariationalState.quantum_geometric_tensor" title="netket.variational.VariationalState.quantum_geometric_tensor"><code class="xref py py-attr docutils literal notranslate"><span class="pre">quantum_geometric_tensor</span></code></a>.</p>
+In NetKet you can obtain (an approximation of) the quantum geometric tensor of a variational state by calling <a class="reference internal" href="_generated/variational/netket.vqs.VariationalState.html#netket.vqs.VariationalState.quantum_geometric_tensor" title="netket.vqs.VariationalState.quantum_geometric_tensor"><code class="xref py py-attr docutils literal notranslate"><span class="pre">quantum_geometric_tensor</span></code></a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ma</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">RBM</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 <span class="n">sa</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">MetropolisLocal</span><span class="p">(</span><span class="n">nk</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">Spin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="n">n_chains</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="n">vs</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">variational</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">sa</span><span class="p">,</span> <span class="n">ma</span><span class="p">)</span>
@@ -469,26 +480,26 @@ The 3 implemnentations are:</p>
 We advise you to have a look at them and experiment.
 We provide a lot of freedom because it’s not yet clear to us what is the best implementation for which kind of problems.
 If you work with NetKet and determine that a particular implementation works best for certain types of networks, we would be glad to hear it! Let us know by opening a Discussion on our GitHub repository. We might use the insight to improve the automatic selection.</p>
-<div class="section" id="stochastic-reconfiguration">
+<section id="stochastic-reconfiguration">
 <h2>Stochastic Reconfiguration<a class="headerlink" href="#stochastic-reconfiguration" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="https://www.attaccalite.com/PhDThesis/html/node15.html">stochastic reconfiguration (SR) method</a> is a technique that makes use of the information encoded in the quantum geometric tensor described above to <em>precondition</em> the gradient used in stochastic optimization, <em>improving</em> the convergence rate to the ground state of a Hamiltonian <span class="math notranslate nohighlight">\( \hat{H} \)</span>.</p>
 <p>We would like to underline that SR can be derived (and therefore thought of) as imaginary time evolution of the variational ansatz.
 The derivation in the case of a variational optimization for the ground state, can be sketched as follows:</p>
 <p>Given a a variational wavefunction <span class="math notranslate nohighlight">\( \ket{\psi_W} \)</span>, we consider its first order Taylor expansion around <span class="math notranslate nohighlight">\( W \)</span>, <span class="math notranslate nohighlight">\( \ket{\psi_{W+\delta W}} = \ket{\psi_W} + \delta W_k \hat{O}_k \ket{\psi_W} \)</span>, where <span class="math notranslate nohighlight">\( \bra{\sigma}\hat{O}_k \ket{\eta} = \delta_{\sigma,\eta} \frac{d \log\psi_W(\sigma)}{dW_k}\)</span>.
 We wish to determine the updates <span class="math notranslate nohighlight">\( \delta_{\sigma,\eta} \)</span> of the variational parameters that match a step of imaginary-time evolution, given by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-89cdc28a-2659-4971-8bc3-0e3139dc3119">
-<span class="eqno">(1)<a class="headerlink" href="#equation-89cdc28a-2659-4971-8bc3-0e3139dc3119" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4deee123-040c-4fdb-bdc6-e4762c7e6ba2">
+<span class="eqno">(1)<a class="headerlink" href="#equation-4deee123-040c-4fdb-bdc6-e4762c7e6ba2" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \ket{\phi} = U(\epsilon)\ket{\psi_W} = e^{\epsilon\hat{H}}\ket{\psi_W} \sim (\mathbb{I} - \epsilon \hat{H})\ket{\psi_W}
 \end{equation}\]</div>
 <p>It is possible to show that the updates <span class="math notranslate nohighlight">\(\delta W_k \)</span> that minimise the norm of the state <span class="math notranslate nohighlight">\(\ket{\phi}-\ket{\psi_{W+\delta W}}\)</span> can be determined by solving the linear system</p>
-<div class="amsmath math notranslate nohighlight" id="equation-198b100a-cacd-49de-b818-982afcb97e17">
-<span class="eqno">(2)<a class="headerlink" href="#equation-198b100a-cacd-49de-b818-982afcb97e17" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c84c811e-9200-4b8d-80b0-fea47be56db8">
+<span class="eqno">(2)<a class="headerlink" href="#equation-c84c811e-9200-4b8d-80b0-fea47be56db8" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 S_{i,k} \delta W_k = F_i
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\( F_i = \langle \hat{E}^{loc} \hat{O}_i\rangle_c \)</span> is the gradient of the Energy and <span class="math notranslate nohighlight">\( S_{i,k} = \langle \hat{O}^\dagger_i \hat{O}_k\rangle_c \)</span> is the Quantum Geometric Tensor.
 The QGT is positive definite, therefore it can be inverted and the solution is formally written as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b9c821f0-f8f4-4c2e-a8f1-3d3023400e91">
-<span class="eqno">(3)<a class="headerlink" href="#equation-b9c821f0-f8f4-4c2e-a8f1-3d3023400e91" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4c83742f-4556-4fc2-9c57-b1aa287ef650">
+<span class="eqno">(3)<a class="headerlink" href="#equation-4c83742f-4556-4fc2-9c57-b1aa287ef650" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \bf{\delta W} = S^{-1} \bf{F},
 \end{equation}\]</div>
 <p>where bold fonts are used for vectors.
@@ -499,7 +510,7 @@ This can be set with the keyword argument <code class="docutils literal notransl
 Those methods, combined with our lazy representations of the QGT, never instantiate the full matrix and therefore achieve a great performance.
 However, when the number of parameters is small (smaller than 1000-5000), it might make sense to solve the system by factorizing the QGT with cholesky or SVD.
 Those techniques require instantiating the full dense matrix, but in general are more stable and don’t require a diagonal shift.</p>
-<div class="section" id="using-stochastic-reconfiguration">
+<section id="using-stochastic-reconfiguration">
 <h3>Using stochastic reconfiguration<a class="headerlink" href="#using-stochastic-reconfiguration" title="Permalink to this headline">¶</a></h3>
 <p>To use SR, you must simply provide it as a preconditioner to the VMC solver.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sr</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">SR</span><span class="p">()</span>
@@ -527,9 +538,9 @@ We reccomend you experiment and specify the QGT format that gives you the best p
 </pre></div>
 </div>
 <p>Since SR leads to an optimisation that approximates an imaginary time evolution, we find that in general it is not a good idea to couple SR with advanced optimisers like ADAM, which modify the gradient remarkably. Stochastic Gradient Descent is the best choice in general.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
     </div>
@@ -545,7 +556,7 @@ We reccomend you experiment and specify the QGT format that gives you the best p
     </p>
     <p>
         &copy; Copyright 2019-2021, The Netket authors - All rights reserved.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.<br/>
     </p>
   </div>
 </footer>
