@@ -69,7 +69,7 @@ vecp = vec * jax.random.normal(keys[3], shape=vec.shape, dtype=vec.dtype)
 pars = unravel(vecp)
 
 start = datetime.now()
-lhs = qgt_.solve(cg, rhs1)
+lhs = jax.tree_map(lambda x: x.block_until_ready, qgt_.solve(cg, rhs1))
 end = datetime.now()
 print(f"First time took {(end-start).total_seconds()} seconds")
 
@@ -79,6 +79,6 @@ vstate._parameters = pars
 qgt_ = qgt.QGTOnTheFly(vstate=vstate, diag_shift=0.01)
 
 start = datetime.now()
-lhs = qgt_.solve(cg, rhs2)
+lhs = jax.tree_map(lambda x: x.block_until_ready, qgt_.solve(cg, rhs2))
 end = datetime.now()
 print(f"Second time took {(end-start).total_seconds()} seconds")
