@@ -38,7 +38,7 @@ else:
     )
 
 # Create a variational state to run QGT on
-n_samples = 20000
+n_samples = 200
 sa = nk.sampler.MetropolisExchange(hilbert=hilbert, graph=graph, d_max=2)
 vstate = nk.variational.MCState(sampler=sa, model=machine, n_samples=n_samples)
 vstate.init(seed=0)
