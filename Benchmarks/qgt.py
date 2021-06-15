@@ -57,7 +57,7 @@ vstate.init(seed=0)
 # We don't actually want to perform a rather slow sampling
 vstate._samples = hilbert.random_state(key=keys[0], size=n_samples)
 
-qgt_ = qgt.QGTOnTheFly(vstate=vstate, diag_shift=0.01)
+qgt_ = qgt.QGTOnTheFly(vstate=vstate, diag_shift=0.01, centered=False)
 
 # Generate a random RHS of the same pytree shape as the parameters
 vec, unravel = nk.jax.tree_ravel(vstate.parameters)
@@ -76,7 +76,7 @@ print(f"First time took {(end-start).total_seconds()} seconds")
 # See what jit hath wrought us
 vstate._samples = hilbert.random_state(key=keys[4], size=n_samples)
 vstate._parameters = pars
-qgt_ = qgt.QGTOnTheFly(vstate=vstate, diag_shift=0.01)
+qgt_ = qgt.QGTOnTheFly(vstate=vstate, diag_shift=0.01, centered=False)
 
 start = datetime.now()
 lhs = jax.tree_map(lambda x: x.block_until_ready, qgt_.solve(cg, rhs2))
