@@ -235,6 +235,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../api.html">Public API: netket package</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../api.html#graph">Graph</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.graph.Graph.html">netket.graph.Graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">netket.graph.Lattice</a></li>
@@ -437,7 +438,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="netket.graph.Lattice">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">netket.graph.</span></span><span class="sig-name descname"><span class="pre">Lattice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_vectors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extent</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_offsets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms_coord</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_atol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/graph/lattice.html#Lattice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.graph.Lattice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.graph.graph.Graph</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="netket.graph.Graph.html#netket.graph.Graph" title="netket.graph.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">netket.graph.graph.Graph</span></code></a></p>
 <p>A lattice built by periodic arrangement of a given unit cell.</p>
 <p>The lattice is represented as a Bravais lattice with (<code class="code docutils literal notranslate"><span class="pre">basis_vectors</span></code>)
 <span class="math notranslate nohighlight">\(\{a_d\}_{d=1}^D\)</span> (where <span class="math notranslate nohighlight">\(D = \mathtt{ndim}\)</span> is the dimension of the
@@ -698,7 +699,7 @@ is represented by an integer in [0, n_nodes)</p>
 <dt class="sig sig-object py" id="netket.graph.Lattice.distances">
 <span class="sig-name descname"><span class="pre">distances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#netket.graph.Lattice.distances" title="Permalink to this definition">¶</a></dt>
 <dd><p>List containing the distances between the nodes.
-The fact that some node may not be reachable from another is represented by -1</p>
+The distance between unconnected nodes (no path exists between them) is set to -1</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]</p>
