@@ -118,7 +118,7 @@ class QGTOnTheFlyT(LinearOperator):
 ########################################################################################
 
 
-@partial(jax.jit, backend="cpu")
+@jax.jit
 def onthefly_mat_treevec(
     S: QGTOnTheFly, vec: Union[PyTree, jnp.ndarray]
 ) -> Union[PyTree, jnp.ndarray]:
@@ -167,7 +167,7 @@ def onthefly_mat_treevec(
     return res
 
 
-@partial(jax.jit, backend="cpu")
+@jax.jit
 def _solve(
     self: QGTOnTheFlyT, solve_fun, y: PyTree, *, x0: Optional[PyTree], **kwargs
 ) -> PyTree:

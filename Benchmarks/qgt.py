@@ -71,7 +71,7 @@ def benchmark(n_nodes, n_samples, n_layers, width):
     pars = unravel(vecp)
 
     time = timeit(lambda: jax.tree_map(lambda x: x.block_until_ready(), qgt_.solve(cg, rhs1)), number=1)
-    print(f"* Jitting run took {time} seconds")
+    print(f"* Jitting run took {time:.6f} seconds")
 
     # See what jit hath wrought us
     vstate._samples = hilbert.random_state(key=keys[4], size=n_samples)
@@ -79,22 +79,24 @@ def benchmark(n_nodes, n_samples, n_layers, width):
     qgt_ = qgt.QGTOnTheFly(vstate=vstate, diag_shift=0.01, centered=False)
 
     time = timeit(lambda: jax.tree_map(lambda x: x.block_until_ready(), qgt_.solve(cg, rhs2)), number = 10)/10
-    print(f"* After jitting, average runtime is {time} seconds\n")
+    print(f"* After jitting, average runtime is {time:.6f} seconds\n")
 
 print('## Different network widths/system sizes')
-benchmark(64, 128, 4, 64)
-benchmark(128, 128, 4, 128)
-benchmark(256, 128, 4, 256)
-benchmark(512, 128, 4, 512)
+benchmark(256, 256, 4, 256)
+benchmark(512, 256, 4, 512)
+benchmark(1024, 256, 4, 1024)
+benchmark(2048, 256, 4, 2048)
+benchmark(4096, 256, 4, 4096)
 
 print('## Different sample numbers')
-benchmark(128, 128, 4, 128)
-benchmark(128, 256, 4, 128)
-benchmark(128, 512, 4, 128)
-benchmark(128, 1024, 4, 128)
+benchmark(512, 256, 4, 512)
+benchmark(512, 512, 4, 512)
+benchmark(512, 1024, 4, 512)
+benchmark(512, 2048, 4, 512)
+benchmark(512, 4096, 4, 512)
 
 print('## Different number of layers')
-benchmark(128, 128, 4, 128)
-benchmark(128, 128, 6, 128)
-benchmark(128, 128, 8, 128)
-benchmark(128, 128, 12, 128)
+benchmark(512, 256, 4, 512)
+benchmark(512, 256, 8, 512)
+benchmark(512, 256, 12, 512)
+benchmark(512, 256, 16, 512)
