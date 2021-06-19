@@ -23,7 +23,7 @@
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="netket.graph.Graph" href="netket.graph.Graph.html" />
+    <link rel="next" title="netket.graph.Edgeless" href="netket.graph.Edgeless.html" />
     <link rel="prev" title="Public API: netket package" href="../../api.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
@@ -233,7 +233,6 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../api.html">Public API: netket package</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../api.html#graph">Graph</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">netket.graph.AbstractGraph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="netket.graph.Graph.html">netket.graph.Graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.graph.Lattice.html">netket.graph.Lattice</a></li>
@@ -492,7 +491,7 @@ is represented by an integer in [0, n_nodes)</p>
 <dt class="sig sig-object py" id="netket.graph.AbstractGraph.distances">
 <em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">distances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/graph/abstract_graph.html#AbstractGraph.distances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.graph.AbstractGraph.distances" title="Permalink to this definition">¶</a></dt>
 <dd><p>List containing the distances between the nodes.
-The distance between unconnected nodes (no path exists between them) is set to -1</p>
+The fact that some node may not be reachable from another is represented by -1</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]</p>

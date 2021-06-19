@@ -20,7 +20,7 @@
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "tex2jax_process|mathjax_process|math"}}</script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../_static/js/rtd_theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -235,7 +235,6 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html">Public API: netket package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Graph.html">netket.graph.Graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
@@ -490,7 +489,7 @@ parameters, to the constructor.</p>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">RBM</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">kernel_init</span><span class="o">=</span><span class="n">nk</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">stddev</span><span class="o">=</span><span class="mf">0.01</span><span class="p">))</span>
 
-<span class="n">vstate</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">vqs</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">sampler</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">vstate</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">variational</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">sampler</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>When constructed, the variational state will call the model’s init method to generate the state and the
@@ -570,7 +569,7 @@ changing <a class="reference internal" href="_generated/variational/netket.vqs.M
 
 <span class="n">sampler</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">MetropolisLocal</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">n_chains</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 
-<span class="n">vstate</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">vqs</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">sampler</span><span class="p">,</span> <span class="n">nk</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">RBM</span><span class="p">(),</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">vstate</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">variational</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">sampler</span><span class="p">,</span> <span class="n">nk</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">RBM</span><span class="p">(),</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">vstate</span><span class="o">.</span><span class="n">n_samples</span><span class="p">)</span>
 <span class="mi">504</span>
@@ -633,7 +632,7 @@ can be operated upon with functions like <a class="reference external" href="htt
 through that interface.</p>
 <p>A simple example to serialize data is provided below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct an RBM model on 10 spins</span>
-<span class="n">vstate</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">vqs</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">nk</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">MetropolisLocal</span><span class="p">(</span><span class="n">nk</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">Spin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">10</span><span class="p">),</span>
+<span class="n">vstate</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">variational</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">nk</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">MetropolisLocal</span><span class="p">(</span><span class="n">nk</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">Spin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">10</span><span class="p">),</span>
                                 <span class="n">nk</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">RBM</span><span class="p">())</span>
 
 <span class="kn">import</span> <span class="nn">flax</span>
@@ -644,7 +643,7 @@ through that interface.</p>
 </div>
 <p>And here we de-serialize it:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct a new RBM model on 10 spins</span>
-<span class="n">vstate</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">vqs</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">nk</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">MetropolisLocal</span><span class="p">(</span><span class="n">nk</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">Spin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">10</span><span class="p">),</span>
+<span class="n">vstate</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">variational</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">nk</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">MetropolisLocal</span><span class="p">(</span><span class="n">nk</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">Spin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">10</span><span class="p">),</span>
                                 <span class="n">nk</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">RBM</span><span class="p">())</span>
 
 <span class="c1"># load</span>

@@ -110,14 +110,15 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 
 <span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">flax</span>
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">jnp</span>
 <span class="kn">from</span> <span class="nn">flax</span> <span class="kn">import</span> <span class="n">struct</span>
 
-<span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">PyTree</span>
+<span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">PyTree</span><span class="p">,</span> <span class="n">Array</span>
 <span class="kn">import</span> <span class="nn">netket.jax</span> <span class="k">as</span> <span class="nn">nkjax</span>
 
 <span class="kn">from</span> <span class="nn">.qgt_onthefly_logic</span> <span class="kn">import</span> <span class="n">mat_vec</span> <span class="k">as</span> <span class="n">mat_vec_onthefly</span><span class="p">,</span> <span class="n">tree_cast</span>
@@ -182,7 +183,7 @@
     <span class="sd">&quot;&quot;&quot;Optional state of the ansataz.&quot;&quot;&quot;</span>
 
     <span class="n">centered</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">pytree_node</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="sd">&quot;&quot;&quot;Uses S=⟨ΔÔᶜΔÔ⟩ if True (default), S=⟨ÔᶜΔÔ⟩ otherwise. The two forms are</span>
+    <span class="sd">&quot;&quot;&quot;Uses S=⟨ΔÔᶜΔÔ⟩ if True (default), S=⟨ÔᶜΔÔ⟩ otherwise. The two forms are </span>
 <span class="sd">    mathematically equivalent, but might lead to different results due to numerical</span>
 <span class="sd">    precision. The non-centered variant should be approximately 33% faster.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -210,6 +211,11 @@
         <span class="k">return</span> <span class="n">_to_dense</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
 
+<span class="c1">########################################################################################</span>
+<span class="c1">#####                                  QGT Logic                                   #####</span>
+<span class="c1">########################################################################################</span>
+
+
 <span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
 <span class="k">def</span> <span class="nf">onthefly_mat_treevec</span><span class="p">(</span>
     <span class="n">S</span><span class="p">:</span> <span class="n">QGTOnTheFly</span><span class="p">,</span> <span class="n">vec</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">PyTree</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
@@ -226,7 +232,7 @@
         <span class="c1"># If the input is a vector</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">nkjax</span><span class="o">.</span><span class="n">tree_size</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> <span class="o">==</span> <span class="n">vec</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sd">&quot;&quot;&quot;Size mismatch between number of parameters ({nkjax.tree_size(S.params)})</span>
+                <span class="sd">&quot;&quot;&quot;Size mismatch between number of parameters ({nkjax.tree_size(S.params)}) </span>
 <span class="sd">                                and vector size {vec.size}.</span>
 <span class="sd">                             &quot;&quot;&quot;</span>
             <span class="p">)</span>

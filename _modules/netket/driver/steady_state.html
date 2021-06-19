@@ -110,14 +110,19 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 
+<span class="kn">import</span> <span class="nn">math</span>
+
 <span class="kn">import</span> <span class="nn">jax</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">from</span> <span class="nn">jax.tree_util</span> <span class="kn">import</span> <span class="n">tree_map</span>
 
 <span class="kn">from</span> <span class="nn">netket.operator</span> <span class="kn">import</span> <span class="n">Squared</span><span class="p">,</span> <span class="n">AbstractSuperOperator</span>
+<span class="kn">from</span> <span class="nn">netket.stats</span> <span class="kn">import</span> <span class="n">Stats</span>
 <span class="kn">from</span> <span class="nn">netket.vqs</span> <span class="kn">import</span> <span class="n">MCMixedState</span>
 <span class="kn">from</span> <span class="nn">netket.utils</span> <span class="kn">import</span> <span class="n">warn_deprecation</span>
 <span class="kn">from</span> <span class="nn">netket.optimizer</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">identity_preconditioner</span><span class="p">,</span>
+    <span class="n">LinearPreconditioner</span><span class="p">,</span>
     <span class="n">PreconditionerT</span><span class="p">,</span>
 <span class="p">)</span>
 
@@ -135,10 +140,10 @@
         <span class="n">lindbladian</span><span class="p">,</span>
         <span class="n">optimizer</span><span class="p">,</span>
         <span class="o">*</span><span class="n">args</span><span class="p">,</span>
-        <span class="n">variational_state</span><span class="p">:</span> <span class="n">MCMixedState</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">preconditioner</span><span class="p">:</span> <span class="n">PreconditionerT</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">sr</span><span class="p">:</span> <span class="n">PreconditionerT</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">sr_restart</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">variational_state</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">preconditioner</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">sr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">sr_restart</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

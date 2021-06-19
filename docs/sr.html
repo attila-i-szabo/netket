@@ -20,7 +20,7 @@
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "tex2jax_process|mathjax_process|math"}}</script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script src="../_static/js/rtd_theme.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
@@ -235,7 +235,6 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html">Public API: netket package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Graph.html">netket.graph.Graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
@@ -445,7 +444,7 @@ This can be expanded to second order in an infinitesimal parameter change <span 
 In NetKet you can obtain (an approximation of) the quantum geometric tensor of a variational state by calling <a class="reference internal" href="_generated/variational/netket.vqs.VariationalState.html#netket.vqs.VariationalState.quantum_geometric_tensor" title="netket.vqs.VariationalState.quantum_geometric_tensor"><code class="xref py py-attr docutils literal notranslate"><span class="pre">quantum_geometric_tensor</span></code></a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ma</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">RBM</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 <span class="n">sa</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">MetropolisLocal</span><span class="p">(</span><span class="n">nk</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">Spin</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span> <span class="n">n_chains</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="n">vs</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">vqs</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">sa</span><span class="p">,</span> <span class="n">ma</span><span class="p">)</span>
+<span class="n">vs</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">variational</span><span class="o">.</span><span class="n">MCState</span><span class="p">(</span><span class="n">sa</span><span class="p">,</span> <span class="n">ma</span><span class="p">)</span>
 
 <span class="n">qgt</span> <span class="o">=</span> <span class="n">vs</span><span class="o">.</span><span class="n">quantum_geometric_tensor</span><span class="p">()</span>
 </pre></div>
@@ -488,19 +487,19 @@ If you work with NetKet and determine that a particular implementation works bes
 The derivation in the case of a variational optimization for the ground state, can be sketched as follows:</p>
 <p>Given a a variational wavefunction <span class="math notranslate nohighlight">\( \ket{\psi_W} \)</span>, we consider its first order Taylor expansion around <span class="math notranslate nohighlight">\( W \)</span>, <span class="math notranslate nohighlight">\( \ket{\psi_{W+\delta W}} = \ket{\psi_W} + \delta W_k \hat{O}_k \ket{\psi_W} \)</span>, where <span class="math notranslate nohighlight">\( \bra{\sigma}\hat{O}_k \ket{\eta} = \delta_{\sigma,\eta} \frac{d \log\psi_W(\sigma)}{dW_k}\)</span>.
 We wish to determine the updates <span class="math notranslate nohighlight">\( \delta_{\sigma,\eta} \)</span> of the variational parameters that match a step of imaginary-time evolution, given by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-82727ee0-9be5-4fb7-b810-b5da9599e6d5">
-<span class="eqno">(1)<a class="headerlink" href="#equation-82727ee0-9be5-4fb7-b810-b5da9599e6d5" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9ce3ce0a-f387-4ef9-bdc0-6066c2ae0d00">
+<span class="eqno">(1)<a class="headerlink" href="#equation-9ce3ce0a-f387-4ef9-bdc0-6066c2ae0d00" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \ket{\phi} = U(\epsilon)\ket{\psi_W} = e^{\epsilon\hat{H}}\ket{\psi_W} \sim (\mathbb{I} - \epsilon \hat{H})\ket{\psi_W}
 \end{equation}\]</div>
 <p>It is possible to show that the updates <span class="math notranslate nohighlight">\(\delta W_k \)</span> that minimise the norm of the state <span class="math notranslate nohighlight">\(\ket{\phi}-\ket{\psi_{W+\delta W}}\)</span> can be determined by solving the linear system</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ece65ae8-6760-4250-8326-32ab2087d9f8">
-<span class="eqno">(2)<a class="headerlink" href="#equation-ece65ae8-6760-4250-8326-32ab2087d9f8" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2aff56f4-61a3-4ef7-b650-b7380743ced8">
+<span class="eqno">(2)<a class="headerlink" href="#equation-2aff56f4-61a3-4ef7-b650-b7380743ced8" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 S_{i,k} \delta W_k = F_i
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\( F_i = \langle \hat{E}^{loc} \hat{O}_i\rangle_c \)</span> is the gradient of the Energy and <span class="math notranslate nohighlight">\( S_{i,k} = \langle \hat{O}^\dagger_i \hat{O}_k\rangle_c \)</span> is the Quantum Geometric Tensor.
 The QGT is positive definite, therefore it can be inverted and the solution is formally written as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ef3a6463-5869-4ca7-9691-f8a149c99d45">
-<span class="eqno">(3)<a class="headerlink" href="#equation-ef3a6463-5869-4ca7-9691-f8a149c99d45" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-84730f9a-12e6-4224-a844-21e0ca4909b3">
+<span class="eqno">(3)<a class="headerlink" href="#equation-84730f9a-12e6-4224-a844-21e0ca4909b3" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \bf{\delta W} = S^{-1} \bf{F},
 \end{equation}\]</div>
 <p>where bold fonts are used for vectors.
