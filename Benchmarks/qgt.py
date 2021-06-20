@@ -8,7 +8,6 @@ from jax.scipy.sparse.linalg import cg
 import numpy as np
 from typing import Any
 from netket.utils.types import NNInitFunc
-from datetime import datetime
 from timeit import timeit
 
 
@@ -43,8 +42,6 @@ class FFNN(nn.Module):
 
 # Benchmark starts here
 def benchmark(n_nodes, n_samples, n_layers, width):
-    print(f'Dense network\n* {n_nodes} nodes\n* {n_samples} samples')
-    print(f'* {n_layers} dense layers with {width} hidden units')
     keys = jax.random.split(jax.random.PRNGKey(0), 5)
 
     graph = nk.graph.Chain(n_nodes)
@@ -70,33 +67,34 @@ def benchmark(n_nodes, n_samples, n_layers, width):
     vecp = vec * jax.random.normal(keys[3], shape=vec.shape, dtype=vec.dtype)
     pars = unravel(vecp)
 
-    time = timeit(lambda: jax.tree_map(lambda x: x.block_until_ready(), qgt_.solve(cg, rhs1)), number=1)
-    print(f"* Jitting run took {time:.6f} seconds")
+    time1 = timeit(lambda: jax.tree_map(lambda x: x.block_until_ready(), qgt_.solve(cg, rhs1)), number=1)
 
     # See what jit hath wrought us
     vstate._samples = hilbert.random_state(key=keys[4], size=n_samples)
     vstate._parameters = pars
     qgt_ = qgt.QGTOnTheFly(vstate=vstate, diag_shift=0.01, centered=False)
 
-    time = timeit(lambda: jax.tree_map(lambda x: x.block_until_ready(), qgt_.solve(cg, rhs2)), number = 10)/10
-    print(f"* After jitting, average runtime is {time:.6f} seconds\n")
+    time2 = timeit(lambda: jax.tree_map(lambda x: x.block_until_ready(), qgt_.solve(cg, rhs2)), number = 10)/10
+    print(f'{n_nodes}\t{width}\t{n_layers}\t{n_samples}\t{time1:.6f}\t{time2:.6f}')
 
-print('## Different network widths/system sizes')
+print(f'# Nodes\tWidth\tLayers\tSamples\tJitting\tAfter jitting')
+
+# Different network widths/system sizes
 benchmark(256, 256, 4, 256)
 benchmark(512, 256, 4, 512)
 benchmark(1024, 256, 4, 1024)
 benchmark(2048, 256, 4, 2048)
 benchmark(4096, 256, 4, 4096)
 
-print('## Different sample numbers')
+# Different sample numbers
 benchmark(512, 256, 4, 512)
 benchmark(512, 512, 4, 512)
 benchmark(512, 1024, 4, 512)
 benchmark(512, 2048, 4, 512)
 benchmark(512, 4096, 4, 512)
 
-print('## Different number of layers')
+# Different number of layers
 benchmark(512, 256, 4, 512)
 benchmark(512, 256, 8, 512)
-benchmark(512, 256, 12, 512)
 benchmark(512, 256, 16, 512)
+benchmark(512, 256, 32, 512)
