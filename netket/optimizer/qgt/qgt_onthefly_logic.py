@@ -28,13 +28,13 @@ from netket.jax import tree_conj, tree_dot, tree_cast, tree_axpy
 
 
 def O_vjp(vjp_fun, w):
-    res, _ = vjp_fun(w)
+    res, = vjp_fun(w)
     return jax.tree_map(lambda x: mpi.mpi_sum_jax(x)[0], res)  # allreduce w/ MPI.SUM
 
 
 def O_vjp_rc(vjp_fun, w):
-    res_r, _ = vjp_fun(w)
-    res_i, _ = vjp_fun(-1.0j * w)
+    res_r, = vjp_fun(w)
+    res_i, = vjp_fun(-1.0j * w)
     res = jax.tree_multimap(jax.lax.complex, res_r, res_i)
     return jax.tree_map(lambda x: mpi.mpi_sum_jax(x)[0], res)  # allreduce w/ MPI.SUM
 
@@ -58,7 +58,7 @@ def O_mean(forward_fn, params, samples, holomorphic=True):
     # only support R->C, R->R, holomorphic C->C
     assert homogeneous and (real_params or holomorphic)
 
-    vjp_fun = jax.vjp(lambda p: forward_fn(p, samples), params)
+    _, vjp_fun = jax.vjp(lambda p: forward_fn(p, samples), params)
 
     if real_params and not real_out:
         # R->C
@@ -80,9 +80,9 @@ def OH_w(vjp_fun, w):
 
     # TODO The allreduce in O_vjp could be deferred until after the tree_cast
     # where the amount of data to be transferred would potentially be smaller
-    res = tree_conj(O_vjp(vjp_fun, w.conjugate()))
-
-    return tree_cast(res, params)
+    # CHECK the tree_cast is not needed because the vjp returns the right dtypes
+    # anyway
+    return tree_conj(O_vjp(vjp_fun, w.conjugate()))
 
 
 def Odagger_O_v(jvp_fun, vjp_fun, v, *, center=False):
@@ -98,7 +98,7 @@ def Odagger_O_v(jvp_fun, vjp_fun, v, *, center=False):
     # w is an array of size n_samples; each MPI rank has its own slice
     w = jvp_fun(v)
     # w /= n_samples (elementwise):
-    w = w * (1.0 / (samples.shape[0] * mpi.n_nodes))
+    w = w * (1.0 / (w.size * mpi.n_nodes))
 
     if center:
         w = subtract_mean(w)  # w/ MPI

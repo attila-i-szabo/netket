@@ -34,27 +34,31 @@ def QGTOnTheFly(vstate=None, centered: bool = True, holomorphic: bool = True, di
 
     return QGTOnTheFlyT(
         mat_vec=QGT_mat_vec_builder(
-            apply_fun=vstate._apply_fun,
-            params=vstate.parameters,
-            samples=vstate.samples,
-            model_state=vstate.model_state,
-            centered=centered,
-            holomorphic=holomorphic,
-            diag_shift=diag_shift
-        )
+            vstate._apply_fun,
+            vstate.parameters,
+            vstate.samples,
+            vstate.model_state,
+            centered,
+            holomorphic,
+            diag_shift
+        ),
+        params = vstate.parameters
     )
 
-@partial(jax.jit, static_argnums=(0,4,5))
+#@partial(jax.jit, static_argnums=(0,4,5))
 def QGT_mat_vec_builder(apply_fun: Callable[[PyTree, jnp.ndarray], jnp.ndarray],
                         params: PyTree,
                         samples: jnp.ndarray,
                         model_state: Optional[PyTree],
                         centered: bool,
                         holomorphic: bool,
-                        diag_shift: float):
+                        diag_shift: float) -> Callable:
     def forward_fn(W, σ):
         return apply_fun({"params": W, **model_state}, σ)
     
+    if samples.ndim != 2:
+        samples = samples.reshape((-1, samples.shape[-1]))
+        
     # For centered=True and networks other than R→R, R→C, and holomorphic C→C
     # the params pytree must be disassembled into real and imaginary parts
     should_disassemble = False
@@ -78,9 +82,9 @@ def QGT_mat_vec_builder(apply_fun: Callable[[PyTree, jnp.ndarray], jnp.ndarray],
         _forward_fn = forward_fn
 
         def forward_fn(p,x):
-            return _forward_fn(p, x) - tree_dot(p, omean)
+            return _forward_fn(p, x) - nkjax.tree_dot(p, omean)
     
-    _, O_jvp = jax.linearize(lambda p: forward_fn(p, samples), (params,))
+    _, O_jvp = jax.linearize(lambda p: forward_fn(p, samples), params)
     _, O_vjp = jax.vjp(lambda p: forward_fn(p, samples), params)
 
     @jax.jit
@@ -90,14 +94,15 @@ def QGT_mat_vec_builder(apply_fun: Callable[[PyTree, jnp.ndarray], jnp.ndarray],
         res = Odagger_O_v(O_jvp, O_vjp, v, center = not centered)
         if should_disassemble:
             res = reassemble(res)
-        res = tree_axpy(diag_shift, v, res) # res += diag_shift * v
+        res = nkjax.tree_axpy(diag_shift, v, res) # res += diag_shift * v
         return res
 
     return mat_vec
 
+
 @struct.dataclass
 class QGTOnTheFlyT(LinearOperator):
-    mat_vec: Callable[PyTree,PyTree] = struct.field(
+    mat_vec: Callable[[PyTree],PyTree] = struct.field(
         pytree_node=False, default=Uninitialized
     )
     """Jitted function performing the matrix-vector product on PyTree inputs
@@ -124,38 +129,38 @@ class QGTOnTheFlyT(LinearOperator):
         else:
             ravel_result = False
 
-        vec = tree_cast(vec, self.params)
+        vec = nkjax.tree_cast(vec, self.params)
 
         vec = self.mat_vec(vec)
         
         if ravel_result:
-            res, _ = nkjax.tree_ravel(res)
+            vec, _ = nkjax.tree_ravel(vec)
 
-        return res
+        return vec
 
     def _solve(self, solve_fun, y: PyTree, *, x0: Optional[PyTree], **kwargs) -> PyTree:
-        y = tree_cast(y, self.params)
-        return _solve(self.mat_vec, solve_fun, y, x0=x0, **kwargs)
+        return _solve(self, solve_fun, y, x0=x0, **kwargs)
 
     def to_dense(self) -> jnp.ndarray:
-        return _to_dense(self.mat_vec)
+        return _to_dense(self)
 
 
 ########################################################################################
 #####                                  QGT Logic                                   #####
 ########################################################################################
 
-def solve(mat_vec: Callable, solve_fun: Callable, y: PyTree, *, x0: Optional[PyTree], **kwargs) -> PyTree:
+def _solve(self: QGTOnTheFlyT, solve_fun: Callable, y: PyTree, *, x0: Optional[PyTree], **kwargs) -> PyTree:
+    y = nkjax.tree_cast(y, self.params)
     if x0 is None:
         x0 = jax.tree_map(jnp.zeros_like, y)
 
     out, info = solve_fun(self, y, x0=x0)
     return out, info
 
-def _to_dense(mat_vec: Callable) -> jnp.ndarray:
+def _to_dense(self: QGTOnTheFlyT) -> jnp.ndarray:
     Npars = nkjax.tree_size(self.params)
     I = jax.numpy.eye(Npars)
-    out = jax.vmap(mat_vec, in_axes=0)(I)
+    out = jax.vmap(self.__matmul__, in_axes=0)(I)
 
     if nkjax.is_complex(out):
         out = out.T

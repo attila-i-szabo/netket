@@ -16,7 +16,7 @@ from jax.scipy.sparse.linalg import cg
 
 import netket as nk
 from netket.optimizer import qgt
-from netket.optimizer.qgt import qgt_onthefly_logic as _sr_onthefly_logic
+#from netket.optimizer.qgt import qgt_onthefly_logic as _sr_onthefly_logic
 
 from .. import common
 
