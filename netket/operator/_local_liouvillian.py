@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import numbers
 from typing import List as PyList
 
 import numpy as np
@@ -262,8 +261,8 @@ class LocalLiouvillian(AbstractSuperOperator):
             self._xprime_f,
             self._mels_f,
             sections,
-            xr,
-            xc,
+            np.asarray(xr),
+            np.asarray(xc),
             sections_r,
             sections_c,
             xr_prime,
@@ -307,7 +306,6 @@ class LocalLiouvillian(AbstractSuperOperator):
         N,
         pad,
     ):
-        sec = 0
         off = 0
 
         n_hr_i = 0

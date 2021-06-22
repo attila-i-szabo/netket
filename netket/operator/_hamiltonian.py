@@ -25,7 +25,7 @@ from . import spin, boson
 from ._local_operator import LocalOperator
 from ._graph_operator import GraphOperator
 from ._abstract_operator import AbstractOperator
-from ._lazy import Transpose, Adjoint, Squared
+from ._lazy import Squared
 
 
 class SpecialHamiltonian(AbstractOperator):
@@ -332,7 +332,7 @@ class Ising(SpecialHamiltonian):
         """
 
         return self._flattened_kernel(
-            x,
+            np.asarray(x),
             sections,
             self._edges,
             self._h,
@@ -531,10 +531,6 @@ class BoseHubbard(SpecialHamiltonian):
     def mu(self):
         """The chemical potential."""
         return self._mu
-
-    @property
-    def is_hermitian(self) -> bool:
-        return True
 
     def copy(self):
         graph = Graph(edges=[list(edge) for edge in self.edges])
@@ -778,7 +774,7 @@ class BoseHubbard(SpecialHamiltonian):
             self._max_xprime = np.empty((total_size, x.shape[1]), dtype=x.dtype)
 
         return self._flattened_kernel(
-            x,
+            np.asarray(x),
             sections,
             self._edges,
             self._U,

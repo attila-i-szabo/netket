@@ -32,9 +32,9 @@ from .activation import (
     tanh,
     cosh,
     sinh,
-    logcosh,
-    logsinh,
-    logtanh,
+    log_cosh,
+    log_sinh,
+    log_tanh,
 )
 from flax.linen import (
     MultiHeadDotProductAttention,
@@ -61,7 +61,5 @@ from flax.linen.module import compact, enable_named_call, disable_named_call, Va
 from .initializers import zeros, ones
 
 from flax.linen import Embed
-
-from flax.linen import compact
 
 from .utils import to_array, to_matrix

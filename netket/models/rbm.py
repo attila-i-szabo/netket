@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Union, Optional, Tuple, Any, Callable, Iterable
+from typing import Union, Any
 
 import numpy as np
 
@@ -20,11 +20,11 @@ import jax
 from jax import numpy as jnp
 from flax import linen as nn
 from netket.utils import HashableArray
-from netket.utils.types import PRNGKeyT, Shape, DType, Array, NNInitFunc
+from netket.utils.types import NNInitFunc
 from netket.utils.group import PermutationGroup
 
 from netket import nn as nknn
-from netket.nn.initializers import lecun_normal, variance_scaling, zeros, normal
+from netket.nn.initializers import normal
 
 default_kernel_init = normal(stddev=0.01)
 
@@ -36,7 +36,7 @@ class RBM(nn.Module):
 
     dtype: Any = np.float64
     """The dtype of the weights."""
-    activation: Any = nknn.logcosh
+    activation: Any = nknn.log_cosh
     """The nonlinear activation function."""
     alpha: Union[float, int] = 1
     """feature density. Number of features equal to alpha * input.shape[-1]"""
@@ -96,7 +96,7 @@ class RBMModPhase(nn.Module):
 
     dtype: Any = np.float64
     """The dtype of the weights."""
-    activation: Any = nknn.logcosh
+    activation: Any = nknn.log_cosh
     """The nonlinear activation function."""
     alpha: Union[float, int] = 1
     """feature density. Number of features equal to alpha * input.shape[-1]"""
@@ -149,7 +149,7 @@ class RBMMultiVal(nn.Module):
     """The number of classes in the one-hot encoding"""
     dtype: Any = np.float64
     """The dtype of the weights."""
-    activation: Any = nknn.logcosh
+    activation: Any = nknn.log_cosh
     """The nonlinear activation function."""
     alpha: Union[float, int] = 1
     """feature density. Number of features equal to alpha * input.shape[-1]"""
@@ -200,7 +200,7 @@ class RBMSymm(nn.Module):
     """
     dtype: Any = np.float64
     """The dtype of the weights."""
-    activation: Any = nknn.logcosh
+    activation: Any = nknn.log_cosh
     """The nonlinear activation function."""
     alpha: Union[float, int] = 1
     """feature density. Number of features equal to alpha * input.shape[-1]"""
