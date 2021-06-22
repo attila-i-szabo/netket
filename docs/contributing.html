@@ -233,6 +233,7 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html">Public API: netket package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Graph.html">netket.graph.Graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
@@ -358,7 +359,7 @@
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.softmax.html">netket.nn.softmax</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.softplus.html">netket.nn.softplus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.swish.html">netket.nn.swish</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.logcosh.html">netket.nn.logcosh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.log_cosh.html">netket.nn.log_cosh</a></li>
 </ul>
 </li>
 </ul>
@@ -487,19 +488,19 @@ changes.</p>
 </li>
 <li><p>Make sure the tests pass by running the following command from the top of
 the repository:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest -n auto Test/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest -n auto test/
 </pre></div>
 </div>
 <p>If your code contribution touches parts of NetKet that are expected to work under MPI, such
 the computation of expectation values, initialization of parameters or lazy matrix-vector products
 you should also check that tests pass under MPI by running pytest under MPI. When doing so, you
 should also disable pytest parallelization.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpirun -np <span class="m">2</span> pytest -n0 Test/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mpirun -np <span class="m">2</span> pytest -n0 test/
 </pre></div>
 </div>
 <p>NetKet’s test suite is quite large, so if you know the specific test file that covers your
 changes, you can limit the tests to that; for example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest -n auto Test/Hilbert
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pytest -n auto test/hilbert
 </pre></div>
 </div>
 </li>
@@ -554,7 +555,7 @@ On the command line, this can be done via</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># to reformat a specific file</span>
 black Path/To/The/file.py
 <span class="c1"># to reformat all files below the specified directories</span>
-black Test/ Examples/
+black test/ Examples/
 </pre></div>
 </div>
 <p>before creating a pull request.

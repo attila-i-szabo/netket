@@ -110,7 +110,6 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 <span class="kn">import</span> <span class="nn">math</span>
 
 <span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
@@ -118,7 +117,6 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">flax</span> <span class="kn">import</span> <span class="n">struct</span>
 
-<span class="kn">from</span> <span class="nn">netket.legacy</span> <span class="kn">import</span> <span class="n">random</span> <span class="k">as</span> <span class="n">_random</span>
 <span class="kn">from</span> <span class="nn">netket.operator</span> <span class="kn">import</span> <span class="n">AbstractOperator</span>
 
 
@@ -151,9 +149,8 @@
         <span class="c1"># Raise errors if hilbert is not an Hilbert</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="p">,</span> <span class="n">AbstractOperator</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">&quot;Argument to HamiltonianRuleNumpy must be a valid operator.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="nb">type</span><span class="p">(</span><span class="n">operator</span><span class="p">)</span>
-                <span class="p">)</span>
+                <span class="s2">&quot;Argument to HamiltonianRule must be a valid operator, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;but operator is a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
             <span class="p">)</span>
 
 <div class="viewcode-block" id="HamiltonianRuleNumpy.init_state"><a class="viewcode-back" href="../../../../docs/_generated/samplers/netket.sampler.rules.HamiltonianRuleNumpy.html#netket.sampler.rules.HamiltonianRuleNumpy.init_state">[docs]</a>    <span class="k">def</span> <span class="nf">init_state</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">sampler</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>

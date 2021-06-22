@@ -785,7 +785,7 @@ respect to the non-symmetric Jastrow, it does not improve the estimate of the gr
     @nk.nn.compact
     def __call__(self, x):
         x = nk.nn.Dense(features=2*x.shape[-1], dtype=np.complex128, kernel_init=nk.nn.initializers.normal(stddev=0.1), bias_init=nk.nn.initializers.normal(stddev=0.1))(x)
-        x = nk.nn.activation.logcosh(x)
+        x = nk.nn.activation.log_cosh(x)
         return jax.numpy.sum(x, axis=-1)
 
 ffnn = Model()
@@ -888,9 +888,9 @@ plt.show()
     @nk.nn.compact
     def __call__(self, x):
         x = nk.nn.Dense(features=2*x.shape[-1], dtype=np.complex128, kernel_init=nk.nn.initializers.normal(stddev=0.1), bias_init=nk.nn.initializers.normal(stddev=0.1))(x)
-        x = nk.nn.activation.logcosh(x)
+        x = nk.nn.activation.log_cosh(x)
         x = nk.nn.Dense(features=x.shape[-1], dtype=np.complex128, kernel_init=nk.nn.initializers.normal(stddev=0.1), bias_init=nk.nn.initializers.normal(stddev=0.1))(x)
-        x = nk.nn.activation.logcosh(x)
+        x = nk.nn.activation.log_cosh(x)
         return jax.numpy.sum(x, axis=-1)
 
 ffnn2 = Model2()

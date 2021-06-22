@@ -478,7 +478,7 @@ class FFNN(nknn.Module):
     @nknn.compact
     def __call__(self, x):
         x = nknn.Dense(features=2*x.shape[-1], use_bias=True, dtype=np.complex128, kernel_init=nknn.initializers.normal(stddev=0.01), bias_init=nknn.initializers.normal(stddev=0.01))(x)
-        x = nknn.logcosh(x)
+        x = nknn.log_cosh(x)
         x = jnp.sum(x, axis=-1)
         return x
 

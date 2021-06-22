@@ -233,6 +233,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../api.html">Public API: netket package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Graph.html">netket.graph.Graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
@@ -358,7 +359,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.softmax.html">netket.nn.softmax</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.softplus.html">netket.nn.softplus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.swish.html">netket.nn.swish</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.logcosh.html">netket.nn.logcosh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.log_cosh.html">netket.nn.log_cosh</a></li>
 </ul>
 </li>
 </ul>
@@ -463,8 +464,8 @@ when jitting.</p>
 <dt class="sig sig-object py" id="netket.sampler.Sampler.is_exact">
 <span class="sig-name descname"><span class="pre">is_exact</span></span><a class="headerlink" href="#netket.sampler.Sampler.is_exact" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <cite>True</cite> if the sampler is exact.</p>
-<p>The sampler is exact if the samples are always distributed according to the
-chosen power of the variational state.</p>
+<p>The sampler is exact if all the samples are exactly distributed according to the
+chosen power of the variational state, and there is no correlation among them.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>

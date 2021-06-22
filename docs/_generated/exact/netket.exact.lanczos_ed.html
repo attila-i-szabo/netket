@@ -233,6 +233,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../api.html">Public API: netket package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Graph.html">netket.graph.Graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
@@ -358,7 +359,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.softmax.html">netket.nn.softmax</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.softplus.html">netket.nn.softplus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.swish.html">netket.nn.swish</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.logcosh.html">netket.nn.logcosh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.log_cosh.html">netket.nn.log_cosh</a></li>
 </ul>
 </li>
 </ul>
@@ -447,14 +448,24 @@ eigenvectors of the operator. With ARPACK, not requiring the
 eigenvectors has almost no performance benefits.</p></li>
 <li><p><strong>matrix_free</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If true, matrix elements are computed on the fly.
 Otherwise, the operator is first converted to a sparse matrix.</p></li>
-<li><p><strong>scipy_args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Additional keyword arguments passed to <cite>scipy.sparse.linalg.eigvalsh</cite>.
-See the Scipy documentation for further information.</p></li>
+<li><p><strong>scipy_args</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Additional keyword arguments passed to
+<cite>scipy.sparse.linalg.eigvalsh</cite>. See the Scipy documentation for further
+information.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p>Either <cite>w</cite> or the tuple <cite>(w, v)</cite> depending on whether <cite>compute_eigenvectors</cite> is True.</p>
-<p>w: Array containing the lowest <cite>first_n</cite> eigenvalues.</p>
-<p>v: Array containing the eigenvectors as columns, such that`v[:, i]` corresponds to <cite>w[i]</cite>.</p>
+<dd class="field-even"><p><p>Either <cite>w</cite> or the tuple <cite>(w, v)</cite> depending on whether <cite>compute_eigenvectors</cite>
+is True.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>w: Array containing the lowest <cite>first_n</cite> eigenvalues.</p></li>
+<li><dl class="simple">
+<dt>v: Array containing the eigenvectors as columns, such that`v[:, i]`</dt><dd><p>corresponds to <cite>w[i]</cite>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
 </p>
 </dd>
 </dl>

@@ -266,17 +266,13 @@
 
         <span class="n">in_features</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">assert</span> <span class="n">in_features</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_group_count</span> <span class="o">==</span> <span class="mi">0</span>
-        <span class="n">kernel_shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">kernel_size</span><span class="p">,)</span> <span class="o">+</span> <span class="p">(</span>
+        <span class="n">kernel_shape</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">kernel_size</span><span class="p">,</span>
             <span class="n">in_features</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_group_count</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="n">kernel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">(</span>
-            <span class="s2">&quot;kernel&quot;</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">kernel_init</span><span class="p">,</span>
-            <span class="n">kernel_shape</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
-        <span class="p">)</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">(</span><span class="s2">&quot;kernel&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kernel_init</span><span class="p">,</span> <span class="n">kernel_shape</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
         <span class="n">kernel</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exclusive</span><span class="p">:</span>

@@ -235,6 +235,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Public API: netket package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Graph.html">netket.graph.Graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
@@ -360,7 +361,7 @@
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.softmax.html">netket.nn.softmax</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.softplus.html">netket.nn.softplus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.swish.html">netket.nn.swish</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.logcosh.html">netket.nn.logcosh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.log_cosh.html">netket.nn.log_cosh</a></li>
 </ul>
 </li>
 </ul>
@@ -445,22 +446,25 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="_generated/graph/netket.graph.AbstractGraph.html#netket.graph.AbstractGraph" title="netket.graph.AbstractGraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.AbstractGraph</span></code></a></p></td>
 <td><p>Abstract class for NetKet graph objects.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Edgeless.html#netket.graph.Edgeless" title="netket.graph.Edgeless"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Edgeless</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Graph.html#netket.graph.Graph" title="netket.graph.Graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Graph</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Edgeless.html#netket.graph.Edgeless" title="netket.graph.Edgeless"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Edgeless</span></code></a></p></td>
 <td><p>Construct a set graph (collection of unconnected vertices).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Hypercube.html#netket.graph.Hypercube" title="netket.graph.Hypercube"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Hypercube</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Hypercube.html#netket.graph.Hypercube" title="netket.graph.Hypercube"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Hypercube</span></code></a></p></td>
 <td><p>Constructs a hypercubic lattice with equal side length in all dimensions.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Lattice.html#netket.graph.Lattice" title="netket.graph.Lattice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Lattice</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Lattice.html#netket.graph.Lattice" title="netket.graph.Lattice"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Lattice</span></code></a></p></td>
 <td><p>A lattice built by periodic arrangement of a given unit cell.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/graph/netket.graph.lattice.LatticeSite.html#netket.graph.lattice.LatticeSite" title="netket.graph.lattice.LatticeSite"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.lattice.LatticeSite</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/graph/netket.graph.lattice.LatticeSite.html#netket.graph.lattice.LatticeSite" title="netket.graph.lattice.LatticeSite"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.lattice.LatticeSite</span></code></a></p></td>
 <td><p>Contains information about a single <a class="reference internal" href="_generated/graph/netket.graph.Lattice.html#netket.graph.Lattice" title="netket.graph.Lattice"><code class="xref py py-class docutils literal notranslate"><span class="pre">Lattice</span></code></a> site.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Chain.html#netket.graph.Chain" title="netket.graph.Chain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Chain</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Chain.html#netket.graph.Chain" title="netket.graph.Chain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Chain</span></code></a></p></td>
 <td><p>Constructs a chain of <cite>length</cite> sites.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Grid.html#netket.graph.Grid" title="netket.graph.Grid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Grid</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_generated/graph/netket.graph.Grid.html#netket.graph.Grid" title="netket.graph.Grid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">netket.graph.Grid</span></code></a></p></td>
 <td><p>Constructs a hypercubic lattice given its extent in all dimensions.</p></td>
 </tr>
 </tbody>
@@ -861,7 +865,7 @@ Read more about the design goal of this module in their <a class="reference exte
 <tr class="row-even"><td><p><a class="reference internal" href="_generated/nn/netket.nn.swish.html#netket.nn.swish" title="netket.nn.swish"><code class="xref py py-obj docutils literal notranslate"><span class="pre">swish</span></code></a>(x)</p></td>
 <td><p>SiLU activation function.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_generated/nn/netket.nn.logcosh.html#netket.nn.logcosh" title="netket.nn.logcosh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logcosh</span></code></a>(x)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_generated/nn/netket.nn.log_cosh.html#netket.nn.log_cosh" title="netket.nn.log_cosh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">log_cosh</span></code></a>(x)</p></td>
 <td><p></p></td>
 </tr>
 </tbody>

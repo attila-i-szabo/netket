@@ -113,13 +113,12 @@
 <span class="kn">import</span> <span class="nn">flax.linen</span> <span class="k">as</span> <span class="nn">nn</span>
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 
-<span class="kn">import</span> <span class="nn">netket</span> <span class="k">as</span> <span class="nn">nk</span>
 <span class="kn">from</span> <span class="nn">netket.nn.initializers</span> <span class="kn">import</span> <span class="n">normal</span>
 <span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">DType</span><span class="p">,</span> <span class="n">Array</span><span class="p">,</span> <span class="n">NNInitFunc</span>
 
 
 <div class="viewcode-block" id="Jastrow"><a class="viewcode-back" href="../../../docs/_generated/models/netket.models.Jastrow.html#netket.models.Jastrow">[docs]</a><span class="k">class</span> <span class="nc">Jastrow</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Jastrow wave function :math:`\Psi(s) = \exp(\sum_{ij} s_i W_{ij} s_j)`.</span>
 
 <span class="sd">    The W matrix is stored as a non-symmetric matrix, and symmetrized</span>

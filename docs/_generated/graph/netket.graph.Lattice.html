@@ -235,6 +235,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../api.html">Public API: netket package</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../api.html#graph">Graph</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.graph.Graph.html">netket.graph.Graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">netket.graph.Lattice</a></li>
@@ -360,7 +361,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.softmax.html">netket.nn.softmax</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.softplus.html">netket.nn.softplus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.swish.html">netket.nn.swish</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.logcosh.html">netket.nn.logcosh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.log_cosh.html">netket.nn.log_cosh</a></li>
 </ul>
 </li>
 </ul>
@@ -437,7 +438,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="netket.graph.Lattice">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">netket.graph.</span></span><span class="sig-name descname"><span class="pre">Lattice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">basis_vectors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extent</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">site_offsets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atoms_coord</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_atol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/graph/lattice.html#Lattice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.graph.Lattice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.graph.graph.Graph</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="netket.graph.Graph.html#netket.graph.Graph" title="netket.graph.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">netket.graph.graph.Graph</span></code></a></p>
 <p>A lattice built by periodic arrangement of a given unit cell.</p>
 <p>The lattice is represented as a Bravais lattice with (<code class="code docutils literal notranslate"><span class="pre">basis_vectors</span></code>)
 <span class="math notranslate nohighlight">\(\{a_d\}_{d=1}^D\)</span> (where <span class="math notranslate nohighlight">\(D = \mathtt{ndim}\)</span> is the dimension of the
@@ -588,6 +589,11 @@ the purpose of identifying nearest neighbors.</p></li>
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="netket.graph.Lattice.edge_colors">
+<span class="sig-name descname"><span class="pre">edge_colors</span></span><a class="headerlink" href="#netket.graph.Lattice.edge_colors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="netket.graph.Lattice.extent">
 <span class="sig-name descname"><span class="pre">extent</span></span><a class="headerlink" href="#netket.graph.Lattice.extent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extent of the lattice</p>
@@ -698,7 +704,7 @@ is represented by an integer in [0, n_nodes)</p>
 <dt class="sig sig-object py" id="netket.graph.Lattice.distances">
 <span class="sig-name descname"><span class="pre">distances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#netket.graph.Lattice.distances" title="Permalink to this definition">¶</a></dt>
 <dd><p>List containing the distances between the nodes.
-The fact that some node may not be reachable from another is represented by -1</p>
+The distance between unconnected nodes (no path exists between them) is set to -1</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]</p>
@@ -732,14 +738,22 @@ The fact that some node may not be reachable from another is represented by -1</
 
 <dl class="py method">
 <dt class="sig sig-object py" id="netket.graph.Lattice.edges">
-<span class="sig-name descname"><span class="pre">edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.graph.Lattice.edges" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterator over the edges of the graph. Optionally filter by edge color.</p>
+<span class="sig-name descname"><span class="pre">edges</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.graph.Lattice.edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the sequence of edges of the graph.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]]</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>return_color</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If <code class="code docutils literal notranslate"><span class="pre">True</span></code>, return edges with added color information.</p></li>
+<li><p><strong>filter_color</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – If set, return only edges of the given color.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Parameters</dt>
-<dd class="field-even"><p><strong>color</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – </p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Sequence" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A sequence of edges as tuples <code class="code docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j)</span></code> or, if <cite>return_color</cite> is
+passed, a sequence of tuples <code class="code docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">c)</span></code> with <code class="code docutils literal notranslate"><span class="pre">c</span></code> indicating
+the color of the respective edge.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -749,8 +763,11 @@ The fact that some node may not be reachable from another is represented by -1</
 <em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_igraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.graph.Lattice.from_igraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new Graph instance from an igraph.Graph instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>graph</strong> (<em>igraph.Graph</em>) – </p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="netket.graph.Graph.html#netket.graph.Graph" title="netket.graph.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a></p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>graph</strong> (<em>igraph.Graph</em>) – </p>
 </dd>
 </dl>
 </dd></dl>
@@ -759,6 +776,11 @@ The fact that some node may not be reachable from another is represented by -1</
 <dt class="sig sig-object py" id="netket.graph.Lattice.from_networkx">
 <em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_networkx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.graph.Lattice.from_networkx" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a new Graph instance from a networkx graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="netket.graph.Graph.html#netket.graph.Graph" title="netket.graph.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">

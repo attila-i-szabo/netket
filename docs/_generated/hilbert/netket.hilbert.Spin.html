@@ -235,6 +235,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../api.html">Public API: netket package</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Graph.html">netket.graph.Graph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
@@ -360,7 +361,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.softmax.html">netket.nn.softmax</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.softplus.html">netket.nn.softplus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.swish.html">netket.nn.swish</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.logcosh.html">netket.nn.logcosh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nn/netket.nn.log_cosh.html">netket.nn.log_cosh</a></li>
 </ul>
 </li>
 </ul>
@@ -458,7 +459,8 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>s</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Spin at each site. Must be integer or half-integer.</p></li>
 <li><p><strong>N</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of sites (default=1)</p></li>
-<li><p><strong>total_sz</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]) – If given, constrains the total spin of system to a particular value.</p></li>
+<li><p><strong>total_sz</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]) – If given, constrains the total spin of system to a particular
+value.</p></li>
 <li><p><strong>graph</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="../graph/netket.graph.AbstractGraph.html#netket.graph.AbstractGraph" title="netket.graph.abstract_graph.AbstractGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractGraph</span></code></a>]) – (deprecated) a graph from which to extract the number of sites.</p></li>
 </ul>
 </dd>
@@ -596,12 +598,14 @@ to the pre-allocated array if it was passed.</p>
 <dt class="sig sig-object py" id="netket.hilbert.Spin.numbers_to_states">
 <span class="sig-name descname"><span class="pre">numbers_to_states</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numbers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.hilbert.Spin.numbers_to_states" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the quantum numbers corresponding to the n-th basis state
-for input n. n is an array of integer indices such that numbers[k]=Index(states[k]).
+for input n. n is an array of integer indices such that
+<a href="#id1"><span class="problematic" id="id2">:code:py:`numbers[k]=Index(states[k])`</span></a>.
 Throws an exception iff the space is not indexable.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>numbers</strong> (<em>numpy.array</em>) – Batch of input numbers to be converted into arrays of quantum numbers.</p></li>
+<li><p><strong>numbers</strong> (<em>numpy.array</em>) – Batch of input numbers to be converted into arrays of
+quantum numbers.</p></li>
 <li><p><strong>out</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]) – Optional Array of quantum numbers corresponding to numbers.</p></li>
 </ul>
 </dd>
@@ -632,16 +636,18 @@ might be different from the starting one.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="netket.hilbert.Spin.random_state">
-<span class="sig-name descname"><span class="pre">random_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">key=&lt;netket.hilbert.abstract_hilbert.NoneType</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">size=&lt;netket.hilbert.abstract_hilbert.NoneType</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float32'&gt;</span></em>, <em class="sig-param"><span class="pre">out=None</span></em>, <em class="sig-param"><span class="pre">rgen=None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.hilbert.Spin.random_state" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">random_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">key=&lt;netket.hilbert.abstract_hilbert.NoneTypeT</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">size=&lt;netket.hilbert.abstract_hilbert.NoneTypeT</span> <span class="pre">object&gt;</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float32'&gt;</span></em>, <em class="sig-param"><span class="pre">out=None</span></em>, <em class="sig-param"><span class="pre">rgen=None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.hilbert.Spin.random_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates either a single or a batch of uniformly distributed random states.
 Runs as <code class="code docutils literal notranslate"><span class="pre">random_state(self,</span> <span class="pre">key,</span> <span class="pre">size=None,</span> <span class="pre">dtype=np.float32)</span></code> by default.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>key</strong> – rng state from a jax-style functional generator.</p></li>
-<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – If provided, returns a batch of configurations of the form <code class="code docutils literal notranslate"><span class="pre">(size,</span> <span class="pre">N)</span></code> if size
-is an integer or <code class="code docutils literal notranslate"><span class="pre">(*size,</span> <span class="pre">N)</span></code> if it is a tuple and where <span class="math notranslate nohighlight">\(N\)</span> is the Hilbert space size.
-By default, a single random configuration with shape <code class="code docutils literal notranslate"><span class="pre">(#,)</span></code> is returned.</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – If provided, returns a batch of configurations of the form
+<code class="code docutils literal notranslate"><span class="pre">(size,</span> <span class="pre">N)</span></code> if size is an integer or <code class="code docutils literal notranslate"><span class="pre">(*size,</span> <span class="pre">N)</span></code> if it is
+a tuple and where <span class="math notranslate nohighlight">\(N\)</span> is the Hilbert space size.
+By default, a single random configuration with shape
+<code class="code docutils literal notranslate"><span class="pre">(#,)</span></code> is returned.</p></li>
 <li><p><strong>dtype</strong> – DType of the resulting vector.</p></li>
 <li><p><strong>out</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]) – Deprecated. Will be removed in v3.1</p></li>
 <li><p><strong>rgen</strong> – Deprecated. Will be removed in v3.1</p></li>
@@ -651,7 +657,8 @@ By default, a single random configuration with shape <code class="code docutils 
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A state or batch of states sampled from the uniform distribution on the hilbert space.</p>
+<dd class="field-odd"><p>A state or batch of states sampled from the uniform distribution on the
+hilbert space.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
