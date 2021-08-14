@@ -6,8 +6,8 @@
 .. autoclass:: HamiltonianRule
    :show-inheritance:
 
-   .. automethod:: HamiltonianRule.__init__
 
+   
    
       
    

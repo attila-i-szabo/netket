@@ -6,9 +6,11 @@
 .. autoclass:: Sampler
    :show-inheritance:
 
-   .. automethod:: Sampler.__init__
 
    
+   
+
+   .. automethod:: Sampler.__init__
       
    .. rst-class:: class-dl-groups
 

@@ -6,14 +6,16 @@
 .. autoclass:: CustomHilbert
    :show-inheritance:
 
-   .. automethod:: CustomHilbert.__init__
 
    
+   
+
+   .. automethod:: CustomHilbert.__init__
       
    .. rst-class:: class-dl-groups
 
    Attributes
-      .. autoattribute:: CustomHilbert.is_discrete
+      .. autoattribute:: CustomHilbert.constrained
       .. autoattribute:: CustomHilbert.is_finite
       .. autoattribute:: CustomHilbert.is_indexable
       .. autoattribute:: CustomHilbert.local_size

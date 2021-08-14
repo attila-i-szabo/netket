@@ -6,8 +6,8 @@
 .. autoclass:: HamiltonianRuleNumpy
    :show-inheritance:
 
-   .. automethod:: HamiltonianRuleNumpy.__init__
 
+   
    
       
    

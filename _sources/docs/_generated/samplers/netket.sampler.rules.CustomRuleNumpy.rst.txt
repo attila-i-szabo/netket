@@ -6,8 +6,8 @@
 .. autoclass:: CustomRuleNumpy
    :show-inheritance:
 
-   .. automethod:: CustomRuleNumpy.__init__
 
+   
    
       
    .. rst-class:: class-dl-groups

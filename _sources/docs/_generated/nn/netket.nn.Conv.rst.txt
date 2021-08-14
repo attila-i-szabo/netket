@@ -6,8 +6,8 @@
 .. autoclass:: Conv
    :show-inheritance:
 
-   .. automethod:: Conv.__init__
 
+   
    
       
    .. rst-class:: class-dl-groups

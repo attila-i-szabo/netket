@@ -6,9 +6,11 @@
 .. autoclass:: MetropolisPtSampler
    :show-inheritance:
 
-   .. automethod:: MetropolisPtSampler.__init__
 
    
+   
+
+   .. automethod:: MetropolisPtSampler.__init__
       
    .. rst-class:: class-dl-groups
 

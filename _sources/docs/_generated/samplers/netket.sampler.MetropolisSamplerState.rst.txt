@@ -6,8 +6,8 @@
 .. autoclass:: MetropolisSamplerState
    :show-inheritance:
 
-   .. automethod:: MetropolisSamplerState.__init__
 
+   
    
       
    .. rst-class:: class-dl-groups

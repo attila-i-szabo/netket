@@ -6,8 +6,8 @@
 .. autoclass:: DenseGeneral
    :show-inheritance:
 
-   .. automethod:: DenseGeneral.__init__
 
+   
    
       
    .. rst-class:: class-dl-groups

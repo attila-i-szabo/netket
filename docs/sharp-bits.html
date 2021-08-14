@@ -3,18 +3,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🔪 The Sharp Bits 🔪 &#8212; netket v3.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/bootstrap-sphinx.css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/jumbo-style.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/all.min.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css" />
     <link rel="stylesheet" type="text/css" href="../_static/css/rtd_theme.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -126,16 +125,24 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-0b3-unreleased">NetKet 3.0b3 (unreleased)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-0b4-unreleased">NetKet 3.0b4 (unreleased)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#new-features">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#breaking-changes">Breaking Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#internal-changes">Internal Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#bug-fixes">Bug Fixes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-0b2-published-on-31-may-2021">NetKet 3.0b2 (published on 31 May 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-0b3-published-on-9-july-2021">NetKet 3.0b3 (published on 9 july 2021)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#id1">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#id2">Breaking Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="changelog.html#id3">Bug Fixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#id3">Internal Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#id4">Bug Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-0b2-published-on-31-may-2021">NetKet 3.0b2 (published on 31 May 2021)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#id5">New features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#id6">Breaking Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#id7">Bug Fixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-0b1-published-beta-release">NetKet 3.0b1 (published beta release)</a><ul>
@@ -197,13 +204,21 @@
 <li class="toctree-l2"><a class="reference internal" href="custom_models.html#using-haiku">Using Haiku</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="custom_preconditioners.html">The preconditioner interface</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="custom_preconditioners.html#the-linearpreconditioner-interface">The LinearPreconditioner interface</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="custom_preconditioners.html#bare-interface">Bare interface</a></li>
-<li class="toctree-l3"><a class="reference internal" href="custom_preconditioners.html#linearoperator-interface">LinearOperator interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="custom_preconditioners.html">Defining Custom Preconditioners</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="custom_preconditioners.html#the-preconditioner-interface">The preconditioner interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="custom_preconditioners.html#the-linearpreconditioner-interface">The LinearPreconditioner interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="custom_preconditioners.html#bare-interface">Bare interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custom_preconditioners.html#linearoperator-interface">LinearOperator interface</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="custom_preconditioners.html#the-preconditioner-function-api">The preconditioner function API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_preconditioners.html#the-preconditioner-function-api">The preconditioner function API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom_expect.html">Overriding behaviour and defining custom operators</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="custom_expect.html#netket-architecture-multiple-dispatch">NetKet Architecture: Multiple Dispatch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom_expect.html#defining-custom-implementations-for-expectation-values">Defining custom implementations for expectation values</a></li>
 </ul>
 </li>
 </ul>
@@ -328,8 +343,12 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.MPSPeriodic.html">netket.models.MPSPeriodic</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.NDM.html">netket.models.NDM</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.GCNN.html">netket.models.GCNN</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.ARNN.html">netket.models.ARNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.AbstractARNN.html">netket.models.AbstractARNN</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.ARNNDense.html">netket.models.ARNNDense</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.ARNNConv1D.html">netket.models.ARNNConv1D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.ARNNConv2D.html">netket.models.ARNNConv2D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.FastARNNConv1D.html">netket.models.FastARNNConv1D</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/models/netket.models.FastARNNConv2D.html">netket.models.FastARNNConv2D</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#model-tools">Model tools</a><ul>
@@ -409,7 +428,7 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.RuntimeLog.html">netket.logging.RuntimeLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.JsonLog.html">netket.logging.JsonLog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.StateLog.html">netket.logging.StateLog</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.TBLog.html">netket.logging.TBLog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/driver/netket.logging.TensorBoardLog.html">netket.logging.TensorBoardLog</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#utils">Utils</a><ul>
@@ -431,10 +450,10 @@
       </div>
     <div class="body col-md-9 content" role="main">
       
-  <section id="the-sharp-bits">
+  <div class="section" id="the-sharp-bits">
 <h1>🔪 The Sharp Bits 🔪<a class="headerlink" href="#the-sharp-bits" title="Permalink to this headline">¶</a></h1>
 <p>Read ahead for some pitfalls, counter-intuitive behavior, and sharp edges that we had to introduce in order to make this work.</p>
-<section id="parallelization">
+<div class="section" id="parallelization">
 <span id="id1"></span><h2>Parallelization<a class="headerlink" href="#parallelization" title="Permalink to this headline">¶</a></h2>
 <p>Netket computations run mostly via Jax’s XLA.
 Compared to NetKet 2, this means that we can automatically benefit from multiple CPUs without having to use MPI.
@@ -448,7 +467,7 @@ To disable this behaviour, refer to <a class="reference external" href="https://
 <p>Note that when using <code class="code docutils literal notranslate"><span class="pre">netket</span></code> it is crucial to run Python with the same implementation and version of MPI that the <code class="code docutils literal notranslate"><span class="pre">mpi4py</span></code> module is compiled against.
 If you encounter issues, you can check whether your MPI environment is set up properly by running:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mpirun -np 2 python3 -m netket.tools.check_mpi
-mpi_available                : True
+mpi4py_available             : True
 mpi4jax_available            : True
 avalable_cpus (rank 0)       : 12
 n_nodes                      : 1
@@ -463,8 +482,8 @@ Be mindfull that Jax, in general, is like an invasive plant and tends to use all
 the environment variables above might not prevent it from making use of the <cite>available_cpus</cite>.
 On Mac it is not possible to control this number.
 On Linux it can be controlled using <cite>taskset</cite> or <cite>–bind-to core</cite> when using <cite>mpirun</cite>.</p>
-</section>
-<section id="running-on-cpu-when-gpus-are-present">
+</div>
+<div class="section" id="running-on-cpu-when-gpus-are-present">
 <span id="running-on-cpu"></span><h2>Running on CPU when GPUs are present<a class="headerlink" href="#running-on-cpu-when-gpus-are-present" title="Permalink to this headline">¶</a></h2>
 <p>If you have the CUDA version of jaxlib installed, then computations will, by default, run on the GPU.
 For small systems this will be very inefficient. To check if this is the case, run the following code:</p>
@@ -478,8 +497,8 @@ something like <code class="code docutils literal notranslate"><span class="pre"
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">JAX_PLATFORM_NAME</span><span class="o">=</span><span class="s2">&quot;cpu&quot;</span>
 </pre></div>
 </div>
-</section>
-<section id="using-gpus">
+</div>
+<div class="section" id="using-gpus">
 <span id="gpus"></span><h2>Using GPUs<a class="headerlink" href="#using-gpus" title="Permalink to this headline">¶</a></h2>
 <p>Jax supports GPUs, so your calculations should run fine on GPU, however there are a few gotchas:</p>
 <ul class="simple">
@@ -488,8 +507,8 @@ something like <code class="code docutils literal notranslate"><span class="pre"
 </ul>
 <p>Eventually we would like the selection to be automatic, but this has not yet been implemented.</p>
 <p>Please open tickets if you find issues!</p>
-</section>
-<section id="nans-in-training-and-loss-of-precision">
+</div>
+<div class="section" id="nans-in-training-and-loss-of-precision">
 <span id="nan"></span><h2>NaNs in training and loss of precision<a class="headerlink" href="#nans-in-training-and-loss-of-precision" title="Permalink to this headline">¶</a></h2>
 <p>If you find NaNs while training, especially if you are using your own model, there might be a few reasons:</p>
 <ul class="simple">
@@ -502,8 +521,8 @@ if you use general flax layers they might use different initializers.
 different initialisation distributions have particoularly strong effects when working with complex-valued models.
 A good way to enforce the same distribution across all your weights, similar to NetKet 2 behaviour, is to use <a class="reference internal" href="_generated/variational/netket.vqs.VariationalState.html#netket.vqs.VariationalState.init_parameters" title="netket.vqs.VariationalState.init_parameters"><code class="xref py py-meth docutils literal notranslate"><span class="pre">init_parameters()</span></code></a>.</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 
 
     </div>
@@ -519,7 +538,7 @@ A good way to enforce the same distribution across all your weights, similar to 
     </p>
     <p>
         &copy; Copyright 2019-2021, The Netket authors - All rights reserved.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4.<br/>
     </p>
   </div>
 </footer>

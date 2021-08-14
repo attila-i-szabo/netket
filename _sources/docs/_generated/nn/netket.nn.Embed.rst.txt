@@ -6,8 +6,8 @@
 .. autoclass:: Embed
    :show-inheritance:
 
-   .. automethod:: Embed.__init__
 
+   
    
       
    .. rst-class:: class-dl-groups

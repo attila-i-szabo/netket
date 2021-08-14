@@ -6,9 +6,11 @@
 .. autoclass:: MetropolisSamplerNumpy
    :show-inheritance:
 
-   .. automethod:: MetropolisSamplerNumpy.__init__
 
    
+   
+
+   .. automethod:: MetropolisSamplerNumpy.__init__
       
    .. rst-class:: class-dl-groups
 

@@ -6,8 +6,8 @@
 .. autoclass:: ARDirectSampler
    :show-inheritance:
 
-   .. automethod:: ARDirectSampler.__init__
 
+   
    
       
    .. rst-class:: class-dl-groups

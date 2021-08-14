@@ -6,8 +6,8 @@
 .. autoclass:: MaskedConv1D
    :show-inheritance:
 
-   .. automethod:: MaskedConv1D.__init__
 
+   
    
       
    .. rst-class:: class-dl-groups
