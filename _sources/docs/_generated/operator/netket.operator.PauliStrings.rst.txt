@@ -38,6 +38,7 @@
       .. automethod:: PauliStrings.n_conn
       .. automethod:: PauliStrings.to_dense
       .. automethod:: PauliStrings.to_linear_operator
+      .. automethod:: PauliStrings.to_qobj
       .. automethod:: PauliStrings.to_sparse
       .. automethod:: PauliStrings.transpose
 

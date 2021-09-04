@@ -48,6 +48,7 @@
       .. automethod:: Heisenberg.n_conn
       .. automethod:: Heisenberg.to_dense
       .. automethod:: Heisenberg.to_linear_operator
+      .. automethod:: Heisenberg.to_qobj
       .. automethod:: Heisenberg.to_sparse
       .. automethod:: Heisenberg.transpose
 

@@ -386,6 +386,18 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">()</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span><span class="o">.</span><span class="n">A</span></div>
 
+<div class="viewcode-block" id="AbstractOperator.to_qobj"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.AbstractOperator.html#netket.operator.AbstractOperator.to_qobj">[docs]</a>    <span class="k">def</span> <span class="nf">to_qobj</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;qutip.Qobj&quot;</span><span class="p">:</span>  <span class="c1"># noqa: F821</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Convert the operator to a qutip&#39;s Qobj.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A `qutip.Qobj` object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">qutip</span> <span class="kn">import</span> <span class="n">Qobj</span>
+
+        <span class="k">return</span> <span class="n">Qobj</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">to_sparse</span><span class="p">(),</span> <span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">shape</span><span class="p">)]</span>
+        <span class="p">)</span></div>
+
 <div class="viewcode-block" id="AbstractOperator.apply"><a class="viewcode-back" href="../../../docs/_generated/operator/netket.operator.AbstractOperator.html#netket.operator.AbstractOperator.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
         <span class="n">op</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_linear_operator</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">op</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></div>

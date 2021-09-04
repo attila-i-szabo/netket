@@ -45,6 +45,7 @@
       .. automethod:: LocalOperator.n_conn
       .. automethod:: LocalOperator.to_dense
       .. automethod:: LocalOperator.to_linear_operator
+      .. automethod:: LocalOperator.to_qobj
       .. automethod:: LocalOperator.to_sparse
       .. automethod:: LocalOperator.transpose
 
