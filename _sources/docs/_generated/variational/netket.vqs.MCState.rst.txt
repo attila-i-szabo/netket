@@ -44,5 +44,6 @@
       .. automethod:: MCState.reset
       .. automethod:: MCState.sample
       .. automethod:: MCState.to_array
+      .. automethod:: MCState.to_qobj
 
    

@@ -32,5 +32,6 @@
       .. automethod:: VariationalState.quantum_geometric_tensor
       .. automethod:: VariationalState.reset
       .. automethod:: VariationalState.to_array
+      .. automethod:: VariationalState.to_qobj
 
    

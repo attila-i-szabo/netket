@@ -28,9 +28,9 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
 <meta name="apple-mobile-web-app-capable" content="yes">
-<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-1.12.4.min.js "></script>
 <script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
-<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.4.1/js/bootstrap.min.js "></script>
 <script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
 
   </head><body>
@@ -399,6 +399,8 @@
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.softplus.html">netket.nn.softplus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.swish.html">netket.nn.swish</a></li>
 <li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.log_cosh.html">netket.nn.log_cosh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.reim_relu.html">netket.nn.reim_relu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="_generated/nn/netket.nn.reim_selu.html">netket.nn.reim_selu</a></li>
 </ul>
 </li>
 </ul>
@@ -566,10 +568,10 @@ probably be of poor quality.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">nk</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">Hypercube</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">n_dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pbc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Then, one must define the systeme to be studied. To do so, the first
+<p>Then, one must define the system to be studied. To do so, the first
 thing to do is usually defining the lattice of the model. This is not
 always required, but it can sometimes avoid errors.
-Seveeral types of Lattices (graphs) are defined in the <a class="reference internal" href="api.html#graph"><span class="std std-ref">Graph</span></a>
+Several types of Lattices (graphs) are defined in the <a class="reference internal" href="api.html#graph"><span class="std std-ref">Graph</span></a>
 submodule.</p>
 <p>In the example above we chose a 1-Dimensional chain with 20 sites and
 periodic boundary conditions.</p>
@@ -602,7 +604,7 @@ which can _loose_ precision in some cases.
 This can happen if you mix single and double precision in your models and the sampler and
 is described in <a class="reference external" href="https://jax.readthedocs.io/en/latest/type_promotion.html">Jax:Type promotion semantics</a>.</p>
 <p>Hilbert space samplers are defined in the <a class="reference internal" href="api.html#sampler"><span class="std std-ref">Sampler</span></a> submodule. In general
-you must provide the constructor the hilbert space to be sampled and some options.
+you must provide the constructor of the hilbert space to be sampled and some options.
 In this case we ask for 16 markov chains.
 The default behaviour for samplers is to output states with double precision, but
 this can be configured by specifying the <code class="code docutils literal notranslate"><span class="pre">dtype</span></code> argument when constructing the
@@ -623,9 +625,9 @@ use an arbitrary flax optimiser, or define your own.</p>
 </pre></div>
 </div>
 <p>Once you have all the pieces together, you can construct a variational monte
-carlo optimisation driver by passing the constructor the hamiltonian and thee
-optimmmiser (which must always be the first two arguments), and theene the
-sampler, mahcine and various options.</p>
+carlo optimisation driver by passing the constructor the hamiltonian and the
+optimizer (which must always be the first two arguments), and then the
+sampler, machine and various options.</p>
 <p>Once that is done, you can run the simulation by calling the <span class="xref std std-ref">run</span> method
 in the driver, specifying the output loggers and the number of iterations in
 the optimisation.</p>

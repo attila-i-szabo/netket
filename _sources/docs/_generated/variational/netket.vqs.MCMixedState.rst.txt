@@ -53,5 +53,6 @@
       .. automethod:: MCMixedState.sample
       .. automethod:: MCMixedState.to_array
       .. automethod:: MCMixedState.to_matrix
+      .. automethod:: MCMixedState.to_qobj
 
    
