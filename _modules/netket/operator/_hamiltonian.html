@@ -115,6 +115,7 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Sequence</span>
 
 <span class="kn">from</span> <span class="nn">netket.graph</span> <span class="kn">import</span> <span class="n">AbstractGraph</span><span class="p">,</span> <span class="n">Graph</span>
 <span class="kn">from</span> <span class="nn">netket.hilbert</span> <span class="kn">import</span> <span class="n">AbstractHilbert</span><span class="p">,</span> <span class="n">Fock</span>
@@ -462,7 +463,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">hilbert</span><span class="p">:</span> <span class="n">AbstractHilbert</span><span class="p">,</span>
         <span class="n">graph</span><span class="p">:</span> <span class="n">AbstractGraph</span><span class="p">,</span>
-        <span class="n">J</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">J</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="n">sign_rule</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -473,11 +474,15 @@
 <span class="sd">            hilbert: Hilbert space the operator acts on.</span>
 <span class="sd">            graph: The graph upon which this hamiltonian is defined.</span>
 <span class="sd">            J: The strength of the coupling. Default is 1.</span>
-<span class="sd">            sign_rule: If enabled, Marshal&#39;s sign rule will be used. On a bipartite</span>
+<span class="sd">               Can pass a sequence of coupling strengths with coloured graphs:</span>
+<span class="sd">               edges of colour n will have coupling strength J[n]</span>
+<span class="sd">            sign_rule: If True, Marshal&#39;s sign rule will be used. On a bipartite</span>
 <span class="sd">                       lattice, this corresponds to a basis change flipping the Sz direction</span>
 <span class="sd">                       at every odd site of the lattice. For non-bipartite lattices, the</span>
 <span class="sd">                       sign rule cannot be applied. Defaults to True if the lattice is</span>
 <span class="sd">                       bipartite, False otherwise.</span>
+<span class="sd">                       If a sequence of coupling strengths is passed, defaults to False</span>
+<span class="sd">                       and a matching sequence of sign_rule must be specified to override it</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">         Constructs a ``Heisenberg`` operator for a 1D system.</span>
@@ -487,10 +492,27 @@
 <span class="sd">            &gt;&gt;&gt; hi = nk.hilbert.Spin(s=0.5, total_sz=0, N=g.n_nodes)</span>
 <span class="sd">            &gt;&gt;&gt; op = nk.operator.Heisenberg(hilbert=hi, graph=g)</span>
 <span class="sd">            &gt;&gt;&gt; print(op)</span>
-<span class="sd">            Heisenberg(J=1, sign_rule=True; dim=20)</span>
+<span class="sd">            Heisenberg(J=1.0, sign_rule=True; dim=20)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">sign_rule</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">sign_rule</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">is_bipartite</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">):</span>
+            <span class="c1"># check that the number of Js matches the number of colours</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">J</span><span class="p">)</span> <span class="o">==</span> <span class="nb">max</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">edge_colors</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="n">sign_rule</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">sign_rule</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">J</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">sign_rule</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">J</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">J</span><span class="p">)):</span>
+                    <span class="n">subgraph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">edges</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">filter_color</span><span class="o">=</span><span class="n">i</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="n">sign_rule</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">subgraph</span><span class="o">.</span><span class="n">is_bipartite</span><span class="p">():</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                            <span class="s2">&quot;sign_rule=True specified for a non-bipartite lattice&quot;</span>
+                        <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">sign_rule</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">sign_rule</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">is_bipartite</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">sign_rule</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">graph</span><span class="o">.</span><span class="n">is_bipartite</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;sign_rule=True specified for a non-bipartite lattice&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_J</span> <span class="o">=</span> <span class="n">J</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sign_rule</span> <span class="o">=</span> <span class="n">sign_rule</span>
@@ -511,17 +533,19 @@
                 <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
             <span class="p">]</span>
         <span class="p">)</span>
-        <span class="k">if</span> <span class="n">sign_rule</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span><span class="o">.</span><span class="n">is_bipartite</span><span class="p">():</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;sign_rule=True specified for a non-bipartite lattice&quot;</span><span class="p">)</span>
-            <span class="n">heis_term</span> <span class="o">=</span> <span class="n">sz_sz</span> <span class="o">-</span> <span class="n">exchange</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">):</span>
+            <span class="n">bond_ops</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">J</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">sz_sz</span> <span class="o">-</span> <span class="n">exchange</span> <span class="k">if</span> <span class="n">sign_rule</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">else</span> <span class="n">sz_sz</span> <span class="o">+</span> <span class="n">exchange</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">J</span><span class="p">))</span>
+            <span class="p">]</span>
+            <span class="n">bond_ops_colors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">J</span><span class="p">)))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">heis_term</span> <span class="o">=</span> <span class="n">sz_sz</span> <span class="o">+</span> <span class="n">exchange</span>
+            <span class="n">bond_ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">J</span> <span class="o">*</span> <span class="p">(</span><span class="n">sz_sz</span> <span class="o">-</span> <span class="n">exchange</span> <span class="k">if</span> <span class="n">sign_rule</span> <span class="k">else</span> <span class="n">sz_sz</span> <span class="o">+</span> <span class="n">exchange</span><span class="p">)]</span>
+            <span class="n">bond_ops_colors</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-            <span class="n">hilbert</span><span class="p">,</span>
-            <span class="n">graph</span><span class="p">,</span>
-            <span class="n">bond_ops</span><span class="o">=</span><span class="p">[</span><span class="n">J</span> <span class="o">*</span> <span class="n">heis_term</span><span class="p">],</span>
+            <span class="n">hilbert</span><span class="p">,</span> <span class="n">graph</span><span class="p">,</span> <span class="n">bond_ops</span><span class="o">=</span><span class="n">bond_ops</span><span class="p">,</span> <span class="n">bond_ops_colors</span><span class="o">=</span><span class="n">bond_ops_colors</span>
         <span class="p">)</span></div>
 
     <span class="nd">@property</span>
