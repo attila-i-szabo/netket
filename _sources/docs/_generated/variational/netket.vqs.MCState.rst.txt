@@ -6,8 +6,15 @@
 .. autoclass:: MCState
    :show-inheritance:
 
-
    
+
+   .. rst-class:: class-dl-groups
+
+   Inheritance
+      .. inheritance-diagram:: netket.vqs.MCState
+         :parts: 2
+
+
    
 
    .. automethod:: MCState.__init__

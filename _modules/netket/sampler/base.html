@@ -7,6 +7,7 @@
     <title>netket.sampler.base &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jumbo-style.css" />
@@ -130,20 +131,20 @@
 <span class="n">fancy</span> <span class="o">=</span> <span class="p">[]</span>
 
 
-<div class="viewcode-block" id="SamplerState"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.SamplerState.html#netket.sampler.SamplerState">[docs]</a><span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">SamplerState</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class holding the state of a sampler.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">pass</span></div>
+    <span class="k">pass</span>
 
 
 <span class="k">def</span> <span class="nf">autodoc</span><span class="p">(</span><span class="n">clz</span><span class="p">):</span>
     <span class="k">pass</span>
 
 
-<div class="viewcode-block" id="Sampler"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.Sampler.html#netket.sampler.Sampler">[docs]</a><span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">Sampler</span><span class="p">(</span><span class="n">abc</span><span class="o">.</span><span class="n">ABC</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Abstract base class for all samplers.</span>
@@ -444,10 +445,10 @@
 <span class="sd">        If you sub-class Sampler, you should define _sample_next and not sample_next</span>
 <span class="sd">        itself, because reset contains some common logic.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;sample_next Not Implemented&quot;</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;sample_next Not Implemented&quot;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="sampler_state"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.sampler_state.html#netket.sampler.sampler_state">[docs]</a><span class="k">def</span> <span class="nf">sampler_state</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">sampler_state</span><span class="p">(</span>
     <span class="n">sampler</span><span class="p">:</span> <span class="n">Sampler</span><span class="p">,</span> <span class="n">machine</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">],</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">PyTree</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SamplerState</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -473,10 +474,10 @@
 <span class="sd">        The structure holding the state of the sampler. In general you should not expect</span>
 <span class="sd">        it to be in a valid state, and should reset it before use.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">sampler</span><span class="o">.</span><span class="n">init_state</span><span class="p">(</span><span class="n">machine</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">sampler</span><span class="o">.</span><span class="n">init_state</span><span class="p">(</span><span class="n">machine</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="reset"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.reset.html#netket.sampler.reset">[docs]</a><span class="k">def</span> <span class="nf">reset</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">reset</span><span class="p">(</span>
     <span class="n">sampler</span><span class="p">:</span> <span class="n">Sampler</span><span class="p">,</span>
     <span class="n">machine</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">],</span>
     <span class="n">parameters</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span>
@@ -495,10 +496,10 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        A valid sampler state.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">sampler</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">machine</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span></div>
+    <span class="n">sampler</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">machine</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="sample_next"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.sample_next.html#netket.sampler.sample_next">[docs]</a><span class="k">def</span> <span class="nf">sample_next</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">sample_next</span><span class="p">(</span>
     <span class="n">sampler</span><span class="p">:</span> <span class="n">Sampler</span><span class="p">,</span>
     <span class="n">machine</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">],</span>
     <span class="n">parameters</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span>
@@ -518,10 +519,10 @@
 <span class="sd">        state: The new state of the sampler</span>
 <span class="sd">        σ: The next batch of samples.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">sampler</span><span class="o">.</span><span class="n">sample_next</span><span class="p">(</span><span class="n">machine</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">sampler</span><span class="o">.</span><span class="n">sample_next</span><span class="p">(</span><span class="n">machine</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="sample"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.sample.html#netket.sampler.sample">[docs]</a><span class="k">def</span> <span class="nf">sample</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">sample</span><span class="p">(</span>
     <span class="n">sampler</span><span class="p">:</span> <span class="n">Sampler</span><span class="p">,</span>
     <span class="n">machine</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">],</span>
     <span class="n">parameters</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span>
@@ -547,7 +548,7 @@
     <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">machine</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">sampler</span><span class="o">.</span><span class="n">_sample_chain</span><span class="p">(</span><span class="n">machine</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">chain_length</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">sampler</span><span class="o">.</span><span class="n">_sample_chain</span><span class="p">(</span><span class="n">machine</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">chain_length</span><span class="p">)</span>
 
 
 <span class="nd">@partial</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">,</span> <span class="n">static_argnums</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -587,7 +588,7 @@
     <span class="k">return</span> <span class="n">samples</span><span class="p">,</span> <span class="n">state</span>
 
 
-<div class="viewcode-block" id="samples"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.samples.html#netket.sampler.samples">[docs]</a><span class="k">def</span> <span class="nf">samples</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">samples</span><span class="p">(</span>
     <span class="n">sampler</span><span class="p">:</span> <span class="n">Sampler</span><span class="p">,</span>
     <span class="n">machine</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">],</span>
     <span class="n">parameters</span><span class="p">:</span> <span class="n">PyTree</span><span class="p">,</span>
@@ -611,7 +612,7 @@
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">chain_length</span><span class="p">):</span>
         <span class="n">samples</span><span class="p">,</span> <span class="n">state</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">_sample_chain</span><span class="p">(</span><span class="n">machine</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">yield</span> <span class="n">samples</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span></div>
+        <span class="k">yield</span> <span class="n">samples</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
 </pre></div>
 
     </div>

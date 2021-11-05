@@ -7,6 +7,7 @@
     <title>netket.vqs.mc_mixed_state &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jumbo-style.css" />
@@ -140,7 +141,7 @@
     <span class="k">return</span> <span class="n">bare_afun</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="MCMixedState"><a class="viewcode-back" href="../../../docs/_generated/variational/netket.vqs.MCMixedState.html#netket.vqs.MCMixedState">[docs]</a><span class="k">class</span> <span class="nc">MCMixedState</span><span class="p">(</span><span class="n">VariationalMixedState</span><span class="p">,</span> <span class="n">MCState</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">MCMixedState</span><span class="p">(</span><span class="n">VariationalMixedState</span><span class="p">,</span> <span class="n">MCState</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Variational State for a Mixed Variational Neural Quantum State.</span>
 
 <span class="sd">    The state is sampled according to the provided sampler, and it&#39;s diagonal is sampled</span>
@@ -383,7 +384,7 @@
             <span class="o">+</span> <span class="s2">&quot;hilbert = </span><span class="si">{}</span><span class="s2">, &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hilbert</span><span class="p">)</span>
             <span class="o">+</span> <span class="s2">&quot;sampler = </span><span class="si">{}</span><span class="s2">, &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="p">)</span>
             <span class="o">+</span> <span class="s2">&quot;n_samples = </span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span><span class="p">)</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
 
 
 <span class="c1"># serialization</span>

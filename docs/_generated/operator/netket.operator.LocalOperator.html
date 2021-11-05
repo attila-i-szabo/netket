@@ -7,6 +7,7 @@
     <title>netket.operator.LocalOperator &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jumbo-style.css" />
@@ -127,38 +128,45 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change Log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-1-under-development">NetKet 3.1 (under development)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-2-in-development">NetKet 3.2 (In development)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#new-features">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#breaking-changes">Breaking Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#internal-changes">Internal Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#bug-fixes">Bug Fixes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0-23-august-2021">NetKet 3.0 (23 august 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-1-20-october-2021">NetKet 3.1 (20 October 2021)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id1">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id2">Breaking Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id3">Internal Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id4">Bug Fixes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b4-17-august-2021">NetKet 3.0b4 (17 august 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0-23-august-2021">NetKet 3.0 (23 august 2021)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id5">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id6">Breaking Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id7">Internal Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id8">Bug Fixes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b3-published-on-9-july-2021">NetKet 3.0b3 (published on 9 july 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b4-17-august-2021">NetKet 3.0b4 (17 august 2021)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id9">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id10">Breaking Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id11">Internal Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id12">Bug Fixes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b2-published-on-31-may-2021">NetKet 3.0b2 (published on 31 May 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b3-published-on-9-july-2021">NetKet 3.0b3 (published on 9 july 2021)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id13">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id14">Breaking Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id15">Bug Fixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id15">Internal Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id16">Bug Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b2-published-on-31-may-2021">NetKet 3.0b2 (published on 31 May 2021)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id17">New features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id18">Breaking Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id19">Bug Fixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b1-published-beta-release">NetKet 3.0b1 (published beta release)</a><ul>
@@ -271,9 +279,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Graph.html">netket.graph.Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.lattice.LatticeSite.html">netket.graph.lattice.LatticeSite</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Chain.html">netket.graph.Chain</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Grid.html">netket.graph.Grid</a></li>
@@ -281,15 +289,21 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#hilbert">Hilbert</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.AbstractHilbert.html">netket.hilbert.AbstractHilbert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.AbstractParticle.html">netket.hilbert.AbstractParticle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.DiscreteHilbert.html">netket.hilbert.DiscreteHilbert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.HomogeneousHilbert.html">netket.hilbert.HomogeneousHilbert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.CustomHilbert.html">netket.hilbert.CustomHilbert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.TensorHilbert.html">netket.hilbert.TensorHilbert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.DoubledHilbert.html">netket.hilbert.DoubledHilbert</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Fock.html">netket.hilbert.Fock</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Spin.html">netket.hilbert.Spin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Fock.html">netket.hilbert.Fock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.ContinuousBoson.html">netket.hilbert.ContinuousBoson</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../api.html#operators">Operators</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="netket.operator.AbstractOperator.html">netket.operator.AbstractOperator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.operator.DiscreteOperator.html">netket.operator.DiscreteOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.operator.BoseHubbard.html">netket.operator.BoseHubbard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.operator.GraphOperator.html">netket.operator.GraphOperator</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">netket.operator.LocalOperator</a></li>
@@ -478,11 +492,19 @@
 <h1>netket.operator.LocalOperator<a class="headerlink" href="#netket-operator-localoperator" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="netket.operator.LocalOperator">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.operator.</span></code><code class="sig-name descname"><span class="pre">LocalOperator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilbert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acting_on</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constant</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_local_operator.html#LocalOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.LocalOperator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.operator._abstract_operator.AbstractOperator</span></code></p>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.operator.</span></code><code class="sig-name descname"><span class="pre">LocalOperator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilbert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acting_on</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constant</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.LocalOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="netket.operator.DiscreteOperator.html#netket.operator.DiscreteOperator" title="netket.operator.DiscreteOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">netket.operator.DiscreteOperator</span></code></a></p>
 <p>A custom local operator. This is a sum of an arbitrary number of operators
 acting locally on a limited set of k quantum numbers (i.e. k-local,
 in the quantum information sense).</p>
+<dl class="class-dl-groups">
+<dt>Inheritance</dt><dd><div class="graphviz"><img src="../../../_images/inheritance-4620badfaaf827c407bc71e952c3e30016f384c4.png" alt="Inheritance diagram of netket.operator.LocalOperator" usemap="#inheritancea6f4252e84" class="inheritance graphviz" /></div>
+<map id="inheritancea6f4252e84" name="inheritancea6f4252e84">
+<area shape="rect" id="node1" href="netket.operator.AbstractOperator.html#netket.operator.AbstractOperator" target="_top" title="Abstract class for quantum Operators. This class prototypes the methods" alt="" coords="5,5,196,31"/>
+<area shape="rect" id="node2" href="netket.operator.DiscreteOperator.html#netket.operator.DiscreteOperator" target="_top" title="This class is the base class for operators defined on a" alt="" coords="244,5,435,31"/>
+<area shape="rect" id="node3" href="#netket.operator.LocalOperator" target="_top" title="A custom local operator. This is a sum of an arbitrary number of operators" alt="" coords="483,5,653,31"/>
+</map></dd>
+</dl>
 <dl class="py method">
 <dt id="netket.operator.LocalOperator.__init__">
 <code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilbert</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">operators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acting_on</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constant</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/operator/_local_operator.html#LocalOperator.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.operator.LocalOperator.__init__" title="Permalink to this definition">¶</a></dt>
@@ -494,7 +516,7 @@ specified) a constant level shift.</p>
 <li><p><strong>hilbert</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">netket.AbstractHilbert</span></code>) – Hilbert space the operator acts on.</p></li>
 <li><p><strong>operators</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list(numpy.array)</span> <span class="pre">or</span> <span class="pre">numpy.array</span></code>) – A list of operators, in matrix form.</p></li>
 <li><p><strong>acting_on</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list(numpy.array)</span> <span class="pre">or</span> <span class="pre">numpy.array</span></code>) – A list of sites, which the corresponding operators act on.</p></li>
-<li><p><strong>constant</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Level shift for operator. Default is 0.0.</p></li>
+<li><p><strong>constant</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Level shift for operator. Default is 0.0.</p></li>
 <li><p><strong>dtype</strong> (<em>Optional</em><em>[</em><em>Any</em><em>]</em>) – </p></li>
 </ul>
 </dd>
@@ -518,7 +540,7 @@ specified) a constant level shift.</p>
 <dd><p>Returns the Conjugate-Transposed operator</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractOperator</span></code></p>
+<dd class="field-odd"><p><a class="reference internal" href="netket.operator.AbstractOperator.html#netket.operator.AbstractOperator" title="netket.operator.AbstractOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractOperator</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -529,7 +551,7 @@ specified) a constant level shift.</p>
 <dd><p>Returns the transposed operator</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractOperator</span></code></p>
+<dd class="field-odd"><p><a class="reference internal" href="netket.operator.AbstractOperator.html#netket.operator.AbstractOperator" title="netket.operator.AbstractOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractOperator</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -541,7 +563,7 @@ specified) a constant level shift.</p>
 <p>Every operator <cite>self.operators[i]</cite> acts on the sites <cite>self.acting_on[i]</cite></p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -551,7 +573,7 @@ specified) a constant level shift.</p>
 <code class="sig-name descname"><span class="pre">constant</span></code><a class="headerlink" href="#netket.operator.LocalOperator.constant" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/numbers.html#numbers.Number" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Number</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/numbers.html#numbers.Number" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Number</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -561,7 +583,7 @@ specified) a constant level shift.</p>
 <code class="sig-name descname"><span class="pre">dtype</span></code><a class="headerlink" href="#netket.operator.LocalOperator.dtype" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -572,7 +594,7 @@ specified) a constant level shift.</p>
 <dd><p>The hilbert space associated to this operator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractHilbert</span></code></p>
+<dd class="field-odd"><p><a class="reference internal" href="../hilbert/netket.hilbert.AbstractHilbert.html#netket.hilbert.AbstractHilbert" title="netket.hilbert.AbstractHilbert"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractHilbert</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -583,7 +605,7 @@ specified) a constant level shift.</p>
 <dd><p>Returns true if this operator is hermitian.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -594,7 +616,7 @@ specified) a constant level shift.</p>
 <dd><p>The maximum number of non zero ⟨x|O|x’⟩ for every x.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -607,10 +629,10 @@ Only matrix elements such that abs(O(i,i))&gt;mel_cutoff
 are considered</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -620,7 +642,7 @@ are considered</p>
 <code class="sig-name descname"><span class="pre">n_operators</span></code><a class="headerlink" href="#netket.operator.LocalOperator.n_operators" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -632,7 +654,7 @@ are considered</p>
 Returns a copy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -642,7 +664,7 @@ Returns a copy.</p>
 <code class="sig-name descname"><span class="pre">size</span></code><a class="headerlink" href="#netket.operator.LocalOperator.size" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -686,7 +708,7 @@ hermitian conjugate…), this is used to obtain a guaranteed non-lazy
 operator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractOperator</span></code></p>
+<dd class="field-odd"><p><a class="reference internal" href="netket.operator.AbstractOperator.html#netket.operator.AbstractOperator" title="netket.operator.AbstractOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractOperator</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -696,7 +718,7 @@ operator.</p>
 <code class="sig-name descname"><span class="pre">conj</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concrete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.LocalOperator.conj" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractOperator</span></code></p>
+<dd class="field-odd"><p><a class="reference internal" href="netket.operator.AbstractOperator.html#netket.operator.AbstractOperator" title="netket.operator.AbstractOperator"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractOperator</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -726,17 +748,23 @@ of the operator.</p>
 from a given quantum number x, it finds all other quantum numbers x’ such
 that the matrix element <span class="math notranslate nohighlight">\(O(x,x')\)</span> is different from zero. In general there
 will be several different connected states x’ satisfying this
-condition, and they are denoted here <span class="math notranslate nohighlight">\(x'(k)\)</span>, for <span class="math notranslate nohighlight">\(k=0,1...N_{\mathrm{connected}}\)</span>.</p>
+condition, and they are denoted here <span class="math notranslate nohighlight">\(x'(k)\)</span>, for <span class="math notranslate nohighlight">\(k=0,1...N_{\mathrm{connected}}\)</span>.
+:type x: <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>
+:param x: An array of shape (hilbert.size) containing the quantum numbers x.
+:type x: <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – An array of shape (hilbert.size) containing the quantum numbers x.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The connected states x’ of shape (N_connected,hilbert.size)
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The connected states x’ of shape (N_connected,hilbert.size)
 array: An array containing the matrix elements <span class="math notranslate nohighlight">\(O(x,x')\)</span> associated to each x’.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>matrix</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>matrix</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.10)"><strong>ValueError</strong></a> – If the given quantum number is not compatible with the hilbert space.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><p><strong>x</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><em>numpy.ndarray</em></a>) – </p>
 </dd>
 </dl>
 </dd></dl>
@@ -789,7 +817,7 @@ the batch of quantum numbers x.</p></li>
 <li><p><strong>sections</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – An array of size (batch_size) useful to unflatten
 the output of this function.
 See numpy.split for the meaning of sections.</p></li>
-<li><p><strong>pad</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether to use zero-valued matrix elements in order to return all equal sections.</p></li>
+<li><p><strong>pad</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether to use zero-valued matrix elements in order to return all equal sections.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -810,22 +838,26 @@ Starting from a batch of quantum numbers x={x_1, … x_n} of size B x M
 where B size of the batch and M size of the hilbert space, finds all states
 y_i^1, …, y_i^K connected to every x_i.
 Returns a matrix of size B x Kmax x M where Kmax is the maximum number of
-connections for every y_i.</p>
+connections for every y_i.
+:type x: <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>
+:param x: A N-tensor of shape (…,hilbert.size) containing</p>
+<blockquote>
+<div><p>the batch/batches of quantum numbers x.</p>
+</div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – A N-tensor of shape (…,hilbert.size) containing
-the batch/batches of quantum numbers x.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p>The connected states x’, in a N+1-tensor.
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>The connected states x’, in a N+1-tensor.
 mels: A N-tensor containing the matrix elements <span class="math notranslate nohighlight">\(O(x,x')\)</span></p>
 <blockquote>
 <div><p>associated to each x’ for every batch.</p>
 </div></blockquote>
 </p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>x_primes</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>x_primes</p>
+</dd>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><em>numpy.ndarray</em></a>) – </p>
 </dd>
 </dl>
 </dd></dl>
@@ -877,13 +909,12 @@ low-dimensional Hilbert spaces or sufficiently sparse operators.</p>
 <dl class="py method">
 <dt id="netket.operator.LocalOperator.to_qobj">
 <code class="sig-name descname"><span class="pre">to_qobj</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#netket.operator.LocalOperator.to_qobj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert the operator to a qutip’s Qobj.</p>
+<dd><p>Convert the operator to a qutip’s Qobj.
+:rtype: qutip.Qobj
+:returns: A <cite>qutip.Qobj</cite> object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>qutip.Qobj</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <cite>qutip.Qobj</cite> object.</p>
 </dd>
 </dl>
 </dd></dl>

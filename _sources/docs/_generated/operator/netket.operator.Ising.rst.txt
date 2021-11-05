@@ -6,8 +6,15 @@
 .. autoclass:: Ising
    :show-inheritance:
 
-
    
+
+   .. rst-class:: class-dl-groups
+
+   Inheritance
+      .. inheritance-diagram:: netket.operator.Ising
+         :parts: 2
+
+
    
 
    .. automethod:: Ising.__init__

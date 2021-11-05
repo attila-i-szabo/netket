@@ -7,6 +7,7 @@
     <title>netket.hilbert.DoubledHilbert &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jumbo-style.css" />
@@ -24,8 +25,8 @@
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="netket.hilbert.Fock" href="netket.hilbert.Fock.html" />
-    <link rel="prev" title="netket.hilbert.CustomHilbert" href="netket.hilbert.CustomHilbert.html" />
+    <link rel="next" title="netket.hilbert.Spin" href="netket.hilbert.Spin.html" />
+    <link rel="prev" title="netket.hilbert.TensorHilbert" href="netket.hilbert.TensorHilbert.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -127,38 +128,45 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Change Log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-1-under-development">NetKet 3.1 (under development)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-2-in-development">NetKet 3.2 (In development)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#new-features">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#breaking-changes">Breaking Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#internal-changes">Internal Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#bug-fixes">Bug Fixes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0-23-august-2021">NetKet 3.0 (23 august 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-1-20-october-2021">NetKet 3.1 (20 October 2021)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id1">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id2">Breaking Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id3">Internal Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id4">Bug Fixes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b4-17-august-2021">NetKet 3.0b4 (17 august 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0-23-august-2021">NetKet 3.0 (23 august 2021)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id5">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id6">Breaking Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id7">Internal Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id8">Bug Fixes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b3-published-on-9-july-2021">NetKet 3.0b3 (published on 9 july 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b4-17-august-2021">NetKet 3.0b4 (17 august 2021)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id9">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id10">Breaking Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id11">Internal Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id12">Bug Fixes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b2-published-on-31-may-2021">NetKet 3.0b2 (published on 31 May 2021)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b3-published-on-9-july-2021">NetKet 3.0b3 (published on 9 july 2021)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id13">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id14">Breaking Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id15">Bug Fixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id15">Internal Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id16">Bug Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b2-published-on-31-may-2021">NetKet 3.0b2 (published on 31 May 2021)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id17">New features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id18">Breaking Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../changelog.html#id19">Bug Fixes</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../changelog.html#netket-3-0b1-published-beta-release">NetKet 3.0b1 (published beta release)</a><ul>
@@ -271,9 +279,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#graph">Graph</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.AbstractGraph.html">netket.graph.AbstractGraph</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Graph.html">netket.graph.Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Edgeless.html">netket.graph.Edgeless</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Hypercube.html">netket.graph.Hypercube</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Lattice.html">netket.graph.Lattice</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.lattice.LatticeSite.html">netket.graph.lattice.LatticeSite</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Chain.html">netket.graph.Chain</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../graph/netket.graph.Grid.html">netket.graph.Grid</a></li>
@@ -281,15 +289,21 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../api.html#hilbert">Hilbert</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="netket.hilbert.AbstractHilbert.html">netket.hilbert.AbstractHilbert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.hilbert.AbstractParticle.html">netket.hilbert.AbstractParticle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.hilbert.DiscreteHilbert.html">netket.hilbert.DiscreteHilbert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.hilbert.HomogeneousHilbert.html">netket.hilbert.HomogeneousHilbert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.hilbert.CustomHilbert.html">netket.hilbert.CustomHilbert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.hilbert.TensorHilbert.html">netket.hilbert.TensorHilbert</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">netket.hilbert.DoubledHilbert</a></li>
-<li class="toctree-l3"><a class="reference internal" href="netket.hilbert.Fock.html">netket.hilbert.Fock</a></li>
-<li class="toctree-l3"><a class="reference internal" href="netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="netket.hilbert.Spin.html">netket.hilbert.Spin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.hilbert.Fock.html">netket.hilbert.Fock</a></li>
+<li class="toctree-l3"><a class="reference internal" href="netket.hilbert.ContinuousBoson.html">netket.hilbert.ContinuousBoson</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#operators">Operators</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.AbstractOperator.html">netket.operator.AbstractOperator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.DiscreteOperator.html">netket.operator.DiscreteOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.BoseHubbard.html">netket.operator.BoseHubbard</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.GraphOperator.html">netket.operator.GraphOperator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../operator/netket.operator.LocalOperator.html">netket.operator.LocalOperator</a></li>
@@ -478,10 +492,18 @@
 <h1>netket.hilbert.DoubledHilbert<a class="headerlink" href="#netket-hilbert-doubledhilbert" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="netket.hilbert.DoubledHilbert">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.hilbert.</span></code><code class="sig-name descname"><span class="pre">DoubledHilbert</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/hilbert/doubled_hilbert.html#DoubledHilbert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.hilbert.DoubledHilbert" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">netket.hilbert.</span></code><code class="sig-name descname"><span class="pre">DoubledHilbert</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilb</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#netket.hilbert.DoubledHilbert" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">netket.hilbert.doubled_hilbert.DoubledHilbert</span></code></p>
 <p>Superoperatorial hilbert space for states living in the tensorised state
 <span class="math notranslate nohighlight">\(\hat{H}\otimes \hat{H}\)</span>, encoded according to Choi’s isomorphism.</p>
+<dl class="class-dl-groups">
+<dt>Inheritance</dt><dd><div class="graphviz"><img src="../../../_images/inheritance-40c8d398ecb150c281ce80a4dcc481869cb4c8ed.png" alt="Inheritance diagram of netket.hilbert.DoubledHilbert" usemap="#inheritance22efab6f30" class="inheritance graphviz" /></div>
+<map id="inheritance22efab6f30" name="inheritance22efab6f30">
+<area shape="rect" id="node4" href="#netket.hilbert.DoubledHilbert" target="_top" title="Superoperatorial hilbert space for states living in the tensorised state" alt="" coords="618,5,763,27"/>
+<area shape="rect" id="node2" href="netket.hilbert.DiscreteHilbert.html#netket.hilbert.DiscreteHilbert" target="_top" title="Abstract class for an hilbert space defined on a lattice." alt="" coords="192,5,337,27"/>
+<area shape="rect" id="node3" href="netket.hilbert.AbstractHilbert.html#netket.hilbert.AbstractHilbert" target="_top" title="Abstract class for NetKet hilbert objects." alt="" coords="5,5,150,27"/>
+</map></dd>
+</dl>
 <dl class="py method">
 <dt id="netket.hilbert.DoubledHilbert.__init__">
 <code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hilb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/netket/hilbert/doubled_hilbert.html#DoubledHilbert.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#netket.hilbert.DoubledHilbert.__init__" title="Permalink to this definition">¶</a></dt>
@@ -490,7 +512,7 @@ state <span class="math notranslate nohighlight">\(\hat{H}\otimes \hat{H}\)</spa
 isomorphism.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>hilb</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractHilbert</span></code>) – the Hilbert space H.</p>
+<dd class="field-odd"><p><strong>hilb</strong> (<a class="reference internal" href="netket.hilbert.AbstractHilbert.html#netket.hilbert.AbstractHilbert" title="netket.hilbert.AbstractHilbert"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractHilbert</span></code></a>) – the Hilbert space H.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -517,7 +539,7 @@ isomorphism.</p>
 <dd><p>Whever the space can be indexed with an integer</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -562,7 +584,7 @@ isomorphism.</p>
 <p>Throws an exception if the space is not indexable.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>out</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]) – an optional pre-allocated output array</p>
+<dd class="field-odd"><p><strong>out</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]) – an optional pre-allocated output array</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
@@ -586,7 +608,7 @@ Throws an exception iff the space is not indexable.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>numbers</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.array</span></code>) – Batch of input numbers to be converted into arrays of
 quantum numbers.</p></li>
-<li><p><strong>out</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]) – Optional Array of quantum numbers corresponding to numbers.</p></li>
+<li><p><strong>out</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]) – Optional Array of quantum numbers corresponding to numbers.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -602,10 +624,10 @@ quantum numbers.</p></li>
 <p>Not all hilbert spaces support this operation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>sites</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>]) – a site or list of sites to trace away</p>
+<dd class="field-odd"><p><strong>sites</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterable</span></code></a>]) – a site or list of sites to trace away</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractHilbert</span></code></p>
+<dd class="field-even"><p><a class="reference internal" href="netket.hilbert.AbstractHilbert.html#netket.hilbert.AbstractHilbert" title="netket.hilbert.AbstractHilbert"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractHilbert</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>The partially-traced hilbert space. The type of the resulting hilbert space
@@ -623,7 +645,7 @@ Runs as <code class="code docutils literal notranslate"><span class="pre">random
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>key</strong> – rng state from a jax-style functional generator.</p></li>
-<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – If provided, returns a batch of configurations of the form
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – If provided, returns a batch of configurations of the form
 <code class="code docutils literal notranslate"><span class="pre">(size,</span> <span class="pre">N)</span></code> if size is an integer or <code class="code docutils literal notranslate"><span class="pre">(*size,</span> <span class="pre">N)</span></code> if it is
 a tuple and where <span class="math notranslate nohighlight">\(N\)</span> is the Hilbert space size.
 By default, a single random configuration with shape
@@ -661,7 +683,7 @@ Iterating over all states with this method is typically inefficient,
 and <code class="docutils literal notranslate"><span class="pre">`all_states`</span></code> should be prefered.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterator" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterator</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterator" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Iterator</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -676,7 +698,7 @@ Throws an exception iff the space is not indexable.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>states</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Batch of states to be converted into the corresponding integers.</p></li>
-<li><p><strong>out</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]) – Array of integers such that out[k]=Index(states[k]).
+<li><p><strong>out</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]) – Array of integers such that out[k]=Index(states[k]).
 If None, memory is allocated.</p></li>
 </ul>
 </dd>

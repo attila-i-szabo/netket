@@ -1,0 +1,38 @@
+﻿netket.hilbert.ContinuousBoson
+==============================
+
+.. currentmodule:: netket.hilbert
+
+.. autoclass:: ContinuousBoson
+   :show-inheritance:
+
+   
+
+   .. rst-class:: class-dl-groups
+
+   Inheritance
+      .. inheritance-diagram:: netket.hilbert.ContinuousBoson
+         :parts: 2
+
+
+   
+
+   .. automethod:: ContinuousBoson.__init__
+      
+   .. rst-class:: class-dl-groups
+
+   Attributes
+      .. autoattribute:: ContinuousBoson.extend
+      .. autoattribute:: ContinuousBoson.is_indexable
+      .. autoattribute:: ContinuousBoson.n_particles
+      .. autoattribute:: ContinuousBoson.pbc
+      .. autoattribute:: ContinuousBoson.size
+   
+      
+   .. rst-class:: class-dl-groups
+
+   Methods
+      .. automethod:: ContinuousBoson.ptrace
+      .. automethod:: ContinuousBoson.random_state
+
+   

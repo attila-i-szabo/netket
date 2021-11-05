@@ -7,6 +7,7 @@
     <title>netket.hilbert.doubled_hilbert &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jumbo-style.css" />
@@ -120,7 +121,7 @@
 <span class="kn">from</span> <span class="nn">.discrete_hilbert</span> <span class="kn">import</span> <span class="n">DiscreteHilbert</span>
 
 
-<div class="viewcode-block" id="DoubledHilbert"><a class="viewcode-back" href="../../../docs/_generated/hilbert/netket.hilbert.DoubledHilbert.html#netket.hilbert.DoubledHilbert">[docs]</a><span class="nd">@parametric</span>
+<span class="nd">@parametric</span>
 <span class="k">class</span> <span class="nc">DoubledHilbert</span><span class="p">(</span><span class="n">DiscreteHilbert</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Superoperatorial hilbert space for states living in the tensorised state</span>
@@ -232,7 +233,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">physical</span><span class="p">,)</span></div>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">physical</span><span class="p">,)</span>
 </pre></div>
 
     </div>

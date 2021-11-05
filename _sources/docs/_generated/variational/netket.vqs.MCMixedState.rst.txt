@@ -6,8 +6,15 @@
 .. autoclass:: MCMixedState
    :show-inheritance:
 
-
    
+
+   .. rst-class:: class-dl-groups
+
+   Inheritance
+      .. inheritance-diagram:: netket.vqs.MCMixedState
+         :parts: 2
+
+
    
 
    .. automethod:: MCMixedState.__init__

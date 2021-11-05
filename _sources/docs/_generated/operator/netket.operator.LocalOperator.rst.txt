@@ -6,8 +6,15 @@
 .. autoclass:: LocalOperator
    :show-inheritance:
 
-
    
+
+   .. rst-class:: class-dl-groups
+
+   Inheritance
+      .. inheritance-diagram:: netket.operator.LocalOperator
+         :parts: 2
+
+
    
 
    .. automethod:: LocalOperator.__init__

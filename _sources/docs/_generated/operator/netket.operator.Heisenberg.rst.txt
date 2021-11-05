@@ -6,8 +6,15 @@
 .. autoclass:: Heisenberg
    :show-inheritance:
 
-
    
+
+   .. rst-class:: class-dl-groups
+
+   Inheritance
+      .. inheritance-diagram:: netket.operator.Heisenberg
+         :parts: 2
+
+
    
 
    .. automethod:: Heisenberg.__init__

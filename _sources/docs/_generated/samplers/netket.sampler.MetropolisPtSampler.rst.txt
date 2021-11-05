@@ -6,8 +6,15 @@
 .. autoclass:: MetropolisPtSampler
    :show-inheritance:
 
-
    
+
+   .. rst-class:: class-dl-groups
+
+   Inheritance
+      .. inheritance-diagram:: netket.sampler.MetropolisPtSampler
+         :parts: 2
+
+
    
 
    .. automethod:: MetropolisPtSampler.__init__

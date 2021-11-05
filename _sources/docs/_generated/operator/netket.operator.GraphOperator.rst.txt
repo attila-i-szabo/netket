@@ -6,8 +6,15 @@
 .. autoclass:: GraphOperator
    :show-inheritance:
 
-
    
+
+   .. rst-class:: class-dl-groups
+
+   Inheritance
+      .. inheritance-diagram:: netket.operator.GraphOperator
+         :parts: 2
+
+
    
 
    .. automethod:: GraphOperator.__init__

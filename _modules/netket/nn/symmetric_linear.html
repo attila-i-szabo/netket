@@ -7,6 +7,7 @@
     <title>netket.nn.symmetric_linear &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jumbo-style.css" />
@@ -118,14 +119,9 @@
 <span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">from</span> <span class="nn">jax.nn.initializers</span> <span class="kn">import</span> <span class="n">normal</span><span class="p">,</span> <span class="n">zeros</span><span class="p">,</span> <span class="n">lecun_normal</span><span class="p">,</span> <span class="n">variance_scaling</span>
 
-<span class="kn">from</span> <span class="nn">netket.nn.initializers</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">normal</span><span class="p">,</span>
-    <span class="n">zeros</span><span class="p">,</span>
-    <span class="n">lecun_normal</span><span class="p">,</span>
-    <span class="n">variance_scaling</span><span class="p">,</span>
-    <span class="n">_complex_truncated_normal</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">netket.nn.initializers</span> <span class="kn">import</span> <span class="n">_complex_truncated_normal</span>
 <span class="kn">from</span> <span class="nn">netket.utils</span> <span class="kn">import</span> <span class="n">HashableArray</span>
 <span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">Array</span><span class="p">,</span> <span class="n">DType</span><span class="p">,</span> <span class="n">PRNGKeyT</span><span class="p">,</span> <span class="n">Shape</span><span class="p">,</span> <span class="n">NNInitFunc</span>
 <span class="kn">from</span> <span class="nn">netket.utils.group</span> <span class="kn">import</span> <span class="n">PermutationGroup</span>

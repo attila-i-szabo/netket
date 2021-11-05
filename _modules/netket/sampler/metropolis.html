@@ -7,6 +7,7 @@
     <title>netket.sampler.metropolis &#8212; netket v3.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/jumbo-style.css" />
@@ -127,7 +128,7 @@
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Sampler</span><span class="p">,</span> <span class="n">SamplerState</span>
 
 
-<div class="viewcode-block" id="MetropolisRule"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.MetropolisRule.html#netket.sampler.MetropolisRule">[docs]</a><span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">MetropolisRule</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for Transition rules of Metropolis, such as Local, Exchange, Hamiltonian</span>
@@ -215,10 +216,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">sampler</span><span class="o">.</span><span class="n">hilbert</span><span class="o">.</span><span class="n">random_state</span><span class="p">(</span>
             <span class="n">key</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_batches</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">sampler</span><span class="o">.</span><span class="n">dtype</span>
-        <span class="p">)</span></div></div>
+        <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="MetropolisSamplerState"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.MetropolisSamplerState.html#netket.sampler.MetropolisSamplerState">[docs]</a><span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">MetropolisSamplerState</span><span class="p">(</span><span class="n">SamplerState</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    State for a metropolis sampler.</span>
@@ -288,10 +289,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">acc_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">acc_string</span><span class="si">}</span><span class="s2">rng state=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">acc_string</span><span class="si">}</span><span class="s2">rng state=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">rng</span><span class="si">}</span><span class="s2">)&quot;</span>
 
 
-<div class="viewcode-block" id="MetropolisSampler"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.MetropolisSampler.html#netket.sampler.MetropolisSampler">[docs]</a><span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
+<span class="nd">@struct</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">MetropolisSampler</span><span class="p">(</span><span class="n">Sampler</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Metropolis-Hastings sampler for an Hilbert space according to a specific transition rule.</span>
@@ -461,10 +462,10 @@
             <span class="o">+</span> <span class="s2">&quot;machine_power = </span><span class="si">{}</span><span class="s2">, &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">machine_pow</span><span class="p">)</span>
             <span class="o">+</span> <span class="s2">&quot;n_sweeps = </span><span class="si">{}</span><span class="s2">, &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_sweeps</span><span class="p">)</span>
             <span class="o">+</span> <span class="s2">&quot;dtype = </span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sampler</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
 
 
-<div class="viewcode-block" id="MetropolisLocal"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.MetropolisLocal.html#netket.sampler.MetropolisLocal">[docs]</a><span class="k">def</span> <span class="nf">MetropolisLocal</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MetropolisSampler</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">MetropolisLocal</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MetropolisSampler</span><span class="p">:</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sampler acting on one local degree of freedom.</span>
 
@@ -501,10 +502,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.rules</span> <span class="kn">import</span> <span class="n">LocalRule</span>
 
-    <span class="k">return</span> <span class="n">MetropolisSampler</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">LocalRule</span><span class="p">(),</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">MetropolisSampler</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">LocalRule</span><span class="p">(),</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="MetropolisExchange"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.MetropolisExchange.html#netket.sampler.MetropolisExchange">[docs]</a><span class="k">def</span> <span class="nf">MetropolisExchange</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">MetropolisExchange</span><span class="p">(</span>
     <span class="n">hilbert</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">clusters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">d_max</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MetropolisSampler</span><span class="p">:</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -560,10 +561,10 @@
     <span class="kn">from</span> <span class="nn">.rules</span> <span class="kn">import</span> <span class="n">ExchangeRule</span>
 
     <span class="n">rule</span> <span class="o">=</span> <span class="n">ExchangeRule</span><span class="p">(</span><span class="n">clusters</span><span class="o">=</span><span class="n">clusters</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span class="n">graph</span><span class="p">,</span> <span class="n">d_max</span><span class="o">=</span><span class="n">d_max</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">MetropolisSampler</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">MetropolisSampler</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="MetropolisHamiltonian"><a class="viewcode-back" href="../../../docs/_generated/samplers/netket.sampler.MetropolisHamiltonian.html#netket.sampler.MetropolisHamiltonian">[docs]</a><span class="k">def</span> <span class="nf">MetropolisHamiltonian</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">hamiltonian</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MetropolisSampler</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">MetropolisHamiltonian</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">hamiltonian</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MetropolisSampler</span><span class="p">:</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sampling based on the off-diagonal elements of a Hamiltonian (or a generic Operator).</span>
 <span class="sd">    In this case, the transition matrix is taken to be:</span>
@@ -612,7 +613,7 @@
     <span class="kn">from</span> <span class="nn">.rules</span> <span class="kn">import</span> <span class="n">HamiltonianRule</span>
 
     <span class="n">rule</span> <span class="o">=</span> <span class="n">HamiltonianRule</span><span class="p">(</span><span class="n">hamiltonian</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">MetropolisSampler</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">MetropolisSampler</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">rule</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">MetropolisGaussian</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MetropolisSampler</span><span class="p">:</span>
