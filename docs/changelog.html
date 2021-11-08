@@ -287,7 +287,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#hilbert">Hilbert</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.AbstractHilbert.html">netket.hilbert.AbstractHilbert</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.AbstractParticle.html">netket.hilbert.AbstractParticle</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.DiscreteHilbert.html">netket.hilbert.DiscreteHilbert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.HomogeneousHilbert.html">netket.hilbert.HomogeneousHilbert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.CustomHilbert.html">netket.hilbert.CustomHilbert</a></li>
@@ -296,7 +295,6 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.Spin.html">netket.hilbert.Spin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.Fock.html">netket.hilbert.Fock</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/hilbert/netket.hilbert.ContinuousBoson.html">netket.hilbert.ContinuousBoson</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#operators">Operators</a><ul>
@@ -495,6 +493,8 @@
 <h3>New features<a class="headerlink" href="#new-features" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Heisenberg</span></code> Hamiltonians support different coupling strengths on <code class="docutils literal notranslate"><span class="pre">Graph</span></code> edges with different colors. <a class="reference external" href="https://github.com/netket/netket/pull/972">#972</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GraphOperator</span></code> (and <code class="docutils literal notranslate"><span class="pre">Heisenberg</span></code>) now support passing a custom mapping of graph nodes to Hilbert space sites via the new <code class="docutils literal notranslate"><span class="pre">acting_on_subspace</span></code> argument. This makes it possible to create <code class="docutils literal notranslate"><span class="pre">GraphOperator</span></code>s that act on a subset of sites, which is useful in composite Hilbert spaces. <a class="reference external" href="https://github.com/netket/netket/pull/924">#924</a></p></li>
+<li><p>In addition to nearest-neighbor edges, <code class="docutils literal notranslate"><span class="pre">Lattice</span></code> can now generate edges between next-nearest and, more generally, k-nearest neighbors via the constructor argument <code class="docutils literal notranslate"><span class="pre">max_neighbor_order</span></code>. The edges can be distinguished by their <code class="docutils literal notranslate"><span class="pre">color</span></code> property (which is used, e.g., by <code class="docutils literal notranslate"><span class="pre">GraphOperator</span></code> to apply different bond operators). <a class="reference external" href="https://github.com/netket/netket/pull/970">#970</a></p></li>
 </ul>
 </div>
 <div class="section" id="breaking-changes">

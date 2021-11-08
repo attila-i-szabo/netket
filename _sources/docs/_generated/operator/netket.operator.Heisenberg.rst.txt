@@ -26,6 +26,7 @@
       .. autoattribute:: Heisenberg.J
       .. autoattribute:: Heisenberg.T
       .. autoattribute:: Heisenberg.acting_on
+      .. autoattribute:: Heisenberg.acting_on_subspace
       .. autoattribute:: Heisenberg.constant
       .. autoattribute:: Heisenberg.dtype
       .. autoattribute:: Heisenberg.graph

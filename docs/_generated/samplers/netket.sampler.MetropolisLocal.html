@@ -289,7 +289,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#hilbert">Hilbert</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.AbstractHilbert.html">netket.hilbert.AbstractHilbert</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.AbstractParticle.html">netket.hilbert.AbstractParticle</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.DiscreteHilbert.html">netket.hilbert.DiscreteHilbert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.HomogeneousHilbert.html">netket.hilbert.HomogeneousHilbert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.CustomHilbert.html">netket.hilbert.CustomHilbert</a></li>
@@ -298,7 +297,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Spin.html">netket.hilbert.Spin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Fock.html">netket.hilbert.Fock</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.ContinuousBoson.html">netket.hilbert.ContinuousBoson</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#operators">Operators</a><ul>
@@ -502,7 +500,7 @@ sampler can be decomposed into two steps:</p>
 <ol class="arabic simple">
 <li><p>One of the site indices <span class="math notranslate nohighlight">\(i = 1\dots N\)</span> is chosen with uniform probability.</p></li>
 </ol>
-<p>2. Among all the possible (<span class="math notranslate nohighlight">\(m\)</span>) values that <span class="math notranslate nohighlight">\(s_i\)</span> can take,
+<p>2. Among all the possible (<span class="math notranslate nohighlight">\(m - 1\)</span>) values that <span class="math notranslate nohighlight">\(s^\prime_i\)</span> can take,
 one of them is chosen with uniform probability.</p>
 <p>For example, in the case of spin <span class="math notranslate nohighlight">\(1/2\)</span> particles, <span class="math notranslate nohighlight">\(m=2\)</span>
 and the possible local values are <span class="math notranslate nohighlight">\(s_i = -1,+1\)</span>.
@@ -510,7 +508,7 @@ In this case then <a class="reference internal" href="#netket.sampler.Metropolis
 <p>In the case of bosons, with occupation numbers
 <span class="math notranslate nohighlight">\(s_i = 0, 1, \dots n_{\mathrm{max}}\)</span>, <a class="reference internal" href="#netket.sampler.MetropolisLocal" title="netket.sampler.MetropolisLocal"><code class="xref py py-class docutils literal notranslate"><span class="pre">MetropolisLocal</span></code></a>
 would pick a random local occupation number uniformly between <span class="math notranslate nohighlight">\(0\)</span>
-and <span class="math notranslate nohighlight">\(n_{\mathrm{max}}\)</span>.</p>
+and <span class="math notranslate nohighlight">\(n_{\mathrm{max}}\)</span> except the current <span class="math notranslate nohighlight">\(s_i\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">

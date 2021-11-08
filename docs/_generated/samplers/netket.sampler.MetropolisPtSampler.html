@@ -289,7 +289,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#hilbert">Hilbert</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.AbstractHilbert.html">netket.hilbert.AbstractHilbert</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.AbstractParticle.html">netket.hilbert.AbstractParticle</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.DiscreteHilbert.html">netket.hilbert.DiscreteHilbert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.HomogeneousHilbert.html">netket.hilbert.HomogeneousHilbert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.CustomHilbert.html">netket.hilbert.CustomHilbert</a></li>
@@ -298,7 +297,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Spin.html">netket.hilbert.Spin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Qubit.html">netket.hilbert.Qubit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.Fock.html">netket.hilbert.Fock</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../hilbert/netket.hilbert.ContinuousBoson.html">netket.hilbert.ContinuousBoson</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../api.html#operators">Operators</a><ul>
@@ -515,8 +513,8 @@ The transition kernel is used to generate
 a proposed state <span class="math notranslate nohighlight">\(s^\prime\)</span>, starting from the current state <span class="math notranslate nohighlight">\(s\)</span>.
 The move is accepted with probability</p>
 <div class="math notranslate nohighlight">
-\[A(s\rightarrow s^\prime) = \mathrm{min}\left (1,\frac{P(s^\prime)}{P(s)} F(e^{L(s,s^\prime)})\right),\]</div>
-<p>where the probability being sampled from is <span class="math notranslate nohighlight">\(P(s)=|M(s)|^p. Here ::math::\)</span> is a
+\[A(s\rightarrow s^\prime) = \mathrm{min}\left (1,\frac{P(s^\prime)}{P(s)} e^{L(s,s^\prime)} \right),\]</div>
+<p>where the probability being sampled from is <span class="math notranslate nohighlight">\(P(s)=|M(s)|^p. Here :math:\)</span> is a
 user-provided function (the machine), <span class="math notranslate nohighlight">\(p\)</span> is also user-provided with default value <span class="math notranslate nohighlight">\(p=2\)</span>,
 and <span class="math notranslate nohighlight">\(L(s,s^\prime)\)</span> is a suitable correcting factor computed by the transition kernel.</p>
 <dl class="field-list simple">

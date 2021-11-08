@@ -111,13 +111,13 @@
 <span class="c1"># See the License for the specific language governing permissions and</span>
 <span class="c1"># limitations under the License.</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span>
 
 <span class="kn">import</span> <span class="nn">jax</span>
 <span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">jnp</span>
 <span class="kn">from</span> <span class="nn">jax.experimental</span> <span class="kn">import</span> <span class="n">loops</span>
 
-<span class="kn">from</span> <span class="nn">netket.hilbert</span> <span class="kn">import</span> <span class="n">AbstractParticle</span>
+<span class="kn">from</span> <span class="nn">netket.hilbert</span> <span class="kn">import</span> <span class="n">ContinuousHilbert</span>
 
 <span class="kn">from</span> <span class="nn">netket.utils</span> <span class="kn">import</span> <span class="n">mpi</span>
 <span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">PyTree</span><span class="p">,</span> <span class="n">PRNGKeyT</span>
@@ -190,7 +190,7 @@
         <span class="n">state</span><span class="p">:</span> <span class="n">SamplerState</span><span class="p">,</span>
         <span class="n">key</span><span class="p">:</span> <span class="n">PRNGKeyT</span><span class="p">,</span>
         <span class="n">σ</span><span class="p">:</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]]:</span>
 
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">)</span></div>
 
@@ -302,9 +302,9 @@
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        A(s \rightarrow s^\prime) = \mathrm{min} \left( 1,\frac{P(s^\prime)}{P(s)} F(e^{L(s,s^\prime)}) \right) ,</span>
+<span class="sd">        A(s \rightarrow s^\prime) = \mathrm{min} \left( 1,\frac{P(s^\prime)}{P(s)} e^{L(s,s^\prime)} \right) ,</span>
 
-<span class="sd">    where the probability being sampled from is :math:`P(s)=|M(s)|^p. Here ::math::`M(s)` is a</span>
+<span class="sd">    where the probability being sampled from is :math:`P(s)=|M(s)|^p. Here :math:`M(s)` is a</span>
 <span class="sd">    user-provided function (the machine), :math:`p` is also user-provided with default value :math:`p=2`,</span>
 <span class="sd">    and :math:`L(s,s^\prime)` is a suitable correcting factor computed by the transition kernel.</span>
 
@@ -478,7 +478,7 @@
 
 <span class="sd">    1. One of the site indices :math:`i = 1\dots N` is chosen with uniform probability.</span>
 
-<span class="sd">    2. Among all the possible (:math:`m`) values that :math:`s_i` can take,</span>
+<span class="sd">    2. Among all the possible (:math:`m - 1`) values that :math:`s^\prime_i` can take,</span>
 <span class="sd">    one of them is chosen with uniform probability.</span>
 
 <span class="sd">    For example, in the case of spin :math:`1/2` particles, :math:`m=2`</span>
@@ -488,7 +488,7 @@
 <span class="sd">    In the case of bosons, with occupation numbers</span>
 <span class="sd">    :math:`s_i = 0, 1, \dots n_{\mathrm{max}}`, :class:`MetropolisLocal`</span>
 <span class="sd">    would pick a random local occupation number uniformly between :math:`0`</span>
-<span class="sd">    and :math:`n_{\mathrm{max}}`.</span>
+<span class="sd">    and :math:`n_{\mathrm{max}}` except the current :math:`s_i`.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        hilbert: The hilbert space to sample</span>
@@ -605,7 +605,7 @@
 <span class="sd">       &gt;&gt;&gt; # Transverse-field Ising Hamiltonian</span>
 <span class="sd">       &gt;&gt;&gt; ha = nk.operator.Ising(hilbert=hi, h=1.0, graph=g)</span>
 <span class="sd">       &gt;&gt;&gt;</span>
-<span class="sd">       &gt;&gt;&gt; # Construct a MetropolisExchange Sampler</span>
+<span class="sd">       &gt;&gt;&gt; # Construct a MetropolisHamiltonian Sampler</span>
 <span class="sd">       &gt;&gt;&gt; sa = nk.sampler.MetropolisHamiltonian(hi, hamiltonian=ha)</span>
 <span class="sd">       &gt;&gt;&gt; print(sa)</span>
 <span class="sd">       MetropolisSampler(rule = HamiltonianRule(Ising(J=1.0, h=1.0; dim=100)), n_chains = 16, machine_power = 2, n_sweeps = 100, dtype = &lt;class &#39;numpy.float64&#39;&gt;)</span>
@@ -620,6 +620,7 @@
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;This sampler acts on all particle positions simultaneously</span>
 <span class="sd">    and proposes a new state according to a Gaussian distribution</span>
 <span class="sd">    with width sigma.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">       hilber: The continuous Hilbert space</span>
 <span class="sd">       sigma: The width of the Gaussian proposal distribution (default: 1.0)</span>
@@ -627,7 +628,7 @@
 <span class="sd">       sweep_size: The number of exchanges that compose a single sweep.</span>
 <span class="sd">                   If None, sweep_size is equal to the number of degrees of freedom (n_visible).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">AbstractParticle</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">hilbert</span><span class="p">,</span> <span class="n">ContinuousHilbert</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;This sampler only works for Continuous Hilbert spaces.&quot;</span><span class="p">)</span>
 
     <span class="kn">from</span> <span class="nn">.rules</span> <span class="kn">import</span> <span class="n">GaussianRule</span>
