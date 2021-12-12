@@ -1,6 +1,0 @@
-<map id="inheritance22efab6f30" name="inheritance22efab6f30">
-<area shape="rect" id="node1" title="Superoperatorial hilbert space for states living in the tensorised state" alt="" coords="379,5,576,27"/>
-<area shape="rect" id="node4" href="#netket.hilbert.DoubledHilbert" target="_top" title="Superoperatorial hilbert space for states living in the tensorised state" alt="" coords="618,5,763,27"/>
-<area shape="rect" id="node2" href="netket.hilbert.DiscreteHilbert.html#netket.hilbert.DiscreteHilbert" target="_top" title="Abstract class for an hilbert space defined on a lattice." alt="" coords="192,5,337,27"/>
-<area shape="rect" id="node3" href="netket.hilbert.AbstractHilbert.html#netket.hilbert.AbstractHilbert" target="_top" title="Abstract class for NetKet hilbert objects." alt="" coords="5,5,150,27"/>
-</map>
