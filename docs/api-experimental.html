@@ -131,6 +131,7 @@
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-3-in-development">NetKet 3.3 (In development)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#new-features">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#breaking-changes">Breaking Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#deprecations">Deprecations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#internal-changes">Internal Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#bug-fixes">Bug Fixes</a></li>
 </ul>
@@ -528,27 +529,18 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/experimental/samplers/netket.experimental.sampler.MetropolisLocalPt.html">netket.experimental.sampler.MetropolisLocalPt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/experimental/samplers/netket.experimental.sampler.MetropolisExchangePt.html">netket.experimental.sampler.MetropolisExchangePt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/experimental/samplers/netket.experimental.sampler.MetropolisSamplerPmap.html">netket.experimental.sampler.MetropolisSamplerPmap</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#variational-state-interface">Variational State Interface</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_generated/experimental/variational/netket.experimental.vqs.variables_from_file.html">netket.experimental.vqs.variables_from_file</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_generated/experimental/variational/netket.experimental.vqs.variables_from_tar.html">netket.experimental.vqs.variables_from_tar</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#time-evolution-driver">Time Evolution Driver</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.driver.TDVP.html">netket.experimental.driver.TDVP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variational-state-interface">Variational State Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/variational/netket.experimental.vqs.variables_from_file.html">netket.experimental.vqs.variables_from_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/variational/netket.experimental.vqs.variables_from_tar.html">netket.experimental.vqs.variables_from_tar</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#time-evolution-driver">Time Evolution Driver</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.driver.TDVP.html">netket.experimental.driver.TDVP</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#ode-integrators">ODE Integrators</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.dynamics.Euler.html">netket.experimental.dynamics.Euler</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.dynamics.Heun.html">netket.experimental.dynamics.Heun</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.dynamics.Midpoint.html">netket.experimental.dynamics.Midpoint</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.dynamics.RK12.html">netket.experimental.dynamics.RK12</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.dynamics.RK23.html">netket.experimental.dynamics.RK23</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.dynamics.RK4.html">netket.experimental.dynamics.RK4</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.dynamics.RK45.html">netket.experimental.dynamics.RK45</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#ode-integrators">ODE Integrators</a></li>
 </ul>
 </li>
 </ul>
@@ -602,8 +594,9 @@ several CPUs, but you have to start jax with a specific environment variable.</p
 </tr>
 </tbody>
 </table>
+</div>
 <div class="section" id="variational-state-interface">
-<span id="experimental-variational-api"></span><h3>Variational State Interface<a class="headerlink" href="#variational-state-interface" title="Permalink to this headline">¶</a></h3>
+<span id="experimental-variational-api"></span><h2>Variational State Interface<a class="headerlink" href="#variational-state-interface" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -620,7 +613,7 @@ several CPUs, but you have to start jax with a specific environment variable.</p
 </table>
 </div>
 <div class="section" id="time-evolution-driver">
-<h3>Time Evolution Driver<a class="headerlink" href="#time-evolution-driver" title="Permalink to this headline">¶</a></h3>
+<h2>Time Evolution Driver<a class="headerlink" href="#time-evolution-driver" title="Permalink to this headline">¶</a></h2>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -632,7 +625,6 @@ several CPUs, but you have to start jax with a specific environment variable.</p
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 <div class="section" id="ode-integrators">
 <h2>ODE Integrators<a class="headerlink" href="#ode-integrators" title="Permalink to this headline">¶</a></h2>

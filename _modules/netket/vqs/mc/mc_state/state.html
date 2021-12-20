@@ -128,7 +128,14 @@
 <span class="kn">from</span> <span class="nn">netket.stats</span> <span class="kn">import</span> <span class="n">Stats</span>
 <span class="kn">from</span> <span class="nn">netket.operator</span> <span class="kn">import</span> <span class="n">AbstractOperator</span>
 <span class="kn">from</span> <span class="nn">netket.sampler</span> <span class="kn">import</span> <span class="n">Sampler</span><span class="p">,</span> <span class="n">SamplerState</span>
-<span class="kn">from</span> <span class="nn">netket.utils</span> <span class="kn">import</span> <span class="n">maybe_wrap_module</span><span class="p">,</span> <span class="n">deprecated</span><span class="p">,</span> <span class="n">warn_deprecation</span><span class="p">,</span> <span class="n">mpi</span><span class="p">,</span> <span class="n">wrap_afun</span>
+<span class="kn">from</span> <span class="nn">netket.utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">maybe_wrap_module</span><span class="p">,</span>
+    <span class="n">deprecated</span><span class="p">,</span>
+    <span class="n">warn_deprecation</span><span class="p">,</span>
+    <span class="n">mpi</span><span class="p">,</span>
+    <span class="n">wrap_afun</span><span class="p">,</span>
+    <span class="n">wrap_to_support_scalar</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">netket.utils.types</span> <span class="kn">import</span> <span class="n">PyTree</span><span class="p">,</span> <span class="n">SeedT</span><span class="p">,</span> <span class="n">NNInitFunc</span>
 <span class="kn">from</span> <span class="nn">netket.optimizer</span> <span class="kn">import</span> <span class="n">LinearOperator</span>
 <span class="kn">from</span> <span class="nn">netket.optimizer.qgt</span> <span class="kn">import</span> <span class="n">QGTAuto</span>
@@ -197,21 +204,22 @@
     <span class="sd">&quot;&quot;&quot;An Optional PyTree encoding a mutable state of the model that is not trained.&quot;&quot;&quot;</span>
 
     <span class="n">_sampler</span><span class="p">:</span> <span class="n">Sampler</span>
-    <span class="sd">&quot;&quot;&quot;The sampler used to sample the hilbert space.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;The sampler used to sample the Hilbert space.&quot;&quot;&quot;</span>
     <span class="n">sampler_state</span><span class="p">:</span> <span class="n">SamplerState</span>
-    <span class="sd">&quot;&quot;&quot;The current state of the sampler&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;The current state of the sampler.&quot;&quot;&quot;</span>
 
-    <span class="n">_n_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="sd">&quot;&quot;&quot;Total number of samples across all mpi processes.&quot;&quot;&quot;</span>
+    <span class="n">_chain_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="sd">&quot;&quot;&quot;Length of the Markov chain used for sampling configurations.&quot;&quot;&quot;</span>
     <span class="n">_n_discard_per_chain</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="sd">&quot;&quot;&quot;Number of samples discarded at the beginning of every Monte-Carlo chain.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Number of samples discarded at the beginning of every Markov chain.&quot;&quot;&quot;</span>
+
     <span class="n">_samples</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">jnp</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="sd">&quot;&quot;&quot;Cached samples obtained with the last sampling.&quot;&quot;&quot;</span>
 
     <span class="n">_init_fun</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="sd">&quot;&quot;&quot;The function used to initialise the parameters and model_state&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;The function used to initialise the parameters and model_state.&quot;&quot;&quot;</span>
     <span class="n">_apply_fun</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="sd">&quot;&quot;&quot;The function used to evaluate the model&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;The function used to evaluate the model.&quot;&quot;&quot;</span>
 
     <span class="n">_chunk_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -277,12 +285,15 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_init_fun</span> <span class="o">=</span> <span class="n">nkjax</span><span class="o">.</span><span class="n">HashablePartial</span><span class="p">(</span>
                 <span class="k">lambda</span> <span class="n">model</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">model</span>
             <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_apply_fun</span> <span class="o">=</span> <span class="n">nkjax</span><span class="o">.</span><span class="n">HashablePartial</span><span class="p">(</span>
-                <span class="k">lambda</span> <span class="n">model</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span> <span class="n">model</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_apply_fun</span> <span class="o">=</span> <span class="n">wrap_to_support_scalar</span><span class="p">(</span>
+                <span class="n">nkjax</span><span class="o">.</span><span class="n">HashablePartial</span><span class="p">(</span>
+                    <span class="k">lambda</span> <span class="n">model</span><span class="p">,</span> <span class="n">pars</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pars</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                    <span class="n">model</span><span class="p">,</span>
+                <span class="p">)</span>
             <span class="p">)</span>
 
         <span class="k">elif</span> <span class="n">apply_fun</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_apply_fun</span> <span class="o">=</span> <span class="n">apply_fun</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_apply_fun</span> <span class="o">=</span> <span class="n">wrap_to_support_scalar</span><span class="p">(</span><span class="n">apply_fun</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">init_fun</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_init_fun</span> <span class="o">=</span> <span class="n">init_fun</span>
@@ -301,7 +312,9 @@
 
         <span class="c1"># default argument for n_samples/n_samples_per_rank</span>
         <span class="k">if</span> <span class="n">n_samples</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">n_samples_per_rank</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">n_samples</span> <span class="o">=</span> <span class="mi">1000</span>
+            <span class="c1"># get the first multiple of sampler.n_chains above 1000 to avoid</span>
+            <span class="c1"># printing a warning on construction</span>
+            <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mi">1000</span> <span class="o">/</span> <span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">)</span> <span class="o">*</span> <span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">n_samples</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">n_samples_per_rank</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">&quot;Only one argument between `n_samples` and `n_samples_per_rank`&quot;</span>
@@ -392,38 +405,45 @@
                 <span class="p">)</span>
             <span class="p">)</span>
 
+        <span class="c1"># Save the old `n_samples` before the new `sampler` is set.</span>
+        <span class="c1"># `_chain_length == 0` means that this `MCState` is being constructed.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chain_length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">n_samples_old</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">_sampler</span> <span class="o">=</span> <span class="n">sampler</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sampler_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">init_state</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_sampler_seed</span>
         <span class="p">)</span>
+
+        <span class="c1"># Update `n_samples`, `n_samples_per_rank`, and `chain_length` according</span>
+        <span class="c1"># to the new `sampler.n_chains`.</span>
+        <span class="c1"># If `n_samples` is divisible by the new `sampler.n_chains`, it will be</span>
+        <span class="c1"># unchanged; otherwise it will be rounded up.</span>
+        <span class="c1"># If the new `n_samples_per_rank` is not divisible by `chunk_size`, a</span>
+        <span class="c1"># `ValueError` will be raised.</span>
+        <span class="c1"># `_chain_length == 0` means that this `MCState` is being constructed.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chain_length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span> <span class="o">=</span> <span class="n">n_samples_old</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">n_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;The total number of samples generated at every sampling step.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_samples</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">chain_length</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span>
 
     <span class="nd">@n_samples</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">n_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">chain_length</span> <span class="o">=</span> <span class="n">compute_chain_length</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
-
-        <span class="n">n_samples_per_rank</span> <span class="o">=</span> <span class="n">chain_length</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains_per_rank</span>
-        <span class="n">n_samples</span> <span class="o">=</span> <span class="n">chain_length</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span>
-
-        <span class="n">check_chunk_size</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_n_samples</span> <span class="o">=</span> <span class="n">n_samples</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_chain_length</span> <span class="o">=</span> <span class="n">chain_length</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_n_samples_per_rank</span> <span class="o">=</span> <span class="n">n_samples_per_rank</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chain_length</span> <span class="o">=</span> <span class="n">chain_length</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">n_samples_per_rank</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;The number of samples generated on one MPI rank at every sampling step.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_samples_per_rank</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">chain_length</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains_per_rank</span>
 
     <span class="nd">@n_samples_per_rank</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">n_samples_per_rank</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_samples_per_rank</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">n_samples_per_rank</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_samples_per_rank</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span> <span class="o">=</span> <span class="n">n_samples_per_rank</span> <span class="o">*</span> <span class="n">mpi</span><span class="o">.</span><span class="n">n_nodes</span>
 
     <span class="nd">@property</span>
@@ -436,8 +456,14 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chain_length</span>
 
     <span class="nd">@chain_length</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">chain_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">n_samples</span> <span class="o">=</span> <span class="n">length</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span> <span class="o">*</span> <span class="n">mpi</span><span class="o">.</span><span class="n">n_nodes</span>
+    <span class="k">def</span> <span class="nf">chain_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chain_length</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">chain_length</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid chain length: chain_length=</span><span class="si">{</span><span class="n">chain_length</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">n_samples</span> <span class="o">=</span> <span class="n">chain_length</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span>
+        <span class="n">check_chunk_size</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_chain_length</span> <span class="o">=</span> <span class="n">chain_length</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
     <span class="nd">@property</span>
@@ -568,10 +594,7 @@
                 <span class="n">chain_length</span> <span class="o">=</span> <span class="n">compute_chain_length</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">check_chunk_size</span><span class="p">(</span>
-                    <span class="n">chain_length</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains_per_rank</span> <span class="o">*</span> <span class="n">mpi</span><span class="o">.</span><span class="n">n_nodes</span><span class="p">,</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span><span class="p">,</span>
-                <span class="p">)</span>
+                <span class="n">check_chunk_size</span><span class="p">(</span><span class="n">chain_length</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampler</span><span class="o">.</span><span class="n">n_chains</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">chunk_size</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">n_discard_per_chain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">n_discard_per_chain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_discard_per_chain</span>

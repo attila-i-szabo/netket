@@ -131,6 +131,7 @@
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#netket-3-3-in-development">NetKet 3.3 (In development)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#new-features">New features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#breaking-changes">Breaking Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="changelog.html#deprecations">Deprecations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#internal-changes">Internal Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="changelog.html#bug-fixes">Bug Fixes</a></li>
 </ul>
@@ -528,27 +529,18 @@
 <li class="toctree-l3"><a class="reference internal" href="_generated/experimental/samplers/netket.experimental.sampler.MetropolisLocalPt.html">netket.experimental.sampler.MetropolisLocalPt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/experimental/samplers/netket.experimental.sampler.MetropolisExchangePt.html">netket.experimental.sampler.MetropolisExchangePt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="_generated/experimental/samplers/netket.experimental.sampler.MetropolisSamplerPmap.html">netket.experimental.sampler.MetropolisSamplerPmap</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api-experimental.html#variational-state-interface">Variational State Interface</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_generated/experimental/variational/netket.experimental.vqs.variables_from_file.html">netket.experimental.vqs.variables_from_file</a></li>
-<li class="toctree-l4"><a class="reference internal" href="_generated/experimental/variational/netket.experimental.vqs.variables_from_tar.html">netket.experimental.vqs.variables_from_tar</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="api-experimental.html#time-evolution-driver">Time Evolution Driver</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.driver.TDVP.html">netket.experimental.driver.TDVP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api-experimental.html#variational-state-interface">Variational State Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/variational/netket.experimental.vqs.variables_from_file.html">netket.experimental.vqs.variables_from_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/variational/netket.experimental.vqs.variables_from_tar.html">netket.experimental.vqs.variables_from_tar</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="api-experimental.html#time-evolution-driver">Time Evolution Driver</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.driver.TDVP.html">netket.experimental.driver.TDVP</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="api-experimental.html#ode-integrators">ODE Integrators</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.dynamics.Euler.html">netket.experimental.dynamics.Euler</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.dynamics.Heun.html">netket.experimental.dynamics.Heun</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.dynamics.Midpoint.html">netket.experimental.dynamics.Midpoint</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.dynamics.RK12.html">netket.experimental.dynamics.RK12</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.dynamics.RK23.html">netket.experimental.dynamics.RK23</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.dynamics.RK4.html">netket.experimental.dynamics.RK4</a></li>
-<li class="toctree-l3"><a class="reference internal" href="_generated/experimental/dynamics/netket.experimental.dynamics.RK45.html">netket.experimental.dynamics.RK45</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="api-experimental.html#ode-integrators">ODE Integrators</a></li>
 </ul>
 </li>
 </ul>
@@ -614,19 +606,19 @@ If you work with NetKet and determine that a particular implementation works bes
 The derivation in the case of a variational optimization for the ground state, can be sketched as follows:</p>
 <p>Given a a variational wavefunction <span class="math notranslate nohighlight">\( \ket{\psi_W} \)</span>, we consider its first order Taylor expansion around <span class="math notranslate nohighlight">\( W \)</span>, <span class="math notranslate nohighlight">\( \ket{\psi_{W+\delta W}} = \ket{\psi_W} + \delta W_k \hat{O}_k \ket{\psi_W} \)</span>, where <span class="math notranslate nohighlight">\( \bra{\sigma}\hat{O}_k \ket{\eta} = \delta_{\sigma,\eta} \frac{d \log\psi_W(\sigma)}{dW_k}\)</span>.
 We wish to determine the updates <span class="math notranslate nohighlight">\( \delta_{\sigma,\eta} \)</span> of the variational parameters that match a step of imaginary-time evolution, given by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6aea973a-8d71-435b-aecb-acf1d3fcfc73">
-<span class="eqno">(1)<a class="headerlink" href="#equation-6aea973a-8d71-435b-aecb-acf1d3fcfc73" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b1f8c3b5-6a39-4cfa-be7a-8871786c8613">
+<span class="eqno">(1)<a class="headerlink" href="#equation-b1f8c3b5-6a39-4cfa-be7a-8871786c8613" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \ket{\phi} = U(\epsilon)\ket{\psi_W} = e^{\epsilon\hat{H}}\ket{\psi_W} \sim (\mathbb{I} - \epsilon \hat{H})\ket{\psi_W}
 \end{equation}\]</div>
 <p>It is possible to show that the updates <span class="math notranslate nohighlight">\(\delta W_k \)</span> that minimise the norm of the state <span class="math notranslate nohighlight">\(\ket{\phi}-\ket{\psi_{W+\delta W}}\)</span> can be determined by solving the linear system</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9f410106-824d-4b01-9624-293fd726c05e">
-<span class="eqno">(2)<a class="headerlink" href="#equation-9f410106-824d-4b01-9624-293fd726c05e" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b9894b3b-68e2-479c-9ae8-7357268174bf">
+<span class="eqno">(2)<a class="headerlink" href="#equation-b9894b3b-68e2-479c-9ae8-7357268174bf" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 S_{i,k} \delta W_k = F_i
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\( F_i = \langle \hat{E}^{loc} \hat{O}_i\rangle_c \)</span> is the gradient of the Energy and <span class="math notranslate nohighlight">\( S_{i,k} = \langle \hat{O}^\dagger_i \hat{O}_k\rangle_c \)</span> is the Quantum Geometric Tensor.
 The QGT is positive definite, therefore it can be inverted and the solution is formally written as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a2bfa9df-cc1c-496d-a099-4015dec540c5">
-<span class="eqno">(3)<a class="headerlink" href="#equation-a2bfa9df-cc1c-496d-a099-4015dec540c5" title="Permalink to this equation">¶</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-130cdb0c-3f0a-42f2-a486-96d19391f377">
+<span class="eqno">(3)<a class="headerlink" href="#equation-130cdb0c-3f0a-42f2-a486-96d19391f377" title="Permalink to this equation">¶</a></span>\[\begin{equation}
 \bf{\delta W} = S^{-1} \bf{F},
 \end{equation}\]</div>
 <p>where bold fonts are used for vectors.
