@@ -26,6 +26,7 @@
 * Fixed bug where the gradient of `C->C` models (complex parameters, complex output) was computed incorrectly with `nk.vqs.ExactState`. [#1110](https://github.com/netket/netket/pull/1110)
 * Fixed bug where `QGTJacobianDense.state` and `QGTJacobianPyTree.state` would not correctly transform the starting point `x0` if `holomorphic=False`. [#1115](https://github.com/netket/netket/pull/1115)
 * The gradient of the expectation value obtained with `VarState.expect_and_grad` for `SquaredOperator`s was off by a factor of 2 in some cases, and wrong in others. This has now been fixed. [#1065](https://github.com/netket/netket/pull/1065).
+* Real-parameter `GCNN` returned NaNs when used with real-valued characters, some of which is negative, as `logsumexp` uses real logarithms even if the result is negative. This is fixed by defining `nk.jax.logsumexp_cplx` that always returns a complex number and using it by default in `GCNN`. The old behaviour can be recovered using `complex_output=False`. [#1134](https://github.com/netket/netket/pull/1134).
 
 ## NetKet 3.3.2 (🐛 Bug Fixes)
 
